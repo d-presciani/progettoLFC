@@ -1,4 +1,4 @@
-grammar LR1test;
+grammar PrototipoLR1;
 
 options {
   k = 1;
@@ -45,7 +45,7 @@ options {
 @lexer::members{
 }
 
-//Produzioni parter
+//Produzioni parser
 lr1	: {init();} pr ar+ EOF;
 	
 pr	:	SZ EQ NT TER SC;
@@ -60,7 +60,7 @@ SZ 	:	'S0';
 EQ	:	'->' | ':=';
 NT 	:	('A'..'Z');
 CT	:	('a'..'z') | ('0'..'9') | '+' | '-' | '*' | '/' ;
-TER	:	'\swa' | '\cjswa';
+TER	:	'/swa' | '/cjswa';
 SC 	:	';';
 
 COMMENT
