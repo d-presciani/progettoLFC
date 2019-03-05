@@ -6,12 +6,12 @@ options {
 }
 
 @header{
-  package JavaPackage;
+  package lr1Package;
   import myPackage.*;
 }
 
 @lexer::header{
-  package JavaPackage;
+  package lr1Package;
 }
 
 @members{
@@ -46,7 +46,9 @@ options {
 }
 
 //Produzioni parser
-lr1	: {init();} pr ar+ EOF;
+lr1	: {init();} pr ar+ EOF
+	  
+	;
 	
 pr	:	SZ EQ NT TER SC;
 
