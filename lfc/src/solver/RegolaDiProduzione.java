@@ -29,22 +29,11 @@ public class RegolaDiProduzione {
 	
 	public void calcolaAnnullabilita() {
 		for (int i=0; i<parteDX.size(); i++) {
-			System.out.println("Carattere: " + parteDX.get(i).getLettera() + " | Annullabile: " + parteDX.get(i).isAnnullabile());
 			if(!parteDX.get(i).isAnnullabile()) {
 				annullabile = false;
 				break;
 			}
 		}
-		/*
-		for (Carattere car : parteDX) {
-			System.out.println(this.toString());
-			
-			if (!car.isAnnullabile()) {
-				annullabile = false;
-				break;
-			}
-		}
-		*/
 	}
 	
 	public Carattere getProssimochar() {

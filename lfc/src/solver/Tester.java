@@ -19,21 +19,29 @@ public class Tester {
 			Scanner scanner = new Scanner(new File(".\\resources\\input.txt"));
 			while (scanner.hasNextLine()) {
 				String mom = scanner.nextLine();
-				NonTerminale ntSX = new NonTerminale(String.valueOf(mom.charAt(0)));
+				String charTemp = String.valueOf(mom.charAt(0));
 				boolean trovato = false;
-				for(NonTerminale nt : listaNT) {
-					if(nt.lettera.equals(ntSX.lettera)) {
+				NonTerminale ntSX = null;
+				for(NonTerminale nt: listaNT) {
+					if(nt.lettera.equals(charTemp)) {
 						trovato = true;
+						ntSX = nt;
+						break;
 					}
 				}
-				if(!trovato) {
-					listaNT.add(ntSX);
-				} else {
-					for(NonTerminale nt: listaNT) {
-						if(nt.lettera.equals(ntSX.lettera)) {
-							ntSX=nt;
-						}
+				
+				/*
+				for(int i=0; i<listaNT.size(); i++) {
+					if(listaNT.get(i).lettera.equals(charTemp)) {
+						trovato = true;
+						ntSX=listaNT.get(i);
 					}
+				}
+				*/
+				
+				if(!trovato) {
+					ntSX = new NonTerminale(charTemp);
+					listaNT.add(ntSX);
 				}
 				List<Carattere> listaMom = new LinkedList<Carattere>();
 				if(mom.length()==2) {
@@ -45,17 +53,32 @@ public class Tester {
 							Terminale terTemp = new Terminale(String.valueOf(mom.charAt(i)));
 							listaMom.add(terTemp);
 						} else {
-							NonTerminale ntTemp = new NonTerminale(String.valueOf(mom.charAt(i)));
-							listaMom.add(ntTemp);
+							String mom2 = String.valueOf(mom.charAt(i));
+							NonTerminale ntTemp = null;
 							trovato = false;
+							
 							for(NonTerminale nt : listaNT) {
-								if(nt.lettera.equals(ntSX.lettera)) {
+								if(nt.lettera.equals(mom2)) {
+									ntTemp = nt;
+									trovato = true;
+									break;
+								}
+							}
+							
+							/*
+							for(int j=0; j<listaNT.size();j++) {
+								if(listaNT.get(j).lettera.equals(mom2)) {
+									ntTemp = listaNT.get(j);
 									trovato = true;
 								}
 							}
+							*/
+							
 							if(!trovato) {
-								listaNT.add(ntSX);
+								ntTemp = new NonTerminale(mom2);
+								listaNT.add(ntTemp);
 							}
+							listaMom.add(ntTemp);
 						}
 					}
 					listaReg.add(new RegolaDiProduzione(ntSX, listaMom));
@@ -86,9 +109,16 @@ public class Tester {
 			}
 		}
 		
+		//Calcolo annullabilità regole
 		for(RegolaDiProduzione reg : listaReg) {
 			reg.calcolaAnnullabilita();
 		}
+		
+		//Calcolo annullabilità caratteri
+		for (NonTerminale nt: listaNT) {
+			nt.calcolaAnnullabile();
+		}
+		
 		
 		// Controllo assegnazione regole
 		for(NonTerminale nt : listaNT) {
@@ -100,61 +130,11 @@ public class Tester {
 			System.out.println(reg.toString() + " | annullabile: "+ reg.annullabile);
 		}
 		
-		/*
-		NonTerminale NTS = new NonTerminale("S");
-		NonTerminale NTA = new NonTerminale("A");
-		NonTerminale NTB = new NonTerminale("B");
-		Terminale CTA = new Terminale("a");
-		Terminale CTB = new Terminale("b");
-		List<Carattere> mom;
 		
-		//Creazione regola di produzione S->A
-		mom = new LinkedList<Carattere>();
-		mom.add(NTA);
-		RegolaDiProduzione REG1 = new RegolaDiProduzione(NTS, mom);
-		
-		//Creazione regola di produzione S->b
-		mom.clear();
-		mom.add(CTB);
-		RegolaDiProduzione REG2 = new RegolaDiProduzione(NTS, mom);
-		
-		//Creazione regola di produzione S->a
-		mom.clear();
-		mom.add(CTA);
-		RegolaDiProduzione REG4 = new RegolaDiProduzione(NTS, mom);
-		
-		
-		//Creazione regola di produzione A->a
-		mom.clear();
-		mom.add(CTA);
-		RegolaDiProduzione REG3 = new RegolaDiProduzione(NTA, mom);
-		
-		NTB.setAnnullabile();
-		mom.clear();
-		mom.add(NTB);
-		//mom.add(NTS);
-		RegolaDiProduzione REG5 = new RegolaDiProduzione(NTA, mom);
-		
-		//System.out.println("Reg 5 completamente annullabile?: " + REG5.annullabile);
-		
-		//Inserimento sul non terminale S la sua regola
-		NTS.addRegola(REG1);
-		NTS.addRegola(REG2);
-		NTS.addRegola(REG4);
-		
-		//Inserimento sul non terminale A la sua regola
-		NTA.addRegola(REG3);
-		
-		
-		/*
-		//Calcolo inizi di S 
-		System.out.println("Regole di produzione di S: ");
-		NTS.stampaRegole();
-		System.out.println("\nRegole di produzione di A: ");
-		NTA.stampaRegole();
-		System.out.println("\nInizi di S: ");
-		System.out.println(NTS.calcolaInizi());
-		*/
+		//Controllo annullabilità NT
+		for(NonTerminale nt : listaNT) {
+			System.out.println(nt.lettera + " isAnnullabile(): "+ nt.isAnnullabile());
+		}
 		
 	}
 

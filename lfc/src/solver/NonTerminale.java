@@ -29,11 +29,20 @@ public class NonTerminale extends Carattere{
 	}
 	
 	public boolean isAnnullabile() {
-		return annullabile;
+		return this.annullabile;
 	}
 	
 	public void setAnnullabile() {
 		this.annullabile = true;
+	}
+	
+	public void calcolaAnnullabile() {
+		for(RegolaDiProduzione reg: rdp) {
+			if(reg.annullabile) {
+				this.annullabile = true;
+				break;
+			}
+		}
 	}
 	
 	public List<RegolaDiProduzione> getRegole(){
