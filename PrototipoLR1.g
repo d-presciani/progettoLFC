@@ -8,7 +8,6 @@ options {
 @header{
   package lr1Package;
   import myPackage.*;
-  import solver.*;
 }
 
 @lexer::header{
@@ -47,15 +46,11 @@ options {
 }
 
 //Produzioni parser
-lr1	: {init();} pr ar+ EOF;
-	
-pr	:	start=SZ EQ NT TER SC
-	{
-	  	System.out.println("Test");
-	  	NonTerminale prova = new NonTerminale($start.getText());
-	  	System.out.println("Questo è il non terminale inserito: " + prova);	  	
-	}
+lr1	: {init();} pr ar+ EOF
+	  
 	;
+	
+pr	:	SZ EQ NT TER SC;
 
 ar	:	NT EQ (NT|CT)* SC;
 
