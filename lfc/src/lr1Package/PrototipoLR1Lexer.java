@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g 2019-03-05 11:18:57
+// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-05 16:10:39
 
   package lr1Package;
 
@@ -35,15 +35,15 @@ public class PrototipoLR1Lexer extends Lexer {
 	public PrototipoLR1Lexer(CharStream input, RecognizerSharedState state) {
 		super(input,state);
 	}
-	@Override public String getGrammarFileName() { return "D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g"; }
+	@Override public String getGrammarFileName() { return "C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g"; }
 
 	// $ANTLR start "SZ"
 	public final void mSZ() throws RecognitionException {
 		try {
 			int _type = SZ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:66:5: ( 'S0' )
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:66:7: 'S0'
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:91:5: ( 'S0' )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:91:7: 'S0'
 			{
 			match("S0"); 
 
@@ -63,7 +63,7 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = EQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:67:4: ( '->' | ':=' )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:92:4: ( '->' | ':=' )
 			int alt1=2;
 			int LA1_0 = input.LA(1);
 			if ( (LA1_0=='-') ) {
@@ -81,14 +81,14 @@ public class PrototipoLR1Lexer extends Lexer {
 
 			switch (alt1) {
 				case 1 :
-					// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:67:6: '->'
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:92:6: '->'
 					{
 					match("->"); 
 
 					}
 					break;
 				case 2 :
-					// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:67:13: ':='
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:92:13: ':='
 					{
 					match(":="); 
 
@@ -110,8 +110,8 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = NT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:68:5: ( ( 'A' .. 'Z' ) )
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:93:5: ( ( 'A' .. 'Z' ) )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') ) {
 				input.consume();
@@ -137,8 +137,8 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = CT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:69:4: ( ( 'a' .. 'z' ) | ( '0' .. '9' ) | '+' | '-' | '*' | '/' )
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:94:4: ( ( 'a' .. 'z' ) | ( '0' .. '9' ) | '+' | '-' | '*' | '/' )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:
 			{
 			if ( (input.LA(1) >= '*' && input.LA(1) <= '+')||input.LA(1)=='-'||(input.LA(1) >= '/' && input.LA(1) <= '9')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -164,7 +164,7 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = TER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:70:5: ( '/swa' | '/cjswa' )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:95:5: ( '/swa' | '/cjswa' )
 			int alt2=2;
 			int LA2_0 = input.LA(1);
 			if ( (LA2_0=='/') ) {
@@ -198,14 +198,14 @@ public class PrototipoLR1Lexer extends Lexer {
 
 			switch (alt2) {
 				case 1 :
-					// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:70:7: '/swa'
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:95:7: '/swa'
 					{
 					match("/swa"); 
 
 					}
 					break;
 				case 2 :
-					// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:70:16: '/cjswa'
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:95:16: '/cjswa'
 					{
 					match("/cjswa"); 
 
@@ -227,8 +227,8 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = SC;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:71:5: ( ';' )
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:71:7: ';'
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:96:5: ( ';' )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:96:7: ';'
 			{
 			match(';'); 
 			}
@@ -247,7 +247,7 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:74:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:99:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
 			int alt6=2;
 			int LA6_0 = input.LA(1);
 			if ( (LA6_0=='/') ) {
@@ -281,11 +281,11 @@ public class PrototipoLR1Lexer extends Lexer {
 
 			switch (alt6) {
 				case 1 :
-					// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:74:9: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:99:9: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
 					{
 					match("//"); 
 
-					// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:74:14: (~ ( '\\n' | '\\r' ) )*
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:99:14: (~ ( '\\n' | '\\r' ) )*
 					loop3:
 					while (true) {
 						int alt3=2;
@@ -296,7 +296,7 @@ public class PrototipoLR1Lexer extends Lexer {
 
 						switch (alt3) {
 						case 1 :
-							// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:
+							// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:
 							{
 							if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t')||(input.LA(1) >= '\u000B' && input.LA(1) <= '\f')||(input.LA(1) >= '\u000E' && input.LA(1) <= '\uFFFF') ) {
 								input.consume();
@@ -314,7 +314,7 @@ public class PrototipoLR1Lexer extends Lexer {
 						}
 					}
 
-					// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:74:28: ( '\\r' )?
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:99:28: ( '\\r' )?
 					int alt4=2;
 					int LA4_0 = input.LA(1);
 					if ( (LA4_0=='\r') ) {
@@ -322,7 +322,7 @@ public class PrototipoLR1Lexer extends Lexer {
 					}
 					switch (alt4) {
 						case 1 :
-							// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:74:28: '\\r'
+							// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:99:28: '\\r'
 							{
 							match('\r'); 
 							}
@@ -335,11 +335,11 @@ public class PrototipoLR1Lexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:75:9: '/*' ( options {greedy=false; } : . )* '*/'
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:100:9: '/*' ( options {greedy=false; } : . )* '*/'
 					{
 					match("/*"); 
 
-					// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:75:14: ( options {greedy=false; } : . )*
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:100:14: ( options {greedy=false; } : . )*
 					loop5:
 					while (true) {
 						int alt5=2;
@@ -360,7 +360,7 @@ public class PrototipoLR1Lexer extends Lexer {
 
 						switch (alt5) {
 						case 1 :
-							// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:75:42: .
+							// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:100:42: .
 							{
 							matchAny(); 
 							}
@@ -392,8 +392,8 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:78:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:78:9: ( ' ' | '\\t' | '\\r' | '\\n' )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:103:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:103:9: ( ' ' | '\\t' | '\\r' | '\\n' )
 			{
 			if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
 				input.consume();
@@ -417,7 +417,7 @@ public class PrototipoLR1Lexer extends Lexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:1:8: ( SZ | EQ | NT | CT | TER | SC | COMMENT | WS )
+		// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:8: ( SZ | EQ | NT | CT | TER | SC | COMMENT | WS )
 		int alt7=8;
 		switch ( input.LA(1) ) {
 		case 'S':
@@ -562,56 +562,56 @@ public class PrototipoLR1Lexer extends Lexer {
 		}
 		switch (alt7) {
 			case 1 :
-				// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:1:10: SZ
+				// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:10: SZ
 				{
 				mSZ(); 
 
 				}
 				break;
 			case 2 :
-				// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:1:13: EQ
+				// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:13: EQ
 				{
 				mEQ(); 
 
 				}
 				break;
 			case 3 :
-				// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:1:16: NT
+				// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:16: NT
 				{
 				mNT(); 
 
 				}
 				break;
 			case 4 :
-				// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:1:19: CT
+				// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:19: CT
 				{
 				mCT(); 
 
 				}
 				break;
 			case 5 :
-				// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:1:22: TER
+				// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:22: TER
 				{
 				mTER(); 
 
 				}
 				break;
 			case 6 :
-				// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:1:26: SC
+				// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:26: SC
 				{
 				mSC(); 
 
 				}
 				break;
 			case 7 :
-				// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:1:29: COMMENT
+				// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:29: COMMENT
 				{
 				mCOMMENT(); 
 
 				}
 				break;
 			case 8 :
-				// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:1:37: WS
+				// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:37: WS
 				{
 				mWS(); 
 

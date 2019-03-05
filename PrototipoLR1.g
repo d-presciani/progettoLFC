@@ -8,6 +8,7 @@ options {
 @header{
   package lr1Package;
   import myPackage.*;
+  import solver.*;
 }
 
 @lexer::header{
@@ -46,11 +47,40 @@ options {
 }
 
 //Produzioni parser
-lr1	: {init();} pr ar+ EOF
-	  
+lr1	: 
+	{
+		init();
+		static LinkedList<NonTerminale> listaNT = new LinkedList<NonTerminale>();
+		static LinkedList<RegolaDiProduzione> listaReg = new LinkedList<RegolaDiProduzione>();
+	} 
+		pr ar+ EOF
 	;
 	
-pr	:	SZ EQ NT TER SC;
+pr	:	start=SZ EQ NT
+	{
+	  	System.out.println("Test");
+	  	NonTerminale prova = new NonTerminale($start.getText());
+	  	System.out.println("Questo è il non terminale inserito: " + prova);	  	
+	}
+	 	TER
+	 {
+	 	boolean trovato = false;
+	 	for(NonTerminale nt: listaNT) {
+			if(nt.lettera.equals(charTemp)) {
+				trovato = true;
+				ntSX = nt;
+				break;
+			}
+		}
+		if(!trovato) {
+			System.out.println("Aggiungo carattere alla lista");
+			ntSX = new NonTerminale(charTemp);
+			listaNT.add(ntSX);
+			System.out.println("LISTA: " + listaNT);
+		}
+	 }	
+	 	SC
+	;
 
 ar	:	NT EQ (NT|CT)* SC;
 
@@ -76,4 +106,3 @@ WS  :   ( ' '
         | '\n'
         ) {$channel=HIDDEN;}
     ;
-

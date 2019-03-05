@@ -7,21 +7,20 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Tester {
+	// Liste di regole e NT
 	static LinkedList<NonTerminale> listaNT = new LinkedList<NonTerminale>();
 	static LinkedList<RegolaDiProduzione> listaReg = new LinkedList<RegolaDiProduzione>();
-	
-	//Codice che andrebbe buttato in ?antlr?
-	
-	//TODO: SISTEMARE IL FATTO CHE OGNI REGOLA DI PRODUZIONE PUNTI A DEI NON TERMINALI A CASO CHE NON SONO QUELLI PRESENTI IN listaNT!!!
-	//Questo perché quando vado a calcolare l'annullabilità della regola non le calcola correttamente
+
+	// Quello che c'è qui va portato in ANTLR
 	public static void leggiFile() {
 		try {
 			Scanner scanner = new Scanner(new File(".\\resources\\input.txt"));
 			while (scanner.hasNextLine()) {
-				String mom = scanner.nextLine();
-				String charTemp = String.valueOf(mom.charAt(0));
-				boolean trovato = false;
+				String mom = scanner.nextLine(); 
+				String charTemp = String.valueOf(mom.charAt(0)); // Questo sarebbe tipo il token
+				boolean trovato = false; 
 				NonTerminale ntSX = null;
+				// Verifico che il non terminale non sia già presente, se già presente uso quello già presente (altrimenti si hanno problemi di consistenza)
 				for(NonTerminale nt: listaNT) {
 					if(nt.lettera.equals(charTemp)) {
 						trovato = true;
@@ -29,30 +28,24 @@ public class Tester {
 						break;
 					}
 				}
-				
-				/*
-				for(int i=0; i<listaNT.size(); i++) {
-					if(listaNT.get(i).lettera.equals(charTemp)) {
-						trovato = true;
-						ntSX=listaNT.get(i);
-					}
-				}
-				*/
-				
 				if(!trovato) {
 					ntSX = new NonTerminale(charTemp);
 					listaNT.add(ntSX);
 				}
-				List<Carattere> listaMom = new LinkedList<Carattere>();
-				if(mom.length()==2) {
+				
+				List<Carattere> listaMom = new LinkedList<Carattere>(); // Lista di caratteri che formerà la parte DX della regola di produzione
+				
+				if(mom.length()==2) { // Su ANTLR idea: Creare una variabile sul -> e poi verificare su ; se uguale, in caso impostare la regola di produzione con null sulla parte dx
 					ntSX.setAnnullabile();
-					listaReg.add(new RegolaDiProduzione(ntSX, null));
+					listaReg.add(new RegolaDiProduzione(ntSX, null)); 
 				} else {
 					for(int i=2; i<mom.length();i++) {
-						if(Character.isLowerCase(mom.charAt(i))) {
+						if(Character.isLowerCase(mom.charAt(i))) { // Questo su ANTLR è gratise dato che te li differenzia il lexer
 							Terminale terTemp = new Terminale(String.valueOf(mom.charAt(i)));
+							// Aggiungo il terminale alla lista momentanea che andrà a formare la parte dx della regola di produzione
 							listaMom.add(terTemp);
 						} else {
+							// Stessa verifica come sopra per i NT
 							String mom2 = String.valueOf(mom.charAt(i));
 							NonTerminale ntTemp = null;
 							trovato = false;
@@ -64,23 +57,15 @@ public class Tester {
 									break;
 								}
 							}
-							
-							/*
-							for(int j=0; j<listaNT.size();j++) {
-								if(listaNT.get(j).lettera.equals(mom2)) {
-									ntTemp = listaNT.get(j);
-									trovato = true;
-								}
-							}
-							*/
-							
 							if(!trovato) {
 								ntTemp = new NonTerminale(mom2);
 								listaNT.add(ntTemp);
 							}
+							// Aggiungo il non terminale alla lista momentanea che andrà a formare la parte dx della regola di produzione
 							listaMom.add(ntTemp);
 						}
 					}
+					//Creo la regola di produzione e la aggiungo alla lista delle regole
 					listaReg.add(new RegolaDiProduzione(ntSX, listaMom));
 				}
 				
@@ -100,6 +85,8 @@ public class Tester {
 		}
 		*/
 		
+		// DA FARE SU EOF
+		// Aggiungo ad ogni non terminale le sue regole
 		for(RegolaDiProduzione reg : listaReg) {
 			for(NonTerminale nt : listaNT) {
 				if(reg.parteSX.lettera.equals(nt.lettera)) {
@@ -109,29 +96,32 @@ public class Tester {
 			}
 		}
 		
+		// DA FARE SU EOF
 		//Calcolo annullabilità regole
 		for(RegolaDiProduzione reg : listaReg) {
 			reg.calcolaAnnullabilita();
 		}
 		
+		// DA FARE SU EOF
 		//Calcolo annullabilità caratteri
 		for (NonTerminale nt: listaNT) {
 			nt.calcolaAnnullabile();
 		}
 		
 		
-		// Controllo assegnazione regole
+		// Test funzionalità
+		// Stampo per ogni non terminale le sue regole di produzione
 		for(NonTerminale nt : listaNT) {
 			System.out.println(nt.getRegole());
 		}
 		
-		//Controllo annullabilità regole
+		// Stampo per ogni non regole di produzione se è annullabile
 		for(RegolaDiProduzione reg : listaReg) {
 			System.out.println(reg.toString() + " | annullabile: "+ reg.annullabile);
 		}
 		
 		
-		//Controllo annullabilità NT
+		// Stampo per ogni NT se è annullabile
 		for(NonTerminale nt : listaNT) {
 			System.out.println(nt.lettera + " isAnnullabile(): "+ nt.isAnnullabile());
 		}

@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g 2019-03-05 11:18:57
+// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-05 16:10:39
 
   package lr1Package;
   import myPackage.*;
@@ -42,7 +42,7 @@ public class PrototipoLR1Parser extends Parser {
 	}
 
 	@Override public String[] getTokenNames() { return PrototipoLR1Parser.tokenNames; }
-	@Override public String getGrammarFileName() { return "D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g"; }
+	@Override public String getGrammarFileName() { return "C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g"; }
 
 
 	  Environment env;
@@ -72,18 +72,22 @@ public class PrototipoLR1Parser extends Parser {
 
 
 	// $ANTLR start "lr1"
-	// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:50:1: lr1 : pr ( ar )+ EOF ;
+	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:50:1: lr1 : pr ( ar )+ EOF ;
 	public final void lr1() throws RecognitionException {
 		try {
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:50:5: ( pr ( ar )+ EOF )
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:50:7: pr ( ar )+ EOF
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:50:5: ( pr ( ar )+ EOF )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:51:2: pr ( ar )+ EOF
 			{
-			init();
-			pushFollow(FOLLOW_pr_in_lr164);
+
+					init();
+					static LinkedList<NonTerminale> listaNT = new LinkedList<NonTerminale>();
+					static LinkedList<RegolaDiProduzione> listaReg = new LinkedList<RegolaDiProduzione>();
+				
+			pushFollow(FOLLOW_pr_in_lr169);
 			pr();
 			state._fsp--;
 
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:50:20: ( ar )+
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:56:6: ( ar )+
 			int cnt1=0;
 			loop1:
 			while (true) {
@@ -95,9 +99,9 @@ public class PrototipoLR1Parser extends Parser {
 
 				switch (alt1) {
 				case 1 :
-					// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:50:20: ar
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:56:6: ar
 					{
-					pushFollow(FOLLOW_ar_in_lr166);
+					pushFollow(FOLLOW_ar_in_lr171);
 					ar();
 					state._fsp--;
 
@@ -112,7 +116,7 @@ public class PrototipoLR1Parser extends Parser {
 				cnt1++;
 			}
 
-			match(input,EOF,FOLLOW_EOF_in_lr169); 
+			match(input,EOF,FOLLOW_EOF_in_lr174); 
 			}
 
 		}
@@ -129,24 +133,40 @@ public class PrototipoLR1Parser extends Parser {
 
 
 	// $ANTLR start "pr"
-	// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:52:1: pr : start= SZ EQ NT TER SC ;
+	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:59:1: pr : start= SZ EQ NT TER SC ;
 	public final void pr() throws RecognitionException {
 		Token start=null;
 
 		try {
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:52:4: (start= SZ EQ NT TER SC )
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:52:6: start= SZ EQ NT TER SC
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:59:4: (start= SZ EQ NT TER SC )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:59:6: start= SZ EQ NT TER SC
 			{
-			start=(Token)match(input,SZ,FOLLOW_SZ_in_pr80); 
-			match(input,EQ,FOLLOW_EQ_in_pr82); 
-			match(input,NT,FOLLOW_NT_in_pr84); 
-			match(input,TER,FOLLOW_TER_in_pr86); 
-			match(input,SC,FOLLOW_SC_in_pr88); 
+			start=(Token)match(input,SZ,FOLLOW_SZ_in_pr87); 
+			match(input,EQ,FOLLOW_EQ_in_pr89); 
+			match(input,NT,FOLLOW_NT_in_pr91); 
 
 				  	System.out.println("Test");
 				  	NonTerminale prova = new NonTerminale(start.getText());
 				  	System.out.println("Questo è il non terminale inserito: " + prova);	  	
 				
+			match(input,TER,FOLLOW_TER_in_pr99); 
+
+				 	boolean trovato = false;
+				 	for(NonTerminale nt: listaNT) {
+						if(nt.lettera.equals(charTemp)) {
+							trovato = true;
+							ntSX = nt;
+							break;
+						}
+					}
+					if(!trovato) {
+						System.out.println("Aggiungo carattere alla lista");
+						ntSX = new NonTerminale(charTemp);
+						listaNT.add(ntSX);
+						System.out.println("LISTA: " + listaNT);
+					}
+				 
+			match(input,SC,FOLLOW_SC_in_pr109); 
 			}
 
 		}
@@ -163,15 +183,15 @@ public class PrototipoLR1Parser extends Parser {
 
 
 	// $ANTLR start "ar"
-	// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:60:1: ar : NT EQ ( NT | CT )* SC ;
+	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:85:1: ar : NT EQ ( NT | CT )* SC ;
 	public final void ar() throws RecognitionException {
 		try {
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:60:4: ( NT EQ ( NT | CT )* SC )
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:60:6: NT EQ ( NT | CT )* SC
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:85:4: ( NT EQ ( NT | CT )* SC )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:85:6: NT EQ ( NT | CT )* SC
 			{
-			match(input,NT,FOLLOW_NT_in_ar101); 
-			match(input,EQ,FOLLOW_EQ_in_ar103); 
-			// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:60:12: ( NT | CT )*
+			match(input,NT,FOLLOW_NT_in_ar119); 
+			match(input,EQ,FOLLOW_EQ_in_ar121); 
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:85:12: ( NT | CT )*
 			loop2:
 			while (true) {
 				int alt2=2;
@@ -182,7 +202,7 @@ public class PrototipoLR1Parser extends Parser {
 
 				switch (alt2) {
 				case 1 :
-					// D:\\GoogleDrive\\Unibg\\Esami\\_IN_VALUTAZIONE\\38070 - Linguaggi formali e compilatori\\progettoLFC\\PrototipoLR1.g:
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:
 					{
 					if ( input.LA(1)==CT||input.LA(1)==NT ) {
 						input.consume();
@@ -200,7 +220,7 @@ public class PrototipoLR1Parser extends Parser {
 				}
 			}
 
-			match(input,SC,FOLLOW_SC_in_ar112); 
+			match(input,SC,FOLLOW_SC_in_ar130); 
 			}
 
 		}
@@ -218,15 +238,15 @@ public class PrototipoLR1Parser extends Parser {
 
 
 
-	public static final BitSet FOLLOW_pr_in_lr164 = new BitSet(new long[]{0x0000000000000080L});
-	public static final BitSet FOLLOW_ar_in_lr166 = new BitSet(new long[]{0x0000000000000080L});
-	public static final BitSet FOLLOW_EOF_in_lr169 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_SZ_in_pr80 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_EQ_in_pr82 = new BitSet(new long[]{0x0000000000000080L});
-	public static final BitSet FOLLOW_NT_in_pr84 = new BitSet(new long[]{0x0000000000000400L});
-	public static final BitSet FOLLOW_TER_in_pr86 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_SC_in_pr88 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NT_in_ar101 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_EQ_in_ar103 = new BitSet(new long[]{0x00000000000001A0L});
-	public static final BitSet FOLLOW_SC_in_ar112 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_pr_in_lr169 = new BitSet(new long[]{0x0000000000000080L});
+	public static final BitSet FOLLOW_ar_in_lr171 = new BitSet(new long[]{0x0000000000000080L});
+	public static final BitSet FOLLOW_EOF_in_lr174 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_SZ_in_pr87 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_EQ_in_pr89 = new BitSet(new long[]{0x0000000000000080L});
+	public static final BitSet FOLLOW_NT_in_pr91 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_TER_in_pr99 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_SC_in_pr109 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NT_in_ar119 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_EQ_in_ar121 = new BitSet(new long[]{0x00000000000001A0L});
+	public static final BitSet FOLLOW_SC_in_ar130 = new BitSet(new long[]{0x0000000000000002L});
 }

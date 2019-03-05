@@ -4,8 +4,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class NonTerminale extends Carattere{
-	String lettera;
-	List<RegolaDiProduzione> rdp;
+	String lettera; // Rappresentazione sottoforma di stringa del non terminale
+	List<RegolaDiProduzione> rdp; // Regole di produzione che hanno il non terminale come parte SX
 	boolean annullabile;
 	
 	public NonTerminale (String lettera) {
@@ -15,7 +15,7 @@ public class NonTerminale extends Carattere{
 	}
 	
 	@Override
-
+	//TODO DA EDITARE e ricordarsi che dal chiamante bisogna verificare che il NT non sia annullabile, altrimenti controllare anche il carattere dopo
 	public List<String> calcolaInizi() {
 		List<String> inizi = new LinkedList<String>();
 		for (RegolaDiProduzione reg : rdp) {
@@ -28,12 +28,23 @@ public class NonTerminale extends Carattere{
 		return inizi;
 	}
 	
+	
 	public boolean isAnnullabile() {
-		return annullabile;
+		return this.annullabile;
 	}
 	
 	public void setAnnullabile() {
 		this.annullabile = true;
+	}
+	
+	// Ricalcola annullabilità considerando l'annullabilità delle regole di produzione
+	public void calcolaAnnullabile() {
+		for(RegolaDiProduzione reg: rdp) {
+			if(reg.annullabile) {
+				this.annullabile = true;
+				break;
+			}
+		}
 	}
 	
 	public List<RegolaDiProduzione> getRegole(){

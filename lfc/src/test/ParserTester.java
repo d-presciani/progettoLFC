@@ -22,7 +22,7 @@ public class ParserTester  {
 
 	    parser.lr1();
 
-	    System.out.println("ERRORI:" + parser.getErrorList().size());
+	    System.out.println("\nErrori riscontrati:" + parser.getErrorList().size());
 	    
 	    for (int i=0;i<parser.getErrorList().size();i++) {
 	    	System.out.println((i+1) + ".\t" + parser.getErrorList().get(i));
