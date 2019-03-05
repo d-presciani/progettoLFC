@@ -26,6 +26,7 @@ hs_err_pid*
 # Output folder
 output/
 LR(1)/bin
+lfc/bin
 
 # Windows files
 Desktop.ini
