@@ -17,7 +17,7 @@ public class Solver {
 			}	
 		}
 		
-		//List<Stato> listaStati = new LinkedList<Stato>();
+		List<Stato> listaStati = new LinkedList<Stato>();
 
 		//Creo il primo stato
 		Stato mom = new Stato();

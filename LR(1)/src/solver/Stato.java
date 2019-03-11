@@ -20,6 +20,8 @@ public class Stato {
 	// Da sistemare
 	public void agiungiCore(RegolaDiProduzione rdp) {
 		regoleCore.add(new RegolaDiProduzione(rdp));
+		
+		//Codice che potrei splittare per usarlo da tutti per popolazione dei seguiti???? Controllare
 		if(rdp.parteDX!=null) {
 			for(RegolaDiProduzione regComp : rdp.parteDX.get(rdp.indice).getRegole()) {
 				RegolaDiProduzione tmp = new RegolaDiProduzione(regComp);
@@ -34,8 +36,11 @@ public class Stato {
 				} else {
 					tmp.seguiti.addAll(rdp.seguiti);
 				}
+				// Questo andrebbe spostato (potrei creare una funzione che agiunge i seguiti e alla fine ritorna la regola per l'inserimento già processata)
 				regoleCompletamenti.add(tmp);
 			}
+			
+			// Controllo per espansione regole completamento
 			for(RegolaDiProduzione reg : regoleCompletamenti) {
 				for(RegolaDiProduzione nuoveRegole: reg.parteDX.get(reg.indice).getRegole()) {
 					boolean trovato = false;
@@ -46,6 +51,7 @@ public class Stato {
 						}
 					}
 					if(!trovato) {
+						// Manca inserimento seguiti, rivedere sopra e magari splittare il codice in una funzione dato che viene eseguito da tutti uguali
 						this.aggiungiCompletameno(nuoveRegole);
 					}
 				}
@@ -54,6 +60,7 @@ public class Stato {
 	}
 	
 	// Da sistemare
+	// Circa funziona come quello sopra, quindi sistemato quello sopra si sistema anche questo
 	public void aggiungiCompletameno(RegolaDiProduzione rdp) {
 		regoleCompletamenti.add(new RegolaDiProduzione(rdp));
 		if(rdp.parteDX!=null && rdp.parteDX.size()!=0) {
