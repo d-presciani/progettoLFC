@@ -9,6 +9,7 @@ options {
   package lr1Package;
   import myPackage.*;
   import solver.*;
+  import java.util.LinkedList;
 }
 
 @lexer::header{
@@ -17,6 +18,8 @@ options {
 
 @members{
   Environment env;
+  static LinkedList<NonTerminale> listaNT = new LinkedList<NonTerminale>();
+  static LinkedList<RegolaDiProduzione> listaReg = new LinkedList<RegolaDiProduzione>();
   void init () {
     env = new Environment();
   }
@@ -39,6 +42,25 @@ options {
        Token tk = input.LT(1);
        env.handleError(tokenNames,e,hdr,msg);
     }
+    
+   // Controllo del lato sinistro della produzione 
+   public void leftSide(String s){
+   	boolean trovato = false;
+ 	NonTerminale ntSX = null;
+ 	for(NonTerminale nt: listaNT) {
+		if(nt.getLettera().equals(s)) {
+			trovato = true;
+			ntSX = nt;
+			break;
+		}
+	}
+	if(!trovato) {
+		System.out.println("Aggiungo carattere alla lista");
+		ntSX = new NonTerminale(s);
+		listaNT.add(ntSX);
+		System.out.println("LISTA: " + listaNT);
+	}
+   }
 }
 
 
@@ -50,39 +72,23 @@ options {
 lr1	: 
 	{
 		init();
-		static LinkedList<NonTerminale> listaNT = new LinkedList<NonTerminale>();
-		static LinkedList<RegolaDiProduzione> listaReg = new LinkedList<RegolaDiProduzione>();
 	} 
 		pr ar+ EOF
 	;
 	
-pr	:	start=SZ EQ NT
+pr	:	nxtChar=SZ EQ NT
 	{
-	  	System.out.println("Test");
-	  	NonTerminale prova = new NonTerminale($start.getText());
-	  	System.out.println("Questo è il non terminale inserito: " + prova);	  	
+	 	leftSide($nxtChar.getText());
 	}
-	 	TER
-	 {
-	 	boolean trovato = false;
-	 	for(NonTerminale nt: listaNT) {
-			if(nt.lettera.equals(charTemp)) {
-				trovato = true;
-				ntSX = nt;
-				break;
-			}
-		}
-		if(!trovato) {
-			System.out.println("Aggiungo carattere alla lista");
-			ntSX = new NonTerminale(charTemp);
-			listaNT.add(ntSX);
-			System.out.println("LISTA: " + listaNT);
-		}
-	 }	
-	 	SC
+	 	TER SC
 	;
 
-ar	:	NT EQ (NT|CT)* SC;
+ar	:	nxtChar=NT
+	{
+	 	leftSide($nxtChar.getText());
+	}
+	 	EQ (NT|CT)* SC
+	;
 
 
 

@@ -12,7 +12,7 @@ public class ParserTester  {
   
 	public static void main(String[] args) {
 		CommonTokenStream tokens;
-  	String fileIn = ".\\resources\\input.file";
+  	String fileIn = ".\\resources\\input.txt";
   	
   	try {
 			System.out.println ("LR1 Parsing con ANTLR\n");
