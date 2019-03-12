@@ -26,9 +26,29 @@ public class RegolaDiProduzione {
 		this.indice = 0;
 	}
 
-	// TODO: Creare copy constructor per espansione stati e creazione nuove regole di produzione (Pensare come spostare indice)
 	
+	public RegolaDiProduzione(RegolaDiProduzione reg) {
+		this();
+		this.parteSX = reg.parteSX;
+		if(reg.parteDX!=null) {
+			for(Carattere ch : reg.parteDX) {
+				this.parteDX.add(ch);
+			}
+		} else {
+			this.parteDX = null;
+			this.annullabile = true;
+		}
+		this.indice = reg.indice;
+		this.annullabile = reg.annullabile;
+		for(String seg : reg.seguiti) {
+			this.seguiti.add(seg);
+		}
+	}
 	
+	public void avanzaPuntino() {
+		indice++;
+	}
+
 	// Calcolo l'annullabilità della funzione
 	public void calcolaAnnullabilita() {
 		for (int i=0; i<parteDX.size(); i++){ 
@@ -39,10 +59,10 @@ public class RegolaDiProduzione {
 		}
 	}
 	
-	//TODO DA EDITARE
-	public Carattere getProssimochar() { 
-		return parteDX.get(indice++);
+	public void espandi() {
+		
 	}
+	
 	
 	@Override
 	public String toString() {

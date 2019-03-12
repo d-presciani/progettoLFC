@@ -77,37 +77,21 @@ public class Tester {
 	}
 
 	public static void main(String[] args) {
+		NonTerminale mom = new NonTerminale("S0");
+		List<Carattere> listaMom = new LinkedList<Carattere>();
+		NonTerminale mom2 = new NonTerminale("S");
+		listaNT.add(mom);
+		listaNT.add(mom2);
+		listaMom.add(mom2);
+		listaMom.add(new Terminale("/cjswa"));
+		RegolaDiProduzione regTemp = new RegolaDiProduzione(mom,listaMom);
+		regTemp.seguiti.add("/emptyset");
+		listaReg.add(regTemp);
+		
 		leggiFile();
-		/*
-		System.out.println(listaNT.toString());
-		for(RegolaDiProduzione reg : listaReg) {
-			System.out.println(reg.toString());
-		}
-		*/
-		
-		// DA FARE SU EOF
-		// Aggiungo ad ogni non terminale le sue regole
-		for(RegolaDiProduzione reg : listaReg) {
-			for(NonTerminale nt : listaNT) {
-				if(reg.parteSX.lettera.equals(nt.lettera)) {
-					nt.addRegola(reg);
-					break;
-				}
-			}
-		}
-		
-		// DA FARE SU EOF
-		//Calcolo annullabilità regole
-		for(RegolaDiProduzione reg : listaReg) {
-			reg.calcolaAnnullabilita();
-		}
-		
-		// DA FARE SU EOF
-		//Calcolo annullabilità caratteri
-		for (NonTerminale nt: listaNT) {
-			nt.calcolaAnnullabile();
-		}
-		
+		System.out.println("Inizio solver");
+		Solver risolutore = new Solver();
+		risolutore.solve(listaNT, listaReg);
 		
 		// Test funzionalità
 		// Stampo per ogni non terminale le sue regole di produzione
@@ -125,6 +109,13 @@ public class Tester {
 		for(NonTerminale nt : listaNT) {
 			System.out.println(nt.lettera + " isAnnullabile(): "+ nt.isAnnullabile());
 		}
+		
+		// Controllo inizi di ogni NT
+		for(NonTerminale nt: listaNT) {
+			System.out.println("Insieme degli inizi di " + nt.lettera + ": " + nt.calcolaInizi().toString());
+		}
+		
+		
 		
 	}
 

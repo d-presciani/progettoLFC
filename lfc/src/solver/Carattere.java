@@ -9,4 +9,6 @@ public abstract class Carattere {
 	public abstract boolean isAnnullabile();
 	
 	public abstract String getLettera();
+	
+	public abstract List<RegolaDiProduzione> getRegole();
 }

@@ -33,4 +33,10 @@ public class Terminale extends Carattere{
 		// TODO Auto-generated method stub
 		return lettera;
 	}
+
+	@Override
+	public List<RegolaDiProduzione> getRegole() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

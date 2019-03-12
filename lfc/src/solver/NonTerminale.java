@@ -15,14 +15,27 @@ public class NonTerminale extends Carattere{
 	}
 	
 	@Override
-	//TODO DA EDITARE e ricordarsi che dal chiamante bisogna verificare che il NT non sia annullabile, altrimenti controllare anche il carattere dopo
+	//TODO ricordarsi che dal chiamante bisogna verificare che il NT non sia annullabile, altrimenti controllare anche il carattere dopo
 	public List<String> calcolaInizi() {
 		List<String> inizi = new LinkedList<String>();
 		for (RegolaDiProduzione reg : rdp) {
-			for(String car : reg.getProssimochar().calcolaInizi()) {
-				if(!inizi.contains(car)) {
-					inizi.add(car);
-				}
+			if(!reg.parteDX.isEmpty()) {
+				int i=0;
+				boolean finito = false;
+				do {
+					List<String> temp = reg.parteDX.get(i).calcolaInizi();
+					if(!temp.isEmpty()) {
+						for(String ch: temp) {
+							if(!inizi.contains(ch)) {
+								inizi.add(ch);
+							}
+						}
+					}
+					if(!reg.parteDX.get(i).isAnnullabile()) {
+						finito = true;
+					}
+					i++;
+				} while (!finito && i<reg.parteDX.size());
 			}
 		}
 		return inizi;

@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-12 11:00:53
+// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-12 12:13:52
 
   package lr1Package;
   import myPackage.*;
@@ -47,8 +47,18 @@ public class PrototipoLR1Parser extends Parser {
 
 
 	  Environment env;
+	  // Lista dei caratteri non terminali
 	  static LinkedList<NonTerminale> listaNT = new LinkedList<NonTerminale>();
+	  // Lista delle regole di produzione
 	  static LinkedList<RegolaDiProduzione> listaReg = new LinkedList<RegolaDiProduzione>();
+	  // Booleano per il controllo delle produzioni nulle
+	  boolean nullo = false;
+	  // Variabile per la conservazione del non terminale di sinistra
+	  NonTerminale ntSX = null;
+	  // Lista di store temporanea dei caratteri di destra della produzione
+	  List<Carattere> listaDX = new LinkedList<Carattere>();
+	  // Classificatore della grammatica
+	  Solver classificatore = new Solver();
 	  void init () {
 	    env = new Environment();
 	  }
@@ -73,32 +83,38 @@ public class PrototipoLR1Parser extends Parser {
 	    }
 	    
 	   // Controllo del lato sinistro della produzione 
-	   public void leftSide(String s){
+	   public NonTerminale controlloNT(String s){
+	   	// Booleano per il controllo dell'esistenza del NT nella lista
 	   	boolean trovato = false;
-	 	NonTerminale ntSX = null;
+	   	// Variabile da tornare
+	   	NonTerminale ntNew = null;
 	 	for(NonTerminale nt: listaNT) {
 			if(nt.getLettera().equals(s)) {
+				// NT già esistente nella lista dei caratteri non terminali
 				trovato = true;
-				ntSX = nt;
-				break;
+				// Memorizzo il carattere nella variabile di store
+				return nt;
 			}
 		}
 		if(!trovato) {
-			System.out.println("Aggiungo carattere alla lista");
-			ntSX = new NonTerminale(s);
-			listaNT.add(ntSX);
-			System.out.println("LISTA: " + listaNT);
+			// NT non esistente nella lista dei caratteri non terminali
+			System.out.println("Aggiungo carattere alla lista");	// Stampa di debug (commentare in produzione)
+			ntNew = new NonTerminale(s);
+			// Aggiungo il terminale alla lista e faccio lo store nella variabile
+			listaNT.add(ntNew);
+			System.out.println("LISTA DEI NON TERMINALI: " + listaNT);	// Stampa di debug (commentare in produzione)
 		}
+		return ntNew;
 	   }
 
 
 
 	// $ANTLR start "lr1"
-	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:72:1: lr1 : pr ( ar )+ EOF ;
+	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:88:1: lr1 : pr ( ar )+ EOF ;
 	public final void lr1() throws RecognitionException {
 		try {
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:72:5: ( pr ( ar )+ EOF )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:73:2: pr ( ar )+ EOF
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:88:5: ( pr ( ar )+ EOF )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:89:2: pr ( ar )+ EOF
 			{
 
 					init();
@@ -107,7 +123,7 @@ public class PrototipoLR1Parser extends Parser {
 			pr();
 			state._fsp--;
 
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:76:6: ( ar )+
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:92:6: ( ar )+
 			int cnt1=0;
 			loop1:
 			while (true) {
@@ -119,7 +135,7 @@ public class PrototipoLR1Parser extends Parser {
 
 				switch (alt1) {
 				case 1 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:76:6: ar
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:92:6: ar
 					{
 					pushFollow(FOLLOW_ar_in_lr171);
 					ar();
@@ -137,6 +153,9 @@ public class PrototipoLR1Parser extends Parser {
 			}
 
 			match(input,EOF,FOLLOW_EOF_in_lr174); 
+
+					classificatore.solve(listaNT, listaReg);
+				
 			}
 
 		}
@@ -153,22 +172,34 @@ public class PrototipoLR1Parser extends Parser {
 
 
 	// $ANTLR start "pr"
-	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:79:1: pr : nxtChar= SZ EQ NT TER SC ;
+	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:98:1: pr : nxtChar= SZ EQ charDx= NT TER SC ;
 	public final void pr() throws RecognitionException {
 		Token nxtChar=null;
+		Token charDx=null;
 
 		try {
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:79:4: (nxtChar= SZ EQ NT TER SC )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:79:6: nxtChar= SZ EQ NT TER SC
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:98:4: (nxtChar= SZ EQ charDx= NT TER SC )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:98:6: nxtChar= SZ EQ charDx= NT TER SC
 			{
-			nxtChar=(Token)match(input,SZ,FOLLOW_SZ_in_pr87); 
-			match(input,EQ,FOLLOW_EQ_in_pr89); 
-			match(input,NT,FOLLOW_NT_in_pr91); 
-
-				 	leftSide(nxtChar.getText());
+			nxtChar=(Token)match(input,SZ,FOLLOW_SZ_in_pr90); 
+			match(input,EQ,FOLLOW_EQ_in_pr92); 
 				
-			match(input,TER,FOLLOW_TER_in_pr99); 
-			match(input,SC,FOLLOW_SC_in_pr101); 
+					// Controllo se il non terminale è già noto o no
+				 	ntSX = controlloNT(nxtChar.getText());
+				
+			charDx=(Token)match(input,NT,FOLLOW_NT_in_pr102); 
+			match(input,TER,FOLLOW_TER_in_pr104); 
+				
+					// Controllo se il non terminale è già noto o no
+				 	NonTerminale ntDX = controlloNT(charDx.getText());
+				 	listaDX.add(ntDX);
+				
+			match(input,SC,FOLLOW_SC_in_pr112); 
+
+					listaReg.add(new RegolaDiProduzione(ntSX, listaDX));
+					listaDX.clear();
+					System.out.println("LISTA DELLE PRODUZIONI:" + listaReg);
+				
 			}
 
 		}
@@ -185,40 +216,54 @@ public class PrototipoLR1Parser extends Parser {
 
 
 	// $ANTLR start "ar"
-	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:86:1: ar : nxtChar= NT EQ ( NT | CT )* SC ;
+	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:117:1: ar : nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC ;
 	public final void ar() throws RecognitionException {
 		Token nxtChar=null;
+		Token charDX=null;
+		Token charDXT=null;
 
 		try {
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:86:4: (nxtChar= NT EQ ( NT | CT )* SC )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:86:6: nxtChar= NT EQ ( NT | CT )* SC
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:117:4: (nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:117:6: nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC
 			{
-			nxtChar=(Token)match(input,NT,FOLLOW_NT_in_ar113); 
+			nxtChar=(Token)match(input,NT,FOLLOW_NT_in_ar127); 
 
-				 	leftSide(nxtChar.getText());
+				 	ntSX = controlloNT(nxtChar.getText());
 				
-			match(input,EQ,FOLLOW_EQ_in_ar121); 
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:90:7: ( NT | CT )*
+			match(input,EQ,FOLLOW_EQ_in_ar135); 
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:121:7: (charDX= NT |charDXT= CT )*
 			loop2:
 			while (true) {
-				int alt2=2;
+				int alt2=3;
 				int LA2_0 = input.LA(1);
-				if ( (LA2_0==CT||LA2_0==NT) ) {
+				if ( (LA2_0==NT) ) {
 					alt2=1;
+				}
+				else if ( (LA2_0==CT) ) {
+					alt2=2;
 				}
 
 				switch (alt2) {
 				case 1 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:121:8: charDX= NT
 					{
-					if ( input.LA(1)==CT||input.LA(1)==NT ) {
-						input.consume();
-						state.errorRecovery=false;
+					charDX=(Token)match(input,NT,FOLLOW_NT_in_ar140); 
+						
+							// Controllo se il non terminale è già noto o no
+						 	NonTerminale ntDX = controlloNT(charDX.getText());
+						 	listaDX.add(ntDX);
+						
 					}
-					else {
-						MismatchedSetException mse = new MismatchedSetException(null,input);
-						throw mse;
-					}
+					break;
+				case 2 :
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:127:6: charDXT= CT
+					{
+					charDXT=(Token)match(input,CT,FOLLOW_CT_in_ar152); 
+
+							// Aggiunta del terminale alla regola di produzione
+							Terminale tDX = new Terminale(charDXT.getText());
+							listaDX.add(tDX);
+						
 					}
 					break;
 
@@ -227,7 +272,16 @@ public class PrototipoLR1Parser extends Parser {
 				}
 			}
 
-			match(input,SC,FOLLOW_SC_in_ar130); 
+			match(input,SC,FOLLOW_SC_in_ar164); 
+				
+					if(listaDX.size() > 0){
+						listaReg.add(new RegolaDiProduzione(ntSX, listaDX));
+					} else {
+						listaReg.add(new RegolaDiProduzione(ntSX, null));
+					}
+					listaDX.clear();
+					System.out.println("LISTA DELLE PRODUZIONI:" + listaReg);
+				
 			}
 
 		}
@@ -248,12 +302,14 @@ public class PrototipoLR1Parser extends Parser {
 	public static final BitSet FOLLOW_pr_in_lr169 = new BitSet(new long[]{0x0000000000000080L});
 	public static final BitSet FOLLOW_ar_in_lr171 = new BitSet(new long[]{0x0000000000000080L});
 	public static final BitSet FOLLOW_EOF_in_lr174 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_SZ_in_pr87 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_EQ_in_pr89 = new BitSet(new long[]{0x0000000000000080L});
-	public static final BitSet FOLLOW_NT_in_pr91 = new BitSet(new long[]{0x0000000000000400L});
-	public static final BitSet FOLLOW_TER_in_pr99 = new BitSet(new long[]{0x0000000000000100L});
-	public static final BitSet FOLLOW_SC_in_pr101 = new BitSet(new long[]{0x0000000000000002L});
-	public static final BitSet FOLLOW_NT_in_ar113 = new BitSet(new long[]{0x0000000000000040L});
-	public static final BitSet FOLLOW_EQ_in_ar121 = new BitSet(new long[]{0x00000000000001A0L});
-	public static final BitSet FOLLOW_SC_in_ar130 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_SZ_in_pr90 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_EQ_in_pr92 = new BitSet(new long[]{0x0000000000000080L});
+	public static final BitSet FOLLOW_NT_in_pr102 = new BitSet(new long[]{0x0000000000000400L});
+	public static final BitSet FOLLOW_TER_in_pr104 = new BitSet(new long[]{0x0000000000000100L});
+	public static final BitSet FOLLOW_SC_in_pr112 = new BitSet(new long[]{0x0000000000000002L});
+	public static final BitSet FOLLOW_NT_in_ar127 = new BitSet(new long[]{0x0000000000000040L});
+	public static final BitSet FOLLOW_EQ_in_ar135 = new BitSet(new long[]{0x00000000000001A0L});
+	public static final BitSet FOLLOW_NT_in_ar140 = new BitSet(new long[]{0x00000000000001A0L});
+	public static final BitSet FOLLOW_CT_in_ar152 = new BitSet(new long[]{0x00000000000001A0L});
+	public static final BitSet FOLLOW_SC_in_ar164 = new BitSet(new long[]{0x0000000000000002L});
 }
