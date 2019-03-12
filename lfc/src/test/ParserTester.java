@@ -12,17 +12,17 @@ public class ParserTester  {
   
 	public static void main(String[] args) {
 		CommonTokenStream tokens;
-  	String fileIn = ".\\resources\\input.txt";
+  	String fileIn = ".\\resources\\input2.txt";
   	
   	try {
-			System.out.println ("LR1 Parsing con ANTLR\n");
+			System.out.println ("IDENTIFICAZIONE GRAMMATICHE LR(1)\n");
 			PrototipoLR1Lexer lexer = new PrototipoLR1Lexer(new ANTLRReaderStream(new FileReader(fileIn))); 
 			tokens = new CommonTokenStream(lexer);
 	    parser = new PrototipoLR1Parser(tokens);
 
 	    parser.lr1();
 
-	    System.out.println("\nErrori riscontrati:" + parser.getErrorList().size());
+	    System.out.println("\nErrori sintattici/lessicali riscontrati:" + parser.getErrorList().size());
 	    
 	    for (int i=0;i<parser.getErrorList().size();i++) {
 	    	System.out.println((i+1) + ".\t" + parser.getErrorList().get(i));

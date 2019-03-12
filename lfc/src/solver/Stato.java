@@ -17,41 +17,49 @@ public class Stato {
 		regoleCompletamenti = new LinkedList<RegolaDiProduzione>();
 	}
 	
-	public void agiungiCore(RegolaDiProduzione rdp) {
+	// Aggiunge una regola
+	public void aggiungiCore(RegolaDiProduzione rdp) {
+		// Aggiungo la regola ricevuta alle regole core
 		regoleCore.add(new RegolaDiProduzione(rdp));
-		// Popolazione dei seguiti delle nuove regole
-		if(rdp.parteDX!=null) {
-			for(RegolaDiProduzione regComp : rdp.parteDX.get(rdp.indice).getRegole()) {
-				RegolaDiProduzione tmp = new RegolaDiProduzione(regComp);
-				if(rdp.indice<rdp.parteDX.size()) {
+		
+		// Popolazione dei seguiti dei seguiti generati dalla nuova regola core
+		if(rdp.parteDX!=null) { // Controllo che la regola di produzione abbia effettivamente qualcosa a destra
+			for(RegolaDiProduzione regComp : rdp.parteDX.get(rdp.indice).getRegole()) { // Ciclo su tutte le regole (possono non esserci) generate dal carattere con il puntino
+				RegolaDiProduzione tmp = new RegolaDiProduzione(regComp); // Creo una var temporanea con la regola appena trovata per poterla modificare prima di aggiungerla alla lista delle regole e per duplicarla
+		
+				if(rdp.indice+1<rdp.parteDX.size()) { // Controllo di avere degli altri caratteri a destra del carattere con il puntino
 					int i = 0;
+					// Per ogni carattere a destra di quello con il puntino calcolo gli inizi e continuo finché non trovo un carattere non annullabile
 					do{
-						tmp.seguiti.addAll(rdp.parteDX.get(rdp.indice+i+1).calcolaInizi());
+						if(rdp.parteDX.get(rdp.indice+i+1).calcolaInizi()!=null) {
+							tmp.seguiti.addAll(rdp.parteDX.get(rdp.indice+i+1).calcolaInizi());
+						}
 						i++;
-					} while(rdp.parteDX.get(rdp.indice+i).isAnnullabile() && rdp.indice+i<rdp.parteDX.size());
-					if(rdp.annullabile) {
+					} while(rdp.parteDX.get(rdp.indice+i).isAnnullabile() && rdp.indice+i+1<rdp.parteDX.size());
+					
+					if(rdp.annullabile) { // Se tutti i caratteri son annullabili aggiungo anche i seguiti della regola padre
 						tmp.seguiti.addAll(rdp.seguiti);
 					}
-				} else {
+				} else { // Se non ho nulla a destra aggiungo i seguiti del padre
 					tmp.seguiti.addAll(rdp.seguiti);
 				}
-				regoleCompletamenti.add(tmp);
+				regoleCompletamenti.add(tmp); // Una volta aggiunti i seguiti agiungo la regola alle regole di completamento
 			}
 			
-			// Controllo per espansione regole completamento
+			// Controllo per espansione regole ogni regola di completamento
 			int i = 0;
-			while(i<regoleCompletamenti.size()) {
-				RegolaDiProduzione reg = regoleCompletamenti.get(i);
-				if(reg.parteDX.size()!=0 && reg.parteDX.get(reg.indice).getRegole()!=null) {
-					for(RegolaDiProduzione nuoveRegole: reg.parteDX.get(reg.indice).getRegole()) {
+			while(i<regoleCompletamenti.size()) { // Non posso usare un foreach dato che la dimensione di questa lista continua a variare ad ogni iterazione
+				RegolaDiProduzione reg = regoleCompletamenti.get(i); // Prendo la i-esima regola
+				if(reg.parteDX.size()!=0 && reg.parteDX.get(reg.indice).getRegole()!=null) { // Controllo che abbia delle regole espandibili puntate dal puntino
+					for(RegolaDiProduzione nuoveRegole: reg.parteDX.get(reg.indice).getRegole()) { // Per ogni regola di produzione che ritorna il carattere con il puntino controllo che questa non sia già inserita
 						boolean trovato = false;
-						for(RegolaDiProduzione regCk : regoleCompletamenti) {
+						for(RegolaDiProduzione regCk : regoleCompletamenti) { // Controllo che la regola non sia già stata inserita
 							if(nuoveRegole.parteSX.toString().equals(regCk.parteSX.toString()) && nuoveRegole.parteDX.toString().equals(regCk.parteDX.toString())) {
 								trovato = true;
 								break;
 							}
 						}
-						if(!trovato) {
+						if(!trovato) { // Se non è ancor astata inserita inserisco la nuova regola
 							this.aggiungiCompletameno(nuoveRegole, reg);
 						}
 					}
@@ -60,16 +68,20 @@ public class Stato {
 			}
 		}
 	}
-	
-	
-	public void aggiungiCompletameno(RegolaDiProduzione nuovaRdp, RegolaDiProduzione regolaPadre) {
+
+	// Inserimento regola di completamento
+	private void aggiungiCompletameno(RegolaDiProduzione nuovaRdp, RegolaDiProduzione regolaPadre) {
 		// Inserimento seguiti sulle nuove regole
-		if(regolaPadre.indice<regolaPadre.parteDX.size()) {
-			int i = 0;
-			while(regolaPadre.parteDX.get(regolaPadre.indice+i).isAnnullabile() && regolaPadre.indice+i+1<regolaPadre.parteDX.size()) {
-				nuovaRdp.seguiti.addAll(regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi());
+		if(regolaPadre.indice+1<regolaPadre.parteDX.size()) {
+			int i = 0;						
+			do{
+				if(regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi()!=null) {
+					
+					nuovaRdp.seguiti.addAll(regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi());
+				}
 				i++;
-			}
+			} while(regolaPadre.parteDX.get(regolaPadre.indice+i).isAnnullabile() && regolaPadre.indice+i+1<regolaPadre.parteDX.size());
+
 			if(regolaPadre.annullabile || regolaPadre.parteDX.size()==regolaPadre.indice+1) {
 				nuovaRdp.seguiti.addAll(regolaPadre.seguiti);
 			}
@@ -78,6 +90,7 @@ public class Stato {
 		}
 		regoleCompletamenti.add(new RegolaDiProduzione(nuovaRdp));		
 	}
+	
 	
 	public void espandiStato() {
 		

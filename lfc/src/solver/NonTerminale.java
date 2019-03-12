@@ -85,4 +85,10 @@ public class NonTerminale extends Carattere{
 		// TODO Auto-generated method stub
 		return lettera;
 	}
+	
+	public void controlloProduzioni() throws NTSenzaProd {
+		if(rdp.size() <= 0) {
+			throw new NTSenzaProd("Il non terminale " + lettera + " non ha produzioni associate!");
+		}
+	}
 }

@@ -69,11 +69,11 @@ options {
 	}
 	if(!trovato) {
 		// NT non esistente nella lista dei caratteri non terminali
-		System.out.println("Aggiungo carattere alla lista");	// Stampa di debug (commentare in produzione)
+		//System.out.println("Aggiungo carattere alla lista");	// Stampa di debug (commentare in produzione)
 		ntNew = new NonTerminale(s);
 		// Aggiungo il terminale alla lista e faccio lo store nella variabile
 		listaNT.add(ntNew);
-		System.out.println("LISTA DEI NON TERMINALI: " + listaNT);	// Stampa di debug (commentare in produzione)
+		//System.out.println("LISTA DEI NON TERMINALI: " + listaNT);	// Stampa di debug (commentare in produzione)
 	}
 	return ntNew;
    }
@@ -91,7 +91,14 @@ lr1	:
 	} 
 		pr ar+ EOF
 	{
-		classificatore.solve(listaNT, listaReg);
+		try{
+			for(NonTerminale nt : listaNT){
+				nt.controlloProduzioni();
+			}
+			classificatore.solve(listaNT, listaReg);
+		} catch (NTSenzaProd e){
+			System.err.println("\nERRORE SEMANTICO:" + e.getMessage());
+		}
 	}
 	;
 	
@@ -100,17 +107,20 @@ pr	:	nxtChar=SZ EQ
 		// Controllo se il non terminale è già noto o no
 	 	ntSX = controlloNT($nxtChar.getText());
 	}
-	 	charDx=NT TER
+	 	charDx=NT charTer=TER
 	{	
 		// Controllo se il non terminale è già noto o no
 	 	NonTerminale ntDX = controlloNT($charDx.getText());
 	 	listaDX.add(ntDX);
+	 	listaDX.add(new Terminale($charTer.getText()));
 	}
 		 SC
-	{
-		listaReg.add(new RegolaDiProduzione(ntSX, listaDX));
+	{	
+		RegolaDiProduzione regola = new RegolaDiProduzione(ntSX, listaDX);
+		listaReg.add(regola);
+		ntSX.addRegola(regola);
 		listaDX.clear();
-		System.out.println("LISTA DELLE PRODUZIONI:" + listaReg);
+		//System.out.println("LISTA DELLE PRODUZIONI:" + listaReg); // Stampa di debug (commentare in produzione)
 	}
 	;
 
@@ -120,7 +130,7 @@ ar	:	nxtChar=NT
 	}
 	 	EQ (charDX=NT
 	{	
-		// Controllo se il non terminale è già noto o no
+		// Controllo se il non terminale è già noto o no e lo aggiungo alla regola di produzione
 	 	NonTerminale ntDX = controlloNT($charDX.getText());
 	 	listaDX.add(ntDX);
 	}
@@ -132,13 +142,22 @@ ar	:	nxtChar=NT
 	}	
 	 	)* SC
 	{	
+		// Controllo se la produzione è nulla o meno
 		if(listaDX.size() > 0){
+			// Produzione non nulla
 			listaReg.add(new RegolaDiProduzione(ntSX, listaDX));
 		} else {
+			// Setto il non terminale come annullabile
+			ntSX.setAnnullabile();
+			// Produzione nulla
 			listaReg.add(new RegolaDiProduzione(ntSX, null));
 		}
+		// Pulizia della lista temporanea per conservare il lato destro della produzione
+		RegolaDiProduzione regola = new RegolaDiProduzione(ntSX, listaDX);
+		listaReg.add(regola);
+		ntSX.addRegola(regola);
 		listaDX.clear();
-		System.out.println("LISTA DELLE PRODUZIONI:" + listaReg);
+		//System.out.println("LISTA DELLE PRODUZIONI:" + listaReg); // Stampa di debug (commentare in produzione)
 	}
 	;
 
