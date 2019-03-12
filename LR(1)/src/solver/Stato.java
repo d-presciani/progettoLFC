@@ -26,13 +26,16 @@ public class Stato {
 		if(rdp.parteDX!=null) { // Controllo che la regola di produzione abbia effettivamente qualcosa a destra
 			for(RegolaDiProduzione regComp : rdp.parteDX.get(rdp.indice).getRegole()) { // Ciclo su tutte le regole (possono non esserci) generate dal carattere con il puntino
 				RegolaDiProduzione tmp = new RegolaDiProduzione(regComp); // Creo una var temporanea con la regola appena trovata per poterla modificare prima di aggiungerla alla lista delle regole e per duplicarla
-				if(rdp.indice<rdp.parteDX.size()) { // Controllo di avere degli altri caratteri a destra del carattere con il puntino
+		
+				if(rdp.indice+1<rdp.parteDX.size()) { // Controllo di avere degli altri caratteri a destra del carattere con il puntino
 					int i = 0;
 					// Per ogni carattere a destra di quello con il puntino calcolo gli inizi e continuo finché non trovo un carattere non annullabile
 					do{
-						tmp.seguiti.addAll(rdp.parteDX.get(rdp.indice+i+1).calcolaInizi());
+						if(rdp.parteDX.get(rdp.indice+i+1).calcolaInizi()!=null) {
+							tmp.seguiti.addAll(rdp.parteDX.get(rdp.indice+i+1).calcolaInizi());
+						}
 						i++;
-					} while(rdp.parteDX.get(rdp.indice+i).isAnnullabile() && rdp.indice+i<rdp.parteDX.size());
+					} while(rdp.parteDX.get(rdp.indice+i).isAnnullabile() && rdp.indice+i+1<rdp.parteDX.size());
 					
 					if(rdp.annullabile) { // Se tutti i caratteri son annullabili aggiungo anche i seguiti della regola padre
 						tmp.seguiti.addAll(rdp.seguiti);
@@ -69,12 +72,16 @@ public class Stato {
 	// Inserimento regola di completamento
 	private void aggiungiCompletameno(RegolaDiProduzione nuovaRdp, RegolaDiProduzione regolaPadre) {
 		// Inserimento seguiti sulle nuove regole
-		if(regolaPadre.indice<regolaPadre.parteDX.size()) {
-			int i = 0;
-			while(regolaPadre.parteDX.get(regolaPadre.indice+i).isAnnullabile() && regolaPadre.indice+i+1<regolaPadre.parteDX.size()) {
-				nuovaRdp.seguiti.addAll(regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi());
+		if(regolaPadre.indice+1<regolaPadre.parteDX.size()) {
+			int i = 0;						
+			do{
+				if(regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi()!=null) {
+					
+					nuovaRdp.seguiti.addAll(regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi());
+				}
 				i++;
-			}
+			} while(regolaPadre.parteDX.get(regolaPadre.indice+i).isAnnullabile() && regolaPadre.indice+i+1<regolaPadre.parteDX.size());
+
 			if(regolaPadre.annullabile || regolaPadre.parteDX.size()==regolaPadre.indice+1) {
 				nuovaRdp.seguiti.addAll(regolaPadre.seguiti);
 			}

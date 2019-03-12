@@ -95,22 +95,25 @@ public class Tester {
 		
 		// Test funzionalità
 		// Stampo per ogni non terminale le sue regole di produzione
+		System.out.println("\nElenco regole di produzione per NT");
 		for(NonTerminale nt : listaNT) {
 			System.out.println(nt.getRegole());
 		}
 		
 		// Stampo per ogni non regole di produzione se è annullabile
+		System.out.println("\nAnnullabilità per ogni regola di produzione");
 		for(RegolaDiProduzione reg : listaReg) {
 			System.out.println(reg.toString() + " | annullabile: "+ reg.annullabile);
 		}
 		
-		
 		// Stampo per ogni NT se è annullabile
+		System.out.println("\nAnnullabiltà per ongi NT");
 		for(NonTerminale nt : listaNT) {
 			System.out.println(nt.lettera + " isAnnullabile(): "+ nt.isAnnullabile());
 		}
 		
 		// Controllo inizi di ogni NT
+		System.out.println("\nInsieme degli inizi per ogni NT");
 		for(NonTerminale nt: listaNT) {
 			System.out.println("Insieme degli inizi di " + nt.lettera + ": " + nt.calcolaInizi().toString());
 		}	
