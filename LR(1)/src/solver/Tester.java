@@ -113,10 +113,7 @@ public class Tester {
 		// Controllo inizi di ogni NT
 		for(NonTerminale nt: listaNT) {
 			System.out.println("Insieme degli inizi di " + nt.lettera + ": " + nt.calcolaInizi().toString());
-		}
-		
-		
-		
+		}	
 	}
 
 }

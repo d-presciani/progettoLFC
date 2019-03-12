@@ -31,9 +31,9 @@ public class Solver {
 		
 		//Creo il primo stato
 		Stato mom = new Stato();
-		mom.agiungiCore(listaReg.get(0));
-				
-		System.out.println(mom.toString());
+		mom.aggiungiCore(listaReg.get(0));
+		listaStati.add(mom);
 		
+		System.out.println(mom.toString());
 	}
 }
