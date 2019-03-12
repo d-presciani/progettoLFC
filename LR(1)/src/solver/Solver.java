@@ -18,12 +18,6 @@ public class Solver {
 		}
 		
 		List<Stato> listaStati = new LinkedList<Stato>();
-
-		//Creo il primo stato
-		Stato mom = new Stato();
-		mom.agiungiCore(listaReg.get(0));
-		
-		System.out.println(mom.toString());
 		
 		//Calcolo annullabilità regole
 		for(RegolaDiProduzione reg : listaReg) {
@@ -35,7 +29,11 @@ public class Solver {
 			nt.calcolaAnnullabile();
 		}
 		
-		
+		//Creo il primo stato
+		Stato mom = new Stato();
+		mom.agiungiCore(listaReg.get(0));
+				
+		System.out.println(mom.toString());
 		
 	}
 }
