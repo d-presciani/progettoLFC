@@ -156,7 +156,7 @@ public class Stato {
 								j++;
 							}
 							
-							if(j!=regoleCore.size()) {
+							if(j==stt.regoleCore.size()) {
 								trovato = true;
 							}
 						}
