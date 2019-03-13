@@ -38,9 +38,17 @@ public class Solver {
 		
 		while(i<listaStati.size()) {
 			listaStati.get(i).espandiStato(listaStati, i, listaTransizioni);
+			i++;
 		}
 		
+		System.out.println("\nElenco degli stati:");
+		for(Stato stt : listaStati) {
+			System.out.println(stt.toString());
+		}
 		
-		System.out.println(mom.toString());
+		System.out.println("\nElenco delle transizioni");
+		for(String transizione : listaTransizioni) {
+			System.out.println(transizione);
+		}
 	}
 }

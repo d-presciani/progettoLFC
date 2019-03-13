@@ -19,7 +19,6 @@ public class Terminale extends Carattere{
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return lettera;
 	}
 
@@ -30,13 +29,11 @@ public class Terminale extends Carattere{
 
 	@Override
 	public String getLettera() {
-		// TODO Auto-generated method stub
 		return lettera;
 	}
 
 	@Override
 	public List<RegolaDiProduzione> getRegole() {
-		// TODO Auto-generated method stub
 		return null;
 	}
 }

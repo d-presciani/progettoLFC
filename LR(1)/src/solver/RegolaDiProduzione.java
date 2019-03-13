@@ -7,7 +7,7 @@ import java.util.List;
 public class RegolaDiProduzione {
 	NonTerminale parteSX; // Singolo non terminale
 	List<Carattere> parteDX; // Lista di caratteri (può essere null)
-	List<String> seguiti; // TODO: DA definire
+	List<String> seguiti;
 	int indice; // Indice per il puntino
 	boolean annullabile; // Indica se la regola è annullabile (usata per il ricalcolo annullabilità dei non terminali)
 	
@@ -67,16 +67,19 @@ public class RegolaDiProduzione {
 		}
 	}
 	
-	
 	@Override
-	public String toString() {
-		String mom = "";
-		for(int i=0; i<parteDX.size(); i++) {
-			mom += parteDX.get(i).toString();
-		}
-		mom = mom.substring(0,indice) + "." + mom.substring(indice, mom.length());
-		
-		return parteSX.toString()+"->"+mom;
-	}
+    public String toString() {
+        String mom = "";
+        for(int i=0; i<indice; i++) {
+            mom += parteDX.get(i).toString();
+        }
+        mom += ".";
+        for(int i = indice; i<parteDX.size(); i++) {
+            mom += parteDX.get(i).toString();
+        }
+
+        return parteSX.toString()+"->"+mom;
+    }
+	
 	
 }
