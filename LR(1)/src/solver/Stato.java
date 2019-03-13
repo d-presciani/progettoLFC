@@ -103,74 +103,150 @@ public class Stato {
 		for(int i=0; i<regoleCore.size(); i++) {
 			
 			if(regoleCore.get(i).parteDX.size()!=regoleCore.get(i).indice) {
-				LinkedList<RegolaDiProduzione> listaRegoleNuovoStato = new LinkedList<RegolaDiProduzione>();
-				listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCore.get(i)));
 				
-				if(regoleCore.get(i).parteDX.size()>regoleCore.get(i).indice+1) {
-					// Scorro tutte le regole core per vedere se devo muovere lo stesso carattere
-					for(int j = i+1; j<regoleCore.size(); j++) {	
-						// Controllo se il puntino della i-esima regola core e della j-esima regola core punta alla stessa lettera
-						if(regoleCore.get(j).parteDX.size()!=0 && regoleCore.get(i).parteDX.get(regoleCore.get(i).indice).getLettera().equals(regoleCore.get(j).parteDX.get(regoleCore.get(j).indice).getLettera())) {
-							listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCore.get(j)));
-						}
+				boolean giapParsato = false;
+				for(String str : caratteriParsati) {
+					if(str.equals(regoleCore.get(i).parteDX.get(regoleCore.get(i).indice).getLettera())) {
+						giapParsato = true;
+						break;
 					}
-					
-					// Scorro tutte le regole completamento per vedere se devo muovere lo stesso carattere
-					for(int j = 0; j<regoleCompletamenti.size(); j++) {	
-						// Controllo se il puntino della i-esima regola core e della j-esima regola completamento punta alla stessa lettera
-						if(regoleCompletamenti.get(j).parteDX.size()!=0 && regoleCore.get(i).parteDX.get(regoleCore.get(i).indice).getLettera().equals(regoleCompletamenti.get(j).parteDX.get(regoleCompletamenti.get(j).indice).getLettera())) {
-							listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCompletamenti.get(j)));
-						}
-						
-					}
-					
-					
 				}
-				// Salvo il caratere parsato per aggiungerlo alla lista dei parsati 
-				String chpasr = listaRegoleNuovoStato.get(0).parteDX.get(listaRegoleNuovoStato.get(0).indice).getLettera();
-				caratteriParsati.add(chpasr);
-				
-				// A questo punto in listaRegoleNuovoStato ho un elenco che contiene tutte le regole che formeranno la core del nuovo stato, quindi avanzo di tutte il puntino
-				for(RegolaDiProduzione reg : listaRegoleNuovoStato) {
-					reg.avanzaPuntino();
-				}
-				
-				// Controllo che non esista nessuno stato nella lista stati con le stesse regole.
-				boolean trovato=false;
-				for(Stato stt: listaStati) {
-					if(stt.regoleCore.size()==listaRegoleNuovoStato.size()) {
-						int j = 0;
-						while(j<regoleCore.size()) {
-							if(!stt.regoleCore.get(j).compara(listaRegoleNuovoStato.get(j))) {
-								break;
+				if(!giapParsato) {
+					LinkedList<RegolaDiProduzione> listaRegoleNuovoStato = new LinkedList<RegolaDiProduzione>();
+					listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCore.get(i)));
+					
+					if(regoleCore.get(i).parteDX.size()>regoleCore.get(i).indice+1) {
+						// Scorro tutte le regole core per vedere se devo muovere lo stesso carattere
+						for(int j = i+1; j<regoleCore.size(); j++) {	
+							// Controllo se il puntino della i-esima regola core e della j-esima regola core punta alla stessa lettera
+							if(regoleCore.get(j).parteDX.size()!=0 && regoleCore.get(i).parteDX.get(regoleCore.get(i).indice).getLettera().equals(regoleCore.get(j).parteDX.get(regoleCore.get(j).indice).getLettera())) {
+								listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCore.get(j)));
 							}
-							j++;
 						}
 						
-						if(j!=regoleCore.size()) {
-							trovato = true;
+						// Scorro tutte le regole completamento per vedere se devo muovere lo stesso carattere
+						for(int j = 0; j<regoleCompletamenti.size(); j++) {	
+							// Controllo se il puntino della i-esima regola core e della j-esima regola completamento punta alla stessa lettera
+							if(regoleCompletamenti.get(j).parteDX.size()!=0 && regoleCore.get(i).parteDX.get(regoleCore.get(i).indice).getLettera().equals(regoleCompletamenti.get(j).parteDX.get(regoleCompletamenti.get(j).indice).getLettera())) {
+								listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCompletamenti.get(j)));
+							}
+							
+						}
+						
+						
+					}
+					// Salvo il caratere parsato per aggiungerlo alla lista dei parsati 
+					String chpasr = listaRegoleNuovoStato.get(0).parteDX.get(listaRegoleNuovoStato.get(0).indice).getLettera();
+					caratteriParsati.add(chpasr);
+					
+					// A questo punto in listaRegoleNuovoStato ho un elenco che contiene tutte le regole che formeranno la core del nuovo stato, quindi avanzo di tutte il puntino
+					for(RegolaDiProduzione reg : listaRegoleNuovoStato) {
+						reg.avanzaPuntino();
+					}
+					
+					// Controllo che non esista nessuno stato nella lista stati con le stesse regole.
+					boolean trovato=false;
+					for(Stato stt: listaStati) {
+						if(stt.regoleCore.size()==listaRegoleNuovoStato.size()) {
+							int j = 0;
+							while(j<stt.regoleCore.size()) {
+								if(!stt.regoleCore.get(j).compara(listaRegoleNuovoStato.get(j))) {
+									break;
+								}
+								j++;
+							}
+							
+							if(j!=regoleCore.size()) {
+								trovato = true;
+							}
 						}
 					}
-				}
-				
-				if(!trovato) {
-					Stato temp = new Stato();
-					for(RegolaDiProduzione reg : listaRegoleNuovoStato) {
-						temp.aggiungiCore(reg);
-					}
-					listaStati.add(temp);
 					
-					//TODO: Aggiungere transizioni alle regole di transizione
-					String transizione = "S" + numeroStato + " -- "+chpasr + " --> S"+temp.numeroStato;
-					listaTransizioni.add(transizione);
-				}
+					if(!trovato) {
+						Stato temp = new Stato();
+						for(RegolaDiProduzione reg : listaRegoleNuovoStato) {
+							temp.aggiungiCore(reg);
+						}
+						listaStati.add(temp);
+						
+						//TODO: Aggiungere transizioni alle regole di transizione
+						String transizione = "S" + numeroStato + " -- "+chpasr + " --> S"+temp.numeroStato;
+						listaTransizioni.add(transizione);
+					}
+				}			
 			}			
 		}
 		
-		
-		
-		// TODO: Rifare la stessa cosa di sopra ma per le regole di completamento
-		
+		// Scorro tutte le regole completamento
+		for(int i=0; i<regoleCompletamenti.size(); i++) {
+			
+			if(regoleCompletamenti.get(i).parteDX.size()!=regoleCompletamenti.get(i).indice) {
+				
+				boolean giapParsato = false;
+				for(String str : caratteriParsati) {
+					if(str.equals(regoleCompletamenti.get(i).parteDX.get(regoleCompletamenti.get(i).indice).getLettera())) {
+						giapParsato = true;
+						break;
+					}
+				}
+				if(!giapParsato) {
+					LinkedList<RegolaDiProduzione> listaRegoleNuovoStato = new LinkedList<RegolaDiProduzione>();
+					listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCompletamenti.get(i)));
+					
+					if(regoleCompletamenti.get(i).parteDX.size()>regoleCompletamenti.get(i).indice+1) {						
+						// Scorro tutte le regole completamento per vedere se devo muovere lo stesso carattere
+						for(int j = i+1; j<regoleCompletamenti.size(); j++) {	
+							// Controllo se il puntino della i-esima regola core e della j-esima regola completamento punta alla stessa lettera
+							if(regoleCompletamenti.get(j).parteDX.size()!=0 && regoleCompletamenti.get(i).parteDX.get(regoleCompletamenti.get(i).indice).getLettera().equals(regoleCompletamenti.get(j).parteDX.get(regoleCompletamenti.get(j).indice).getLettera())) {
+								listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCompletamenti.get(j)));
+							}
+							
+						}
+						
+						
+					}
+					// Salvo il caratere parsato per aggiungerlo alla lista dei parsati 
+					String chpasr = listaRegoleNuovoStato.get(0).parteDX.get(listaRegoleNuovoStato.get(0).indice).getLettera();
+					caratteriParsati.add(chpasr);
+					
+					// A questo punto in listaRegoleNuovoStato ho un elenco che contiene tutte le regole che formeranno la core del nuovo stato, quindi avanzo di tutte il puntino
+					for(RegolaDiProduzione reg : listaRegoleNuovoStato) {
+						reg.avanzaPuntino();
+					}
+					
+					// Controllo che non esista nessuno stato nella lista stati con le stesse regole.
+					boolean trovato=false;
+					for(Stato stt: listaStati) {
+						if(stt.regoleCore.size()==listaRegoleNuovoStato.size()) {
+							int j = 0;
+							while(j<stt.regoleCore.size()) {
+								if(!stt.regoleCore.get(j).compara(listaRegoleNuovoStato.get(j))) {
+									break;
+								}
+								j++;
+							}
+							
+							if(j==stt.regoleCore.size()) {
+								trovato = true;
+								break;
+							}
+						}
+					}
+					
+					if(!trovato) {
+						Stato temp = new Stato();
+						for(RegolaDiProduzione reg : listaRegoleNuovoStato) {
+							temp.aggiungiCore(reg);
+						}
+						listaStati.add(temp);
+						
+						//TODO: Aggiungere transizioni alle regole di transizione
+						String transizione = "S" + numeroStato + " -- "+chpasr + " --> S"+temp.numeroStato;
+						listaTransizioni.add(transizione);
+					}
+				}			
+			}			
+		}
 		
 		
 		

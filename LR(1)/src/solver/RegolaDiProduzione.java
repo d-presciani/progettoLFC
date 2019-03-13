@@ -59,11 +59,11 @@ public class RegolaDiProduzione {
 		}
 	}
 	
-	public boolean compara(RegolaDiProduzione reg) {
-		if (!parteSX.getLettera().equals(reg.parteSX.getLettera()) || parteDX.size()!=reg.parteDX.size() || !parteDX.toString().equals(reg.parteDX.toString()) || !seguiti.toString().equals(reg.seguiti.toString())) {
-			return false;
-		} else {
+	public boolean compara (RegolaDiProduzione reg) {
+		if (parteSX.getLettera().equals(reg.parteSX.getLettera()) && parteDX.size()==reg.parteDX.size() && parteDX.toString().equals(reg.parteDX.toString()) && seguiti.toString().equals(reg.seguiti.toString())) {
 			return true;
+		} else {
+			return false;
 		}
 	}
 	
