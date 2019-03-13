@@ -1,6 +1,5 @@
 package solver;
 
-import java.util.List;
 import java.util.LinkedList;
 
 public class Solver {
@@ -17,7 +16,8 @@ public class Solver {
 			}	
 		}
 		
-		List<Stato> listaStati = new LinkedList<Stato>();
+		LinkedList<Stato> listaStati = new LinkedList<Stato>();
+		LinkedList<String> listaTransizioni = new LinkedList<String>();
 		
 		//Calcolo annullabilità regole
 		for(RegolaDiProduzione reg : listaReg) {
@@ -33,6 +33,13 @@ public class Solver {
 		Stato mom = new Stato();
 		mom.aggiungiCore(listaReg.get(0));
 		listaStati.add(mom);
+		
+		int i=0;
+		
+		while(i<listaStati.size()) {
+			listaStati.get(i).espandiStato(listaStati, i, listaTransizioni);
+		}
+		
 		
 		System.out.println(mom.toString());
 	}
