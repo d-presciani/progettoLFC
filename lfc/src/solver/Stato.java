@@ -31,7 +31,7 @@ public class Stato {
 			if(rdp.parteDX.size()!=0 && rdp.parteDX.size()>rdp.indice && rdp.parteDX.get(rdp.indice).getRegole()!=null) {
 				for(RegolaDiProduzione regComp : rdp.parteDX.get(rdp.indice).getRegole()) { // Ciclo su tutte le regole (possono non esserci) generate dal carattere con il puntino
 					RegolaDiProduzione tmp = new RegolaDiProduzione(regComp); // Creo una var temporanea con la regola appena trovata per poterla modificare prima di aggiungerla alla lista delle regole e per duplicarla
-			
+					tmp.seguiti.clear();
 					if(rdp.indice+1<rdp.parteDX.size()) { // Controllo di avere degli altri caratteri a destra del carattere con il puntino
 						int i = 0;
 						// Per ogni carattere a destra di quello con il puntino calcolo gli inizi e continuo finché non trovo un carattere non annullabile
@@ -170,12 +170,14 @@ public class Stato {
 					}
 					
 					// Controllo che non esista nessuno stato nella lista stati con le stesse regole.
-					boolean trovato=false;
+					boolean trovato = false;
+					int nroStatoDup = -1;
 					for(Stato stt: listaStati) {
 						if(stt.regoleCore.size()==listaRegoleNuovoStato.size()) {
 							int j = 0;
 							while(j<stt.regoleCore.size()) {
 								if(!stt.regoleCore.get(j).compara(listaRegoleNuovoStato.get(j))) {
+									nroStatoDup = stt.numeroStato;
 									break;
 								}
 								j++;
@@ -194,8 +196,10 @@ public class Stato {
 						}
 						listaStati.add(temp);
 						
-						//TODO: Aggiungere transizioni alle regole di transizione
-						String transizione = "S" + numeroStato + " -- "+chpasr + " --> S"+temp.numeroStato;
+						String transizione = "S" + numeroStato + " -- " + chpasr + " --> S"+temp.numeroStato;
+						listaTransizioni.add(transizione);
+					} else {
+						String transizione = "S" + numeroStato + " -- " + chpasr + " --> S" + nroStatoDup;
 						listaTransizioni.add(transizione);
 					}
 				}			
@@ -241,12 +245,15 @@ public class Stato {
 					
 					// Controllo che non esista nessuno stato nella lista stati con le stesse regole.
 					boolean trovato=false;
+					int nroStatoDup = -1;
 					for(Stato stt: listaStati) {
 						if(stt.regoleCore.size()==listaRegoleNuovoStato.size()) {
 							int j = 0;
 							while(j<stt.regoleCore.size()) {
 								if(!stt.regoleCore.get(j).compara(listaRegoleNuovoStato.get(j))) {
 									break;
+								} else {
+									nroStatoDup = stt.numeroStato;
 								}
 								j++;
 							}
@@ -267,6 +274,9 @@ public class Stato {
 						
 						//TODO: Aggiungere transizioni alle regole di transizione
 						String transizione = "S" + numeroStato + " -- "+chpasr + " --> S"+temp.numeroStato;
+						listaTransizioni.add(transizione);
+					} else {
+						String transizione = "S" + numeroStato + " -- " + chpasr + " --> S" + nroStatoDup;
 						listaTransizioni.add(transizione);
 					}
 				}			
