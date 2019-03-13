@@ -15,7 +15,6 @@ public class NonTerminale extends Carattere{
 	}
 	
 	@Override
-	//TODO ricordarsi che dal chiamante bisogna verificare che il NT non sia annullabile, altrimenti controllare anche il carattere dopo
 	public List<String> calcolaInizi() {
 		List<String> inizi = new LinkedList<String>();
 		for (RegolaDiProduzione reg : rdp) {
@@ -70,7 +69,6 @@ public class NonTerminale extends Carattere{
 	
 	@Override
 	public String toString() {
-		// TODO Auto-generated method stub
 		return lettera;
 	}
 	
@@ -82,7 +80,6 @@ public class NonTerminale extends Carattere{
 
 	@Override
 	public String getLettera() {
-		// TODO Auto-generated method stub
 		return lettera;
 	}
 	
