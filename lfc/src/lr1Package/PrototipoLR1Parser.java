@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-12 16:32:31
+// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-13 17:48:52
 
   package lr1Package;
   import myPackage.*;
@@ -285,20 +285,22 @@ public class PrototipoLR1Parser extends Parser {
 
 			match(input,SC,FOLLOW_SC_in_ar166); 
 				
+					RegolaDiProduzione regola;
 					// Controllo se la produzione è nulla o meno
 					if(listaDX.size() > 0){
 						// Produzione non nulla
-						listaReg.add(new RegolaDiProduzione(ntSX, listaDX));
+						regola = new RegolaDiProduzione(ntSX, listaDX);
+						listaReg.add(regola);
 					} else {
 						// Setto il non terminale come annullabile
 						ntSX.setAnnullabile();
 						// Produzione nulla
-						listaReg.add(new RegolaDiProduzione(ntSX, null));
+						regola = new RegolaDiProduzione(ntSX, null);
+						listaReg.add(regola);
 					}
-					// Pulizia della lista temporanea per conservare il lato destro della produzione
-					RegolaDiProduzione regola = new RegolaDiProduzione(ntSX, listaDX);
-					listaReg.add(regola);
+					// Associo la regola al non terminale
 					ntSX.addRegola(regola);
+					// Pulizia della lista temporanea per conservare il lato destro della produzione
 					listaDX.clear();
 					//System.out.println("LISTA DELLE PRODUZIONI:" + listaReg); // Stampa di debug (commentare in produzione)
 				
