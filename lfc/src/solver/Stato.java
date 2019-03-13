@@ -8,6 +8,7 @@ public class Stato {
 	List<RegolaDiProduzione> regoleCore;
 	List<RegolaDiProduzione> regoleCompletamenti;
 	int numeroStato;
+	boolean erroreLR1;
 	
 	
 	public Stato() {
@@ -15,6 +16,7 @@ public class Stato {
 		counter++;
 		regoleCore = new LinkedList<RegolaDiProduzione>();
 		regoleCompletamenti = new LinkedList<RegolaDiProduzione>();
+		erroreLR1 = false;
 	}
 	
 	// Aggiunge una regola
@@ -35,16 +37,28 @@ public class Stato {
 						// Per ogni carattere a destra di quello con il puntino calcolo gli inizi e continuo finché non trovo un carattere non annullabile
 						do{
 							if(rdp.parteDX.get(rdp.indice+i+1).calcolaInizi()!=null) {
-								tmp.seguiti.addAll(rdp.parteDX.get(rdp.indice+i+1).calcolaInizi());
+								for(String seg : rdp.parteDX.get(rdp.indice+i+1).calcolaInizi()) {
+									if(!tmp.seguiti.contains(seg)) {
+										tmp.seguiti.add(seg);
+									}
+								}
 							}
 							i++;
 						} while(rdp.parteDX.get(rdp.indice+i).isAnnullabile() && rdp.indice+i+1<rdp.parteDX.size());
 						
 						if(rdp.annullabile) { // Se tutti i caratteri son annullabili aggiungo anche i seguiti della regola padre
-							tmp.seguiti.addAll(rdp.seguiti);
+							for(String seg : rdp.seguiti) {
+								if(!tmp.seguiti.contains(seg)) {
+									tmp.seguiti.add(seg);
+								}
+							}
 						}
 					} else { // Se non ho nulla a destra aggiungo i seguiti del padre
-						tmp.seguiti.addAll(rdp.seguiti);
+						for(String seg : rdp.seguiti) {
+							if(!tmp.seguiti.contains(seg)) {
+								tmp.seguiti.add(seg);
+							}
+						}
 					}
 					regoleCompletamenti.add(tmp); // Una volta aggiunti i seguiti agiungo la regola alle regole di completamento
 				}
@@ -80,17 +94,28 @@ public class Stato {
 			int i = 0;						
 			do{
 				if(regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi()!=null) {
-					
-					nuovaRdp.seguiti.addAll(regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi());
+					for(String seg : regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi()) {
+						if(!nuovaRdp.seguiti.contains(seg)) {
+							nuovaRdp.seguiti.add(seg);
+						}
+					}
 				}
 				i++;
 			} while(regolaPadre.parteDX.get(regolaPadre.indice+i).isAnnullabile() && regolaPadre.indice+i+1<regolaPadre.parteDX.size());
 
 			if(regolaPadre.annullabile || regolaPadre.parteDX.size()==regolaPadre.indice+1) {
-				nuovaRdp.seguiti.addAll(regolaPadre.seguiti);
+				for(String seg : regolaPadre.seguiti) {
+					if(!nuovaRdp.seguiti.contains(seg)) {
+						nuovaRdp.seguiti.add(seg);
+					}
+				}
 			}
 		} else {
-			nuovaRdp.seguiti.addAll(regolaPadre.seguiti);
+			for(String seg : regolaPadre.seguiti) {
+				if(!nuovaRdp.seguiti.contains(seg)) {
+					nuovaRdp.seguiti.add(seg);
+				}
+			}
 		}
 		regoleCompletamenti.add(new RegolaDiProduzione(nuovaRdp));		
 	}
@@ -248,16 +273,27 @@ public class Stato {
 			}			
 		}
 		
-		
-		
-		
+		// Controllo LR(1)
+		LinkedList<String> sovrapposizioni = new LinkedList<String>();
+		for(RegolaDiProduzione reg : regoleCore) {
+			if(reg.indice==reg.parteDX.size()) {
+				for(String seg : reg.seguiti) {
+					if(sovrapposizioni.contains(seg)) {
+						erroreLR1=true;
+						break;
+					} else {
+						sovrapposizioni.add(seg);
+					}
+				}
+			}
+		}
 		
 	}
 	
 	@Override
 	public String toString() {
 		String temp = "";
-		temp += "Stato: S" + numeroStato + "\nRegole Core:\n";
+		temp += "\nStato: S" + numeroStato + "\nRegole Core:\n";
 		for(RegolaDiProduzione reg : regoleCore) {
 			temp += reg.toString() + " {" + reg.seguiti + "} \n";
 		}

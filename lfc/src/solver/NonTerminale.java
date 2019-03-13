@@ -67,6 +67,7 @@ public class NonTerminale extends Carattere{
 		rdp.add(reg);
 	}
 	
+	
 	@Override
 	public String toString() {
 		return lettera;
