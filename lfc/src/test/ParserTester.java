@@ -12,7 +12,7 @@ public class ParserTester  {
   
 	public static void main(String[] args) {
 		CommonTokenStream tokens;
-  	String fileIn = ".\\resources\\input2.txt";
+  	String fileIn = ".\\resources\\input.txt";
   	
   	try {
 			System.out.println ("IDENTIFICAZIONE GRAMMATICHE LR(1)\n");
