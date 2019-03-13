@@ -6,16 +6,30 @@ options {
 }
 
 @header{
-  package JavaPackage;
+  package lr1Package;
   import myPackage.*;
+  import solver.*;
+  import java.util.LinkedList;
 }
 
 @lexer::header{
-  package JavaPackage;
+  package lr1Package;
 }
 
 @members{
   Environment env;
+  // Lista dei caratteri non terminali
+  static LinkedList<NonTerminale> listaNT = new LinkedList<NonTerminale>();
+  // Lista delle regole di produzione
+  static LinkedList<RegolaDiProduzione> listaReg = new LinkedList<RegolaDiProduzione>();
+  // Booleano per il controllo delle produzioni nulle
+  boolean nullo = false;
+  // Variabile per la conservazione del non terminale di sinistra
+  NonTerminale ntSX = null;
+  // Lista di store temporanea dei caratteri di destra della produzione
+  List<Carattere> listaDX = new LinkedList<Carattere>();
+  // Classificatore della grammatica
+  Solver classificatore = new Solver();
   void init () {
     env = new Environment();
   }
@@ -38,6 +52,31 @@ options {
        Token tk = input.LT(1);
        env.handleError(tokenNames,e,hdr,msg);
     }
+    
+   // Controllo del lato sinistro della produzione 
+   public NonTerminale controlloNT(String s){
+   	// Booleano per il controllo dell'esistenza del NT nella lista
+   	boolean trovato = false;
+   	// Variabile da tornare
+   	NonTerminale ntNew = null;
+ 	for(NonTerminale nt: listaNT) {
+		if(nt.getLettera().equals(s)) {
+			// NT già esistente nella lista dei caratteri non terminali
+			trovato = true;
+			// Memorizzo il carattere nella variabile di store
+			return nt;
+		}
+	}
+	if(!trovato) {
+		// NT non esistente nella lista dei caratteri non terminali
+		//System.out.println("Aggiungo carattere alla lista");	// Stampa di debug (commentare in produzione)
+		ntNew = new NonTerminale(s);
+		// Aggiungo il terminale alla lista e faccio lo store nella variabile
+		listaNT.add(ntNew);
+		//System.out.println("LISTA DEI NON TERMINALI: " + listaNT);	// Stampa di debug (commentare in produzione)
+	}
+	return ntNew;
+   }
 }
 
 
@@ -46,11 +85,81 @@ options {
 }
 
 //Produzioni parser
-lr1	: {init();} pr ar+ EOF;
+lr1	: 
+	{
+		init();
+	} 
+		pr ar+ EOF
+	{
+		try{
+			for(NonTerminale nt : listaNT){
+				nt.controlloProduzioni();
+			}
+			classificatore.solve(listaNT, listaReg);
+		} catch (NTSenzaProd e){
+			System.err.println("\nERRORE SEMANTICO:" + e.getMessage());
+		}
+	}
+	;
 	
-pr	:	SZ EQ NT TER SC;
+pr	:	nxtChar=SZ EQ
+	{	
+		// Controllo se il non terminale è già noto o no
+	 	ntSX = controlloNT($nxtChar.getText());
+	}
+	 	charDx=NT charTer=TER
+	{	
+		// Controllo se il non terminale è già noto o no
+	 	NonTerminale ntDX = controlloNT($charDx.getText());
+	 	listaDX.add(ntDX);
+	 	listaDX.add(new Terminale($charTer.getText()));
+	}
+		 SC
+	{	
+		RegolaDiProduzione regola = new RegolaDiProduzione(ntSX, listaDX);
+		listaReg.add(regola);
+		ntSX.addRegola(regola);
+		listaDX.clear();
+		//System.out.println("LISTA DELLE PRODUZIONI:" + listaReg); // Stampa di debug (commentare in produzione)
+	}
+	;
 
-ar	:	NT EQ (NT|CT)* SC;
+ar	:	nxtChar=NT
+	{
+	 	ntSX = controlloNT($nxtChar.getText());
+	}
+	 	EQ (charDX=NT
+	{	
+		// Controllo se il non terminale è già noto o no e lo aggiungo alla regola di produzione
+	 	NonTerminale ntDX = controlloNT($charDX.getText());
+	 	listaDX.add(ntDX);
+	}
+	 	| charDXT=CT
+	{
+		// Aggiunta del terminale alla regola di produzione
+		Terminale tDX = new Terminale($charDXT.getText());
+		listaDX.add(tDX);
+	}	
+	 	)* SC
+	{	
+		// Controllo se la produzione è nulla o meno
+		if(listaDX.size() > 0){
+			// Produzione non nulla
+			listaReg.add(new RegolaDiProduzione(ntSX, listaDX));
+		} else {
+			// Setto il non terminale come annullabile
+			ntSX.setAnnullabile();
+			// Produzione nulla
+			listaReg.add(new RegolaDiProduzione(ntSX, null));
+		}
+		// Pulizia della lista temporanea per conservare il lato destro della produzione
+		RegolaDiProduzione regola = new RegolaDiProduzione(ntSX, listaDX);
+		listaReg.add(regola);
+		ntSX.addRegola(regola);
+		listaDX.clear();
+		//System.out.println("LISTA DELLE PRODUZIONI:" + listaReg); // Stampa di debug (commentare in produzione)
+	}
+	;
 
 
 
@@ -74,4 +183,3 @@ WS  :   ( ' '
         | '\n'
         ) {$channel=HIDDEN;}
     ;
-
