@@ -67,6 +67,12 @@ public class NonTerminale extends Carattere{
 		rdp.add(reg);
 	}
 	
+	public void controlloProduzioni() throws NTSenzaProd {
+        if(rdp.size() <= 0) {
+            throw new NTSenzaProd("Il non terminale " + lettera + " non ha produzioni associate!");
+        }
+    }
+	
 	@Override
 	public String toString() {
 		return lettera;

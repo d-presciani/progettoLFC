@@ -50,5 +50,24 @@ public class Solver {
 		for(String transizione : listaTransizioni) {
 			System.out.println(transizione);
 		}
+		
+		boolean isLR1 = true;
+		for(Stato stt : listaStati) {
+			if(stt.erroreLR1) {
+				isLR1 = false;
+			}
+		}
+		
+		if(isLR1) {
+			System.out.println("La grammatica inserita è LR(1)");
+		} else {
+			System.out.println("La grammagita inserita non è LR(1), gli stati che contengono conflitti sono:\n");
+			for(Stato stt : listaStati) {
+				if(stt.erroreLR1) {
+					System.out.println("S"+stt.numeroStato);
+				}
+			}
+		}
+		
 	}
 }
