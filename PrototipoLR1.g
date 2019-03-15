@@ -117,6 +117,7 @@ pr	:	nxtChar=SZ EQ
 		 SC
 	{	
 		RegolaDiProduzione regola = new RegolaDiProduzione(ntSX, listaDX);
+		regola.addSeguito("emptyset");
 		listaReg.add(regola);
 		ntSX.addRegola(regola);
 		listaDX.clear();
