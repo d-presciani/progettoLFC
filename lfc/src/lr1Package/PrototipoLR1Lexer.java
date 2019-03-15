@@ -1,6 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-15 14:38:37
-
-  package lr1Package;
+package lr1Package;
 
 
 import org.antlr.runtime.*;
@@ -42,8 +40,6 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = SZ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:171:5: ( 'S0' )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:171:7: 'S0'
 			{
 			match("S0"); 
 
@@ -63,7 +59,6 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = EQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:172:4: ( '->' | ':=' )
 			int alt1=2;
 			int LA1_0 = input.LA(1);
 			if ( (LA1_0=='-') ) {
@@ -81,14 +76,12 @@ public class PrototipoLR1Lexer extends Lexer {
 
 			switch (alt1) {
 				case 1 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:172:6: '->'
 					{
 					match("->"); 
 
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:172:13: ':='
 					{
 					match(":="); 
 
@@ -110,8 +103,6 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = NT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:173:5: ( ( 'A' .. 'Z' ) )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') ) {
 				input.consume();
@@ -137,8 +128,6 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = CT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:174:4: ( ( 'a' .. 'z' ) | ( '0' .. '9' ) | '+' | '-' | '*' | '/' )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:
 			{
 			if ( (input.LA(1) >= '*' && input.LA(1) <= '+')||input.LA(1)=='-'||(input.LA(1) >= '/' && input.LA(1) <= '9')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
 				input.consume();
@@ -164,7 +153,6 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = TER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:175:5: ( '/swa' | '/cjswa' )
 			int alt2=2;
 			int LA2_0 = input.LA(1);
 			if ( (LA2_0=='/') ) {
@@ -198,14 +186,12 @@ public class PrototipoLR1Lexer extends Lexer {
 
 			switch (alt2) {
 				case 1 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:175:7: '/swa'
 					{
 					match("/swa"); 
 
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:175:16: '/cjswa'
 					{
 					match("/cjswa"); 
 
@@ -227,8 +213,6 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = SC;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:176:5: ( ';' )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:176:7: ';'
 			{
 			match(';'); 
 			}
@@ -247,7 +231,6 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:179:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
 			int alt6=2;
 			int LA6_0 = input.LA(1);
 			if ( (LA6_0=='/') ) {
@@ -281,11 +264,8 @@ public class PrototipoLR1Lexer extends Lexer {
 
 			switch (alt6) {
 				case 1 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:179:9: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
 					{
 					match("//"); 
-
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:179:14: (~ ( '\\n' | '\\r' ) )*
 					loop3:
 					while (true) {
 						int alt3=2;
@@ -296,7 +276,6 @@ public class PrototipoLR1Lexer extends Lexer {
 
 						switch (alt3) {
 						case 1 :
-							// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:
 							{
 							if ( (input.LA(1) >= '\u0000' && input.LA(1) <= '\t')||(input.LA(1) >= '\u000B' && input.LA(1) <= '\f')||(input.LA(1) >= '\u000E' && input.LA(1) <= '\uFFFF') ) {
 								input.consume();
@@ -314,7 +293,6 @@ public class PrototipoLR1Lexer extends Lexer {
 						}
 					}
 
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:179:28: ( '\\r' )?
 					int alt4=2;
 					int LA4_0 = input.LA(1);
 					if ( (LA4_0=='\r') ) {
@@ -322,7 +300,6 @@ public class PrototipoLR1Lexer extends Lexer {
 					}
 					switch (alt4) {
 						case 1 :
-							// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:179:28: '\\r'
 							{
 							match('\r'); 
 							}
@@ -335,12 +312,9 @@ public class PrototipoLR1Lexer extends Lexer {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:180:9: '/*' ( options {greedy=false; } : . )* '*/'
-					{
+          {
 					match("/*"); 
-
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:180:14: ( options {greedy=false; } : . )*
-					loop5:
+          loop5:
 					while (true) {
 						int alt5=2;
 						int LA5_0 = input.LA(1);
@@ -360,7 +334,6 @@ public class PrototipoLR1Lexer extends Lexer {
 
 						switch (alt5) {
 						case 1 :
-							// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:180:42: .
 							{
 							matchAny(); 
 							}
@@ -392,8 +365,6 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:183:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:183:9: ( ' ' | '\\t' | '\\r' | '\\n' )
 			{
 			if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
 				input.consume();
@@ -417,7 +388,6 @@ public class PrototipoLR1Lexer extends Lexer {
 
 	@Override
 	public void mTokens() throws RecognitionException {
-		// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:8: ( SZ | EQ | NT | CT | TER | SC | COMMENT | WS )
 		int alt7=8;
 		switch ( input.LA(1) ) {
 		case 'S':
@@ -562,56 +532,48 @@ public class PrototipoLR1Lexer extends Lexer {
 		}
 		switch (alt7) {
 			case 1 :
-				// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:10: SZ
 				{
 				mSZ(); 
 
 				}
 				break;
 			case 2 :
-				// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:13: EQ
 				{
 				mEQ(); 
 
 				}
 				break;
 			case 3 :
-				// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:16: NT
 				{
 				mNT(); 
 
 				}
 				break;
 			case 4 :
-				// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:19: CT
 				{
 				mCT(); 
 
 				}
 				break;
 			case 5 :
-				// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:22: TER
 				{
 				mTER(); 
 
 				}
 				break;
 			case 6 :
-				// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:26: SC
 				{
 				mSC(); 
 
 				}
 				break;
 			case 7 :
-				// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:29: COMMENT
 				{
 				mCOMMENT(); 
 
 				}
 				break;
 			case 8 :
-				// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:1:37: WS
 				{
 				mWS(); 
 

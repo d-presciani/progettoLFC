@@ -1,5 +1,3 @@
-// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-15 14:38:37
-
   package lr1Package;
   import myPackage.*;
   import solver.*;
@@ -90,7 +88,7 @@ public class PrototipoLR1Parser extends Parser {
 	   	NonTerminale ntNew = null;
 	 	for(NonTerminale nt: listaNT) {
 			if(nt.getLettera().equals(s)) {
-				// NT già esistente nella lista dei caratteri non terminali
+				// NT giÃ  esistente nella lista dei caratteri non terminali
 				trovato = true;
 				// Memorizzo il carattere nella variabile di store
 				return nt;
@@ -110,11 +108,8 @@ public class PrototipoLR1Parser extends Parser {
 
 
 	// $ANTLR start "lr1"
-	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:88:1: lr1 : pr ( ar )+ EOF ;
 	public final void lr1() throws RecognitionException {
 		try {
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:88:5: ( pr ( ar )+ EOF )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:89:2: pr ( ar )+ EOF
 			{
 
 					init();
@@ -123,7 +118,6 @@ public class PrototipoLR1Parser extends Parser {
 			pr();
 			state._fsp--;
 
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:92:6: ( ar )+
 			int cnt1=0;
 			loop1:
 			while (true) {
@@ -135,7 +129,6 @@ public class PrototipoLR1Parser extends Parser {
 
 				switch (alt1) {
 				case 1 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:92:6: ar
 					{
 					pushFollow(FOLLOW_ar_in_lr171);
 					ar();
@@ -179,26 +172,23 @@ public class PrototipoLR1Parser extends Parser {
 
 
 	// $ANTLR start "pr"
-	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:105:1: pr : nxtChar= SZ EQ charDx= NT charTer= TER SC ;
 	public final void pr() throws RecognitionException {
 		Token nxtChar=null;
 		Token charDx=null;
 		Token charTer=null;
 
 		try {
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:105:4: (nxtChar= SZ EQ charDx= NT charTer= TER SC )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:105:6: nxtChar= SZ EQ charDx= NT charTer= TER SC
 			{
 			nxtChar=(Token)match(input,SZ,FOLLOW_SZ_in_pr90); 
 			match(input,EQ,FOLLOW_EQ_in_pr92); 
 				
-					// Controllo se il non terminale è già noto o no
+					// Controllo se il non terminale Ã¨ giÃ  noto o no
 				 	ntSX = controlloNT(nxtChar.getText());
 				
 			charDx=(Token)match(input,NT,FOLLOW_NT_in_pr102); 
 			charTer=(Token)match(input,TER,FOLLOW_TER_in_pr106); 
 				
-					// Controllo se il non terminale è già noto o no
+					// Controllo se il non terminale Ã¨ giÃ  noto o no
 				 	NonTerminale ntDX = controlloNT(charDx.getText());
 				 	listaDX.add(ntDX);
 				 	listaDX.add(new Terminale(charTer.getText()));
@@ -228,22 +218,18 @@ public class PrototipoLR1Parser extends Parser {
 
 
 	// $ANTLR start "ar"
-	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:128:1: ar : nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC ;
 	public final void ar() throws RecognitionException {
 		Token nxtChar=null;
 		Token charDX=null;
 		Token charDXT=null;
 
 		try {
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:128:4: (nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:128:6: nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC
 			{
 			nxtChar=(Token)match(input,NT,FOLLOW_NT_in_ar129); 
 
 				 	ntSX = controlloNT(nxtChar.getText());
 				
 			match(input,EQ,FOLLOW_EQ_in_ar137); 
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:132:7: (charDX= NT |charDXT= CT )*
 			loop2:
 			while (true) {
 				int alt2=3;
@@ -257,18 +243,16 @@ public class PrototipoLR1Parser extends Parser {
 
 				switch (alt2) {
 				case 1 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:132:8: charDX= NT
 					{
 					charDX=(Token)match(input,NT,FOLLOW_NT_in_ar142); 
 						
-							// Controllo se il non terminale è già noto o no e lo aggiungo alla regola di produzione
+							// Controllo se il non terminale Ã¨ giÃ  noto o no e lo aggiungo alla regola di produzione
 						 	NonTerminale ntDX = controlloNT(charDX.getText());
 						 	listaDX.add(ntDX);
 						
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:138:6: charDXT= CT
 					{
 					charDXT=(Token)match(input,CT,FOLLOW_CT_in_ar154); 
 
@@ -287,7 +271,7 @@ public class PrototipoLR1Parser extends Parser {
 			match(input,SC,FOLLOW_SC_in_ar166); 
 				
 					RegolaDiProduzione regola;
-					// Controllo se la produzione è nulla o meno
+					// Controllo se la produzione Ã¨ nulla o meno
 					if(listaDX.size() > 0){
 						// Produzione non nulla
 						regola = new RegolaDiProduzione(ntSX, listaDX);
