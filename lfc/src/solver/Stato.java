@@ -111,13 +111,15 @@ public class Stato {
 	// Inserimento regola di completamento
 	private void aggiungiCompletameno(RegolaDiProduzione nuovaRdp, RegolaDiProduzione regolaPadre) {
 		// Inserimento seguiti sulle nuove regole
+		RegolaDiProduzione regolaTemp = new RegolaDiProduzione(nuovaRdp);
+		
 		if(regolaPadre.indice+1<regolaPadre.parteDX.size()) {
 			int i = 0;						
 			do{
 				if(regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi()!=null) {
 					for(String seg : regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi()) {
-						if(!nuovaRdp.seguiti.contains(seg)) {
-							nuovaRdp.seguiti.add(seg);
+						if(!regolaTemp.seguiti.contains(seg)) {
+							regolaTemp.seguiti.add(seg);
 						}
 					}
 				}
@@ -131,15 +133,15 @@ public class Stato {
 			
 			if(regolaPadre.annullabile || regolaPadre.parteDX.size()==regolaPadre.indice+1 || verificaSegAnn) {
 				for(String seg : regolaPadre.seguiti) {
-					if(!nuovaRdp.seguiti.contains(seg)) {
-						nuovaRdp.seguiti.add(seg);
+					if(!regolaTemp.seguiti.contains(seg)) {
+						regolaTemp.seguiti.add(seg);
 					}
 				}
 			}
 		} else {
 			for(String seg : regolaPadre.seguiti) {
-				if(!nuovaRdp.seguiti.contains(seg)) {
-					nuovaRdp.seguiti.add(seg);
+				if(!regolaTemp.seguiti.contains(seg)) {
+					regolaTemp.seguiti.add(seg);
 				}
 			}
 		}
@@ -147,8 +149,8 @@ public class Stato {
 		// Cerco se la regola è già presente nei seguiti
 		boolean regPresente = false;
 		for(RegolaDiProduzione reg: regoleCompletamenti) {
-			if(reg.parteSX.lettera.equals(nuovaRdp.parteSX.lettera) && reg.parteDX.toString().equals(nuovaRdp.parteDX.toString()) && reg.indice == nuovaRdp.indice) {
-				for(String seguito : nuovaRdp.seguiti) {
+			if(reg.parteSX.lettera.equals(regolaTemp.parteSX.lettera) && reg.parteDX.toString().equals(regolaTemp.parteDX.toString()) && reg.indice == regolaTemp.indice) {
+				for(String seguito : regolaTemp.seguiti) {
 					if(!reg.seguiti.contains(seguito)) {
 						reg.seguiti.add(seguito);
 					}
@@ -158,7 +160,7 @@ public class Stato {
 			}
 		}
 		if(!regPresente) {
-			regoleCompletamenti.add(nuovaRdp); // Una volta aggiunti i seguiti agiungo la regola alle regole di completamento
+			regoleCompletamenti.add(regolaTemp); // Una volta aggiunti i seguiti agiungo la regola alle regole di completamento
 		}
 	}
 	
