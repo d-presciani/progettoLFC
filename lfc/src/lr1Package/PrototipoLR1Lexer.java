@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-15 14:33:58
-=======
-// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-13 17:48:52
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-15 14:38:37
 
   package lr1Package;
 
@@ -46,13 +42,8 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = SZ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-<<<<<<< HEAD
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:169:5: ( 'S0' )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:169:7: 'S0'
-=======
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:170:5: ( 'S0' )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:170:7: 'S0'
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:171:5: ( 'S0' )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:171:7: 'S0'
 			{
 			match("S0"); 
 
@@ -72,11 +63,7 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = EQ;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-<<<<<<< HEAD
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:170:4: ( '->' | ':=' )
-=======
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:171:4: ( '->' | ':=' )
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:172:4: ( '->' | ':=' )
 			int alt1=2;
 			int LA1_0 = input.LA(1);
 			if ( (LA1_0=='-') ) {
@@ -94,22 +81,14 @@ public class PrototipoLR1Lexer extends Lexer {
 
 			switch (alt1) {
 				case 1 :
-<<<<<<< HEAD
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:170:6: '->'
-=======
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:171:6: '->'
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:172:6: '->'
 					{
 					match("->"); 
 
 					}
 					break;
 				case 2 :
-<<<<<<< HEAD
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:170:13: ':='
-=======
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:171:13: ':='
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:172:13: ':='
 					{
 					match(":="); 
 
@@ -131,11 +110,7 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = NT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-<<<<<<< HEAD
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:171:5: ( ( 'A' .. 'Z' ) )
-=======
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:172:5: ( ( 'A' .. 'Z' ) )
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:173:5: ( ( 'A' .. 'Z' ) )
 			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:
 			{
 			if ( (input.LA(1) >= 'A' && input.LA(1) <= 'Z') ) {
@@ -162,11 +137,7 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = CT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-<<<<<<< HEAD
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:172:4: ( ( 'a' .. 'z' ) | ( '0' .. '9' ) | '+' | '-' | '*' | '/' )
-=======
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:173:4: ( ( 'a' .. 'z' ) | ( '0' .. '9' ) | '+' | '-' | '*' | '/' )
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:174:4: ( ( 'a' .. 'z' ) | ( '0' .. '9' ) | '+' | '-' | '*' | '/' )
 			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:
 			{
 			if ( (input.LA(1) >= '*' && input.LA(1) <= '+')||input.LA(1)=='-'||(input.LA(1) >= '/' && input.LA(1) <= '9')||(input.LA(1) >= 'a' && input.LA(1) <= 'z') ) {
@@ -193,11 +164,7 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = TER;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-<<<<<<< HEAD
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:173:5: ( '/swa' | '/cjswa' )
-=======
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:174:5: ( '/swa' | '/cjswa' )
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:175:5: ( '/swa' | '/cjswa' )
 			int alt2=2;
 			int LA2_0 = input.LA(1);
 			if ( (LA2_0=='/') ) {
@@ -231,22 +198,14 @@ public class PrototipoLR1Lexer extends Lexer {
 
 			switch (alt2) {
 				case 1 :
-<<<<<<< HEAD
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:173:7: '/swa'
-=======
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:174:7: '/swa'
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:175:7: '/swa'
 					{
 					match("/swa"); 
 
 					}
 					break;
 				case 2 :
-<<<<<<< HEAD
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:173:16: '/cjswa'
-=======
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:174:16: '/cjswa'
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:175:16: '/cjswa'
 					{
 					match("/cjswa"); 
 
@@ -268,13 +227,8 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = SC;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-<<<<<<< HEAD
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:174:5: ( ';' )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:174:7: ';'
-=======
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:175:5: ( ';' )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:175:7: ';'
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:176:5: ( ';' )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:176:7: ';'
 			{
 			match(';'); 
 			}
@@ -293,11 +247,7 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = COMMENT;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-<<<<<<< HEAD
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:177:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
-=======
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:178:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:179:5: ( '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n' | '/*' ( options {greedy=false; } : . )* '*/' )
 			int alt6=2;
 			int LA6_0 = input.LA(1);
 			if ( (LA6_0=='/') ) {
@@ -331,19 +281,11 @@ public class PrototipoLR1Lexer extends Lexer {
 
 			switch (alt6) {
 				case 1 :
-<<<<<<< HEAD
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:177:9: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:179:9: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
 					{
 					match("//"); 
 
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:177:14: (~ ( '\\n' | '\\r' ) )*
-=======
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:178:9: '//' (~ ( '\\n' | '\\r' ) )* ( '\\r' )? '\\n'
-					{
-					match("//"); 
-
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:178:14: (~ ( '\\n' | '\\r' ) )*
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:179:14: (~ ( '\\n' | '\\r' ) )*
 					loop3:
 					while (true) {
 						int alt3=2;
@@ -372,11 +314,7 @@ public class PrototipoLR1Lexer extends Lexer {
 						}
 					}
 
-<<<<<<< HEAD
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:177:28: ( '\\r' )?
-=======
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:178:28: ( '\\r' )?
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:179:28: ( '\\r' )?
 					int alt4=2;
 					int LA4_0 = input.LA(1);
 					if ( (LA4_0=='\r') ) {
@@ -384,11 +322,7 @@ public class PrototipoLR1Lexer extends Lexer {
 					}
 					switch (alt4) {
 						case 1 :
-<<<<<<< HEAD
-							// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:177:28: '\\r'
-=======
-							// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:178:28: '\\r'
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+							// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:179:28: '\\r'
 							{
 							match('\r'); 
 							}
@@ -401,19 +335,11 @@ public class PrototipoLR1Lexer extends Lexer {
 					}
 					break;
 				case 2 :
-<<<<<<< HEAD
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:178:9: '/*' ( options {greedy=false; } : . )* '*/'
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:180:9: '/*' ( options {greedy=false; } : . )* '*/'
 					{
 					match("/*"); 
 
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:178:14: ( options {greedy=false; } : . )*
-=======
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:179:9: '/*' ( options {greedy=false; } : . )* '*/'
-					{
-					match("/*"); 
-
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:179:14: ( options {greedy=false; } : . )*
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:180:14: ( options {greedy=false; } : . )*
 					loop5:
 					while (true) {
 						int alt5=2;
@@ -434,11 +360,7 @@ public class PrototipoLR1Lexer extends Lexer {
 
 						switch (alt5) {
 						case 1 :
-<<<<<<< HEAD
-							// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:178:42: .
-=======
-							// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:179:42: .
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+							// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:180:42: .
 							{
 							matchAny(); 
 							}
@@ -470,13 +392,8 @@ public class PrototipoLR1Lexer extends Lexer {
 		try {
 			int _type = WS;
 			int _channel = DEFAULT_TOKEN_CHANNEL;
-<<<<<<< HEAD
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:181:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:181:9: ( ' ' | '\\t' | '\\r' | '\\n' )
-=======
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:182:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:182:9: ( ' ' | '\\t' | '\\r' | '\\n' )
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:183:5: ( ( ' ' | '\\t' | '\\r' | '\\n' ) )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:183:9: ( ' ' | '\\t' | '\\r' | '\\n' )
 			{
 			if ( (input.LA(1) >= '\t' && input.LA(1) <= '\n')||input.LA(1)=='\r'||input.LA(1)==' ' ) {
 				input.consume();

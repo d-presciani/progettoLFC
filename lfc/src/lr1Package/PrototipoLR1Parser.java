@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-15 14:33:57
-=======
-// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-13 17:48:52
->>>>>>> 09835c58317d581fb7967793a99bfb83ed72c61f
+// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-15 14:38:37
 
   package lr1Package;
   import myPackage.*;
