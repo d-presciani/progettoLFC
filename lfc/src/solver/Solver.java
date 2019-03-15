@@ -38,10 +38,13 @@ public class Solver {
 		
 		int i=0;
 		
+		// Espando tutti gli stati
 		while(i<listaStati.size()) {
-			listaStati.get(i).espandiStato(listaStati, i, listaTransizioni);
+			listaStati.get(i).espandiStato(listaStati, listaTransizioni);
 			i++;
 		}
+		
+		System.out.println("Numero stati: " + listaStati.size());
 		
 		System.out.println("\nElenco degli stati:");
 		for(Stato stt : listaStati) {
@@ -53,6 +56,7 @@ public class Solver {
 			System.out.println(transizione);
 		}
 		
+		// Controllo che la grammatica sia LR(1)
 		boolean isLR1 = true;
 		for(Stato stt : listaStati) {
 			if(stt.erroreLR1) {
@@ -60,6 +64,7 @@ public class Solver {
 			}
 		}
 		
+		// Stampo risultato controllo
 		if(isLR1) {
 			System.out.println("\nLa grammatica inserita è LR(1)");
 		} else {

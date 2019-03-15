@@ -90,6 +90,11 @@ public class Stato {
 						for(RegolaDiProduzione regCk : regoleCompletamenti) { // Controllo che la regola non sia già stata inserita
 							if(nuoveRegole.parteSX.toString().equals(regCk.parteSX.toString()) && nuoveRegole.parteDX.toString().equals(regCk.parteDX.toString())) {
 								trovato = true;
+								for(String seguito : reg.seguiti) {
+									if(!regCk.seguiti.contains(seguito)) {
+										regCk.seguiti.add(seguito);
+									}
+								}
 								break;
 							}
 						}
@@ -119,7 +124,12 @@ public class Stato {
 				i++;
 			} while(regolaPadre.parteDX.get(regolaPadre.indice+i).isAnnullabile() && regolaPadre.indice+i+1<regolaPadre.parteDX.size());
 
-			if(regolaPadre.annullabile || regolaPadre.parteDX.size()==regolaPadre.indice+1) {
+			boolean verificaSegAnn = true;
+			for(int j = regolaPadre.indice+1; j < regolaPadre.parteDX.size(); j++) {
+				verificaSegAnn = verificaSegAnn && regolaPadre.parteDX.get(j).isAnnullabile();
+			}
+			
+			if(regolaPadre.annullabile || regolaPadre.parteDX.size()==regolaPadre.indice+1 || verificaSegAnn) {
 				for(String seg : regolaPadre.seguiti) {
 					if(!nuovaRdp.seguiti.contains(seg)) {
 						nuovaRdp.seguiti.add(seg);
@@ -154,7 +164,7 @@ public class Stato {
 	
 	// Funzione per generazione di nuovi stati
 	// TODO: Aggiungere caso che una regola di completamento porta ad aggiungre nuovi seguiti alle altre regole di completamento
-	public void espandiStato(LinkedList<Stato> listaStati, int indiceStatoExp, LinkedList<String> listaTransizioni) {
+	public void espandiStato(LinkedList<Stato> listaStati, LinkedList<String> listaTransizioni) {
 		LinkedList<String> caratteriParsati = new LinkedList<String>(); // Variabile utilizata per memorizzare i vari caratteri man mano li parso
 		
 		// Scorro tutte le regole core
@@ -305,7 +315,7 @@ public class Stato {
 						}
 						listaStati.add(temp);
 						
-						String transizione = "S" + numeroStato + " -- "+chpasr + " --> S"+temp.numeroStato;
+						String transizione = "S" + numeroStato + " -- " + chpasr + " --> S"+temp.numeroStato;
 						listaTransizioni.add(transizione);
 					} else {
 						String transizione = "S" + numeroStato + " -- " + chpasr + " --> S" + nroStatoDup;
@@ -321,12 +331,18 @@ public class Stato {
 			if(reg.indice==reg.parteDX.size()) {
 				for(String seg : reg.seguiti) {
 					if(sovrapposizioni.contains(seg)) {
-						erroreLR1=true;
+						erroreLR1 = true;
 						break;
 					} else {
 						sovrapposizioni.add(seg);
 					}
 				}
+			}
+		}
+		for(String carattereMosso : caratteriParsati) {
+			if(sovrapposizioni.contains(carattereMosso)) {
+				erroreLR1 = true;
+				break;
 			}
 		}
 		
