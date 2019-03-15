@@ -1,9 +1,6 @@
-S0 := S/cjswa;
-S->A;
-S->C;
-A->Ba;
-A->;
-B->b;
-C->DE;
-D->;
-E->;
+S0->S/cjswa;
+S->a;
+S->X;
+X->bXa;
+X->bX;
+X->S;

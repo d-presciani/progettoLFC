@@ -93,6 +93,7 @@ public class Tester {
 		Solver risolutore = new Solver();
 		risolutore.solve(listaNT, listaReg);
 		
+		/*
 		// Test funzionalità
 		// Stampo per ogni non terminale le sue regole di produzione
 		System.out.println("\nElenco regole di produzione per NT");
@@ -117,6 +118,7 @@ public class Tester {
 		for(NonTerminale nt: listaNT) {
 			System.out.println("Insieme degli inizi di " + nt.lettera + ": " + nt.calcolaInizi().toString());
 		}	
+		*/
 	}
 
 }
