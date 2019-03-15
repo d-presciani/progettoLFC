@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Stato {
-	static int counter = 0;
+	static int counter = 1;
 	List<RegolaDiProduzione> regoleCore;
 	List<RegolaDiProduzione> regoleCompletamenti;
 	int numeroStato;
@@ -26,8 +26,6 @@ public class Stato {
 		
 		// Popolazione dei seguiti dei seguiti generati dalla nuova regola core
 		if(rdp.parteDX!=null) { // Controllo che la regola di produzione abbia effettivamente qualcosa a destra
-			//TODO NULL POINTER EXCP
-			
 			if(rdp.parteDX.size()!=0 && rdp.parteDX.size()>rdp.indice && rdp.parteDX.get(rdp.indice).getRegole()!=null) {
 				for(RegolaDiProduzione regComp : rdp.parteDX.get(rdp.indice).getRegole()) { // Ciclo su tutte le regole (possono non esserci) generate dal carattere con il puntino
 					RegolaDiProduzione tmp = new RegolaDiProduzione(regComp); // Creo una var temporanea con la regola appena trovata per poterla modificare prima di aggiungerla alla lista delle regole e per duplicarla
@@ -60,7 +58,25 @@ public class Stato {
 							}
 						}
 					}
-					regoleCompletamenti.add(tmp); // Una volta aggiunti i seguiti agiungo la regola alle regole di completamento
+					
+					
+					// Cerco se la regola è già presente nei seguiti
+					boolean regPresente = false;
+					for(RegolaDiProduzione reg: regoleCompletamenti) {
+						if(reg.parteSX.lettera.equals(tmp.parteSX.lettera) && reg.parteDX.toString().equals(tmp.parteDX.toString()) && reg.indice == tmp.indice) {
+							for(String seguito : tmp.seguiti) {
+								if(!reg.seguiti.contains(seguito)) {
+									reg.seguiti.add(seguito);
+								}
+							}
+							regPresente = true;
+							break;
+						}
+					}
+					if(!regPresente) {
+						regoleCompletamenti.add(tmp); // Una volta aggiunti i seguiti agiungo la regola alle regole di completamento
+					}
+					
 				}
 			}
 
@@ -117,10 +133,27 @@ public class Stato {
 				}
 			}
 		}
-		regoleCompletamenti.add(new RegolaDiProduzione(nuovaRdp));		
+		
+		// Cerco se la regola è già presente nei seguiti
+		boolean regPresente = false;
+		for(RegolaDiProduzione reg: regoleCompletamenti) {
+			if(reg.parteSX.lettera.equals(nuovaRdp.parteSX.lettera) && reg.parteDX.toString().equals(nuovaRdp.parteDX.toString()) && reg.indice == nuovaRdp.indice) {
+				for(String seguito : nuovaRdp.seguiti) {
+					if(!reg.seguiti.contains(seguito)) {
+						reg.seguiti.add(seguito);
+					}
+				}
+				regPresente = true;
+				break;
+			}
+		}
+		if(!regPresente) {
+			regoleCompletamenti.add(nuovaRdp); // Una volta aggiunti i seguiti agiungo la regola alle regole di completamento
+		}
 	}
 	
 	// Funzione per generazione di nuovi stati
+	// TODO: Aggiungere caso che una regola di completamento porta ad aggiungre nuovi seguiti alle altre regole di completamento
 	public void espandiStato(LinkedList<Stato> listaStati, int indiceStatoExp, LinkedList<String> listaTransizioni) {
 		LinkedList<String> caratteriParsati = new LinkedList<String>(); // Variabile utilizata per memorizzare i vari caratteri man mano li parso
 		
@@ -272,7 +305,6 @@ public class Stato {
 						}
 						listaStati.add(temp);
 						
-						//TODO: Aggiungere transizioni alle regole di transizione
 						String transizione = "S" + numeroStato + " -- "+chpasr + " --> S"+temp.numeroStato;
 						listaTransizioni.add(transizione);
 					} else {
