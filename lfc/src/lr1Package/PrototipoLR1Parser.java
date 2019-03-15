@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-12 16:32:31
+// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-15 14:33:57
 
   package lr1Package;
   import myPackage.*;
@@ -206,6 +206,7 @@ public class PrototipoLR1Parser extends Parser {
 			match(input,SC,FOLLOW_SC_in_pr114); 
 				
 					RegolaDiProduzione regola = new RegolaDiProduzione(ntSX, listaDX);
+					regola.addSeguito("emptyset");
 					listaReg.add(regola);
 					ntSX.addRegola(regola);
 					listaDX.clear();
@@ -227,22 +228,22 @@ public class PrototipoLR1Parser extends Parser {
 
 
 	// $ANTLR start "ar"
-	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:127:1: ar : nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC ;
+	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:128:1: ar : nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC ;
 	public final void ar() throws RecognitionException {
 		Token nxtChar=null;
 		Token charDX=null;
 		Token charDXT=null;
 
 		try {
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:127:4: (nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:127:6: nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:128:4: (nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:128:6: nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC
 			{
 			nxtChar=(Token)match(input,NT,FOLLOW_NT_in_ar129); 
 
 				 	ntSX = controlloNT(nxtChar.getText());
 				
 			match(input,EQ,FOLLOW_EQ_in_ar137); 
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:131:7: (charDX= NT |charDXT= CT )*
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:132:7: (charDX= NT |charDXT= CT )*
 			loop2:
 			while (true) {
 				int alt2=3;
@@ -256,7 +257,7 @@ public class PrototipoLR1Parser extends Parser {
 
 				switch (alt2) {
 				case 1 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:131:8: charDX= NT
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:132:8: charDX= NT
 					{
 					charDX=(Token)match(input,NT,FOLLOW_NT_in_ar142); 
 						
@@ -267,7 +268,7 @@ public class PrototipoLR1Parser extends Parser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:137:6: charDXT= CT
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:138:6: charDXT= CT
 					{
 					charDXT=(Token)match(input,CT,FOLLOW_CT_in_ar154); 
 

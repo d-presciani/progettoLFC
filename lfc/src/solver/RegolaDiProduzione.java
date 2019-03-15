@@ -75,4 +75,8 @@ public class RegolaDiProduzione {
 		return parteSX.toString()+"->"+mom;
 	}
 	
+	public void addSeguito(String s) {
+		this.seguiti.add(s);
+	}
+	
 }

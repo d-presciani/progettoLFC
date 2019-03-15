@@ -32,7 +32,6 @@ public class Solver {
 		
 		//Creo il primo stato
 		Stato mom = new Stato();
-		listaReg.get(0).seguiti.add("/emtyset");
 		mom.aggiungiCore(listaReg.get(0));
 		listaStati.add(mom);
 		
