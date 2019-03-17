@@ -221,7 +221,7 @@ public class Stato {
 						if(stt.regoleCore.size()==listaRegoleNuovoStato.size()) {
 							int j = 0;
 							while(j<stt.regoleCore.size()) {
-								if(!stt.regoleCore.get(j).compara(listaRegoleNuovoStato.get(j))) {
+								if(!stt.regoleCore.get(j).equals(listaRegoleNuovoStato.get(j))) {
 									nroStatoDup = stt.numeroStato;
 									break;
 								}
@@ -295,7 +295,7 @@ public class Stato {
 						if(stt.regoleCore.size()==listaRegoleNuovoStato.size()) {
 							int j = 0;
 							while(j<stt.regoleCore.size()) {
-								if(!stt.regoleCore.get(j).compara(listaRegoleNuovoStato.get(j))) {
+								if(!stt.regoleCore.get(j).equals(listaRegoleNuovoStato.get(j))) {
 									break;
 								} else {
 									nroStatoDup = stt.numeroStato;

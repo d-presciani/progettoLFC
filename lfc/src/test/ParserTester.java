@@ -22,15 +22,12 @@ public class ParserTester  {
 	    parser = new PrototipoLR1Parser(tokens);
 
 	    parser.lr1();
-
-	    System.out.println("\nErrori sintattici/lessicali riscontrati:" + parser.getErrorList().size());
 	    
-	    for (int i=0;i<parser.getErrorList().size();i++) {
-	    	System.out.println((i+1) + ".\t" + parser.getErrorList().get(i));
-	    }
+		    for (int i=0;i<parser.getErrorList().size();i++) {
+		    	System.out.println((i+1) + ".\t" + parser.getErrorList().get(i));
+		    }
 		} catch (Exception e) {
 			System.out.println ("Parsing con ANTLR abortito\n\n");
-			e.printStackTrace();
 		}
   }
 }

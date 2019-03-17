@@ -59,7 +59,7 @@ public class RegolaDiProduzione {
 		}
 	}
 	
-	public boolean compara (RegolaDiProduzione reg) {
+	public boolean equals(RegolaDiProduzione reg) {
 		if (parteSX.getLettera().equals(reg.parteSX.getLettera()) && parteDX.toString().equals(reg.parteDX.toString()) && seguiti.toString().equals(reg.seguiti.toString()) && indice==reg.indice) {
 			return true;
 		} else {
