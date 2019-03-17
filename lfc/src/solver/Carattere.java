@@ -4,7 +4,7 @@ import java.util.List;
 
 
 public abstract class Carattere {
-	public abstract List<String> calcolaInizi();
+	public abstract List<String> calcolaInizi(RegolaDiProduzione start) throws ErroreSemantico;
 	
 	public abstract boolean isAnnullabile();
 	

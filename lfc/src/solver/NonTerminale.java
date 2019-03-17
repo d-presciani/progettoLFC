@@ -14,15 +14,24 @@ public class NonTerminale extends Carattere{
 		annullabile = false;
 	}
 	
+	
 	@Override
-	public List<String> calcolaInizi() {
+	public List<String> calcolaInizi(RegolaDiProduzione regStart) throws ErroreSemantico{
+		// Recupero il non terminale di partenza
+		NonTerminale ntStart = regStart.parteSX;
 		List<String> inizi = new LinkedList<String>();
 		for (RegolaDiProduzione reg : rdp) {
+			// Controllo che la regola di produzione non sia nulla
 			if(!reg.parteDX.isEmpty()) {
+				if(ntStart.equals(reg.parteDX.get(0))) {
+					throw new ErroreSemantico("Le seguenti regole generano un loop:\n" + regStart + "\n" + reg);
+				}
 				int i=0;
 				boolean finito = false;
 				do {
-					List<String> temp = reg.parteDX.get(i).calcolaInizi();
+					// Calcolo ricorsivamente gli inizi della parte destra della produzione
+					List<String> temp = reg.parteDX.get(i).calcolaInizi(reg);
+					// Se trovo degli inizi, li aggiungo qualora non siano già presenti
 					if(!temp.isEmpty()) {
 						for(String ch: temp) {
 							if(!inizi.contains(ch)) {
@@ -84,9 +93,9 @@ public class NonTerminale extends Carattere{
 		return lettera;
 	}
 	
-	public void controlloProduzioni() throws NTSenzaProd {
+	public void controlloProduzioni() throws ErroreSemantico {
 		if(rdp.size() <= 0) {
-			throw new NTSenzaProd("Il non terminale " + lettera + " non ha produzioni associate!");
+			throw new ErroreSemantico("Il non terminale " + lettera + " non ha produzioni associate!");
 		}
 	}
 }
