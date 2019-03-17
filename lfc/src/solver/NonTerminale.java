@@ -28,8 +28,15 @@ public class NonTerminale extends Carattere{
 					LinkedList<RegolaDiProduzione> regoleLoop = new LinkedList<RegolaDiProduzione>();
 					for(RegolaDiProduzione rOut : regole) {
 						for(RegolaDiProduzione rIn : regole) {
+							// Se il primo NT è annullabile incremento l'indice interno di 1 e così via
+							int incrAnn = 0;
+							int i = 0;
+							while(rIn.parteDX.get(i).isAnnullabile()) {
+								incrAnn++;
+								i++;
+							}
 							// Se una regola ha lo stesso terminale sinistro di un'altra come primo elemento di destra la metto nella lista
-							if(rOut.parteSX.equals(rIn.parteDX.get(0)) & !regoleLoop.contains(rIn)) {
+							if(rOut.parteSX.equals(rIn.parteDX.get(0 + incrAnn)) & !regoleLoop.contains(rIn)) {
 								regoleLoop.add(rIn);
 							}
 						}

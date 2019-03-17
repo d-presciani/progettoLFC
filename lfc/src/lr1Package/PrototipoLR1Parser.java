@@ -1,4 +1,4 @@
-// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-17 12:22:36
+// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-17 14:56:07
 
   package lr1Package;
   import myPackage.*;
@@ -154,13 +154,14 @@ public class PrototipoLR1Parser extends Parser {
 
 			match(input,EOF,FOLLOW_EOF_in_lr174); 
 
+					// Controllo che la grammatica non generi loop nel calcolo degli inizi
 					try{
 						for(NonTerminale nt : listaNT){
 							nt.controlloProduzioni();
 						}
 						classificatore.solve(listaNT, listaReg);
 					} catch (ErroreSemantico e){
-						System.err.println("\nERRORE SEMANTICO! " + e.getMessage());
+						System.err.println("\nERRORE! " + e.getMessage());
 					}
 				
 			}
@@ -179,15 +180,15 @@ public class PrototipoLR1Parser extends Parser {
 
 
 	// $ANTLR start "pr"
-	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:105:1: pr : nxtChar= SZ EQ charDx= NT charTer= TER SC ;
+	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:106:1: pr : nxtChar= SZ EQ charDx= NT charTer= TER SC ;
 	public final void pr() throws RecognitionException {
 		Token nxtChar=null;
 		Token charDx=null;
 		Token charTer=null;
 
 		try {
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:105:4: (nxtChar= SZ EQ charDx= NT charTer= TER SC )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:105:6: nxtChar= SZ EQ charDx= NT charTer= TER SC
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:106:4: (nxtChar= SZ EQ charDx= NT charTer= TER SC )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:106:6: nxtChar= SZ EQ charDx= NT charTer= TER SC
 			{
 			nxtChar=(Token)match(input,SZ,FOLLOW_SZ_in_pr90); 
 			match(input,EQ,FOLLOW_EQ_in_pr92); 
@@ -228,22 +229,22 @@ public class PrototipoLR1Parser extends Parser {
 
 
 	// $ANTLR start "ar"
-	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:128:1: ar : nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC ;
+	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:129:1: ar : nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC ;
 	public final void ar() throws RecognitionException {
 		Token nxtChar=null;
 		Token charDX=null;
 		Token charDXT=null;
 
 		try {
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:128:4: (nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:128:6: nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:129:4: (nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:129:6: nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC
 			{
 			nxtChar=(Token)match(input,NT,FOLLOW_NT_in_ar129); 
 
 				 	ntSX = controlloNT(nxtChar.getText());
 				
 			match(input,EQ,FOLLOW_EQ_in_ar137); 
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:132:7: (charDX= NT |charDXT= CT )*
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:133:7: (charDX= NT |charDXT= CT )*
 			loop2:
 			while (true) {
 				int alt2=3;
@@ -257,7 +258,7 @@ public class PrototipoLR1Parser extends Parser {
 
 				switch (alt2) {
 				case 1 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:132:8: charDX= NT
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:133:8: charDX= NT
 					{
 					charDX=(Token)match(input,NT,FOLLOW_NT_in_ar142); 
 						
@@ -268,7 +269,7 @@ public class PrototipoLR1Parser extends Parser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:138:6: charDXT= CT
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:139:6: charDXT= CT
 					{
 					charDXT=(Token)match(input,CT,FOLLOW_CT_in_ar154); 
 
@@ -303,7 +304,7 @@ public class PrototipoLR1Parser extends Parser {
 					try{
 						regola.controlloRicorsioneSx();
 					} catch(ErroreSemantico e) {
-						System.err.println("\nERRORE SEMANTICO! " + e.getMessage());
+						System.err.println("\nERRORE! " + e.getMessage());
 						System.exit(0);
 					}
 					// Associo la regola al non terminale
