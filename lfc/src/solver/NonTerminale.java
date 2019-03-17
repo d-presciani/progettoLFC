@@ -31,7 +31,7 @@ public class NonTerminale extends Carattere{
 							// Se il primo NT è annullabile incremento l'indice interno di 1 e così via
 							int incrAnn = 0;
 							int i = 0;
-							while(rIn.parteDX.get(i).isAnnullabile()) {
+							while(rIn.parteDX.get(i).isAnnullabile() && i + 1 < rIn.parteDX.size()) {
 								incrAnn++;
 								i++;
 							}

@@ -1,4 +1,9 @@
 S0->S/cjswa;
-S->AB;
-A ->;
-B->S;
+S->P;
+P->L;
+L->IL;
+L->;
+I->c;
+I->vit;
+L -> ic;
+L->S;
