@@ -96,8 +96,8 @@ lr1	:
 				nt.controlloProduzioni();
 			}
 			classificatore.solve(listaNT, listaReg);
-		} catch (NTSenzaProd e){
-			System.err.println("\nERRORE SEMANTICO:" + e.getMessage());
+		} catch (ErroreSemantico e){
+			System.err.println("\nERRORE SEMANTICO! " + e.getMessage());
 		}
 	}
 	;
@@ -155,6 +155,13 @@ ar	:	nxtChar=NT
 			// Produzione nulla
 			regola = new RegolaDiProduzione(ntSX, null);
 			listaReg.add(regola);
+		}
+		//  Controllo che non ci sia ricorsione sinsitra
+		try{
+			regola.controlloRicorsioneSx();
+		} catch(ErroreSemantico e) {
+			System.err.println("\nERRORE SEMANTICO! " + e.getMessage());
+			System.exit(0);
 		}
 		// Associo la regola al non terminale
 		ntSX.addRegola(regola);
