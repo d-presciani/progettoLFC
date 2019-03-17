@@ -34,8 +34,8 @@ public class Stato {
 						int i = 0;
 						// Per ogni carattere a destra di quello con il puntino calcolo gli inizi e continuo finché non trovo un carattere non annullabile
 						do{
-							if(rdp.parteDX.get(rdp.indice+i+1).calcolaInizi(rdp)!=null) {
-								for(String seg : rdp.parteDX.get(rdp.indice+i+1).calcolaInizi(rdp)) {
+							if(rdp.parteDX.get(rdp.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())!=null) {
+								for(String seg : rdp.parteDX.get(rdp.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())) {
 									if(!tmp.seguiti.contains(seg)) {
 										tmp.seguiti.add(seg);
 									}
@@ -116,8 +116,8 @@ public class Stato {
 		if(regolaPadre.indice+1<regolaPadre.parteDX.size()) {
 			int i = 0;						
 			do{
-				if(regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi(regolaPadre)!=null) {
-					for(String seg : regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi(regolaPadre)) {
+				if(regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())!=null) {
+					for(String seg : regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())) {
 						if(!regolaTemp.seguiti.contains(seg)) {
 							regolaTemp.seguiti.add(seg);
 						}

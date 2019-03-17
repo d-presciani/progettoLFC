@@ -16,21 +16,34 @@ public class NonTerminale extends Carattere{
 	
 	
 	@Override
-	public List<String> calcolaInizi(RegolaDiProduzione regStart) throws ErroreSemantico{
-		// Recupero il non terminale di partenza
-		NonTerminale ntStart = regStart.parteSX;
+	public List<String> calcolaInizi(LinkedList<RegolaDiProduzione> prevReg) throws ErroreSemantico{
+		LinkedList<RegolaDiProduzione> regole = prevReg;
 		List<String> inizi = new LinkedList<String>();
 		for (RegolaDiProduzione reg : rdp) {
 			// Controllo che la regola di produzione non sia nulla
 			if(!reg.parteDX.isEmpty()) {
-				if(ntStart.equals(reg.parteDX.get(0))) {
-					throw new ErroreSemantico("Le seguenti regole generano un loop:\n" + regStart + "\n" + reg);
+				// Se incontro una regola di produzione già visitata lancio un errore
+				if(regole.contains(reg)) {
+					// Individuo le regole che generano il loop
+					LinkedList<RegolaDiProduzione> regoleLoop = new LinkedList<RegolaDiProduzione>();
+					for(RegolaDiProduzione rOut : regole) {
+						for(RegolaDiProduzione rIn : regole) {
+							// Se una regola ha lo stesso terminale sinistro di un'altra come primo elemento di destra la metto nella lista
+							if(rOut.parteSX.equals(rIn.parteDX.get(0)) & !regoleLoop.contains(rIn)) {
+								regoleLoop.add(rIn);
+							}
+						}
+					}
+					throw new ErroreSemantico("Le seguenti regole generano un loop nel calcolo degli inizi:\n" + regoleLoop.toString());
+				}
+				if(!reg.parteDX.get(0).isTerminale()) {
+					regole.add(reg);
 				}
 				int i=0;
 				boolean finito = false;
 				do {
 					// Calcolo ricorsivamente gli inizi della parte destra della produzione
-					List<String> temp = reg.parteDX.get(i).calcolaInizi(reg);
+					List<String> temp = reg.parteDX.get(i).calcolaInizi(regole);
 					// Se trovo degli inizi, li aggiungo qualora non siano già presenti
 					if(!temp.isEmpty()) {
 						for(String ch: temp) {
@@ -97,5 +110,11 @@ public class NonTerminale extends Carattere{
 		if(rdp.size() <= 0) {
 			throw new ErroreSemantico("Il non terminale " + lettera + " non ha produzioni associate!");
 		}
+	}
+
+
+	@Override
+	public boolean isTerminale() {
+		return false;
 	}
 }

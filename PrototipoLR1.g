@@ -91,13 +91,14 @@ lr1	:
 	} 
 		pr ar+ EOF
 	{
+		// Controllo che la grammatica non generi loop nel calcolo degli inizi
 		try{
 			for(NonTerminale nt : listaNT){
 				nt.controlloProduzioni();
 			}
 			classificatore.solve(listaNT, listaReg);
 		} catch (ErroreSemantico e){
-			System.err.println("\nERRORE SEMANTICO! " + e.getMessage());
+			System.err.println("\nERRORE! " + e.getMessage());
 		}
 	}
 	;
@@ -160,7 +161,7 @@ ar	:	nxtChar=NT
 		try{
 			regola.controlloRicorsioneSx();
 		} catch(ErroreSemantico e) {
-			System.err.println("\nERRORE SEMANTICO! " + e.getMessage());
+			System.err.println("\nERRORE! " + e.getMessage());
 			System.exit(0);
 		}
 		// Associo la regola al non terminale
