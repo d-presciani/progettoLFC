@@ -14,7 +14,7 @@ public class ParserTester  {
 		CommonTokenStream tokens;
   	String fileIn = ".\\resources\\input.txt";
 
-  	
+  	boolean errore =false;
   	try {
 			System.out.println ("IDENTIFICAZIONE GRAMMATICHE LR(1)\n");
 			PrototipoLR1Lexer lexer = new PrototipoLR1Lexer(new ANTLRReaderStream(new FileReader(fileIn))); 
@@ -23,11 +23,17 @@ public class ParserTester  {
 
 	    parser.lr1();
 	    
+	    if(parser.getErrorList().size()>0) {
+	    	errore = true;
+	    }
 		    for (int i=0;i<parser.getErrorList().size();i++) {
 		    	System.out.println((i+1) + ".\t" + parser.getErrorList().get(i));
 		    }
 		} catch (Exception e) {
 			System.out.println ("Parsing con ANTLR abortito\n\n");
 		}
+  	if(!errore) {
+  		parser.solve();
+  	}
   }
 }

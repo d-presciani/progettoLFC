@@ -1,4 +1,4 @@
-->S/cjswa
-S -> as;
+S0->S/cjswa;
+S -> aLs;
 L-> ic;
 L->S;

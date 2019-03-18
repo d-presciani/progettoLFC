@@ -169,7 +169,6 @@ public class PrototipoLR1Parser extends Parser {
 						for(NonTerminale nt : listaNT){
 							nt.controlloProduzioni();
 						}
-						classificatore.solve(listaNT, listaReg);
 					} catch (ErroreSemantico e){
 						System.err.println("\nERRORE! " + e.getMessage());
 					}
@@ -348,7 +347,9 @@ public class PrototipoLR1Parser extends Parser {
 
 	// Delegated rules
 
-
+	public void solve() {
+		classificatore.solve(listaNT, listaReg);
+	}
 
 	public static final BitSet FOLLOW_pr_in_lr168 = new BitSet(new long[]{0x0000000000000080L});
 	public static final BitSet FOLLOW_ar_in_lr171 = new BitSet(new long[]{0x0000000000000082L});
