@@ -11,7 +11,7 @@ public class Terminale extends Carattere{
 	}
 	
 	@Override
-	public List<String> calcolaInizi() {
+	public List<String> calcolaInizi(LinkedList<RegolaDiProduzione> prevReg) {
 		List<String> inizi = new LinkedList<String>();
 		inizi.add(lettera);
 		return inizi;
@@ -35,5 +35,10 @@ public class Terminale extends Carattere{
 	@Override
 	public List<RegolaDiProduzione> getRegole() {
 		return null;
+	}
+
+	@Override
+	public boolean isTerminale() {
+		return true;
 	}
 }

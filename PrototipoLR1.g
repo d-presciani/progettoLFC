@@ -19,19 +19,25 @@ options {
 @members{
   Environment env;
   // Lista dei caratteri non terminali
-  static LinkedList<NonTerminale> listaNT = new LinkedList<NonTerminale>();
+  static LinkedList<NonTerminale> listaNT;
   // Lista delle regole di produzione
-  static LinkedList<RegolaDiProduzione> listaReg = new LinkedList<RegolaDiProduzione>();
+  static LinkedList<RegolaDiProduzione> listaReg;
   // Booleano per il controllo delle produzioni nulle
-  boolean nullo = false;
+  boolean nullo;
   // Variabile per la conservazione del non terminale di sinistra
-  NonTerminale ntSX = null;
+  NonTerminale ntSX;
   // Lista di store temporanea dei caratteri di destra della produzione
-  List<Carattere> listaDX = new LinkedList<Carattere>();
+  List<Carattere> listaDX;
   // Classificatore della grammatica
-  Solver classificatore = new Solver();
+  Solver classificatore;
   void init () {
     env = new Environment();
+    listaNT = new LinkedList<NonTerminale>();
+    listaReg = new LinkedList<RegolaDiProduzione>();
+    nullo = false;
+    ntSX = null;
+    listaDX = new LinkedList<Carattere>();
+    classificatore = new Solver();
   }
   public String getTraslation () {
     return env.translation;
@@ -88,16 +94,17 @@ options {
 lr1	: 
 	{
 		init();
-	} 
-		pr ar+ EOF
+	}
+		pr (ar+)
 	{
+		// Controllo che la grammatica non generi loop nel calcolo degli inizi
 		try{
 			for(NonTerminale nt : listaNT){
 				nt.controlloProduzioni();
 			}
 			classificatore.solve(listaNT, listaReg);
-		} catch (NTSenzaProd e){
-			System.err.println("\nERRORE SEMANTICO:" + e.getMessage());
+		} catch (ErroreSemantico e){
+			System.err.println("\nERRORE! " + e.getMessage());
 		}
 	}
 	;
@@ -148,13 +155,30 @@ ar	:	nxtChar=NT
 		if(listaDX.size() > 0){
 			// Produzione non nulla
 			regola = new RegolaDiProduzione(ntSX, listaDX);
-			listaReg.add(regola);
 		} else {
 			// Setto il non terminale come annullabile
 			ntSX.setAnnullabile();
 			// Produzione nulla
 			regola = new RegolaDiProduzione(ntSX, null);
+		}
+		boolean presente = false;
+		for(RegolaDiProduzione r : listaReg){
+			if(r.equals(regola)){
+			presente = true;
+			break;
+			}
+		}
+		if(!presente){
 			listaReg.add(regola);
+		} else {
+			System.out.println("ATTENZIONE! La produzione " + regola + " è stata inserita due volte!\nVerrà considerata una volta sola.\n");
+		}
+		//  Controllo che non ci sia ricorsione sinsitra
+		try{
+			regola.controlloRicorsioneSx();
+		} catch(ErroreSemantico e) {
+			System.err.println("\nERRORE! " + e.getMessage());
+			System.exit(0);
 		}
 		// Associo la regola al non terminale
 		ntSX.addRegola(regola);

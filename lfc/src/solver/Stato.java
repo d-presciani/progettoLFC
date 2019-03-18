@@ -20,7 +20,7 @@ public class Stato {
 	}
 	
 	// Aggiunge una regola
-	public void aggiungiCore(RegolaDiProduzione rdp) {
+	public void aggiungiCore(RegolaDiProduzione rdp) throws ErroreSemantico {
 		// Aggiungo la regola ricevuta alle regole core
 		regoleCore.add(new RegolaDiProduzione(rdp));
 		
@@ -34,8 +34,8 @@ public class Stato {
 						int i = 0;
 						// Per ogni carattere a destra di quello con il puntino calcolo gli inizi e continuo finché non trovo un carattere non annullabile
 						do{
-							if(rdp.parteDX.get(rdp.indice+i+1).calcolaInizi()!=null) {
-								for(String seg : rdp.parteDX.get(rdp.indice+i+1).calcolaInizi()) {
+							if(rdp.parteDX.get(rdp.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())!=null) {
+								for(String seg : rdp.parteDX.get(rdp.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())) {
 									if(!tmp.seguiti.contains(seg)) {
 										tmp.seguiti.add(seg);
 									}
@@ -109,15 +109,15 @@ public class Stato {
 	}
 
 	// Inserimento regola di completamento
-	private void aggiungiCompletameno(RegolaDiProduzione nuovaRdp, RegolaDiProduzione regolaPadre) {
+	private void aggiungiCompletameno(RegolaDiProduzione nuovaRdp, RegolaDiProduzione regolaPadre) throws ErroreSemantico {
 		// Inserimento seguiti sulle nuove regole
 		RegolaDiProduzione regolaTemp = new RegolaDiProduzione(nuovaRdp);
 		
 		if(regolaPadre.indice+1<regolaPadre.parteDX.size()) {
 			int i = 0;						
 			do{
-				if(regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi()!=null) {
-					for(String seg : regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi()) {
+				if(regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())!=null) {
+					for(String seg : regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())) {
 						if(!regolaTemp.seguiti.contains(seg)) {
 							regolaTemp.seguiti.add(seg);
 						}
@@ -166,7 +166,7 @@ public class Stato {
 	
 	// Funzione per generazione di nuovi stati
 	// TODO: Aggiungere caso che una regola di completamento porta ad aggiungre nuovi seguiti alle altre regole di completamento
-	public void espandiStato(LinkedList<Stato> listaStati, LinkedList<String> listaTransizioni) {
+	public void espandiStato(LinkedList<Stato> listaStati, LinkedList<String> listaTransizioni) throws ErroreSemantico {
 		LinkedList<String> caratteriParsati = new LinkedList<String>(); // Variabile utilizata per memorizzare i vari caratteri man mano li parso
 		
 		// Scorro tutte le regole core
@@ -221,7 +221,7 @@ public class Stato {
 						if(stt.regoleCore.size()==listaRegoleNuovoStato.size()) {
 							int j = 0;
 							while(j<stt.regoleCore.size()) {
-								if(!stt.regoleCore.get(j).compara(listaRegoleNuovoStato.get(j))) {
+								if(!stt.regoleCore.get(j).equals(listaRegoleNuovoStato.get(j))) {
 									nroStatoDup = stt.numeroStato;
 									break;
 								}
@@ -295,7 +295,7 @@ public class Stato {
 						if(stt.regoleCore.size()==listaRegoleNuovoStato.size()) {
 							int j = 0;
 							while(j<stt.regoleCore.size()) {
-								if(!stt.regoleCore.get(j).compara(listaRegoleNuovoStato.get(j))) {
+								if(!stt.regoleCore.get(j).equals(listaRegoleNuovoStato.get(j))) {
 									break;
 								} else {
 									nroStatoDup = stt.numeroStato;

@@ -59,7 +59,7 @@ public class RegolaDiProduzione {
 		}
 	}
 	
-	public boolean compara (RegolaDiProduzione reg) {
+	public boolean equals(RegolaDiProduzione reg) {
 		if (parteSX.getLettera().equals(reg.parteSX.getLettera()) && parteDX.toString().equals(reg.parteDX.toString()) && seguiti.toString().equals(reg.seguiti.toString()) && indice==reg.indice) {
 			return true;
 		} else {
@@ -84,6 +84,15 @@ public class RegolaDiProduzione {
 	
 	public void addSeguito(String s) {
 		this.seguiti.add(s);
+	}
+	
+	public void controlloRicorsioneSx() throws ErroreSemantico {
+		// Controllo che la parte destra non sia null
+		if(this.parteDX.size() != 0) {
+			if(this.parteSX.lettera.equals(this.parteDX.get(0).getLettera())) {
+				throw new ErroreSemantico("La seguente produzione presenta ricorsione sinistra:\n" + this.toString());
+			}
+		}
 	}
 	
 }

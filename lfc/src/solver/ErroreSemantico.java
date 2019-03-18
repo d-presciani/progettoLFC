@@ -1,13 +1,13 @@
 package solver;
 
-public class NTSenzaProd extends Exception {
+public class ErroreSemantico extends Exception {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public NTSenzaProd(String errorMessage) {
+	public ErroreSemantico(String errorMessage) {
 		super(errorMessage);
 	}
 
