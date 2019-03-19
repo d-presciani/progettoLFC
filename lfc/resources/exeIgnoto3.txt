@@ -1,0 +1,9 @@
+S0->S/cjswa;
+S->AaCB;
+A->Aa;
+A->C;
+B->Bb;
+B->b;
+C->Cc;
+C->S;
+C->;

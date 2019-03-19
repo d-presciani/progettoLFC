@@ -1,0 +1,8 @@
+COMMENT=4
+CT=5
+EQ=6
+NT=7
+SC=8
+SZ=9
+TER=10
+WS=11

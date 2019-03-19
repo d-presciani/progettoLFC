@@ -4,6 +4,10 @@
 # Log file
 *.log
 
+# Eclipse workspace
+.metadata
+.recommenders
+
 # BlueJ files
 *.ctxt
 
@@ -25,6 +29,7 @@ hs_err_pid*
 
 # Output folder
 output/
+lfc/bin
 
 # Windows files
 Desktop.ini
