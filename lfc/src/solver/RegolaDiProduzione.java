@@ -86,13 +86,4 @@ public class RegolaDiProduzione {
 		this.seguiti.add(s);
 	}
 	
-	public void controlloRicorsioneSx() throws ErroreSemantico {
-		// Controllo che la parte destra non sia null
-		if(this.parteDX.size() != 0) {
-			if(this.parteSX.lettera.equals(this.parteDX.get(0).getLettera())) {
-				throw new ErroreSemantico("La seguente produzione presenta ricorsione sinistra:\n" + this.toString());
-			}
-		}
-	}
-	
 }

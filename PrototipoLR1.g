@@ -83,6 +83,10 @@ options {
 	}
 	return ntNew;
    }
+   
+   public void solve() {
+		classificatore.solve(listaNT, listaReg);
+	}
 }
 
 
@@ -172,13 +176,6 @@ ar	:	nxtChar=NT
 			listaReg.add(regola);
 		} else {
 			System.out.println("ATTENZIONE! La produzione " + regola + " è stata inserita due volte!\nVerrà considerata una volta sola.\n");
-		}
-		//  Controllo che non ci sia ricorsione sinsitra
-		try{
-			regola.controlloRicorsioneSx();
-		} catch(ErroreSemantico e) {
-			System.err.println("\nERRORE! " + e.getMessage());
-			System.exit(0);
 		}
 		// Associo la regola al non terminale
 		ntSX.addRegola(regola);
