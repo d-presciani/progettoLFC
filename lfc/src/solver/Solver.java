@@ -6,17 +6,6 @@ public class Solver {
 	
 	
 	public void solve(LinkedList<NonTerminale> listaNT, LinkedList<RegolaDiProduzione> listaReg) {
-		/*
-		// Aggiungo ad ogni non terminale le sue regole
-		for(RegolaDiProduzione reg : listaReg) {
-			for(NonTerminale nt : listaNT) {
-				if(reg.parteSX.lettera.equals(nt.lettera)) {
-					nt.addRegola(reg);
-					break;
-				}
-			}	
-		}
-		*/
 		
 		LinkedList<Stato> listaStati = new LinkedList<Stato>();
 		LinkedList<String> listaTransizioni = new LinkedList<String>();
