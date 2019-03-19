@@ -341,6 +341,18 @@ public class Stato {
 				}
 			}
 		}
+		for(RegolaDiProduzione reg : regoleCompletamenti) {
+			if(reg.indice==reg.parteDX.size()) {
+				for(String seg : reg.seguiti) {
+					if(sovrapposizioni.contains(seg)) {
+						erroreLR1 = true;
+						break;
+					} else {
+						sovrapposizioni.add(seg);
+					}
+				}
+			}
+		}
 		for(String carattereMosso : caratteriParsati) {
 			if(sovrapposizioni.contains(carattereMosso)) {
 				erroreLR1 = true;

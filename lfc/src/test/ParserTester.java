@@ -12,7 +12,7 @@ public class ParserTester  {
   
 	public static void main(String[] args) {
 		CommonTokenStream tokens;
-  	String fileIn = ".\\resources\\input.txt";
+  	String fileIn = ".\\resources\\te21012011.txt";
 
   	boolean errore =false;
   	try {
@@ -30,6 +30,7 @@ public class ParserTester  {
 		    	System.out.println((i+1) + ".\t" + parser.getErrorList().get(i));
 		    }
 		} catch (Exception e) {
+			errore = true;
 			System.out.println ("Parsing con ANTLR abortito\n\n");
 		}
   	if(!errore) {
