@@ -173,7 +173,6 @@ public class PrototipoLR1Parser extends Parser {
 						for(NonTerminale nt : listaNT){
 							nt.controlloProduzioni();
 						}
-						classificatore.solve(listaNT, listaReg);
 					} catch (ErroreSemantico e){
 						System.err.println("\nERRORE! " + e.getMessage());
 					}

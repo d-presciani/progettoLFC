@@ -14,7 +14,6 @@ public class NonTerminale extends Carattere{
 		annullabile = false;
 	}
 	
-	
 	@Override
 	public List<String> calcolaInizi(LinkedList<RegolaDiProduzione> prevReg) throws ErroreSemantico{
 		LinkedList<RegolaDiProduzione> regole = prevReg;
