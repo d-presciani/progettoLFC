@@ -14,7 +14,6 @@ public class NonTerminale extends Carattere{
 		annullabile = false;
 	}
 	
-	
 	@Override
 	public List<String> calcolaInizi(LinkedList<RegolaDiProduzione> prevReg) throws ErroreSemantico{
 		LinkedList<RegolaDiProduzione> regole = prevReg;
@@ -22,48 +21,27 @@ public class NonTerminale extends Carattere{
 		for (RegolaDiProduzione reg : rdp) {
 			// Controllo che la regola di produzione non sia nulla
 			if(!reg.parteDX.isEmpty()) {
-				// Se incontro una regola di produzione già visitata lancio un errore
-				if(regole.contains(reg)) {
-					// Individuo le regole che generano il loop
-					LinkedList<RegolaDiProduzione> regoleLoop = new LinkedList<RegolaDiProduzione>();
-					for(RegolaDiProduzione rOut : regole) {
-						for(RegolaDiProduzione rIn : regole) {
-							// Se il primo NT è annullabile incremento l'indice interno di 1 e così via
-							int incrAnn = 0;
-							int i = 0;
-							while(rIn.parteDX.get(i).isAnnullabile() && i + 1 < rIn.parteDX.size()) {
-								incrAnn++;
-								i++;
-							}
-							// Se una regola ha lo stesso terminale sinistro di un'altra come primo elemento di destra la metto nella lista
-							if(rOut.parteSX.equals(rIn.parteDX.get(0 + incrAnn)) & !regoleLoop.contains(rIn)) {
-								regoleLoop.add(rIn);
-							}
-						}
-					}
-					throw new ErroreSemantico("Le seguenti regole generano un loop nel calcolo degli inizi:\n" + regoleLoop.toString());
-				}
-				if(!reg.parteDX.get(0).isTerminale()) {
+				if(!regole.contains(reg)) {
 					regole.add(reg);
-				}
-				int i=0;
-				boolean finito = false;
-				do {
-					// Calcolo ricorsivamente gli inizi della parte destra della produzione
-					List<String> temp = reg.parteDX.get(i).calcolaInizi(regole);
-					// Se trovo degli inizi, li aggiungo qualora non siano già presenti
-					if(!temp.isEmpty()) {
-						for(String ch: temp) {
-							if(!inizi.contains(ch)) {
-								inizi.add(ch);
+					int i=0;
+					boolean finito = false;
+					do {
+						// Calcolo ricorsivamente gli inizi della parte destra della produzione
+						List<String> temp = reg.parteDX.get(i).calcolaInizi(regole);
+						// Se trovo degli inizi, li aggiungo qualora non siano già presenti
+						if(!temp.isEmpty()) {
+							for(String ch: temp) {
+								if(!inizi.contains(ch)) {
+									inizi.add(ch);
+								}
 							}
 						}
-					}
-					if(!reg.parteDX.get(i).isAnnullabile()) {
-						finito = true;
-					}
-					i++;
-				} while (!finito && i<reg.parteDX.size());
+						if(!reg.parteDX.get(i).isAnnullabile()) {
+							finito = true;
+						}
+						i++;
+					} while (!finito && i<reg.parteDX.size());
+				}
 			}
 		}
 		return inizi;
@@ -124,4 +102,5 @@ public class NonTerminale extends Carattere{
 	public boolean isTerminale() {
 		return false;
 	}
+
 }

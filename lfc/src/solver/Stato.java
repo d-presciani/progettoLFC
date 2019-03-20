@@ -78,34 +78,66 @@ public class Stato {
 					}
 					
 				}
-			}
-
-			// Controllo per espansione regole ogni regola di completamento
-			int i = 0;
-			while(i<regoleCompletamenti.size()) { // Non posso usare un foreach dato che la dimensione di questa lista continua a variare ad ogni iterazione
-				RegolaDiProduzione reg = regoleCompletamenti.get(i); // Prendo la i-esima regola
-				if(reg.parteDX.size()!=0 && reg.parteDX.get(reg.indice).getRegole()!=null) { // Controllo che abbia delle regole espandibili puntate dal puntino
-					for(RegolaDiProduzione nuoveRegole: reg.parteDX.get(reg.indice).getRegole()) { // Per ogni regola di produzione che ritorna il carattere con il puntino controllo che questa non sia già inserita
-						boolean trovato = false;
-						for(RegolaDiProduzione regCk : regoleCompletamenti) { // Controllo che la regola non sia già stata inserita
-							if(nuoveRegole.parteSX.toString().equals(regCk.parteSX.toString()) && nuoveRegole.parteDX.toString().equals(regCk.parteDX.toString())) {
-								trovato = true;
-								for(String seguito : reg.seguiti) {
-									if(!regCk.seguiti.contains(seguito)) {
-										regCk.seguiti.add(seguito);
+				// Controllo per espansione regole ogni regola di completamento
+				int i = 0;
+				while(i<regoleCompletamenti.size()) { // Non posso usare un foreach dato che la dimensione di questa lista continua a variare ad ogni iterazione
+					RegolaDiProduzione reg = regoleCompletamenti.get(i); // Prendo la i-esima regola
+					if(reg.parteDX.size()!=0 && reg.parteDX.get(reg.indice).getRegole()!=null) { // Controllo che abbia delle regole espandibili puntate dal puntino
+						for(RegolaDiProduzione nuoveRegole: reg.parteDX.get(reg.indice).getRegole()) { // Per ogni regola di produzione che ritorna il carattere con il puntino controllo che questa non sia già inserita
+							boolean trovato = false;
+							for(RegolaDiProduzione regCk : regoleCompletamenti) { // Controllo che la regola non sia già stata inserita
+								if(nuoveRegole.parteSX.toString().equals(regCk.parteSX.toString()) && nuoveRegole.parteDX.toString().equals(regCk.parteDX.toString())) {
+									trovato = true;
+									for(String seguito : reg.seguiti) {
+										if(!regCk.seguiti.contains(seguito)) {
+											regCk.seguiti.add(seguito);
+										}
 									}
+									break;
 								}
-								break;
+							}
+							if(!trovato) { // Se non è ancor astata inserita inserisco la nuova regola
+								this.aggiungiCompletameno(nuoveRegole, reg);
 							}
 						}
-						if(!trovato) { // Se non è ancor astata inserita inserisco la nuova regola
-							this.aggiungiCompletameno(nuoveRegole, reg);
+					}		
+					i++;
+				}	
+				
+				//Ricalcolo i seguiti
+				boolean modificato = true;
+				while(modificato) {
+					modificato = false;
+					for(int indice1 = 0; indice1<regoleCompletamenti.size(); indice1++) {
+						for(int indice2 = 0 ; indice2 < regoleCompletamenti.size(); indice2++) {
+							
+							if(regoleCompletamenti.get(indice2).indice<regoleCompletamenti.get(indice2).parteDX.size()) {
+								if(regoleCompletamenti.get(indice1).parteSX.lettera.equals(regoleCompletamenti.get(indice2).parteDX.get(regoleCompletamenti.get(indice2).indice).getLettera())) {
+									if(regoleCompletamenti.get(indice2).indice+1<regoleCompletamenti.get(indice2).parteDX.size()) {
+										for(String seg: regoleCompletamenti.get(indice2).parteDX.get(regoleCompletamenti.get(indice2).indice+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())) {
+											if(!regoleCompletamenti.get(indice1).seguiti.contains(seg)) {
+												regoleCompletamenti.get(indice1).seguiti.add(seg);
+												modificato = true;
+											}
+										}
+									}else if(regoleCompletamenti.get(indice2).indice+1==regoleCompletamenti.get(indice2).parteDX.size()){
+										for(String seg: regoleCompletamenti.get(indice2).seguiti) {
+											if(!regoleCompletamenti.get(indice1).seguiti.contains(seg)) {
+												regoleCompletamenti.get(indice1).seguiti.add(seg);
+												modificato = true;
+											}
+										}
+									}
+								}
+							}
 						}
-					}
-				}		
-				i++;
-			}
-		}
+					} 
+				}
+				
+				
+				
+			}			
+		}	
 	}
 
 	// Inserimento regola di completamento
@@ -146,7 +178,7 @@ public class Stato {
 			}
 		}
 		
-		// Cerco se la regola è già presente nei seguiti
+		// Cerco se la regola è già presente nei completamenti
 		boolean regPresente = false;
 		for(RegolaDiProduzione reg: regoleCompletamenti) {
 			if(reg.parteSX.lettera.equals(regolaTemp.parteSX.lettera) && reg.parteDX.toString().equals(regolaTemp.parteDX.toString()) && reg.indice == regolaTemp.indice) {
@@ -162,7 +194,11 @@ public class Stato {
 		if(!regPresente) {
 			regoleCompletamenti.add(regolaTemp); // Una volta aggiunti i seguiti agiungo la regola alle regole di completamento
 		}
+		
+		
+		
 	}
+	
 	
 	// Funzione per generazione di nuovi stati
 	// TODO: Aggiungere caso che una regola di completamento porta ad aggiungre nuovi seguiti alle altre regole di completamento
@@ -185,7 +221,7 @@ public class Stato {
 					LinkedList<RegolaDiProduzione> listaRegoleNuovoStato = new LinkedList<RegolaDiProduzione>();
 					listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCore.get(i)));
 					
-					if(regoleCore.get(i).parteDX.size()>regoleCore.get(i).indice+1) {
+					//if(regoleCore.get(i).parteDX.size()>regoleCore.get(i).indice+1) {
 						// Scorro tutte le regole core per vedere se devo muovere lo stesso carattere
 						for(int j = i+1; j<regoleCore.size(); j++) {	
 							// Controllo se il puntino della i-esima regola core e della j-esima regola core punta alla stessa lettera
@@ -200,11 +236,8 @@ public class Stato {
 							if(regoleCompletamenti.get(j).parteDX.size()!=regoleCompletamenti.get(j).indice && regoleCompletamenti.get(j).parteDX.size()!=0 && regoleCore.get(i).parteDX.get(regoleCore.get(i).indice).getLettera().equals(regoleCompletamenti.get(j).parteDX.get(regoleCompletamenti.get(j).indice).getLettera())) {
 								listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCompletamenti.get(j)));
 							}
-							
 						}
-						
-						
-					}
+					//}
 					// Salvo il caratere parsato per aggiungerlo alla lista dei parsati 
 					String chpasr = listaRegoleNuovoStato.get(0).parteDX.get(listaRegoleNuovoStato.get(0).indice).getLettera();
 					caratteriParsati.add(chpasr);
@@ -267,18 +300,15 @@ public class Stato {
 					LinkedList<RegolaDiProduzione> listaRegoleNuovoStato = new LinkedList<RegolaDiProduzione>();
 					listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCompletamenti.get(i)));
 					
-					if(regoleCompletamenti.get(i).parteDX.size()>regoleCompletamenti.get(i).indice+1) {						
+					//if(regoleCompletamenti.get(i).parteDX.size()>regoleCompletamenti.get(i).indice+1) {						
 						// Scorro tutte le regole completamento per vedere se devo muovere lo stesso carattere
 						for(int j = i+1; j<regoleCompletamenti.size(); j++) {	
 							// Controllo se il puntino della i-esima regola core e della j-esima regola completamento punta alla stessa lettera
 							if(regoleCompletamenti.get(j).parteDX.size()!=regoleCompletamenti.get(j).indice && regoleCompletamenti.get(j).parteDX.size()!=0 && regoleCompletamenti.get(i).parteDX.get(regoleCompletamenti.get(i).indice).getLettera().equals(regoleCompletamenti.get(j).parteDX.get(regoleCompletamenti.get(j).indice).getLettera())) {
 								listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCompletamenti.get(j)));
 							}
-							
-						}
-						
-						
-					}
+						}						
+					//}
 					// Salvo il caratere parsato per aggiungerlo alla lista dei parsati 
 					String chpasr = listaRegoleNuovoStato.get(0).parteDX.get(listaRegoleNuovoStato.get(0).indice).getLettera();
 					caratteriParsati.add(chpasr);
