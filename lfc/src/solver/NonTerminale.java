@@ -43,9 +43,7 @@ public class NonTerminale extends Carattere{
 					throw new ErroreSemantico("Le seguenti regole generano un loop nel calcolo degli inizi:\n" + regoleLoop.toString());
 				}
 				if(!reg.parteDX.get(0).isTerminale()) {
-					if(!this.controlloInizi((NonTerminale)reg.parteDX.get(0))) {
 						regole.add(reg);
-					}
 				}
 				int i=0;
 				boolean finito = false;
@@ -125,23 +123,5 @@ public class NonTerminale extends Carattere{
 	public boolean isTerminale() {
 		return false;
 	}
-	
-	
-	
-	private boolean controlloInizi(NonTerminale ntChk) {
-		// Per ogni regola di produzione associata al NT controllo che ci sia un inizio valido
-		for(RegolaDiProduzione r : ntChk.rdp) {
-			if(r.parteSX.equals(ntChk)) {
-				for(Carattere c : r.parteDX) {
-					if(!c.isTerminale() && !c.isAnnullabile()) {
-						break;
-					}
-					if(c.isTerminale()) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
+
 }

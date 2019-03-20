@@ -1,8 +1,0 @@
-S-A
-S-C
-A-a
-A-
-B-b
-C-DEB
-D-
-E-

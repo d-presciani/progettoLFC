@@ -1,8 +1,0 @@
-S-RS
-S-
-R-Ldv
-C-aL
-C-v
-L-CX
-X-sCX
-X-
