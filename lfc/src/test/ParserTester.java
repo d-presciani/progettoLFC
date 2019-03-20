@@ -12,7 +12,7 @@ public class ParserTester  {
   
 	public static void main(String[] args) {
 		CommonTokenStream tokens;
-  	String fileIn = ".\\resources\\te31032015.txt";
+  	String fileIn = ".\\resources\\exeIgnoto" + ".txt";
 
   	boolean errore =false;
   	try {
