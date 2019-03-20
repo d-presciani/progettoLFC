@@ -14,7 +14,7 @@ public class ParserTester  {
 		CommonTokenStream tokens;
   	String fileIn = ".\\resources\\te31032015.txt";
 
-  	boolean errore =false;
+  	boolean errore = false;
   	try {
 			System.out.println ("IDENTIFICAZIONE GRAMMATICHE LR(1)\n");
 			PrototipoLR1Lexer lexer = new PrototipoLR1Lexer(new ANTLRReaderStream(new FileReader(fileIn))); 

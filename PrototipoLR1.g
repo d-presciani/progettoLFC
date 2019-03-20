@@ -108,6 +108,7 @@ lr1	:
 			}
 		} catch (ErroreSemantico e){
 			System.err.println("\nERRORE! " + e.getMessage());
+			System.exit(0);
 		}
 	}
 	;
