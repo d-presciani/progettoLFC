@@ -6,13 +6,16 @@ import org.antlr.runtime.*;
 
 import lr1Package.*;
 
+import java.util.Scanner;
+
 
 public class ParserTester  {
 	static PrototipoLR1Parser parser;
   
 	public static void main(String[] args) {
-		CommonTokenStream tokens;
-  	String fileIn = ".\\resources\\te31032015.txt";
+	CommonTokenStream tokens;
+  	String fileIn = "input.txt";
+  	Scanner capitano = new Scanner(System.in);
 
   	boolean errore = false;
   	try {
@@ -36,5 +39,9 @@ public class ParserTester  {
   	if(!errore) {
   		parser.solve();
   	}
+  	
+  	System.out.println("\nPremere INVIO per uscire dal programma.");
+  	capitano.nextLine();
+  	capitano.close();
   }
 }
