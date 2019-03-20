@@ -1,4 +1,4 @@
 S0->S/cjswa;
 S -> aLs;
 L-> ic;
-L->S;
+L->S

@@ -1,9 +1,10 @@
-// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-20 15:41:55
+// $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-20 16:54:28
 
   package lr1Package;
   import myPackage.*;
   import solver.*;
   import java.util.LinkedList;
+  import java.util.Scanner;
 
 
 import org.antlr.runtime.*;
@@ -59,6 +60,8 @@ public class PrototipoLR1Parser extends Parser {
 	  List<Carattere> listaDX;
 	  // Classificatore della grammatica
 	  Solver classificatore;
+	  // Scanner per input utente
+	  Scanner capitano = new Scanner(System.in);
 	  void init () {
 	    env = new Environment();
 	    listaNT = new LinkedList<NonTerminale>();
@@ -120,11 +123,11 @@ public class PrototipoLR1Parser extends Parser {
 
 
 	// $ANTLR start "lr1"
-	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:98:1: lr1 : pr ( ( ar )+ ) ;
+	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:101:1: lr1 : pr ( ( ar )+ ) ;
 	public final void lr1() throws RecognitionException {
 		try {
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:98:5: ( pr ( ( ar )+ ) )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:99:2: pr ( ( ar )+ )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:101:5: ( pr ( ( ar )+ ) )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:102:2: pr ( ( ar )+ )
 			{
 
 					init();
@@ -133,10 +136,10 @@ public class PrototipoLR1Parser extends Parser {
 			pr();
 			state._fsp--;
 
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:102:6: ( ( ar )+ )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:102:7: ( ar )+
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:105:6: ( ( ar )+ )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:105:7: ( ar )+
 			{
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:102:7: ( ar )+
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:105:7: ( ar )+
 			int cnt1=0;
 			loop1:
 			while (true) {
@@ -148,7 +151,7 @@ public class PrototipoLR1Parser extends Parser {
 
 				switch (alt1) {
 				case 1 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:102:7: ar
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:105:7: ar
 					{
 					pushFollow(FOLLOW_ar_in_lr171);
 					ar();
@@ -168,13 +171,15 @@ public class PrototipoLR1Parser extends Parser {
 			}
 
 
-					// Controllo che la grammatica non generi loop nel calcolo degli inizi
+					// Controllo che la grammatica non presenti terminali senza produzioni associate
 					try{
 						for(NonTerminale nt : listaNT){
 							nt.controlloProduzioni();
 						}
 					} catch (ErroreSemantico e){
-						System.err.println("\nERRORE! " + e.getMessage());
+						System.err.println("\nERRORE! " + e.getMessage() + "\n\nPremere INVIO per uscire dal programma.");
+						capitano.nextLine();
+						capitano.close();
 						System.exit(0);
 					}
 				
@@ -194,15 +199,15 @@ public class PrototipoLR1Parser extends Parser {
 
 
 	// $ANTLR start "pr"
-	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:116:1: pr : nxtChar= SZ EQ charDx= NT charTer= TER SC ;
+	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:121:1: pr : nxtChar= SZ EQ charDx= NT charTer= TER SC ;
 	public final void pr() throws RecognitionException {
 		Token nxtChar=null;
 		Token charDx=null;
 		Token charTer=null;
 
 		try {
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:116:4: (nxtChar= SZ EQ charDx= NT charTer= TER SC )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:116:6: nxtChar= SZ EQ charDx= NT charTer= TER SC
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:121:4: (nxtChar= SZ EQ charDx= NT charTer= TER SC )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:121:6: nxtChar= SZ EQ charDx= NT charTer= TER SC
 			{
 			nxtChar=(Token)match(input,SZ,FOLLOW_SZ_in_pr89); 
 			match(input,EQ,FOLLOW_EQ_in_pr91); 
@@ -243,22 +248,22 @@ public class PrototipoLR1Parser extends Parser {
 
 
 	// $ANTLR start "ar"
-	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:139:1: ar : nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC ;
+	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:144:1: ar : nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC ;
 	public final void ar() throws RecognitionException {
 		Token nxtChar=null;
 		Token charDX=null;
 		Token charDXT=null;
 
 		try {
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:139:4: (nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC )
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:139:6: nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:144:4: (nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC )
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:144:6: nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC
 			{
 			nxtChar=(Token)match(input,NT,FOLLOW_NT_in_ar128); 
 
 				 	ntSX = controlloNT(nxtChar.getText());
 				
 			match(input,EQ,FOLLOW_EQ_in_ar136); 
-			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:143:7: (charDX= NT |charDXT= CT )*
+			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:148:7: (charDX= NT |charDXT= CT )*
 			loop2:
 			while (true) {
 				int alt2=3;
@@ -272,7 +277,7 @@ public class PrototipoLR1Parser extends Parser {
 
 				switch (alt2) {
 				case 1 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:143:8: charDX= NT
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:148:8: charDX= NT
 					{
 					charDX=(Token)match(input,NT,FOLLOW_NT_in_ar141); 
 						
@@ -283,7 +288,7 @@ public class PrototipoLR1Parser extends Parser {
 					}
 					break;
 				case 2 :
-					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:149:6: charDXT= CT
+					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:154:6: charDXT= CT
 					{
 					charDXT=(Token)match(input,CT,FOLLOW_CT_in_ar153); 
 
