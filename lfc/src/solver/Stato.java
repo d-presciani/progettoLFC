@@ -25,8 +25,8 @@ public class Stato {
 		regoleCore.add(new RegolaDiProduzione(rdp));
 		
 		// Popolazione dei seguiti dei seguiti generati dalla nuova regola core
-		if(rdp.parteDX!=null) { // Controllo che la regola di produzione abbia effettivamente qualcosa a destra
-			if(rdp.parteDX.size()!=0 && rdp.parteDX.size()>rdp.indice && rdp.parteDX.get(rdp.indice).getRegole()!=null) {
+		if(rdp.parteDX.size()>0) { // Controllo che la regola di produzione abbia effettivamente qualcosa a destra
+			if(rdp.parteDX.size()>0 && rdp.parteDX.size()>rdp.indice && rdp.parteDX.get(rdp.indice).getRegole()!=null) {
 				for(RegolaDiProduzione regComp : rdp.parteDX.get(rdp.indice).getRegole()) { // Ciclo su tutte le regole (possono non esserci) generate dal carattere con il puntino
 					RegolaDiProduzione tmp = new RegolaDiProduzione(regComp); // Creo una var temporanea con la regola appena trovata per poterla modificare prima di aggiungerla alla lista delle regole e per duplicarla
 					tmp.seguiti.clear();

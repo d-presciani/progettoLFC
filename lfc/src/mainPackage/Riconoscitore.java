@@ -1,4 +1,4 @@
-package test;
+package mainPackage;
 
 import java.io.FileReader;
 
@@ -9,12 +9,12 @@ import lr1Package.*;
 import java.util.Scanner;
 
 
-public class ParserTester  {
+public class Riconoscitore  {
 	static PrototipoLR1Parser parser;
   
 	public static void main(String[] args) {
 	CommonTokenStream tokens;
-  	String fileIn = "input.txt";
+  	String fileIn = ".\\resources\\exeIgnoto2.txt";
   	Scanner capitano = new Scanner(System.in);
 
   	boolean errore = false;
