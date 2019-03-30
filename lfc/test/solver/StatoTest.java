@@ -22,6 +22,7 @@ class StatoTest {
 	
 	@Test
 	void aggiuntaRegolaCore() {
+		// rdp.parteDX.get(rdp.indice).getRegole()!=null == FALSE
 		boolean aggiunta = false;
 		Stato s = new Stato();
 		NonTerminale nt = new NonTerminale("S");
@@ -38,6 +39,7 @@ class StatoTest {
 	
 	@Test
 	void aggiuntaRegolaCoreNulla() {
+		// rdp.parteDX.size()>0 == FALSE
 		boolean aggiunta = false;
 		Stato s = new Stato();
 		NonTerminale nt = new NonTerminale("S");
@@ -51,7 +53,7 @@ class StatoTest {
 	
 	@Test
 	void aggiuntaRegolaCoreIndice() {
-		// Aggiunta regola core con indice >= parteDx.size()
+		// rdp.parteDX.size()>rdp.indice == FALSE
 		boolean aggiunta = false;
 		Stato s = new Stato();
 		NonTerminale nt = new NonTerminale("S");
@@ -71,6 +73,7 @@ class StatoTest {
 	
 	@Test
 	void aggiuntaRegolaCoreNT() {
+		// Condizioni tutte rispettate
 		boolean aggiunta = false;
 		Stato s = new Stato();
 		NonTerminale nt = new NonTerminale("S");
@@ -94,6 +97,7 @@ class StatoTest {
 	
 	@Test
 	void aggiuntaCoreCarattereSingolo() {
+		// Condizioni tutte rispettate
 		boolean aggiunta = false;
 		Stato s = new Stato();
 		NonTerminale nt = new NonTerminale("S");
