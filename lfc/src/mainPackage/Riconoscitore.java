@@ -14,7 +14,7 @@ public class Riconoscitore  {
   
 	public static void main(String[] args) {
 	CommonTokenStream tokens;
-  	String fileIn = ".\\resources\\exeIgnoto2.txt";
+  	String fileIn = ".\\resources\\te22062010.txt";
   	Scanner capitano = new Scanner(System.in);
 
   	boolean errore = false;

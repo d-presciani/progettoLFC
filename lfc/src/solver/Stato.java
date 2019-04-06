@@ -34,7 +34,8 @@ public class Stato {
 						int i = 0;
 						// Per ogni carattere a destra di quello con il puntino calcolo gli inizi e continuo finché non trovo un carattere non annullabile
 						do{
-							if(rdp.parteDX.get(rdp.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())!=null) {
+							LinkedList<String> emptyList = new LinkedList<String>();
+							if(!rdp.parteDX.get(rdp.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>()).equals(emptyList)) {
 								for(String seg : rdp.parteDX.get(rdp.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())) {
 									if(!tmp.seguiti.contains(seg)) {
 										tmp.seguiti.add(seg);
@@ -53,14 +54,12 @@ public class Stato {
 						}
 					} else { // Se non ho nulla a destra aggiungo i seguiti del padre
 						for(String seg : rdp.seguiti) {
-							if(!tmp.seguiti.contains(seg)) {
-								tmp.seguiti.add(seg);
-							}
+							tmp.seguiti.add(seg);
 						}
 					}
 					
 					
-					// Cerco se la regola è già presente nei seguiti
+					// Cerco se la regola è già presente nei completamenti
 					boolean regPresente = false;
 					for(RegolaDiProduzione reg: regoleCompletamenti) {
 						if(reg.parteSX.lettera.equals(tmp.parteSX.lettera) && reg.parteDX.toString().equals(tmp.parteDX.toString()) && reg.indice == tmp.indice) {

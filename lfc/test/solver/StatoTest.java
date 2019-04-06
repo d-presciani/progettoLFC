@@ -76,18 +76,17 @@ class StatoTest {
 		// Condizioni tutte rispettate
 		boolean aggiunta = false;
 		Stato s = new Stato();
-		NonTerminale nt = new NonTerminale("S");
-		Terminale dx1 = new Terminale("a");
-		NonTerminale dx2 = new NonTerminale("A");
+		NonTerminale nts = new NonTerminale("S");
+		Terminale ta = new Terminale("a");
+		NonTerminale nta = new NonTerminale("A");
 		List<Carattere> parteDx = new LinkedList<Carattere>();
-		parteDx.add(dx1);
-		RegolaDiProduzione reg1 = new RegolaDiProduzione(dx2,parteDx);
-		dx2.addRegola(reg1);
+		parteDx.add(ta);
+		RegolaDiProduzione reg1 = new RegolaDiProduzione(nta,parteDx);
+		nta.addRegola(reg1);
 		parteDx.clear();
-		parteDx.add(dx2);
-		parteDx.add(dx1);
-		RegolaDiProduzione reg = new RegolaDiProduzione(nt, parteDx);
-		nt.addRegola(reg);
+		parteDx.add(nta);
+		RegolaDiProduzione reg = new RegolaDiProduzione(nts, parteDx);
+		nts.addRegola(reg);
 		try {
 			s.aggiungiCore(reg);
 			aggiunta = true;
@@ -100,19 +99,159 @@ class StatoTest {
 		// Condizioni tutte rispettate
 		boolean aggiunta = false;
 		Stato s = new Stato();
-		NonTerminale nt = new NonTerminale("S");
-		NonTerminale dx1 = new NonTerminale("A");
+		// Creazione dei caratteri
+		NonTerminale nts = new NonTerminale("S");
+		NonTerminale nta = new NonTerminale("A");
+		NonTerminale ntb = new NonTerminale("B");
+		NonTerminale ntc = new NonTerminale("C");
+		Terminale ta = new Terminale("a");
 		List<Carattere> parteDx = new LinkedList<Carattere>();
-		parteDx.add(dx1);
-		RegolaDiProduzione reg1 = new RegolaDiProduzione(dx1, parteDx);
-		dx1.addRegola(reg1);
-		RegolaDiProduzione reg = new RegolaDiProduzione(nt, parteDx);
-		nt.addRegola(reg);
+		RegolaDiProduzione reg = new RegolaDiProduzione(nta, null);
+		// Aggiunta delle regole di produzinoe ad A
+		reg.calcolaAnnullabilita();
+		nta.addRegola(reg);
+		nta.calcolaAnnullabile();
+		// Aggiunta delle regole di produzione a B
+		parteDx.add(ta);
+		RegolaDiProduzione reg1 = new RegolaDiProduzione(ntb, parteDx);
+		reg1.calcolaAnnullabilita();
+		ntb.addRegola(reg1);
+		RegolaDiProduzione reg2 = new RegolaDiProduzione(ntb, null);
+		reg2.calcolaAnnullabilita();
+		ntb.addRegola(reg2);
+		ntb.calcolaAnnullabile();
+		// Aggiunta delle regole di produzione a C
+		RegolaDiProduzione reg3 = new RegolaDiProduzione(ntc, parteDx);
+		reg3.calcolaAnnullabilita();
+		ntc.addRegola(reg3);
+		ntc.calcolaAnnullabile();
+		// Aggiunta delle regole di produzione a S
+		parteDx.clear();
+		parteDx.add(nta);
+		parteDx.add(ntb);
+		parteDx.add(ntc);
+		RegolaDiProduzione reg4 = new RegolaDiProduzione(nts, parteDx);
+		reg4.calcolaAnnullabilita();
+		nts.addRegola(reg4);
+		nts.calcolaAnnullabile();
+		// Entro in questo IF: if(rdp.indice+1<rdp.parteDX.size())
 		try {
-			s.aggiungiCore(reg);
+			s.aggiungiCore(reg4);
 			aggiunta = true;
 		} catch (ErroreSemantico e) {}
 		assertTrue(aggiunta);
+		/*System.out.println(s.toString());
+		nts.stampaRegole();
+		nta.stampaRegole();
+		ntb.stampaRegole();
+		ntc.stampaRegole();
+		System.out.println("A annullabile: " + nta.isAnnullabile());
+		System.out.println("B annullabile: " + ntb.isAnnullabile());
+		System.out.println("C annullabile: " + ntc.isAnnullabile());
+		System.out.println("S annullabile: " + nts.isAnnullabile());*/
+	}
+	
+	@Test
+	void aggiuntaCoreAnnullabileSeguitiPadre() {
+		// Condizioni tutte rispettate
+		boolean aggiunta = false;
+		Stato s = new Stato();
+		// Creazione dei caratteri
+		NonTerminale nts = new NonTerminale("S");
+		NonTerminale nta = new NonTerminale("A");
+		NonTerminale ntb = new NonTerminale("B");
+		Terminale ta = new Terminale("a");
+		List<Carattere> parteDx = new LinkedList<Carattere>();
+		RegolaDiProduzione reg = new RegolaDiProduzione(nta, null);
+		// Aggiunta delle regole di produzinoe ad A
+		reg.calcolaAnnullabilita();
+		nta.addRegola(reg);
+		nta.calcolaAnnullabile();
+		// Aggiunta delle regole di produzione a B
+		parteDx.add(ta);
+		RegolaDiProduzione reg1 = new RegolaDiProduzione(ntb, parteDx);
+		reg1.calcolaAnnullabilita();
+		ntb.addRegola(reg1);
+		RegolaDiProduzione reg2 = new RegolaDiProduzione(ntb, null);
+		reg2.calcolaAnnullabilita();
+		ntb.addRegola(reg2);
+		ntb.calcolaAnnullabile();
+		// Aggiunta delle regole di produzione a S
+		parteDx.clear();
+		parteDx.add(nta);
+		parteDx.add(ntb);
+		RegolaDiProduzione reg4 = new RegolaDiProduzione(nts, parteDx);
+		reg4.calcolaAnnullabilita();
+		reg4.addSeguito("a");
+		reg4.addSeguito("b");
+		reg4.addSeguito("/cjswa");
+		nts.addRegola(reg4);
+		nts.calcolaAnnullabile();
+		// Entro in questo IF: if(rdp.indice+1<rdp.parteDX.size())
+		try {
+			s.aggiungiCore(reg4);
+			aggiunta = true;
+		} catch (ErroreSemantico e) {}
+		assertTrue(aggiunta);
+	}
+	
+	@Test
+	void aggiuntaCoreNoInizi() {
+		// Condizioni tutte rispettate
+		boolean aggiunta = false;
+		Stato s = new Stato();
+		// Creazione dei caratteri
+		NonTerminale nts = new NonTerminale("S");
+		NonTerminale nta = new NonTerminale("A");
+		NonTerminale ntb = new NonTerminale("B");
+		List<Carattere> parteDx = new LinkedList<Carattere>();
+		RegolaDiProduzione reg = new RegolaDiProduzione(nta, null);
+		// Aggiunta delle regole di produzinoe ad A
+		nta.addRegola(reg);
+		// Aggiunta delle regole di produzione a B
+		parteDx.add(nta);
+		RegolaDiProduzione reg1 = new RegolaDiProduzione(ntb, parteDx);
+		ntb.addRegola(reg1);
+		// Aggiunta delle regole di produzione a S
+		parteDx.clear();
+		parteDx.add(nta);
+		parteDx.add(ntb);
+		RegolaDiProduzione reg2 = new RegolaDiProduzione(nts, parteDx);
+		nts.addRegola(reg2);
+		// Entro in questo IF: if(rdp.indice+1<rdp.parteDX.size())
+		try {
+			s.aggiungiCore(reg2);
+			aggiunta = true;
+		} catch (ErroreSemantico e) {}
+		assertTrue(aggiunta);
+	}
+	
+	@Test
+	void aggiuntaCoreNullaSeguitiPadre() {
+		// Condizioni tutte rispettate
+		boolean aggiunta = false;
+		Stato s = new Stato();
+		NonTerminale nts = new NonTerminale("S");
+		NonTerminale nta = new NonTerminale("A");
+		List<Carattere> parteDx = new LinkedList<Carattere>();
+		// Aggiunta delle regole ad A
+		RegolaDiProduzione reg1 = new RegolaDiProduzione(nta,null);
+		reg1.calcolaAnnullabilita();
+		nta.addRegola(reg1);
+		nta.calcolaAnnullabile();
+		// Aggiunta delle regole a S
+		parteDx.clear();
+		parteDx.add(nta);
+		RegolaDiProduzione reg3 = new RegolaDiProduzione(nts, parteDx);
+		reg3.addSeguito("a");
+		reg3.addSeguito("b");
+		nts.addRegola(reg3);
+		try {
+			s.aggiungiCore(reg3);
+			aggiunta = true;
+		} catch (ErroreSemantico e) {}
+		assertTrue(aggiunta);
+		System.out.println(s.toString());
 	}
 
 }
