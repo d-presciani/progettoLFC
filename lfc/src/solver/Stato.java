@@ -148,11 +148,9 @@ public class Stato {
 		if(regolaPadre.indice+1<regolaPadre.parteDX.size()) {
 			int i = 0;						
 			do{
-				if(regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())!=null) {
-					for(String seg : regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())) {
-						if(!regolaTemp.seguiti.contains(seg)) {
-							regolaTemp.seguiti.add(seg);
-						}
+				for(String seg : regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())) {
+					if(!regolaTemp.seguiti.contains(seg)) {
+						regolaTemp.seguiti.add(seg);
 					}
 				}
 				i++;
@@ -178,24 +176,7 @@ public class Stato {
 			}
 		}
 		
-		// Cerco se la regola è già presente nei completamenti
-		boolean regPresente = false;
-		for(RegolaDiProduzione reg: regoleCompletamenti) {
-			if(reg.parteSX.lettera.equals(regolaTemp.parteSX.lettera) && reg.parteDX.toString().equals(regolaTemp.parteDX.toString()) && reg.indice == regolaTemp.indice) {
-				for(String seguito : regolaTemp.seguiti) {
-					if(!reg.seguiti.contains(seguito)) {
-						reg.seguiti.add(seguito);
-					}
-				}
-				regPresente = true;
-				break;
-			}
-		}
-		if(!regPresente) {
-			regoleCompletamenti.add(regolaTemp); // Una volta aggiunti i seguiti agiungo la regola alle regole di completamento
-		}
-		
-		
+		regoleCompletamenti.add(regolaTemp); // Una volta aggiunti i seguiti agiungo la regola alle regole di completamento
 		
 	}
 	

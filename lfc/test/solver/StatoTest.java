@@ -246,7 +246,6 @@ class StatoTest {
 	
 	@Test
 	void aggiuntaConCompPres() {
-		// Condizioni tutte rispettate
 		boolean aggiunta = false;
 		Stato s = new Stato();
 		NonTerminale nts = new NonTerminale("S");
@@ -370,24 +369,77 @@ class StatoTest {
 		Stato s = new Stato();
 		NonTerminale nts = new NonTerminale("S");
 		NonTerminale nta = new NonTerminale("A");
+		NonTerminale ntb = new NonTerminale("B");
+		NonTerminale ntc = new NonTerminale("C");
+		NonTerminale ntd = new NonTerminale("D");
+		NonTerminale nte = new NonTerminale("E");
 		Terminale ta = new Terminale("a");
+		Terminale tb = new Terminale("b");
 		List<Carattere> parteDx = new LinkedList<Carattere>();
+		RegolaDiProduzione reg7 = new RegolaDiProduzione(nte, parteDx);
+		reg7.calcolaAnnullabilita();
+		nte.addRegola(reg7);
+		nte.calcolaAnnullabile();
+		RegolaDiProduzione reg4 = new RegolaDiProduzione(ntd, parteDx);
+		reg4.calcolaAnnullabilita();
+		reg4.addSeguito("b");
+		ntd.addRegola(reg4);
+		ntd.calcolaAnnullabile();
+		parteDx.add(ntd);
+		parteDx.add(nte);
+		RegolaDiProduzione reg5 = new RegolaDiProduzione(ntc, parteDx);
+		reg5.calcolaAnnullabilita();
+		reg5.addSeguito("c");
+		ntc.addRegola(reg5);
+		parteDx.add(tb);
+		RegolaDiProduzione reg = new RegolaDiProduzione(ntc, parteDx);
+		reg.calcolaAnnullabilita();
+		reg.addSeguito("b");
+		ntc.addRegola(reg);
+		ntc.calcolaAnnullabile();
+		parteDx.clear();
+		parteDx.add(ntc);
+		parteDx.add(ntd);
+		parteDx.add(tb);
 		parteDx.add(ta);
-		nta.addRegola(new RegolaDiProduzione(nta, parteDx));
+		RegolaDiProduzione reg1 = new RegolaDiProduzione(ntb, parteDx);
+		reg1.calcolaAnnullabilita();
+		reg1.addSeguito("f");
+		ntb.addRegola(reg1);
+		ntb.calcolaAnnullabile();
+		parteDx.clear();
+		parteDx.add(ntb);
+		RegolaDiProduzione reg6 = new RegolaDiProduzione(nta, parteDx);
+		reg6.calcolaAnnullabilita();
+		nta.addRegola(reg6);
+		parteDx.clear();
+		parteDx.add(ntb);
+		parteDx.add(ta);
+		RegolaDiProduzione reg2 = new RegolaDiProduzione(nta, parteDx);
+		reg2.calcolaAnnullabilita();
+		nta.addRegola(reg2);
+		parteDx.clear();
+		parteDx.add(ntb);
+		parteDx.add(ntd);
+		parteDx.add(nte);
+		RegolaDiProduzione reg8 = new RegolaDiProduzione(nta, parteDx);
+		reg8.calcolaAnnullabilita();
+		nta.addRegola(reg8);
+		nta.calcolaAnnullabile();
 		parteDx.clear();
 		parteDx.add(nta);
-		RegolaDiProduzione reg1 = new RegolaDiProduzione(nts, parteDx);
-		nts.addRegola(reg1);
+		RegolaDiProduzione reg3 = new RegolaDiProduzione(nts, parteDx);
+		reg3.calcolaAnnullabilita();
+		reg3.addSeguito("d");
+		reg3.addSeguito("f");
+		nts.addRegola(reg3);
+		nts.calcolaAnnullabile();
 		try {
-			s.aggiungiCore(reg1);
+			s.aggiungiCore(reg3);
 			aggiunta = true;
 		} catch (ErroreSemantico e) {}
 		assertTrue(aggiunta);
-		System.out.println(s.toString());
-		nts.stampaRegole();
-		nta.stampaRegole();
-		System.out.println("A annullabile: " + nta.isAnnullabile());
-		System.out.println("S annullabile: " + nts.isAnnullabile());
 	}
+
 
 }
