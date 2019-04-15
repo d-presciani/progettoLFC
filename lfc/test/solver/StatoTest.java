@@ -140,15 +140,6 @@ class StatoTest {
 			aggiunta = true;
 		} catch (ErroreSemantico e) {}
 		assertTrue(aggiunta);
-		/*System.out.println(s.toString());
-		nts.stampaRegole();
-		nta.stampaRegole();
-		ntb.stampaRegole();
-		ntc.stampaRegole();
-		System.out.println("A annullabile: " + nta.isAnnullabile());
-		System.out.println("B annullabile: " + ntb.isAnnullabile());
-		System.out.println("C annullabile: " + ntc.isAnnullabile());
-		System.out.println("S annullabile: " + nts.isAnnullabile());*/
 	}
 	
 	@Test
@@ -251,7 +242,152 @@ class StatoTest {
 			aggiunta = true;
 		} catch (ErroreSemantico e) {}
 		assertTrue(aggiunta);
+	}
+	
+	@Test
+	void aggiuntaConCompPres() {
+		// Condizioni tutte rispettate
+		boolean aggiunta = false;
+		Stato s = new Stato();
+		NonTerminale nts = new NonTerminale("S");
+		NonTerminale nta = new NonTerminale("A");
+		NonTerminale ntb = new NonTerminale("B");
+		Terminale ta = new Terminale("a");
+		Terminale tb = new Terminale("b");
+		List<Carattere> parteDx = new LinkedList<Carattere>();
+		parteDx.add(ta);
+		RegolaDiProduzione reg1 = new RegolaDiProduzione(nta,parteDx);
+		nta.addRegola(reg1);
+		parteDx.clear();
+		parteDx.add(nta);
+		RegolaDiProduzione reg = new RegolaDiProduzione(nts, parteDx);
+		reg.addSeguito("a");
+		reg.addSeguito("b");
+		reg.addSeguito("c");
+		nts.addRegola(reg);
+		// AGGIUNTA DI REGOLE DI COMPLETAMENTO
+		parteDx.clear();
+		parteDx.add(ta);
+		s.regoleCompletamenti.add(new RegolaDiProduzione(ntb, parteDx));
+		RegolaDiProduzione reg2 = new RegolaDiProduzione(nta, parteDx);
+		reg2.addSeguito("a");
+		s.regoleCompletamenti.add(reg2);
+		parteDx.clear();
+		parteDx.add(tb);
+		s.regoleCompletamenti.add(new RegolaDiProduzione(nta, parteDx));
+		try {
+			s.aggiungiCore(reg);
+			aggiunta = true;
+		} catch (ErroreSemantico e) {}
+		assertTrue(aggiunta);
+	}
+	
+	@Test
+	void espansioneDaComp() {
+		// Condizioni tutte rispettate
+		boolean aggiunta = false;
+		Stato s = new Stato();
+		NonTerminale nts = new NonTerminale("S");
+		NonTerminale nta = new NonTerminale("A");
+		NonTerminale ntb = new NonTerminale("B");
+		Terminale ta = new Terminale("a");
+		Terminale tb = new Terminale("b");
+		Terminale tc = new Terminale("c");
+		List<Carattere> parteDx = new LinkedList<Carattere>();
+		parteDx.add(tb);
+		ntb.addRegola(new RegolaDiProduzione(ntb, parteDx));
+		parteDx.clear();
+		parteDx.add(tc);
+		ntb.addRegola(new RegolaDiProduzione(ntb, parteDx));
+		parteDx.clear();
+		parteDx.add(ntb);
+		parteDx.add(ta);
+		nta.addRegola(new RegolaDiProduzione(nta,parteDx));
+		parteDx.clear();
+		parteDx.add(nta);
+		RegolaDiProduzione reg = new RegolaDiProduzione(nts, parteDx);
+		reg.addSeguito("a");
+		reg.addSeguito("b");
+		reg.addSeguito("c");
+		nts.addRegola(reg);
+		// AGGIUNTA DI REGOLE DI COMPLETAMENTO
+		parteDx.clear();
+		parteDx.add(ta);
+		s.regoleCompletamenti.add(new RegolaDiProduzione(nta, parteDx));
+		s.regoleCompletamenti.add(new RegolaDiProduzione(ntb, parteDx));
+		parteDx.clear();
+		parteDx.add(tb);
+		RegolaDiProduzione reg1 = new RegolaDiProduzione(ntb, parteDx);
+		reg1.addSeguito("a");
+		s.regoleCompletamenti.add(reg1);
+		try {
+			s.aggiungiCore(reg);
+			aggiunta = true;
+		} catch (ErroreSemantico e) {}
+		assertTrue(aggiunta);
+	}
+	
+	@Test
+	void ricalcoloInizi() {
+		// Condizioni tutte rispettate
+		boolean aggiunta = false;
+		Stato s = new Stato();
+		NonTerminale nts = new NonTerminale("S");
+		NonTerminale nta = new NonTerminale("A");
+		NonTerminale ntb = new NonTerminale("B");
+		Terminale ta = new Terminale("a");
+		List<Carattere> parteDx = new LinkedList<Carattere>();
+		parteDx.add(ntb);
+		parteDx.add(ta);
+		nta.addRegola(new RegolaDiProduzione(nta, parteDx));
+		parteDx.clear();
+		nta.addRegola(new RegolaDiProduzione(nta, parteDx));
+		parteDx.add(ta);
+		ntb.addRegola(new RegolaDiProduzione(ntb, parteDx));
+		parteDx.clear();
+		parteDx.add(nta);
+		RegolaDiProduzione reg1 = new RegolaDiProduzione(nts, parteDx);
+		reg1.addSeguito("b");
+		reg1.addSeguito("c");
+		nts.addRegola(reg1);
+		parteDx.clear();
+		parteDx.add(nta);
+		RegolaDiProduzione reg = new RegolaDiProduzione(nta,parteDx);
+		reg.addSeguito("a");
+		reg.addSeguito("b");
+		s.regoleCompletamenti.add(reg);
+		try {
+			s.aggiungiCore(reg1);
+			aggiunta = true;
+		} catch (ErroreSemantico e) {}
+		assertTrue(aggiunta);
+	}
+	
+	@Test
+	void aggiuntaComp() {
+		// Condizioni tutte rispettate
+		boolean aggiunta = false;
+		Stato s = new Stato();
+		NonTerminale nts = new NonTerminale("S");
+		NonTerminale nta = new NonTerminale("A");
+		Terminale ta = new Terminale("a");
+		List<Carattere> parteDx = new LinkedList<Carattere>();
+		parteDx.add(ta);
+		nta.addRegola(new RegolaDiProduzione(nta, parteDx));
+		parteDx.clear();
+		parteDx.add(nta);
+		RegolaDiProduzione reg1 = new RegolaDiProduzione(nts, parteDx);
+		nts.addRegola(reg1);
+		try {
+			s.aggiungiCore(reg1);
+			aggiunta = true;
+		} catch (ErroreSemantico e) {}
+		assertTrue(aggiunta);
 		System.out.println(s.toString());
+		nts.stampaRegole();
+		nta.stampaRegole();
+		System.out.println("A annullabile: " + nta.isAnnullabile());
+		System.out.println("S annullabile: " + nts.isAnnullabile());
 	}
 
 }
