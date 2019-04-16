@@ -95,7 +95,6 @@ public class Stato {
 									break;
 								}
 							}
-							// TODO: Controllare da qui per la funzione privata di aggiunta completamento
 							if(!trovato) { // Se non è ancor astata inserita inserisco la nuova regola
 								this.aggiungiCompletamento(nuoveRegole, reg);
 							}
@@ -206,7 +205,7 @@ public class Stato {
 						// Scorro tutte le regole core per vedere se devo muovere lo stesso carattere
 						for(int j = i+1; j<regoleCore.size(); j++) {	
 							// Controllo se il puntino della i-esima regola core e della j-esima regola core punta alla stessa lettera
-							if(regoleCore.get(j).parteDX.size()!=regoleCore.get(j).indice && regoleCore.get(j).parteDX.size()!=0 && regoleCore.get(i).parteDX.get(regoleCore.get(i).indice).getLettera().equals(regoleCore.get(j).parteDX.get(regoleCore.get(j).indice).getLettera())) {
+							if(regoleCore.get(j).parteDX.size()!=regoleCore.get(j).indice && regoleCore.get(i).parteDX.get(regoleCore.get(i).indice).getLettera().equals(regoleCore.get(j).parteDX.get(regoleCore.get(j).indice).getLettera())) {
 								listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCore.get(j)));
 							}
 						}
@@ -214,7 +213,7 @@ public class Stato {
 						// Scorro tutte le regole completamento per vedere se devo muovere lo stesso carattere
 						for(int j = 0; j<regoleCompletamenti.size(); j++) {	
 							// Controllo se il puntino della i-esima regola core e della j-esima regola completamento punta alla stessa lettera
-							if(regoleCompletamenti.get(j).parteDX.size()!=regoleCompletamenti.get(j).indice && regoleCompletamenti.get(j).parteDX.size()!=0 && regoleCore.get(i).parteDX.get(regoleCore.get(i).indice).getLettera().equals(regoleCompletamenti.get(j).parteDX.get(regoleCompletamenti.get(j).indice).getLettera())) {
+							if(regoleCompletamenti.get(j).parteDX.size()!=regoleCompletamenti.get(j).indice && regoleCore.get(i).parteDX.get(regoleCore.get(i).indice).getLettera().equals(regoleCompletamenti.get(j).parteDX.get(regoleCompletamenti.get(j).indice).getLettera())) {
 								listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCompletamenti.get(j)));
 							}
 						}
@@ -285,7 +284,7 @@ public class Stato {
 						// Scorro tutte le regole completamento per vedere se devo muovere lo stesso carattere
 						for(int j = i+1; j<regoleCompletamenti.size(); j++) {	
 							// Controllo se il puntino della i-esima regola core e della j-esima regola completamento punta alla stessa lettera
-							if(regoleCompletamenti.get(j).parteDX.size()!=regoleCompletamenti.get(j).indice && regoleCompletamenti.get(j).parteDX.size()!=0 && regoleCompletamenti.get(i).parteDX.get(regoleCompletamenti.get(i).indice).getLettera().equals(regoleCompletamenti.get(j).parteDX.get(regoleCompletamenti.get(j).indice).getLettera())) {
+							if(regoleCompletamenti.get(j).parteDX.size()!=regoleCompletamenti.get(j).indice && regoleCompletamenti.get(i).parteDX.get(regoleCompletamenti.get(i).indice).getLettera().equals(regoleCompletamenti.get(j).parteDX.get(regoleCompletamenti.get(j).indice).getLettera())) {
 								listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCompletamenti.get(j)));
 							}
 						}						
