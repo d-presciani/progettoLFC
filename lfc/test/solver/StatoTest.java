@@ -724,8 +724,6 @@ class StatoTest {
 	
 	@Test
 	void controlloLR1RiduzioneCore() {
-		// Condizioni tutte rispettate
-		boolean espanso = false;
 		Stato s = new Stato();
 		NonTerminale nts = new NonTerminale("S");
 		NonTerminale nta = new NonTerminale("A");
@@ -756,15 +754,12 @@ class StatoTest {
 			LinkedList<Stato> listaStati = new LinkedList<Stato>();
 			LinkedList<String> listaTransizioni = new LinkedList<String>();
 			s.espandiStato(listaStati, listaTransizioni);
-			espanso = true;
 		} catch (ErroreSemantico e) {}
 		assertTrue(s.erroreLR1);
 	}
 	
 	@Test
 	void controlloLR1RiduzioneCompletamenti() {
-		// Condizioni tutte rispettate
-		boolean espanso = false;
 		Stato s = new Stato();
 		NonTerminale nts = new NonTerminale("S");
 		NonTerminale nta = new NonTerminale("A");
@@ -808,7 +803,6 @@ class StatoTest {
 			LinkedList<Stato> listaStati = new LinkedList<Stato>();
 			LinkedList<String> listaTransizioni = new LinkedList<String>();
 			s.espandiStato(listaStati, listaTransizioni);
-			espanso = true;
 		} catch (ErroreSemantico e) {}
 		assertTrue(s.erroreLR1);
 	}

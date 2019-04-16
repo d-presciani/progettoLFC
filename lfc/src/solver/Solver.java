@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class Solver {
 	
 	
-	public void solve(LinkedList<NonTerminale> listaNT, LinkedList<RegolaDiProduzione> listaReg) {
+	public boolean solve(LinkedList<NonTerminale> listaNT, LinkedList<RegolaDiProduzione> listaReg) {
 		
 		LinkedList<Stato> listaStati = new LinkedList<Stato>();
 		LinkedList<String> listaTransizioni = new LinkedList<String>();
@@ -66,6 +66,7 @@ public class Solver {
 		// Stampo risultato controllo
 		if(isLR1) {
 			System.out.println("\nLa grammatica inserita è LR(1)");
+			return true;
 		} else {
 			System.out.println("\nLa grammagita inserita non è LR(1), gli stati che contengono conflitti sono:\n");
 			for(Stato stt : listaStati) {
@@ -73,6 +74,7 @@ public class Solver {
 					System.out.println("S"+stt.numeroStato);
 				}
 			}
+			return false;
 		}
 		
 	}
