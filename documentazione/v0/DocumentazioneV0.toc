@@ -11,3 +11,11 @@
 \contentsline {subsection}{\numberline {3.2}Errori lessicali}{4}
 \contentsline {subsection}{\numberline {3.3}Errori sintattici}{5}
 \contentsline {subsection}{\numberline {3.4}Errori semantici}{5}
+\contentsline {section}{\numberline {4.}Casi d'uso}{6}
+\contentsline {subsection}{\numberline {4.1}UC1 - Analisi di una grammatica}{6}
+\contentsline {section}{\numberline {5.}Struttura del programma}{7}
+\contentsline {section}{\numberline {6.}Programma di testing}{8}
+\contentsline {section}{\numberline {7.}Strumenti utilizzati}{9}
+\contentsline {subsection}{\numberline {7.1}Controllo di versione}{9}
+\contentsline {subsection}{\numberline {7.2}Strumenti di sviluppo}{9}
+\contentsline {subsection}{\numberline {7.3}Strumenti di testing}{9}
