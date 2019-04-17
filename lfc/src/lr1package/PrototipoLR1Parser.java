@@ -1,6 +1,6 @@
 // $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-20 16:54:28
 
-  package lr1Package;
+  package lr1package;
   import myPackage.*;
   import solver.*;
   import java.util.LinkedList;

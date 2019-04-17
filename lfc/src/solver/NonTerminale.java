@@ -82,7 +82,7 @@ public class NonTerminale extends Carattere{
 	
 	public void stampaRegole() {
 		for(RegolaDiProduzione reg : rdp) {
-			System.out.println(reg.toString());
+			System.out.println(reg.toString()); //NOPMD
 		}
 	}
 
