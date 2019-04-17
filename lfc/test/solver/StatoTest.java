@@ -903,11 +903,9 @@ class StatoTest {
 			LinkedList<String> listaTransizioni = new LinkedList<String>();
 			s.espandiStato(listaStati, listaTransizioni);
 		} catch (ErroreSemantico e) {}
-		System.out.println(s);
 		String check = "";
 		check += "\nStato: S42\nRegole Core:\n";
 		check += "S->.b {[b]} \n";
-		System.out.println(check);
 		assertEquals(check, s.toString());
 	}
 }
