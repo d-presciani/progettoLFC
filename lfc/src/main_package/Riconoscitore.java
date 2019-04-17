@@ -26,13 +26,13 @@ public final class Riconoscitore  {
 		dialog.setFile("*.txt");
 		dialog.setVisible(true);
 		final String file = dialog.getDirectory() + dialog.getFile();
+		dialog.dispose();
 		if(dialog.getFile() == null) {
-			System.out.println("Nessun file selezionato, il programma verrà chiuso."); //NOPMD
+			System.out.println("Nessun file selezionato, premere INVIO per chiudere il programma."); //NOPMD
 			inputUtente.hasNextLine();
 			inputUtente.close();
 		} else {
-			dialog.dispose();
-			
+					
 			CommonTokenStream tokens;
 		
 		  	boolean errore = false;

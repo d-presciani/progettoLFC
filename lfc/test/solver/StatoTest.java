@@ -868,7 +868,7 @@ class StatoTest {
 			s.espandiStato(listaStati, listaTransizioni);
 		} catch (ErroreSemantico e) {}
 		String check = "";
-		check += "\nStato: S3\nRegole Core:\n";
+		check += "\nStato: S10\nRegole Core:\n";
 		check += "S->.A {[b]} \n";
 		check += "-----\nRegole completamento:\n";
 		check += "A->.ab {[b]} \n";
@@ -904,7 +904,7 @@ class StatoTest {
 			s.espandiStato(listaStati, listaTransizioni);
 		} catch (ErroreSemantico e) {}
 		String check = "";
-		check += "\nStato: S42\nRegole Core:\n";
+		check += "\nStato: S49\nRegole Core:\n";
 		check += "S->.b {[b]} \n";
 		assertEquals(check, s.toString());
 	}
