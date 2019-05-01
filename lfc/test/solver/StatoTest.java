@@ -23,38 +23,31 @@ class StatoTest {
 	@Test
 	void aggiuntaRegolaCore() {
 		// rdp.parteDX.get(rdp.indice).getRegole()!=null == FALSE
-		boolean aggiunta = false;
 		Stato s = new Stato();
 		NonTerminale nt = new NonTerminale("S");
 		Terminale dx1 = new Terminale("a");
 		List<Carattere> parteDx = new LinkedList<Carattere>();
 		parteDx.add(dx1);
 		RegolaDiProduzione reg = new RegolaDiProduzione(nt, parteDx);
-		try {
-			s.aggiungiCore(reg);
-			aggiunta = true;
-		} catch (ErroreSemantico e) {}
-		assertTrue(aggiunta);
+		int nRegole = s.regoleCore.size();
+		s.aggiungiCore(reg);
+		assertEquals(nRegole + 1, s.regoleCore.size());
 	}
 	
 	@Test
 	void aggiuntaRegolaCoreNulla() {
 		// rdp.parteDX.size()>0 == FALSE
-		boolean aggiunta = false;
 		Stato s = new Stato();
 		NonTerminale nt = new NonTerminale("S");
 		RegolaDiProduzione reg = new RegolaDiProduzione(nt, null);
-		try {
-			s.aggiungiCore(reg);
-			aggiunta = true;
-		} catch (ErroreSemantico e) {}
-		assertTrue(aggiunta);
+		int nRegole = s.regoleCore.size();
+		s.aggiungiCore(reg);
+		assertEquals(nRegole + 1, s.regoleCore.size());
 	}
 	
 	@Test
 	void aggiuntaRegolaCoreIndice() {
 		// rdp.parteDX.size()>rdp.indice == FALSE
-		boolean aggiunta = false;
 		Stato s = new Stato();
 		NonTerminale nt = new NonTerminale("S");
 		Terminale dx1 = new Terminale("a");
@@ -64,17 +57,14 @@ class StatoTest {
 		while(reg.indice < reg.parteDX.size()) {
 			reg.avanzaPuntino();
 		}
-		try {
-			s.aggiungiCore(reg);
-			aggiunta = true;
-		} catch (ErroreSemantico e) {}
-		assertTrue(aggiunta);
+		int nRegole = s.regoleCore.size();
+		s.aggiungiCore(reg);
+		assertEquals(nRegole + 1, s.regoleCore.size());
 	}
 	
 	@Test
 	void aggiuntaRegolaCoreNT() {
 		// Condizioni tutte rispettate
-		boolean aggiunta = false;
 		Stato s = new Stato();
 		NonTerminale nts = new NonTerminale("S");
 		Terminale ta = new Terminale("a");
@@ -87,17 +77,14 @@ class StatoTest {
 		parteDx.add(nta);
 		RegolaDiProduzione reg = new RegolaDiProduzione(nts, parteDx);
 		nts.addRegola(reg);
-		try {
-			s.aggiungiCore(reg);
-			aggiunta = true;
-		} catch (ErroreSemantico e) {}
-		assertTrue(aggiunta);
+		int nRegole = s.regoleCore.size();
+		s.aggiungiCore(reg);
+		assertEquals(nRegole + 1, s.regoleCore.size());
 	}
 	
 	@Test
 	void aggiuntaCoreCarattereSingolo() {
 		// Condizioni tutte rispettate
-		boolean aggiunta = false;
 		Stato s = new Stato();
 		// Creazione dei caratteri
 		NonTerminale nts = new NonTerminale("S");
@@ -135,17 +122,14 @@ class StatoTest {
 		nts.addRegola(reg4);
 		nts.calcolaAnnullabile();
 		// Entro in questo IF: if(rdp.indice+1<rdp.parteDX.size())
-		try {
-			s.aggiungiCore(reg4);
-			aggiunta = true;
-		} catch (ErroreSemantico e) {}
-		assertTrue(aggiunta);
+		int nRegole = s.regoleCore.size();
+		s.aggiungiCore(reg);
+		assertEquals(nRegole + 1, s.regoleCore.size());
 	}
 	
 	@Test
 	void aggiuntaCoreAnnullabileSeguitiPadre() {
 		// Condizioni tutte rispettate
-		boolean aggiunta = false;
 		Stato s = new Stato();
 		// Creazione dei caratteri
 		NonTerminale nts = new NonTerminale("S");
@@ -179,17 +163,14 @@ class StatoTest {
 		nts.addRegola(reg4);
 		nts.calcolaAnnullabile();
 		// Entro in questo IF: if(rdp.indice+1<rdp.parteDX.size())
-		try {
-			s.aggiungiCore(reg4);
-			aggiunta = true;
-		} catch (ErroreSemantico e) {}
-		assertTrue(aggiunta);
+		int nRegole = s.regoleCore.size();
+		s.aggiungiCore(reg);
+		assertEquals(nRegole + 1, s.regoleCore.size());
 	}
 	
 	@Test
 	void aggiuntaCoreNoInizi() {
 		// Condizioni tutte rispettate
-		boolean aggiunta = false;
 		Stato s = new Stato();
 		// Creazione dei caratteri
 		NonTerminale nts = new NonTerminale("S");
@@ -210,17 +191,14 @@ class StatoTest {
 		RegolaDiProduzione reg2 = new RegolaDiProduzione(nts, parteDx);
 		nts.addRegola(reg2);
 		// Entro in questo IF: if(rdp.indice+1<rdp.parteDX.size())
-		try {
-			s.aggiungiCore(reg2);
-			aggiunta = true;
-		} catch (ErroreSemantico e) {}
-		assertTrue(aggiunta);
+		int nRegole = s.regoleCore.size();
+		s.aggiungiCore(reg);
+		assertEquals(nRegole + 1, s.regoleCore.size());
 	}
 	
 	@Test
 	void aggiuntaCoreNullaSeguitiPadre() {
 		// Condizioni tutte rispettate
-		boolean aggiunta = false;
 		Stato s = new Stato();
 		NonTerminale nts = new NonTerminale("S");
 		NonTerminale nta = new NonTerminale("A");
@@ -237,16 +215,13 @@ class StatoTest {
 		reg3.addSeguito("a");
 		reg3.addSeguito("b");
 		nts.addRegola(reg3);
-		try {
-			s.aggiungiCore(reg3);
-			aggiunta = true;
-		} catch (ErroreSemantico e) {}
-		assertTrue(aggiunta);
+		int nRegole = s.regoleCore.size();
+		s.aggiungiCore(reg3);
+		assertEquals(nRegole + 1, s.regoleCore.size());
 	}
 	
 	@Test
 	void aggiuntaConCompPres() {
-		boolean aggiunta = false;
 		Stato s = new Stato();
 		NonTerminale nts = new NonTerminale("S");
 		NonTerminale nta = new NonTerminale("A");
@@ -274,17 +249,14 @@ class StatoTest {
 		parteDx.clear();
 		parteDx.add(tb);
 		s.regoleCompletamenti.add(new RegolaDiProduzione(nta, parteDx));
-		try {
-			s.aggiungiCore(reg);
-			aggiunta = true;
-		} catch (ErroreSemantico e) {}
-		assertTrue(aggiunta);
+		int nRegole = s.regoleCore.size();
+		s.aggiungiCore(reg);
+		assertEquals(nRegole + 1, s.regoleCore.size());
 	}
 	
 	@Test
 	void espansioneDaComp() {
-		// Condizioni tutte rispettate
-		boolean aggiunta = false;
+		// Condizioni tutte rispettatey
 		Stato s = new Stato();
 		NonTerminale nts = new NonTerminale("S");
 		NonTerminale nta = new NonTerminale("A");
@@ -319,17 +291,14 @@ class StatoTest {
 		RegolaDiProduzione reg1 = new RegolaDiProduzione(ntb, parteDx);
 		reg1.addSeguito("a");
 		s.regoleCompletamenti.add(reg1);
-		try {
-			s.aggiungiCore(reg);
-			aggiunta = true;
-		} catch (ErroreSemantico e) {}
-		assertTrue(aggiunta);
+		int nRegole = s.regoleCore.size();
+		s.aggiungiCore(reg);
+		assertEquals(nRegole + 1, s.regoleCore.size());
 	}
 	
 	@Test
 	void ricalcoloInizi() {
 		// Condizioni tutte rispettate
-		boolean aggiunta = false;
 		Stato s = new Stato();
 		NonTerminale nts = new NonTerminale("S");
 		NonTerminale nta = new NonTerminale("A");
@@ -355,17 +324,14 @@ class StatoTest {
 		reg.addSeguito("a");
 		reg.addSeguito("b");
 		s.regoleCompletamenti.add(reg);
-		try {
-			s.aggiungiCore(reg1);
-			aggiunta = true;
-		} catch (ErroreSemantico e) {}
-		assertTrue(aggiunta);
+		int nRegole = s.regoleCore.size();
+		s.aggiungiCore(reg);
+		assertEquals(nRegole + 1, s.regoleCore.size());
 	}
 	
 	@Test
 	void aggiuntaCompletamenti() {
 		// Condizioni tutte rispettate
-		boolean aggiunta = false;
 		Stato s = new Stato();
 		NonTerminale nts = new NonTerminale("S");
 		NonTerminale nta = new NonTerminale("A");
@@ -434,17 +400,14 @@ class StatoTest {
 		reg3.addSeguito("f");
 		nts.addRegola(reg3);
 		nts.calcolaAnnullabile();
-		try {
-			s.aggiungiCore(reg3);
-			aggiunta = true;
-		} catch (ErroreSemantico e) {}
-		assertTrue(aggiunta);
+		int nRegole = s.regoleCore.size();
+		s.aggiungiCore(reg);
+		assertEquals(nRegole + 1, s.regoleCore.size());
 	}
 	
 	@Test
 	void espansioneStatoCore() {
 		// Condizioni tutte rispettate
-		boolean espanso = false;
 		Stato s = new Stato();
 		NonTerminale nts = new NonTerminale("S");
 		NonTerminale nta = new NonTerminale("A");
@@ -497,24 +460,21 @@ class StatoTest {
 		reg6.calcolaAnnullabilita();
 		ntc.addRegola(reg6);
 		ntc.calcolaAnnullabile();
-		try {
-			s.aggiungiCore(reg3);
-			s.aggiungiCore(reg);
-			s.aggiungiCore(reg4);
-			s.aggiungiCore(reg5);
-			s.regoleCore.get(1).avanzaPuntino();
-			LinkedList<Stato> listaStati = new LinkedList<Stato>();
-			LinkedList<String> listaTransizioni = new LinkedList<String>();
-			s.espandiStato(listaStati, listaTransizioni);
-			espanso = true;
-		} catch (ErroreSemantico e) {}
-		assertTrue(espanso);
+		s.aggiungiCore(reg3);
+		s.aggiungiCore(reg);
+		s.aggiungiCore(reg4);
+		s.aggiungiCore(reg5);
+		s.regoleCore.get(1).avanzaPuntino();
+		LinkedList<Stato> listaStati = new LinkedList<Stato>();
+		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		int nStati = listaStati.size();
+		s.espandiStato(listaStati, listaTransizioni);
+		assertEquals(nStati + 5, listaStati.size());
 	}
 	
 	@Test
 	void espansioneStatoCoreDuplicati() {
 		// Condizioni tutte rispettate
-		boolean espanso = false;
 		Stato s = new Stato();
 		NonTerminale nts = new NonTerminale("S");
 		NonTerminale nta = new NonTerminale("A");
@@ -565,7 +525,6 @@ class StatoTest {
 		Stato s1 = new Stato();
 		Stato s2 = new Stato();
 		Stato s3 = new Stato();
-		try {
 			s.aggiungiCore(reg3);
 			s.aggiungiCore(reg4);
 			s.aggiungiCore(reg5);
@@ -581,16 +540,14 @@ class StatoTest {
 			listaStati.add(s1);
 			listaStati.add(s2);
 			listaStati.add(s3);
+			int nStati = listaStati.size();
 			s.espandiStato(listaStati, listaTransizioni);
-			espanso = true;
-		} catch (ErroreSemantico e) {}
-		assertTrue(espanso);
+			assertEquals(nStati + 3, listaStati.size());
 	}
 	
 	@Test
 	void espansioneStatoCompletamento() {
 		// Condizioni tutte rispettate
-		boolean espanso = false;
 		Stato s = new Stato();
 		NonTerminale nts = new NonTerminale("S");
 		NonTerminale nta = new NonTerminale("A");
@@ -635,20 +592,17 @@ class StatoTest {
 		reg5.calcolaAnnullabilita();
 		ntc.addRegola(reg5);
 		ntc.calcolaAnnullabile();
-		try {
-			s.aggiungiCore(reg3);
-			LinkedList<Stato> listaStati = new LinkedList<Stato>();
-			LinkedList<String> listaTransizioni = new LinkedList<String>();
-			s.espandiStato(listaStati, listaTransizioni);
-			espanso = true;
-		} catch (ErroreSemantico e) {}
-		assertTrue(espanso);
+		s.aggiungiCore(reg3);
+		LinkedList<Stato> listaStati = new LinkedList<Stato>();
+		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		int nStati = listaStati.size();
+		s.espandiStato(listaStati, listaTransizioni);
+		assertEquals(nStati + 4, listaStati.size());
 	}
 	
 	@Test
 	void espansioneStatoCompletamentiDuplicati() {
 		// Condizioni tutte rispettate
-		boolean espanso = false;
 		Stato s = new Stato();
 		NonTerminale nts = new NonTerminale("S");
 		NonTerminale nta = new NonTerminale("A");
@@ -699,27 +653,25 @@ class StatoTest {
 		Stato s1 = new Stato();
 		Stato s2 = new Stato();
 		Stato s3 = new Stato();
-		try {
-			s.aggiungiCore(reg3);
-			s.aggiungiCore(reg4);
-			s.aggiungiCore(reg5);
-			reg3.avanzaPuntino();
-			reg4.avanzaPuntino();
-			s1.aggiungiCore(reg3);
-			s1.aggiungiCore(reg4);
-			s2.aggiungiCore(reg1);
-			reg2.avanzaPuntino();
-			reg2.addSeguito("b");
-			s3.aggiungiCore(reg2);
-			LinkedList<Stato> listaStati = new LinkedList<Stato>();
-			LinkedList<String> listaTransizioni = new LinkedList<String>();
-			listaStati.add(s1);
-			listaStati.add(s2);
-			listaStati.add(s3);
-			s.espandiStato(listaStati, listaTransizioni);
-			espanso = true;
-		} catch (ErroreSemantico e) {}
-		assertTrue(espanso);		
+		s.aggiungiCore(reg3);
+		s.aggiungiCore(reg4);
+		s.aggiungiCore(reg5);
+		reg3.avanzaPuntino();
+		reg4.avanzaPuntino();
+		s1.aggiungiCore(reg3);
+		s1.aggiungiCore(reg4);
+		s2.aggiungiCore(reg1);
+		reg2.avanzaPuntino();
+		reg2.addSeguito("b");
+		s3.aggiungiCore(reg2);
+		LinkedList<Stato> listaStati = new LinkedList<Stato>();
+		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		listaStati.add(s1);
+		listaStati.add(s2);
+		listaStati.add(s3);
+		int nStati = listaStati.size();
+		s.espandiStato(listaStati, listaTransizioni);
+		assertEquals(nStati + 2, listaStati.size());
 	}
 	
 	@Test
@@ -746,15 +698,13 @@ class StatoTest {
 		reg2.addSeguito("b");
 		nts.addRegola(reg2);
 		nts.calcolaAnnullabile();
-		try {
-			s.aggiungiCore(reg1);
-			s.aggiungiCore(reg);
-			s.aggiungiCore(reg2);
-			s.regoleCore.get(1).avanzaPuntino();
-			LinkedList<Stato> listaStati = new LinkedList<Stato>();
-			LinkedList<String> listaTransizioni = new LinkedList<String>();
-			s.espandiStato(listaStati, listaTransizioni);
-		} catch (ErroreSemantico e) {}
+		s.aggiungiCore(reg1);
+		s.aggiungiCore(reg);
+		s.aggiungiCore(reg2);
+		s.regoleCore.get(1).avanzaPuntino();
+		LinkedList<Stato> listaStati = new LinkedList<Stato>();
+		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		s.espandiStato(listaStati, listaTransizioni);
 		assertTrue(s.erroreLR1);
 	}
 	
@@ -797,20 +747,17 @@ class StatoTest {
 		reg4.calcolaAnnullabilita();
 		nta.addRegola(reg4);
 		nta.calcolaAnnullabile();
-		try {
-			s.aggiungiCore(reg3);
-			s.aggiungiCore(reg);
-			LinkedList<Stato> listaStati = new LinkedList<Stato>();
-			LinkedList<String> listaTransizioni = new LinkedList<String>();
-			s.espandiStato(listaStati, listaTransizioni);
-		} catch (ErroreSemantico e) {}
+		s.aggiungiCore(reg3);
+		s.aggiungiCore(reg);
+		LinkedList<Stato> listaStati = new LinkedList<Stato>();
+		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		s.espandiStato(listaStati, listaTransizioni);
 		assertTrue(s.erroreLR1);
 	}
 	
 	@Test
 	void controlloLR1Spostamento() {
 		// Condizioni tutte rispettate
-		boolean espanso = false;
 		Stato s = new Stato();
 		NonTerminale nts = new NonTerminale("S");
 		Terminale ta = new Terminale("a");
@@ -828,16 +775,13 @@ class StatoTest {
 		reg3.addSeguito("a");
 		nts.addRegola(reg3);
 		nts.calcolaAnnullabile();
-		try {
-			reg3.avanzaPuntino();
-			s.aggiungiCore(reg3);
-			s.aggiungiCore(reg);
-			LinkedList<Stato> listaStati = new LinkedList<Stato>();
-			LinkedList<String> listaTransizioni = new LinkedList<String>();
-			s.espandiStato(listaStati, listaTransizioni);
-			espanso = true;
-		} catch (ErroreSemantico e) {}
-		assertTrue(espanso);
+		reg3.avanzaPuntino();
+		s.aggiungiCore(reg3);
+		s.aggiungiCore(reg);
+		LinkedList<Stato> listaStati = new LinkedList<Stato>();
+		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		s.espandiStato(listaStati, listaTransizioni);
+		assertTrue(s.erroreLR1);
 	}
 	
 	@Test
@@ -861,14 +805,13 @@ class StatoTest {
 		reg1.calcolaAnnullabilita();
 		nta.addRegola(reg1);
 		nta.calcolaAnnullabile();
-		try {
-			s.aggiungiCore(reg);
-			LinkedList<Stato> listaStati = new LinkedList<Stato>();
-			LinkedList<String> listaTransizioni = new LinkedList<String>();
-			s.espandiStato(listaStati, listaTransizioni);
-		} catch (ErroreSemantico e) {}
+		s.aggiungiCore(reg);
+		LinkedList<Stato> listaStati = new LinkedList<Stato>();
+		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		int counterStato = Stato.counter - 1;
+		s.espandiStato(listaStati, listaTransizioni);
 		String check = "";
-		check += "\nStato: S10\nRegole Core:\n";
+		check += "\nStato: S" + counterStato +"\nRegole Core:\n";
 		check += "S->.A {[b]} \n";
 		check += "-----\nRegole completamento:\n";
 		check += "A->.ab {[b]} \n";
@@ -897,14 +840,13 @@ class StatoTest {
 		parteDx.clear();
 		parteDx.add(ta);
 		parteDx.add(tb);
-		try {
-			s.aggiungiCore(reg1);
-			LinkedList<Stato> listaStati = new LinkedList<Stato>();
-			LinkedList<String> listaTransizioni = new LinkedList<String>();
-			s.espandiStato(listaStati, listaTransizioni);
-		} catch (ErroreSemantico e) {}
+		s.aggiungiCore(reg1);
+		LinkedList<Stato> listaStati = new LinkedList<Stato>();
+		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		int counterStato = Stato.counter - 1;
+		s.espandiStato(listaStati, listaTransizioni);
 		String check = "";
-		check += "\nStato: S49\nRegole Core:\n";
+		check += "\nStato: S" + counterStato + "\nRegole Core:\n";
 		check += "S->.b {[b]} \n";
 		assertEquals(check, s.toString());
 	}

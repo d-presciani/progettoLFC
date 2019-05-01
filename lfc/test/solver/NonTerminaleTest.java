@@ -132,11 +132,7 @@ public class NonTerminaleTest {
 		reg.calcolaAnnullabilita();
 		nt.addRegola(reg);
 		List<String> inizi = new LinkedList<String>();
-		try {
-			inizi = nt.calcolaInizi(new LinkedList<RegolaDiProduzione>());
-		} catch (ErroreSemantico e) {
-			e.printStackTrace();
-		}
+		inizi = nt.calcolaInizi(new LinkedList<RegolaDiProduzione>());
 		List<String> iniziAttesi = new LinkedList<String>();
 		iniziAttesi.add("a");
 		assertEquals(iniziAttesi, inizi);
@@ -152,11 +148,7 @@ public class NonTerminaleTest {
 		nt.addRegola(reg);
 		nt.stampaRegole();
 		List<String> inizi = new LinkedList<String>();
-		try {
-			inizi = nt.calcolaInizi(new LinkedList<RegolaDiProduzione>());
-		} catch (ErroreSemantico e) {
-			e.printStackTrace();
-		}
+		inizi = nt.calcolaInizi(new LinkedList<RegolaDiProduzione>());
 		List<String> iniziAttesi = new LinkedList<String>();
 		assertEquals(iniziAttesi, inizi);
 	}
@@ -174,11 +166,7 @@ public class NonTerminaleTest {
 		reg.calcolaAnnullabilita();
 		nt.addRegola(reg);
 		List<String> inizi = new LinkedList<String>();
-		try {
-			inizi = nt.calcolaInizi(new LinkedList<RegolaDiProduzione>());
-		} catch (ErroreSemantico e) {
-			e.printStackTrace();
-		}
+		inizi = nt.calcolaInizi(new LinkedList<RegolaDiProduzione>());
 		List<String> iniziAttesi = new LinkedList<String>();
 		assertEquals(iniziAttesi, inizi);
 	}
@@ -203,11 +191,7 @@ public class NonTerminaleTest {
 		nt.addRegola(reg);
 		nt.calcolaAnnullabile();
 		List<String> inizi = new LinkedList<String>();
-		try {
-			inizi = nt.calcolaInizi(new LinkedList<RegolaDiProduzione>());
-		} catch (ErroreSemantico e) {
-			e.printStackTrace();
-		}
+		inizi = nt.calcolaInizi(new LinkedList<RegolaDiProduzione>());
 		List<String> iniziAttesi = new LinkedList<String>();
 		iniziAttesi.add("a");
 		assertEquals(iniziAttesi, inizi);
@@ -238,11 +222,7 @@ public class NonTerminaleTest {
 		reg.calcolaAnnullabilita();
 		nt.addRegola(reg);
 		List<String> inizi = new LinkedList<String>();
-		try {
-			inizi = nt.calcolaInizi(new LinkedList<RegolaDiProduzione>());
-		} catch (ErroreSemantico e) {
-			e.printStackTrace();
-		}
+		inizi = nt.calcolaInizi(new LinkedList<RegolaDiProduzione>());
 		List<String> iniziAttesi = new LinkedList<String>();
 		iniziAttesi.add("a");
 		assertEquals(iniziAttesi, inizi);

@@ -20,7 +20,7 @@ public class Stato {
 	}
 	
 	// Aggiunge una regola
-	public void aggiungiCore(RegolaDiProduzione rdp) throws ErroreSemantico {
+	public void aggiungiCore(RegolaDiProduzione rdp){
 		// Aggiungo la regola ricevuta alle regole core
 		regoleCore.add(new RegolaDiProduzione(rdp));
 		
@@ -140,7 +140,7 @@ public class Stato {
 	}
 
 	// Inserimento regola di completamento
-	private void aggiungiCompletamento(RegolaDiProduzione nuovaRdp, RegolaDiProduzione regolaPadre) throws ErroreSemantico {
+	private void aggiungiCompletamento(RegolaDiProduzione nuovaRdp, RegolaDiProduzione regolaPadre) {
 		// Inserimento seguiti sulle nuove regole
 		RegolaDiProduzione regolaTemp = new RegolaDiProduzione(nuovaRdp);
 		
@@ -182,7 +182,7 @@ public class Stato {
 	
 	// Funzione per generazione di nuovi stati
 	// TODO: Aggiungere caso che una regola di completamento porta ad aggiungre nuovi seguiti alle altre regole di completamento
-	public void espandiStato(LinkedList<Stato> listaStati, LinkedList<String> listaTransizioni) throws ErroreSemantico {
+	public void espandiStato(LinkedList<Stato> listaStati, LinkedList<String> listaTransizioni) {
 		LinkedList<String> caratteriParsati = new LinkedList<String>(); // Variabile utilizata per memorizzare i vari caratteri man mano li parso
 		
 		// Scorro tutte le regole core

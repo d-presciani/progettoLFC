@@ -22,24 +22,14 @@ public class Solver {
 		
 		//Creo il primo stato
 		Stato mom = new Stato();
-		try {
-			mom.aggiungiCore(listaReg.get(0));
-		} catch (ErroreSemantico e) {
-			System.err.println("ERRORE SEMANTICO! " + e.getMessage()); //NOPMD
-			System.exit(0);
-		}
+		mom.aggiungiCore(listaReg.get(0));
 		listaStati.add(mom);
 		
 		int i=0;
 		
 		// Espando tutti gli stati
 		while(i<listaStati.size()) {
-			try {
-				listaStati.get(i).espandiStato(listaStati, listaTransizioni);
-			} catch (ErroreSemantico e) {
-				System.err.println("ERRORE SEMANTICO!" + e.getMessage()); //NOPMD
-				System.exit(0);
-			}
+			listaStati.get(i).espandiStato(listaStati, listaTransizioni);
 			i++;
 		}
 		

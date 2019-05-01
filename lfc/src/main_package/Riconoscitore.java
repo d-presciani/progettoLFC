@@ -38,7 +38,7 @@ public final class Riconoscitore  {
 		  	boolean errore = false;
 		  	try {
 					System.out.println ("IDENTIFICAZIONE GRAMMATICHE LR(1)\n"); //NOPMD
-					PrototipoLR1Lexer lexer = new PrototipoLR1Lexer(new ANTLRReaderStream(new FileReader(file))); //NOPMD
+					PrototipoLR1Lexer lexer = new PrototipoLR1Lexer(new ANTLRReaderStream(new FileReader(file)));
 					tokens = new CommonTokenStream(lexer);
 			    parser = new PrototipoLR1Parser(tokens);
 		
