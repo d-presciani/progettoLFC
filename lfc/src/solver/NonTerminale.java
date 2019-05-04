@@ -15,7 +15,7 @@ public class NonTerminale extends Carattere{
 	}
 	
 	@Override
-	public List<String> calcolaInizi(LinkedList<RegolaDiProduzione> prevReg) throws ErroreSemantico{
+	public List<String> calcolaInizi(LinkedList<RegolaDiProduzione> prevReg){
 		LinkedList<RegolaDiProduzione> regole = prevReg;
 		List<String> inizi = new LinkedList<String>();
 		for (RegolaDiProduzione reg : rdp) {
@@ -82,7 +82,7 @@ public class NonTerminale extends Carattere{
 	
 	public void stampaRegole() {
 		for(RegolaDiProduzione reg : rdp) {
-			System.out.println(reg.toString());
+			System.out.println(reg.toString()); //NOPMD
 		}
 	}
 

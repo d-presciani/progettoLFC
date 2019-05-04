@@ -30,12 +30,11 @@ public class RegolaDiProduzione {
 	public RegolaDiProduzione(RegolaDiProduzione reg) {
 		this();
 		this.parteSX = reg.parteSX;
-		if(reg.parteDX!=null) {
+		if(reg.parteDX.size()>0) {
 			for(Carattere ch : reg.parteDX) {
 				this.parteDX.add(ch);
 			}
 		} else {
-			this.parteDX = null;
 			this.annullabile = true;
 		}
 		this.indice = reg.indice;
@@ -52,19 +51,28 @@ public class RegolaDiProduzione {
 	// Calcolo l'annullabilità della funzione
 	public void calcolaAnnullabilita() {
 		for (int i=0; i<parteDX.size(); i++){ 
-			if(!parteDX.get(i).isAnnullabile()) { // Se trovo anche solo un carattere (terminale o nonterminale) che è annullabile allora la regola non è annullabile
+			if(!parteDX.get(i).isAnnullabile()) { // Se trovo anche solo un carattere (terminale o nonterminale) che non è annullabile allora la regola non è annullabile
 				annullabile = false;
 				break;
 			}
 		}
 	}
 	
-	public boolean equals(RegolaDiProduzione reg) {
-		if (parteSX.getLettera().equals(reg.parteSX.getLettera()) && parteDX.toString().equals(reg.parteDX.toString()) && seguiti.toString().equals(reg.seguiti.toString()) && indice==reg.indice) {
-			return true;
-		} else {
-			return false;
+	@Override
+	public boolean equals(Object o) {
+		if(o instanceof RegolaDiProduzione) {
+			RegolaDiProduzione reg = (RegolaDiProduzione)o;
+			if (parteSX.getLettera().equals(reg.parteSX.getLettera()) && parteDX.toString().equals(reg.parteDX.toString()) && seguiti.toString().equals(reg.seguiti.toString()) && indice==reg.indice) {
+				return true;
+			}
 		}
+		return false;
+	}
+	
+	@Override
+	public int hashCode() {
+		assert false : "hashCode not designed";
+		return 0;
 	}
 	
 	@Override

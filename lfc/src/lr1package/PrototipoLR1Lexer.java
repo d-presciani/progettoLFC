@@ -1,12 +1,9 @@
 // $ANTLR 3.5.1 C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g 2019-03-20 16:54:28
 
-  package lr1Package;
+  package lr1package;
 
 
 import org.antlr.runtime.*;
-import java.util.Stack;
-import java.util.List;
-import java.util.ArrayList;
 
 @SuppressWarnings("all")
 public class PrototipoLR1Lexer extends Lexer {

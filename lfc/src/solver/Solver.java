@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class Solver {
 	
 	
-	public void solve(LinkedList<NonTerminale> listaNT, LinkedList<RegolaDiProduzione> listaReg) {
+	public boolean solve(LinkedList<NonTerminale> listaNT, LinkedList<RegolaDiProduzione> listaReg) {
 		
 		LinkedList<Stato> listaStati = new LinkedList<Stato>();
 		LinkedList<String> listaTransizioni = new LinkedList<String>();
@@ -22,37 +22,27 @@ public class Solver {
 		
 		//Creo il primo stato
 		Stato mom = new Stato();
-		try {
-			mom.aggiungiCore(listaReg.get(0));
-		} catch (ErroreSemantico e) {
-			System.err.println("ERRORE SEMANTICO! " + e.getMessage());
-			System.exit(0);
-		}
+		mom.aggiungiCore(listaReg.get(0));
 		listaStati.add(mom);
 		
 		int i=0;
 		
 		// Espando tutti gli stati
 		while(i<listaStati.size()) {
-			try {
-				listaStati.get(i).espandiStato(listaStati, listaTransizioni);
-			} catch (ErroreSemantico e) {
-				System.err.println("ERRORE SEMANTICO!" + e.getMessage());
-				System.exit(0);
-			}
+			listaStati.get(i).espandiStato(listaStati, listaTransizioni);
 			i++;
 		}
 		
-		System.out.println("Numero stati: " + listaStati.size());
+		System.out.println("Numero stati: " + listaStati.size()); //NOPMD
 		
-		System.out.println("\nElenco degli stati:");
+		System.out.println("\nElenco degli stati:"); //NOPMD
 		for(Stato stt : listaStati) {
-			System.out.println(stt.toString());
+			System.out.println(stt.toString()); //NOPMD
 		}
 		
-		System.out.println("\nElenco delle transizioni");
+		System.out.println("\nElenco delle transizioni"); //NOPMD
 		for(String transizione : listaTransizioni) {
-			System.out.println(transizione);
+			System.out.println(transizione); //NOPMD
 		}
 		
 		// Controllo che la grammatica sia LR(1)
@@ -65,14 +55,16 @@ public class Solver {
 		
 		// Stampo risultato controllo
 		if(isLR1) {
-			System.out.println("\nLa grammatica inserita è LR(1)");
+			System.out.println("\nLa grammatica inserita è LR(1)"); //NOPMD
+			return true;
 		} else {
-			System.out.println("\nLa grammagita inserita non è LR(1), gli stati che contengono conflitti sono:\n");
+			System.out.println("\nLa grammatica inserita non è LR(1), gli stati che contengono conflitti sono:\n"); //NOPMD
 			for(Stato stt : listaStati) {
 				if(stt.erroreLR1) {
-					System.out.println("S"+stt.numeroStato);
+					System.out.println("S"+stt.numeroStato); //NOPMD
 				}
 			}
+			return false;
 		}
 		
 	}

@@ -20,13 +20,13 @@ public class Stato {
 	}
 	
 	// Aggiunge una regola
-	public void aggiungiCore(RegolaDiProduzione rdp) throws ErroreSemantico {
+	public void aggiungiCore(RegolaDiProduzione rdp){
 		// Aggiungo la regola ricevuta alle regole core
 		regoleCore.add(new RegolaDiProduzione(rdp));
 		
-		// Popolazione dei seguiti dei seguiti generati dalla nuova regola core
-		if(rdp.parteDX!=null) { // Controllo che la regola di produzione abbia effettivamente qualcosa a destra
-			if(rdp.parteDX.size()!=0 && rdp.parteDX.size()>rdp.indice && rdp.parteDX.get(rdp.indice).getRegole()!=null) {
+		// Popolazione dei seguiti dei completamenti generati dalla nuova regola core
+		if(rdp.parteDX.size()>0) { // Controllo che la regola di produzione abbia effettivamente qualcosa a destra
+			if(rdp.parteDX.size()>rdp.indice && rdp.parteDX.get(rdp.indice).getRegole()!=null) {
 				for(RegolaDiProduzione regComp : rdp.parteDX.get(rdp.indice).getRegole()) { // Ciclo su tutte le regole (possono non esserci) generate dal carattere con il puntino
 					RegolaDiProduzione tmp = new RegolaDiProduzione(regComp); // Creo una var temporanea con la regola appena trovata per poterla modificare prima di aggiungerla alla lista delle regole e per duplicarla
 					tmp.seguiti.clear();
@@ -34,7 +34,8 @@ public class Stato {
 						int i = 0;
 						// Per ogni carattere a destra di quello con il puntino calcolo gli inizi e continuo finché non trovo un carattere non annullabile
 						do{
-							if(rdp.parteDX.get(rdp.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())!=null) {
+							LinkedList<String> emptyList = new LinkedList<String>();
+							if(!rdp.parteDX.get(rdp.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>()).equals(emptyList)) {
 								for(String seg : rdp.parteDX.get(rdp.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())) {
 									if(!tmp.seguiti.contains(seg)) {
 										tmp.seguiti.add(seg);
@@ -53,17 +54,15 @@ public class Stato {
 						}
 					} else { // Se non ho nulla a destra aggiungo i seguiti del padre
 						for(String seg : rdp.seguiti) {
-							if(!tmp.seguiti.contains(seg)) {
-								tmp.seguiti.add(seg);
-							}
+							tmp.seguiti.add(seg);
 						}
 					}
 					
 					
-					// Cerco se la regola è già presente nei seguiti
+					// Cerco se la regola è già presente nei completamenti
 					boolean regPresente = false;
 					for(RegolaDiProduzione reg: regoleCompletamenti) {
-						if(reg.parteSX.lettera.equals(tmp.parteSX.lettera) && reg.parteDX.toString().equals(tmp.parteDX.toString()) && reg.indice == tmp.indice) {
+						if(reg.parteSX.lettera.equals(tmp.parteSX.lettera) && reg.parteDX.toString().equals(tmp.parteDX.toString())) {
 							for(String seguito : tmp.seguiti) {
 								if(!reg.seguiti.contains(seguito)) {
 									reg.seguiti.add(seguito);
@@ -74,7 +73,7 @@ public class Stato {
 						}
 					}
 					if(!regPresente) {
-						regoleCompletamenti.add(tmp); // Una volta aggiunti i seguiti agiungo la regola alle regole di completamento
+						regoleCompletamenti.add(tmp); // Una volta aggiunti i seguiti aggiungo la regola alle regole di completamento
 					}
 					
 				}
@@ -97,7 +96,7 @@ public class Stato {
 								}
 							}
 							if(!trovato) { // Se non è ancor astata inserita inserisco la nuova regola
-								this.aggiungiCompletameno(nuoveRegole, reg);
+								this.aggiungiCompletamento(nuoveRegole, reg);
 							}
 						}
 					}		
@@ -108,22 +107,22 @@ public class Stato {
 				boolean modificato = true;
 				while(modificato) {
 					modificato = false;
-					for(int indice1 = 0; indice1<regoleCompletamenti.size(); indice1++) {
-						for(int indice2 = 0 ; indice2 < regoleCompletamenti.size(); indice2++) {
+					for(int indiceSx = 0; indiceSx<regoleCompletamenti.size(); indiceSx++) {
+						for(int indiceDx = 0 ; indiceDx < regoleCompletamenti.size(); indiceDx++) {
 							
-							if(regoleCompletamenti.get(indice2).indice<regoleCompletamenti.get(indice2).parteDX.size()) {
-								if(regoleCompletamenti.get(indice1).parteSX.lettera.equals(regoleCompletamenti.get(indice2).parteDX.get(regoleCompletamenti.get(indice2).indice).getLettera())) {
-									if(regoleCompletamenti.get(indice2).indice+1<regoleCompletamenti.get(indice2).parteDX.size()) {
-										for(String seg: regoleCompletamenti.get(indice2).parteDX.get(regoleCompletamenti.get(indice2).indice+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())) {
-											if(!regoleCompletamenti.get(indice1).seguiti.contains(seg)) {
-												regoleCompletamenti.get(indice1).seguiti.add(seg);
+							if(regoleCompletamenti.get(indiceDx).indice<regoleCompletamenti.get(indiceDx).parteDX.size()) {
+								if(regoleCompletamenti.get(indiceSx).parteSX.lettera.equals(regoleCompletamenti.get(indiceDx).parteDX.get(regoleCompletamenti.get(indiceDx).indice).getLettera())) {
+									if(regoleCompletamenti.get(indiceDx).indice+1<regoleCompletamenti.get(indiceDx).parteDX.size()) {
+										for(String seg: regoleCompletamenti.get(indiceDx).parteDX.get(regoleCompletamenti.get(indiceDx).indice+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())) {
+											if(!regoleCompletamenti.get(indiceSx).seguiti.contains(seg)) {
+												regoleCompletamenti.get(indiceSx).seguiti.add(seg);
 												modificato = true;
 											}
 										}
-									}else if(regoleCompletamenti.get(indice2).indice+1==regoleCompletamenti.get(indice2).parteDX.size()){
-										for(String seg: regoleCompletamenti.get(indice2).seguiti) {
-											if(!regoleCompletamenti.get(indice1).seguiti.contains(seg)) {
-												regoleCompletamenti.get(indice1).seguiti.add(seg);
+									} else {
+										for(String seg: regoleCompletamenti.get(indiceDx).seguiti) {
+											if(!regoleCompletamenti.get(indiceSx).seguiti.contains(seg)) {
+												regoleCompletamenti.get(indiceSx).seguiti.add(seg);
 												modificato = true;
 											}
 										}
@@ -141,18 +140,16 @@ public class Stato {
 	}
 
 	// Inserimento regola di completamento
-	private void aggiungiCompletameno(RegolaDiProduzione nuovaRdp, RegolaDiProduzione regolaPadre) throws ErroreSemantico {
+	private void aggiungiCompletamento(RegolaDiProduzione nuovaRdp, RegolaDiProduzione regolaPadre) {
 		// Inserimento seguiti sulle nuove regole
 		RegolaDiProduzione regolaTemp = new RegolaDiProduzione(nuovaRdp);
 		
 		if(regolaPadre.indice+1<regolaPadre.parteDX.size()) {
 			int i = 0;						
 			do{
-				if(regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())!=null) {
-					for(String seg : regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())) {
-						if(!regolaTemp.seguiti.contains(seg)) {
-							regolaTemp.seguiti.add(seg);
-						}
+				for(String seg : regolaPadre.parteDX.get(regolaPadre.indice+i+1).calcolaInizi(new LinkedList<RegolaDiProduzione>())) {
+					if(!regolaTemp.seguiti.contains(seg)) {
+						regolaTemp.seguiti.add(seg);
 					}
 				}
 				i++;
@@ -178,31 +175,14 @@ public class Stato {
 			}
 		}
 		
-		// Cerco se la regola è già presente nei completamenti
-		boolean regPresente = false;
-		for(RegolaDiProduzione reg: regoleCompletamenti) {
-			if(reg.parteSX.lettera.equals(regolaTemp.parteSX.lettera) && reg.parteDX.toString().equals(regolaTemp.parteDX.toString()) && reg.indice == regolaTemp.indice) {
-				for(String seguito : regolaTemp.seguiti) {
-					if(!reg.seguiti.contains(seguito)) {
-						reg.seguiti.add(seguito);
-					}
-				}
-				regPresente = true;
-				break;
-			}
-		}
-		if(!regPresente) {
-			regoleCompletamenti.add(regolaTemp); // Una volta aggiunti i seguiti agiungo la regola alle regole di completamento
-		}
-		
-		
+		regoleCompletamenti.add(regolaTemp); // Una volta aggiunti i seguiti agiungo la regola alle regole di completamento
 		
 	}
 	
 	
 	// Funzione per generazione di nuovi stati
 	// TODO: Aggiungere caso che una regola di completamento porta ad aggiungre nuovi seguiti alle altre regole di completamento
-	public void espandiStato(LinkedList<Stato> listaStati, LinkedList<String> listaTransizioni) throws ErroreSemantico {
+	public void espandiStato(LinkedList<Stato> listaStati, LinkedList<String> listaTransizioni) {
 		LinkedList<String> caratteriParsati = new LinkedList<String>(); // Variabile utilizata per memorizzare i vari caratteri man mano li parso
 		
 		// Scorro tutte le regole core
@@ -225,7 +205,7 @@ public class Stato {
 						// Scorro tutte le regole core per vedere se devo muovere lo stesso carattere
 						for(int j = i+1; j<regoleCore.size(); j++) {	
 							// Controllo se il puntino della i-esima regola core e della j-esima regola core punta alla stessa lettera
-							if(regoleCore.get(j).parteDX.size()!=regoleCore.get(j).indice && regoleCore.get(j).parteDX.size()!=0 && regoleCore.get(i).parteDX.get(regoleCore.get(i).indice).getLettera().equals(regoleCore.get(j).parteDX.get(regoleCore.get(j).indice).getLettera())) {
+							if(regoleCore.get(j).parteDX.size()!=regoleCore.get(j).indice && regoleCore.get(i).parteDX.get(regoleCore.get(i).indice).getLettera().equals(regoleCore.get(j).parteDX.get(regoleCore.get(j).indice).getLettera())) {
 								listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCore.get(j)));
 							}
 						}
@@ -233,7 +213,7 @@ public class Stato {
 						// Scorro tutte le regole completamento per vedere se devo muovere lo stesso carattere
 						for(int j = 0; j<regoleCompletamenti.size(); j++) {	
 							// Controllo se il puntino della i-esima regola core e della j-esima regola completamento punta alla stessa lettera
-							if(regoleCompletamenti.get(j).parteDX.size()!=regoleCompletamenti.get(j).indice && regoleCompletamenti.get(j).parteDX.size()!=0 && regoleCore.get(i).parteDX.get(regoleCore.get(i).indice).getLettera().equals(regoleCompletamenti.get(j).parteDX.get(regoleCompletamenti.get(j).indice).getLettera())) {
+							if(regoleCompletamenti.get(j).parteDX.size()!=regoleCompletamenti.get(j).indice && regoleCore.get(i).parteDX.get(regoleCore.get(i).indice).getLettera().equals(regoleCompletamenti.get(j).parteDX.get(regoleCompletamenti.get(j).indice).getLettera())) {
 								listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCompletamenti.get(j)));
 							}
 						}
@@ -304,7 +284,7 @@ public class Stato {
 						// Scorro tutte le regole completamento per vedere se devo muovere lo stesso carattere
 						for(int j = i+1; j<regoleCompletamenti.size(); j++) {	
 							// Controllo se il puntino della i-esima regola core e della j-esima regola completamento punta alla stessa lettera
-							if(regoleCompletamenti.get(j).parteDX.size()!=regoleCompletamenti.get(j).indice && regoleCompletamenti.get(j).parteDX.size()!=0 && regoleCompletamenti.get(i).parteDX.get(regoleCompletamenti.get(i).indice).getLettera().equals(regoleCompletamenti.get(j).parteDX.get(regoleCompletamenti.get(j).indice).getLettera())) {
+							if(regoleCompletamenti.get(j).parteDX.size()!=regoleCompletamenti.get(j).indice && regoleCompletamenti.get(i).parteDX.get(regoleCompletamenti.get(i).indice).getLettera().equals(regoleCompletamenti.get(j).parteDX.get(regoleCompletamenti.get(j).indice).getLettera())) {
 								listaRegoleNuovoStato.add(new RegolaDiProduzione(regoleCompletamenti.get(j)));
 							}
 						}						
