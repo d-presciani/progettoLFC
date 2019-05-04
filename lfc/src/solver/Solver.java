@@ -58,7 +58,7 @@ public class Solver {
 			System.out.println("\nLa grammatica inserita è LR(1)"); //NOPMD
 			return true;
 		} else {
-			System.out.println("\nLa grammagita inserita non è LR(1), gli stati che contengono conflitti sono:\n"); //NOPMD
+			System.out.println("\nLa grammatica inserita non è LR(1), gli stati che contengono conflitti sono:\n"); //NOPMD
 			for(Stato stt : listaStati) {
 				if(stt.erroreLR1) {
 					System.out.println("S"+stt.numeroStato); //NOPMD

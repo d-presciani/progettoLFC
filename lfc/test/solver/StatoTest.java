@@ -24,11 +24,11 @@ class StatoTest {
 	void aggiuntaRegolaCore() {
 		// rdp.parteDX.get(rdp.indice).getRegole()!=null == FALSE
 		Stato s = new Stato();
-		NonTerminale nt = new NonTerminale("S");
-		Terminale dx1 = new Terminale("a");
+		NonTerminale nts = new NonTerminale("S");
+		Terminale ta = new Terminale("a");
 		List<Carattere> parteDx = new LinkedList<Carattere>();
-		parteDx.add(dx1);
-		RegolaDiProduzione reg = new RegolaDiProduzione(nt, parteDx);
+		parteDx.add(ta);
+		RegolaDiProduzione reg = new RegolaDiProduzione(nts, parteDx);
 		int nRegole = s.regoleCore.size();
 		s.aggiungiCore(reg);
 		assertEquals(nRegole + 1, s.regoleCore.size());
@@ -38,8 +38,8 @@ class StatoTest {
 	void aggiuntaRegolaCoreNulla() {
 		// rdp.parteDX.size()>0 == FALSE
 		Stato s = new Stato();
-		NonTerminale nt = new NonTerminale("S");
-		RegolaDiProduzione reg = new RegolaDiProduzione(nt, null);
+		NonTerminale nts = new NonTerminale("S");
+		RegolaDiProduzione reg = new RegolaDiProduzione(nts, null);
 		int nRegole = s.regoleCore.size();
 		s.aggiungiCore(reg);
 		assertEquals(nRegole + 1, s.regoleCore.size());
@@ -49,11 +49,11 @@ class StatoTest {
 	void aggiuntaRegolaCoreIndice() {
 		// rdp.parteDX.size()>rdp.indice == FALSE
 		Stato s = new Stato();
-		NonTerminale nt = new NonTerminale("S");
-		Terminale dx1 = new Terminale("a");
+		NonTerminale nts = new NonTerminale("S");
+		Terminale ta = new Terminale("a");
 		List<Carattere> parteDx = new LinkedList<Carattere>();
-		parteDx.add(dx1);
-		RegolaDiProduzione reg = new RegolaDiProduzione(nt, parteDx);
+		parteDx.add(ta);
+		RegolaDiProduzione reg = new RegolaDiProduzione(nts, parteDx);
 		while(reg.indice < reg.parteDX.size()) {
 			reg.avanzaPuntino();
 		}
