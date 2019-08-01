@@ -46,6 +46,7 @@ public class NonTerminaleTest {
 		nts.setAnnullabile();
 		assertTrue(nts.isAnnullabile());
 		nts.annullabile = false;
+		assertFalse(nts.isAnnullabile());
 	}
 	
 	@Test
@@ -94,6 +95,7 @@ public class NonTerminaleTest {
 		try {
 			nts.controlloProduzioni();
 		} catch (ErroreSemantico e) {
+			// Il nonTerminale S non ha regole di produzioni associate e quindi abbiamo un errore semantico
 			presenzaProd = false;
 		}
 		assertFalse(presenzaProd);
@@ -142,10 +144,11 @@ public class NonTerminaleTest {
 	void iniziDxVuota() {
 		// Creo i non terminali
 		NonTerminale nts = new NonTerminale("S");
-		// Genero e aggiungo una regola al non terminale S
+		// Genero e aggiungo una regola nulla al non terminale S
 		RegolaDiProduzione reg = new RegolaDiProduzione(nts, null);
 		reg.calcolaAnnullabilita();
 		nts.addRegola(reg);
+		//Deve stampare S->.
 		nts.stampaRegole();
 		List<String> inizi = new LinkedList<String>();
 		inizi = nts.calcolaInizi(new LinkedList<RegolaDiProduzione>());
