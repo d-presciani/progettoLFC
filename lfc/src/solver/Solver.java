@@ -2,13 +2,15 @@ package solver;
 
 import java.util.LinkedList;
 
+import graph.JGraphXDrawer;
+
 public class Solver {
 	
 	
 	public boolean solve(LinkedList<NonTerminale> listaNT, LinkedList<RegolaDiProduzione> listaReg) {
 		
 		LinkedList<Stato> listaStati = new LinkedList<Stato>();
-		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		LinkedList<Transizione> listaTransizioni = new LinkedList<Transizione>();
 		
 		//Calcolo annullabilità regole
 		for(RegolaDiProduzione reg : listaReg) {
@@ -41,9 +43,18 @@ public class Solver {
 		}
 		
 		System.out.println("\nElenco delle transizioni"); //NOPMD
-		for(String transizione : listaTransizioni) {
-			System.out.println(transizione); //NOPMD
+		for(Transizione transizione : listaTransizioni) {
+			System.out.println(transizione.toString()); //NOPMD
 		}
+		
+		
+		//NEW: Stampo il grafo
+		LinkedList<String> nodi = new LinkedList<String>();
+		for(Stato st : listaStati) {
+			nodi.add(st.toGraph());
+		}
+		JGraphXDrawer drawer = new JGraphXDrawer();
+		drawer.draw(nodi, listaTransizioni);
 		
 		// Controllo che la grammatica sia LR(1)
 		boolean isLR1 = true;

@@ -181,8 +181,7 @@ public class Stato {
 	
 	
 	// Funzione per generazione di nuovi stati
-	// TODO: Aggiungere caso che una regola di completamento porta ad aggiungre nuovi seguiti alle altre regole di completamento
-	public void espandiStato(LinkedList<Stato> listaStati, LinkedList<String> listaTransizioni) {
+	public void espandiStato(LinkedList<Stato> listaStati, LinkedList<Transizione> listaTransizioni) {
 		LinkedList<String> caratteriParsati = new LinkedList<String>(); // Variabile utilizata per memorizzare i vari caratteri man mano li parso
 		
 		// Scorro tutte le regole core
@@ -253,12 +252,11 @@ public class Stato {
 							temp.aggiungiCore(reg);
 						}
 						listaStati.add(temp);
-						
-						String transizione = "S" + numeroStato + " -- " + chpasr + " --> S"+temp.numeroStato;
-						listaTransizioni.add(transizione);
+						Transizione trTemp = new Transizione(numeroStato, temp.numeroStato, chpasr);
+						listaTransizioni.add(trTemp);
 					} else {
-						String transizione = "S" + numeroStato + " -- " + chpasr + " --> S" + nroStatoDup;
-						listaTransizioni.add(transizione);
+						Transizione trTemp = new Transizione(numeroStato, nroStatoDup, chpasr);
+						listaTransizioni.add(trTemp);
 					}
 				}			
 			}			
@@ -326,12 +324,11 @@ public class Stato {
 							temp.aggiungiCore(reg);
 						}
 						listaStati.add(temp);
-						
-						String transizione = "S" + numeroStato + " -- " + chpasr + " --> S"+temp.numeroStato;
-						listaTransizioni.add(transizione);
+						Transizione trTemp = new Transizione(numeroStato, temp.numeroStato, chpasr);
+						listaTransizioni.add(trTemp);
 					} else {
-						String transizione = "S" + numeroStato + " -- " + chpasr + " --> S" + nroStatoDup;
-						listaTransizioni.add(transizione);
+						Transizione trTemp = new Transizione(numeroStato, nroStatoDup, chpasr);
+						listaTransizioni.add(trTemp);
 					}
 				}			
 			}			
@@ -370,6 +367,26 @@ public class Stato {
 			}
 		}
 		
+	}
+	
+	// Funzione per la stampa dello stato per rappresentazione grafica
+	public String toGraph() {
+		String messaggio = "";
+		messaggio += "I"+numeroStato;
+		if(erroreLR1) {
+			messaggio += " (!!ERRORE LR1!!)";
+		}
+		messaggio += "\n";
+		for(RegolaDiProduzione reg : regoleCore) {
+			messaggio += reg.toString() + " {" + reg.seguiti + "}\n";
+		}
+		if(regoleCompletamenti.size()!=0) {
+			messaggio += "----------";
+			for(RegolaDiProduzione reg : regoleCompletamenti) {
+				messaggio += "\n" + reg.toString() + " {" + reg.seguiti + "}";
+			}
+		}
+		return messaggio;
 	}
 	
 	@Override
