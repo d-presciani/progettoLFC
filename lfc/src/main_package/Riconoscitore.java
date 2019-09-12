@@ -26,6 +26,7 @@ public final class Riconoscitore  {
 		dialog.setFile("*.txt");
 		dialog.setVisible(true);
 		final String file = dialog.getDirectory() + dialog.getFile();
+		String fileName = dialog.getFile(); //Salvataggio nomeFile per print successivo nel grafico
 		dialog.dispose();
 		if(dialog.getFile() == null) {
 			System.out.println("Nessun file selezionato, premere INVIO per chiudere il programma."); //NOPMD
@@ -55,7 +56,7 @@ public final class Riconoscitore  {
 					System.out.println ("Parsing con ANTLR abortito\n\n"); //NOPMD
 				}
 		  	if(!errore) {
-		  		parser.solve();
+		  		parser.solve(fileName);
 		  	}
 		  	
 		  	System.out.println("\nPremere INVIO per uscire dal programma."); //NOPMD

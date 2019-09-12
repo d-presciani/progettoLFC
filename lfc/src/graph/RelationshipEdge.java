@@ -4,9 +4,6 @@ import org.jgrapht.graph.DefaultEdge;
 
 //Classe per cambiare nome sulla freccia
 class RelationshipEdge extends DefaultEdge {
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8132020941179850957L;
 	private String label;
 

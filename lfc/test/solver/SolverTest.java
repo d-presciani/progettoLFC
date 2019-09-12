@@ -34,7 +34,7 @@ class SolverTest {
 				
 		Solver risolutore = new Solver();
 		
-		assertTrue(risolutore.solve(listaNT, listaRegole));		
+		assertTrue(risolutore.solve(listaNT, listaRegole,"NoFILE"));		
 	}
 	
 	@Test
@@ -69,7 +69,7 @@ class SolverTest {
 		
 		Solver risolutore = new Solver();
 		
-		assertFalse(risolutore.solve(listaNT, listaRegole));
+		assertFalse(risolutore.solve(listaNT, listaRegole,"NoFILE"));
 	}
 
 }

@@ -371,21 +371,51 @@ public class Stato {
 	
 	// Funzione per la stampa dello stato per rappresentazione grafica
 	public String toGraph() {
-		String messaggio = "";
-		messaggio += "I"+numeroStato;
+		LinkedList<String> coreString = new LinkedList<String>();
+		LinkedList<String> complString = new LinkedList<String>();
+		String temp = "";
+		temp += "I"+numeroStato;
 		if(erroreLR1) {
-			messaggio += " (!!ERRORE LR1!!)";
+			temp += " (!!ERRORE LR1!!)";
 		}
-		messaggio += "\n";
+		temp += "\n";
+		coreString.add(temp);
 		for(RegolaDiProduzione reg : regoleCore) {
-			messaggio += reg.toString() + " {" + reg.seguiti + "}\n";
+			coreString.add(reg.toString() + " {" + reg.seguiti + "}\n");
 		}
 		if(regoleCompletamenti.size()!=0) {
-			messaggio += "----------";
 			for(RegolaDiProduzione reg : regoleCompletamenti) {
-				messaggio += "\n" + reg.toString() + " {" + reg.seguiti + "}";
+				complString.add("\n" + reg.toString() + " {" + reg.seguiti + "}");
 			}
 		}
+		// Generazione separatore di lungezza dinamica
+		int min = 0;
+		for(String reg : coreString) {
+			if(reg.length() > min) {
+				min = reg.length();
+			}
+		}
+		for(String reg : complString) {
+			if(reg.length() > min) {
+				min = reg.length();
+			}
+		}
+		String sep = "";
+		for(int i=0; i<min; i++) {
+			sep += "-";
+		}
+		// Fine generazione separatore e inizio costruzione messaggio
+		String messaggio = "";
+		for(String reg : coreString) {
+			messaggio += reg;
+		}
+		if(complString.size()!=0) {
+			messaggio += sep;
+			for(String reg : complString) {
+				messaggio += reg;
+			}
+		}
+		
 		return messaggio;
 	}
 	

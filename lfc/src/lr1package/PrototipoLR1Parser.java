@@ -116,8 +116,8 @@ public class PrototipoLR1Parser extends Parser {
 		return ntNew;
 	   }
 	   
-	   public void solve() {
-			classificatore.solve(listaNT, listaReg);
+	   public void solve(String fileName) {
+			classificatore.solve(listaNT, listaReg,fileName);
 		}
 
 

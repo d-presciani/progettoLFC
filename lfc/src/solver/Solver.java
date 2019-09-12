@@ -7,7 +7,7 @@ import graph.JGraphXDrawer;
 public class Solver {
 	
 	
-	public boolean solve(LinkedList<NonTerminale> listaNT, LinkedList<RegolaDiProduzione> listaReg) {
+	public boolean solve(LinkedList<NonTerminale> listaNT, LinkedList<RegolaDiProduzione> listaReg, String fileName) {
 		
 		LinkedList<Stato> listaStati = new LinkedList<Stato>();
 		LinkedList<Transizione> listaTransizioni = new LinkedList<Transizione>();
@@ -54,7 +54,7 @@ public class Solver {
 			nodi.add(st.toGraph());
 		}
 		JGraphXDrawer drawer = new JGraphXDrawer();
-		drawer.draw(nodi, listaTransizioni);
+		drawer.draw(nodi, listaTransizioni, fileName);
 		
 		// Controllo che la grammatica sia LR(1)
 		boolean isLR1 = true;
