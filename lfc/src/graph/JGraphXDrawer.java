@@ -2,8 +2,8 @@ package graph;
 
 import com.mxgraph.layout.hierarchical.mxHierarchicalLayout;
 import com.mxgraph.model.mxCell;
-import com.mxgraph.model.mxGeometry;
 import com.mxgraph.swing.*;
+import com.mxgraph.util.mxCellRenderer;
 import com.mxgraph.util.mxConstants;
 import com.mxgraph.view.mxStylesheet;
 
@@ -13,8 +13,12 @@ import org.jgrapht.*;
 import org.jgrapht.ext.*;
 import org.jgrapht.graph.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -76,7 +80,6 @@ public class JGraphXDrawer extends JApplet{
                 if (cell.isVertex()) {
                 	cell.setStyle(mxConstants.STYLE_FONTCOLOR+"=black");
                 	if(cell.getValue().toString().contains("ERRORE LR1")) { //isVertex
-                		mxStylesheet style = new mxStylesheet();
                         cell.setStyle(/*mxConstants.STYLE_STROKECOLOR+"=red;"+*/mxConstants.STYLE_FILLCOLOR+"=red;"+mxConstants.STYLE_FONTCOLOR+"=black");
                     }
                 	
@@ -114,5 +117,21 @@ public class JGraphXDrawer extends JApplet{
         jgxAdapter.setStylesheet(edgeStyle);
         
         layout.execute(jgxAdapter.getDefaultParent());
+        final FileDialog dialog = new FileDialog((Frame)null, "Scegliere dove salvare il file");
+		dialog.setMode(FileDialog.SAVE);
+		dialog.setFile("*.png;*.jpg;*.jpeg");
+		dialog.setVisible(true);
+		final String file = dialog.getDirectory() + dialog.getFile();
+		if(file.endsWith(".png") || file.endsWith(".jpg") || file.endsWith(".jpeg")) {
+			BufferedImage image = mxCellRenderer.createBufferedImage(jgxAdapter, null, 1, Color.WHITE, true, null);
+	        try {
+				ImageIO.write(image, "PNG", new File(file));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			System.out.println("Formato non riconosciuto");
+		}
+        
     }
 }
