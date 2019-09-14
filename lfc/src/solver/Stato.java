@@ -19,6 +19,10 @@ public class Stato {
 		erroreLR1 = false;
 	}
 	
+	public static void resetCounter () {
+		Stato.counter = 1;
+	}
+	
 	// Aggiunge una regola
 	public void aggiungiCore(RegolaDiProduzione rdp){
 		// Aggiungo la regola ricevuta alle regole core

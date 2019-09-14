@@ -3,46 +3,56 @@ package app;
 import java.awt.FileDialog;
 import java.awt.Frame;
 import java.io.FileReader;
+import java.net.URI;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Scanner;
+
 import org.antlr.runtime.*;
 
-import lr1package.*;
-
-import javax.swing.JApplet;
-import javax.swing.SwingUtilities;
-
 import graph.JGraphXDrawer;
+import graph.RisImmagine;
+import lr1package.*;
+import solver.Risultati;
+import solver.Transizione;
+
+
+
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
+import javafx.scene.image.ImageView;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.geometry.VPos;
 import javafx.stage.Stage;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.ScrollPane.ScrollBarPolicy;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 
-
-public final class Main extends Application {
+public final class Main extends Application{
 	
 	//Variabili per il parser
 	private static PrototipoLR1Parser parser;
-
+	Risultati ris;
+	Image immagine;
 	
 	@Override
 	public void start(Stage primaryStage) {
+		
+		
 		try {
 			/*
 		    // Creo una linea verticale (o almeno ci proviamo)
@@ -53,26 +63,35 @@ public final class Main extends Application {
 		    linea.setEndY(540);
 		    */
 		    
-		    //Creo un testo (non casella)
+		    // Creo un testo (non casella)
 		    Text testo = new Text();
 		    testo.setFont(new Font(22));
 		    testo.setText("Selezionare un file di testo con la grammatica da identificare");
-
+		    	
+		    // Creazione immagine
+		    
 		    
 		    // Creo i due bottoni
 		    Button btnCarica = new Button("Carica file");
-		    Button btnSalvaGrafico = new Button("Salva Grafo");
+		    Button btnSalvaGrafico = new Button("Genera e mostra grafo");
 		    btnSalvaGrafico.setDisable(true);
-		    
-		    // Applet grafico
-		    // Link a come fare ad usare l'applet
-		    //https://stackoverflow.com/questions/8566818/is-it-possible-to-make-javafx-web-applet
-		    JApplet zonaGrafo = new JGraphXDrawer();
-		    SwingNode nodoGrafo = new SwingNode();
-		    SwingUtilities.invokeLater(()-> nodoGrafo.setContent(zonaGrafo.getRootPane()));
-		    
+		    		    
+		    //Immagine 
+		    ImageView imW = new ImageView(immagine);
+		    imW.resize(960/6*4, 540);
+		    ScrollPane scrollPane = new ScrollPane();
+	        scrollPane.setPrefSize(960/6*3.85, 540);
+	        scrollPane.setPrefViewportWidth(960/6*4);
+	        scrollPane.setPrefViewportHeight(540);
+	        scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
+	        scrollPane.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
+	        scrollPane.setContent(imW);
+	        scrollPane.setLayoutX(690/6*3);
+	        scrollPane.setLayoutY(0);
+	        
+	        
 		    // Event dei bottoni		    
-		    // bottone carica file
+		    // bottone carica file (Copiato codice da Riconoscitore (main_package)
 		    btnCarica.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
@@ -89,8 +108,7 @@ public final class Main extends Application {
 						testo.setText("Nessun file selezionato, riselezionare un file");
 						inputUtente.hasNextLine();
 						inputUtente.close();
-					} else {
-								
+					} else {		
 						CommonTokenStream tokens;
 					
 					  	boolean errore = false;
@@ -99,9 +117,7 @@ public final class Main extends Application {
 								PrototipoLR1Lexer lexer = new PrototipoLR1Lexer(new ANTLRReaderStream(new FileReader(file)));
 								tokens = new CommonTokenStream(lexer);
 						    parser = new PrototipoLR1Parser(tokens);
-					
 						    parser.lr1();
-						    
 						    if(parser.getErrorList().size()>0) {
 						    	errore = true;
 						    }
@@ -115,11 +131,14 @@ public final class Main extends Application {
 								testo.setText(testo.getText() + "\nParsing con ANTLR abortito\n\n");
 							}
 					  	if(!errore) {
-					  		//TODO: questo andrebbe spostato in modo da avere qui tutta la roba da stampare ecc...
-					  		parser.solve(fileName);
+					  		ris = null;
+					  		ris = parser.solve(fileName);
+					  		testo.setText(ris.getMessaggi());
 					  	}
+					  	/*
 					  	inputUtente.nextLine();
-					  	inputUtente.close();
+					  	inputUtente.close();*/
+					  	imW.setImage(null);
 						btnSalvaGrafico.setDisable(false);
 					}
 				}
@@ -128,11 +147,17 @@ public final class Main extends Application {
 		    btnSalvaGrafico.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
-					// TODO Auto-generated method stub
-					
+					JGraphXDrawer drawer = new JGraphXDrawer();
+					RisImmagine risultato = drawer.init(ris.getNodi(), ris.getListaTransizioni());
+					if(risultato.getEsito().compareTo("done")==0) {
+						immagine = new Image("file:" + Paths.get(System.getProperty("user.dir")).relativize(Paths.get(risultato.getPath())));
+						imW.setImage(immagine);
+						scrollPane.setContent(imW);
+					} else {
+						testo.setText(risultato.getEsito());
+					}
 				}
 			});
-		    
 		    //Gridpane per organizzare gli elementi
 		    GridPane griglia = new GridPane();
 		    griglia.setPrefSize(960, 540);
@@ -147,11 +172,15 @@ public final class Main extends Application {
 		    griglia.add(btnCarica, 0, 0, 1, 1);
 		    griglia.add(btnSalvaGrafico, 1, 0, 1, 1);
 		    griglia.add(testo, 0, 1, 2, 9);
-		    griglia.add(nodoGrafo, 2, 0, 4, 10);
+		    //griglia.add(scrollPane, 2, 0, 4, 10);
 		    GridPane.setHalignment(btnCarica, HPos.CENTER);
 		    GridPane.setHalignment(btnSalvaGrafico, HPos.CENTER);
 		    GridPane.setValignment(testo, VPos.TOP);
 		    GridPane.setHalignment(testo, HPos.CENTER);
+		    /*
+		    GridPane.setHalignment(scrollPane, HPos.LEFT);
+		    GridPane.setValignment(scrollPane, VPos.TOP);
+		    */
 		    testo.setWrappingWidth(960/3);
 		    /*
 		    // Creo un gruppo con una linea al suo interno
@@ -164,6 +193,9 @@ public final class Main extends Application {
 		    */
 		    
 		    Group gruppo = new Group(griglia);
+		    ObservableList<Node> lista = gruppo.getChildren();
+		    // Aggiungo al gruppo il testo creato
+		    lista.add(scrollPane);
 		    Scene scene = new Scene(gruppo,960,540); // Dimensione della schermata
 		    scene.setFill(Color.AQUA); // Setto colore BG
 		    primaryStage.setScene(scene);
@@ -173,10 +205,12 @@ public final class Main extends Application {
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		
 	}
-	
+		
 	public static void main(String[] args) {
 		launch(args);
 		
-	}
+	}	
 }

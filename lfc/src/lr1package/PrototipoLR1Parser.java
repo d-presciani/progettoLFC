@@ -116,8 +116,8 @@ public class PrototipoLR1Parser extends Parser {
 		return ntNew;
 	   }
 	   
-	   public void solve(String fileName) {
-			classificatore.solve(listaNT, listaReg,fileName);
+	   public Risultati solve(String fileName) {
+			return classificatore.solve(listaNT, listaReg,fileName);
 		}
 
 
@@ -249,6 +249,7 @@ public class PrototipoLR1Parser extends Parser {
 
 	// $ANTLR start "ar"
 	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:144:1: ar : nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC ;
+	//TODO RITORNARE ERRORI DA STAMPARE
 	public final void ar() throws RecognitionException {
 		Token nxtChar=null;
 		Token charDX=null;

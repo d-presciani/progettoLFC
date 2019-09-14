@@ -43,8 +43,9 @@ public class JGraphXDrawer extends JApplet{
         frame.setVisible(true);
     }
     
-    public void init(LinkedList<String> nodi, LinkedList<Transizione> transizioni)
+    public RisImmagine init(LinkedList<String> nodi, LinkedList<Transizione> transizioni)
     {
+    	RisImmagine risultato = new RisImmagine();
         // Creazione di un grafico JGraphT
         ListenableGraph<String, DefaultEdge> g =
             new DefaultListenableGraph<>(new DefaultDirectedGraph<>(DefaultEdge.class));
@@ -122,16 +123,20 @@ public class JGraphXDrawer extends JApplet{
 		dialog.setFile("*.png;*.jpg;*.jpeg");
 		dialog.setVisible(true);
 		final String file = dialog.getDirectory() + dialog.getFile();
+		risultato.path = file;
 		if(file.endsWith(".png") || file.endsWith(".jpg") || file.endsWith(".jpeg")) {
 			BufferedImage image = mxCellRenderer.createBufferedImage(jgxAdapter, null, 1, Color.WHITE, true, null);
 	        try {
 				ImageIO.write(image, "PNG", new File(file));
+				risultato.esito="done";
 			} catch (IOException e) {
-				e.printStackTrace();
+				
 			}
 		} else {
-			System.out.println("Formato non riconosciuto");
+			risultato.esito = "Formato non riconosciuto";
 		}
+		
+		return risultato;
         
     }
 }
