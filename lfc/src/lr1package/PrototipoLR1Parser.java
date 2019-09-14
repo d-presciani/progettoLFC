@@ -177,6 +177,7 @@ public class PrototipoLR1Parser extends Parser {
 							nt.controlloProduzioni();
 						}
 					} catch (ErroreSemantico e){
+						//TODO
 						System.err.println("\nERRORE! " + e.getMessage() + "\n\nPremere INVIO per uscire dal programma.");
 						capitano.nextLine();
 						capitano.close();
@@ -328,6 +329,7 @@ public class PrototipoLR1Parser extends Parser {
 					if(!presente){
 						listaReg.add(regola);
 					} else {
+						//TODO
 						System.out.println("ATTENZIONE! La produzione " + regola + " è stata inserita due volte!\nVerrà considerata una volta sola.\n");
 					}
 					// Associo la regola al non terminale

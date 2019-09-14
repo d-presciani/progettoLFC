@@ -44,7 +44,7 @@ public class JGraphXDrawer extends JApplet{
     }
     
     public RisImmagine init(LinkedList<String> nodi, LinkedList<Transizione> transizioni)
-    {
+    { 
     	RisImmagine risultato = new RisImmagine();
         // Creazione di un grafico JGraphT
         ListenableGraph<String, DefaultEdge> g =
