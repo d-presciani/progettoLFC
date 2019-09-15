@@ -5,7 +5,7 @@ import java.util.LinkedList;
 public class Solver {
 	
 	
-	public Risultati solve(LinkedList<NonTerminale> listaNT, LinkedList<RegolaDiProduzione> listaReg, String fileName) {
+	public Risultati solve(LinkedList<NonTerminale> listaNT, LinkedList<RegolaDiProduzione> listaReg) {
 		Stato.counter = 1;
 		LinkedList<Stato> listaStati = new LinkedList<Stato>();
 		LinkedList<Transizione> listaTransizioni = new LinkedList<Transizione>();

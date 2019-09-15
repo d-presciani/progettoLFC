@@ -29,19 +29,6 @@ public class JGraphXDrawer extends JApplet{
 	private static final Dimension DEFAULT_SIZE = new Dimension(960, 540);
 
     private JGraphXAdapter<String, DefaultEdge> jgxAdapter;
-
-
-    public void draw(LinkedList<String> nodi, LinkedList<Transizione> transizioni, String fileName)
-    {
-        JGraphXDrawer applet = new JGraphXDrawer();
-        applet.init(nodi, transizioni); //Inizializzazione dell'applet, creazione del grafico e configurazione dello stile di visualizzazione
-        JFrame frame = new JFrame();
-        frame.getContentPane().add(applet);
-        frame.setTitle(fileName);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.pack();
-        frame.setVisible(true);
-    }
     
     public RisImmagine init(LinkedList<String> nodi, LinkedList<Transizione> transizioni)
     { 
@@ -137,6 +124,5 @@ public class JGraphXDrawer extends JApplet{
 		}
 		
 		return risultato;
-        
     }
 }

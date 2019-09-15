@@ -3,8 +3,6 @@ package app;
 import java.awt.FileDialog;
 import java.awt.Frame;
 import java.io.FileReader;
-import java.net.URI;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
 
@@ -14,13 +12,11 @@ import graph.JGraphXDrawer;
 import graph.RisImmagine;
 import lr1package.*;
 import solver.Risultati;
-import solver.Transizione;
 
 
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
-import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.scene.image.ImageView;
 import javafx.event.EventHandler;
@@ -34,7 +30,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.ScrollPane.ScrollBarPolicy;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.RowConstraints;
@@ -44,32 +39,20 @@ import javafx.scene.text.Text;
 
 public final class Main extends Application{
 	
-	//Variabili per il parser
+	//Variabili
 	private static PrototipoLR1Parser parser;
 	Risultati ris;
 	Image immagine;
+	String fileName;
+	String retMex;
 	
 	@Override
 	public void start(Stage primaryStage) {
-		
-		
 		try {
-			/*
-		    // Creo una linea verticale (o almeno ci proviamo)
-		    Line linea = new Line();
-		    linea.setStartX(480);
-		    linea.setStartY(0);
-		    linea.setEndX(480);
-		    linea.setEndY(540);
-		    */
-		    
 		    // Creo un testo (non casella)
 		    Text testo = new Text();
 		    testo.setFont(new Font(22));
-		    testo.setText("Selezionare un file di testo con la grammatica da identificare");
-		    	
-		    // Creazione immagine
-		    
+		    testo.setText("Selezionare un file di testo con la grammatica da identificare");		    
 		    
 		    // Creo i due bottoni
 		    Button btnCarica = new Button("Carica file");
@@ -87,11 +70,11 @@ public final class Main extends Application{
 	        scrollPane.setHbarPolicy(ScrollBarPolicy.AS_NEEDED);
 	        scrollPane.setContent(imW);
 	        scrollPane.setLayoutX(690/6*3);
-	        scrollPane.setLayoutY(0);
+	        scrollPane.setLayoutY(5);
 	        
 	        
 		    // Event dei bottoni		    
-		    // bottone carica file (Copiato codice da Riconoscitore (main_package)
+		    // bottone carica file (Copiato codice da Riconoscitore (main_package))
 		    btnCarica.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
@@ -102,22 +85,20 @@ public final class Main extends Application{
 					dialog.setFile("*.txt");
 					dialog.setVisible(true);
 					final String file = dialog.getDirectory() + dialog.getFile();
-					String fileName = dialog.getFile(); //Salvataggio nomeFile per print successivo nel grafico
+					fileName = dialog.getFile(); //Salvataggio nomeFile per print successivo nel grafico
 					dialog.dispose();
 					if(dialog.getFile() == null) {
-						testo.setText("Nessun file selezionato, riselezionare un file");
-						inputUtente.hasNextLine();
-						inputUtente.close();
-					} else {		
+						testo.setText("Nessun file selezionato, selezionare un file");
+					} else {
 						CommonTokenStream tokens;
-					
+						
 					  	boolean errore = false;
 					  	try {
 								testo.setText("IDENTIFICAZIONE GRAMMATICHE LR(1)\n"); 
 								PrototipoLR1Lexer lexer = new PrototipoLR1Lexer(new ANTLRReaderStream(new FileReader(file)));
 								tokens = new CommonTokenStream(lexer);
 						    parser = new PrototipoLR1Parser(tokens);
-						    parser.lr1();
+						    retMex = parser.lr1();
 						    if(parser.getErrorList().size()>0) {
 						    	errore = true;
 						    }
@@ -127,13 +108,16 @@ public final class Main extends Application{
 							    }
 							    testo.setText(err);
 							} catch (Exception e) {
+								System.out.println("eccezione catturata");
 								errore = true;
 								testo.setText(testo.getText() + "\nParsing con ANTLR abortito\n\n");
 							}
 					  	if(!errore) {
 					  		ris = null;
-					  		ris = parser.solve(fileName);
-					  		testo.setText(ris.getMessaggi());
+					  		ris = parser.solve();
+					  		primaryStage.setTitle("LR(1) Solver - " + fileName); // Titolo della schermata
+					  		testo.setText(retMex + "\n" + ris.getMessaggi());
+					  		inputUtente.close();
 					  	}
 					  	/*
 					  	inputUtente.nextLine();
@@ -167,39 +151,25 @@ public final class Main extends Application{
 		    column.setPercentWidth(15);
 		    griglia.getRowConstraints().add(row);
 		    griglia.getColumnConstraints().add(column);
-		    
-		    //Prova modifica testo auto a capo
+
 		    griglia.add(btnCarica, 0, 0, 1, 1);
 		    griglia.add(btnSalvaGrafico, 1, 0, 1, 1);
 		    griglia.add(testo, 0, 1, 2, 9);
-		    //griglia.add(scrollPane, 2, 0, 4, 10);
+
 		    GridPane.setHalignment(btnCarica, HPos.CENTER);
 		    GridPane.setHalignment(btnSalvaGrafico, HPos.CENTER);
 		    GridPane.setValignment(testo, VPos.TOP);
 		    GridPane.setHalignment(testo, HPos.CENTER);
-		    /*
-		    GridPane.setHalignment(scrollPane, HPos.LEFT);
-		    GridPane.setValignment(scrollPane, VPos.TOP);
-		    */
-		    testo.setWrappingWidth(960/3);
-		    /*
-		    // Creo un gruppo con una linea al suo interno
-		    Group gruppo = new Group(linea);
-		    // Rimedio l'elenco degli oggetti nel gruppo
-		    ObservableList<Node> lista = gruppo.getChildren();
-		    // Aggiungo al gruppo il testo creato
-		    lista.add(testo);
-		    Scene scene = new Scene(gruppo,960,540); // Dimensione della schermata
-		    */
+		    testo.setWrappingWidth(960/3); //Auto a capo del testo
 		    
 		    Group gruppo = new Group(griglia);
 		    ObservableList<Node> lista = gruppo.getChildren();
-		    // Aggiungo al gruppo il testo creato
+		    // Aggiungo al gruppo la scrollpane (nella griglia da problemi con la posizione)
 		    lista.add(scrollPane);
 		    Scene scene = new Scene(gruppo,960,540); // Dimensione della schermata
 		    scene.setFill(Color.AQUA); // Setto colore BG
 		    primaryStage.setScene(scene);
-			primaryStage.setTitle("LR1 Solver"); // Titolo della schermata
+			primaryStage.setTitle("LR(1) Solver"); // Titolo della schermata
 			primaryStage.setResizable(false);
 			primaryStage.show();
 		} catch(Exception e) {

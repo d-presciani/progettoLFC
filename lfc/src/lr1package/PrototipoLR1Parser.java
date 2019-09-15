@@ -116,15 +116,16 @@ public class PrototipoLR1Parser extends Parser {
 		return ntNew;
 	   }
 	   
-	   public Risultati solve(String fileName) {
-			return classificatore.solve(listaNT, listaReg,fileName);
+	   public Risultati solve() {
+			return classificatore.solve(listaNT, listaReg);
 		}
 
 
 
 	// $ANTLR start "lr1"
 	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:101:1: lr1 : pr ( ( ar )+ ) ;
-	public final void lr1() throws RecognitionException {
+	public final String lr1() throws RecognitionException {
+		String retMex = "";
 		try {
 			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:101:5: ( pr ( ( ar )+ ) )
 			// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:102:2: pr ( ( ar )+ )
@@ -154,7 +155,7 @@ public class PrototipoLR1Parser extends Parser {
 					// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:105:7: ar
 					{
 					pushFollow(FOLLOW_ar_in_lr171);
-					ar();
+					retMex += ar();
 					state._fsp--;
 
 					}
@@ -177,11 +178,11 @@ public class PrototipoLR1Parser extends Parser {
 							nt.controlloProduzioni();
 						}
 					} catch (ErroreSemantico e){
-						//TODO
-						System.err.println("\nERRORE! " + e.getMessage() + "\n\nPremere INVIO per uscire dal programma.");
-						capitano.nextLine();
+						retMex += "\nERRORE! " + e.getMessage();
+						//TODO commentato, non so perché ora va, con non so perché non va !!!
+						//capitano.nextLine();
 						capitano.close();
-						System.exit(0);
+						//System.exit(0);
 					}
 				
 			}
@@ -192,6 +193,7 @@ public class PrototipoLR1Parser extends Parser {
 			recover(input,re);
 		}
 		finally {
+			return retMex;
 			// do for sure before leaving
 		}
 	}
@@ -232,7 +234,6 @@ public class PrototipoLR1Parser extends Parser {
 					ntSX.addRegola(regola);
 					listaDX.clear();
 					//System.out.println("LISTA DELLE PRODUZIONI:" + listaReg); // Stampa di debug (commentare in produzione)
-				
 			}
 
 		}
@@ -251,7 +252,8 @@ public class PrototipoLR1Parser extends Parser {
 	// $ANTLR start "ar"
 	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:144:1: ar : nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC ;
 	//TODO RITORNARE ERRORI DA STAMPARE
-	public final void ar() throws RecognitionException {
+	public final String ar() throws RecognitionException {
+		String retMex ="";
 		Token nxtChar=null;
 		Token charDX=null;
 		Token charDXT=null;
@@ -330,7 +332,7 @@ public class PrototipoLR1Parser extends Parser {
 						listaReg.add(regola);
 					} else {
 						//TODO
-						System.out.println("ATTENZIONE! La produzione " + regola + " è stata inserita due volte!\nVerrà considerata una volta sola.\n");
+						retMex += "ATTENZIONE! La produzione " + regola + " è stata inserita due volte!\nVerrà considerata una volta sola.\n";
 					}
 					// Associo la regola al non terminale
 					ntSX.addRegola(regola);
@@ -346,6 +348,7 @@ public class PrototipoLR1Parser extends Parser {
 			recover(input,re);
 		}
 		finally {
+			return retMex;
 			// do for sure before leaving
 		}
 	}
