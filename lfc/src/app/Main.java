@@ -189,7 +189,7 @@ public final class Main extends Application{
 		    scene.setFill(Color.valueOf("#FFFFC2")); // Setto colore BG
 		    primaryStage.setScene(scene);
 			primaryStage.setTitle("LR(1) Solver"); // Titolo della schermata
-			primaryStage.getIcons().add(new Image("file:./jack.png"));
+			primaryStage.getIcons().add(new Image(Main.class.getResourceAsStream("jack.png")));
 			primaryStage.setResizable(false);
 			primaryStage.show();
 			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
