@@ -177,7 +177,7 @@ public class PrototipoLR1Parser extends Parser {
 			 */
 			//Qui se ho una regola in corso di creazione significa che ho missato un ;
 			if(ntSX!=null) {
-				retMex += "ATTENZIONE: manca un ; a fine file";
+				retMex += "ATTENZIONE: manca un ; a fine file\n";
 			}
 			
 			/*
@@ -191,7 +191,7 @@ public class PrototipoLR1Parser extends Parser {
 							nt.controlloProduzioni();
 						}
 					} catch (ErroreSemantico e){
-						retMex += "\nERRORE! " + e.getMessage();
+						retMex += "ERRORE! " + e.getMessage()+"\n";
 						//TODO commentato, non so perché ora va, con non so perché non va !!!
 						//capitano.nextLine();
 						capitano.close();

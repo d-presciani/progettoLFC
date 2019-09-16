@@ -49,21 +49,30 @@ public final class Main extends Application{
 	@Override
 	public void start(Stage primaryStage) {
 		try {
+			Image jackGrafo = new Image("file:./jackGrafo.png",613,533,false, false);
+			
 		    // Creo un testo (non casella)
+			ScrollPane scrollText = new ScrollPane();
 		    Text testo = new Text();
-		    testo.setFont(new Font(22));
-		    testo.setText("Selezionare un file di testo con la grammatica da identificare");		    
+		    testo.setTranslateX(10);
+		    testo.setFont(new Font(18));
+		    testo.setText("Selezionare un file di testo con la grammatica da identificare");
+		    scrollText.setPrefHeight(500);
+		    scrollText.setContent(testo);
+		    scrollText.setTranslateX(10);
 		    
 		    // Creo i due bottoni
 		    Button btnCarica = new Button("Carica file");
 		    Button btnSalvaGrafico = new Button("Genera e mostra grafo");
+		    btnCarica.setFont(new Font(15));
+		    btnSalvaGrafico.setFont(new Font(15));
 		    btnSalvaGrafico.setDisable(true);
 		    		    
 		    //Immagine 
-		    ImageView imW = new ImageView(immagine);
+		    ImageView imW = new ImageView(jackGrafo);
 		    imW.resize(960/6*4, 540);
 		    ScrollPane scrollPane = new ScrollPane();
-	        scrollPane.setPrefSize(960/6*3.85, 540);
+	        scrollPane.setPrefSize(960/6*3.85, 535);
 	        scrollPane.setPrefViewportWidth(960/6*4);
 	        scrollPane.setPrefViewportHeight(540);
 	        scrollPane.setVbarPolicy(ScrollBarPolicy.AS_NEEDED);
@@ -92,6 +101,7 @@ public final class Main extends Application{
 					dialog.dispose();
 					if(dialog.getFile() == null) {
 						testo.setText("Nessun file selezionato, selezionare un file");
+						imW.setImage(jackGrafo);
 					} else {
 						CommonTokenStream tokens;
 						
@@ -107,12 +117,12 @@ public final class Main extends Application{
 						    }
 					    	String err = "";
 						    for (int i=0;i<parser.getErrorList().size();i++) {
-						    	err += (i+1) + ".\t" + parser.getErrorList().get(i);
+						    	err += (i+1) + ".\t" + parser.getErrorList().get(i) + "\n";
 						    }
 						    testo.setText(err);
 						} catch (Exception e) {
 							errore = true;
-							testo.setText(testo.getText() + "\nParsing con ANTLR abortito\n\n");
+							testo.setText(testo.getText() + "\nParsing con ANTLR abortito\n");
 						}
 					  	if(retMex.contains("ATTENZIONE: manca un ; a fine file")) {
 					  		testo.setText(testo.getText() + retMex);
@@ -121,14 +131,14 @@ public final class Main extends Application{
 					  		ris = null;
 					  		ris = parser.solve();
 					  		primaryStage.setTitle("LR(1) Solver - " + fileName); // Titolo della schermata
-					  		testo.setText(retMex + "\n" + ris.getMessaggi());
+					  		testo.setText(retMex + ris.getMessaggi());
 					  		inputUtente.close();
 							btnSalvaGrafico.setDisable(false);
 					  	}
 					  	/*
 					  	inputUtente.nextLine();
 					  	inputUtente.close();*/
-					  	imW.setImage(null);
+					  	imW.setImage(jackGrafo);
 					}
 				}
 			});
@@ -159,20 +169,23 @@ public final class Main extends Application{
 
 		    griglia.add(btnCarica, 0, 0, 1, 1);
 		    griglia.add(btnSalvaGrafico, 1, 0, 1, 1);
-		    griglia.add(testo, 0, 1, 2, 9);
-
+		    //griglia.add(testo, 0, 1, 2, 9);
+		    griglia.add(scrollText, 0, 1, 2, 9);
+		    
 		    GridPane.setHalignment(btnCarica, HPos.CENTER);
 		    GridPane.setHalignment(btnSalvaGrafico, HPos.CENTER);
-		    GridPane.setValignment(testo, VPos.TOP);
-		    GridPane.setHalignment(testo, HPos.CENTER);
-		    testo.setWrappingWidth(960/3); //Auto a capo del testo
+		    //GridPane.setValignment(testo, VPos.TOP);
+		    //GridPane.setHalignment(testo, HPos.CENTER);
+		    GridPane.setValignment(scrollText, VPos.TOP);
+		    GridPane.setHalignment(scrollText, HPos.CENTER);
+		    testo.setWrappingWidth(960/3.4); //Auto a capo del testo
 		    
 		    Group gruppo = new Group(griglia);
 		    ObservableList<Node> lista = gruppo.getChildren();
 		    // Aggiungo al gruppo la scrollpane (nella griglia da problemi con la posizione)
 		    lista.add(scrollPane);
 		    Scene scene = new Scene(gruppo,960,540); // Dimensione della schermata
-		    scene.setFill(Color.LAWNGREEN); // Setto colore BG
+		    scene.setFill(Color.valueOf("#FFFFC2")); // Setto colore BG
 		    primaryStage.setScene(scene);
 			primaryStage.setTitle("LR(1) Solver"); // Titolo della schermata
 			primaryStage.getIcons().add(new Image("file:./jack.png"));

@@ -75,7 +75,7 @@ public class Solver {
 			System.out.println("\nLa grammatica inserita è LR(1)"); //NOPMD
 			return true;
 			*/
-			return new Risultati(nodi, listaTransizioni, "La grammatica inserita è LR(1)");
+			return new Risultati(nodi, listaTransizioni, "La grammatica inserita è LR(1)\n");
 			
 		} else {
 			/*
