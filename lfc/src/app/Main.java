@@ -23,6 +23,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
@@ -191,10 +192,17 @@ public final class Main extends Application{
 			primaryStage.getIcons().add(new Image("file:./jack.png"));
 			primaryStage.setResizable(false);
 			primaryStage.show();
+			primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+				
+				@Override
+				public void handle(WindowEvent event) {
+					// TODO Auto-generated method stub
+					System.exit(0);
+				}
+			});
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
-		
 		
 	}
 		
