@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<launch4jConfig>
+  <dontWrapJar>false</dontWrapJar>
+  <headerType>gui</headerType>
+  <jar>C:\Users\Matteo\Documents\GitKraken\progettoLFC\eseguibile\Yaaaaaaaaar.jar</jar>
+  <outfile>C:\Users\Matteo\Desktop\Yaaaaar.exe</outfile>
+  <errTitle></errTitle>
+  <cmdLine></cmdLine>
+  <chdir>.</chdir>
+  <priority>normal</priority>
+  <downloadUrl>http://java.com/download</downloadUrl>
+  <supportUrl></supportUrl>
+  <stayAlive>false</stayAlive>
+  <restartOnCrash>false</restartOnCrash>
+  <manifest></manifest>
+  <icon>C:\Users\Matteo\Downloads\jack.ico</icon>
+  <jre>
+    <path></path>
+    <bundledJre64Bit>false</bundledJre64Bit>
+    <bundledJreAsFallback>false</bundledJreAsFallback>
+    <minVersion>1.8.0</minVersion>
+    <maxVersion></maxVersion>
+    <jdkPreference>preferJre</jdkPreference>
+    <runtimeBits>64/32</runtimeBits>
+  </jre>
+  <versionInfo>
+    <fileVersion>1.0.0.0</fileVersion>
+    <txtFileVersion>1.0.0.0</txtFileVersion>
+    <fileDescription>Riconoscitore Linguaggi LR(1)</fileDescription>
+    <copyright>Filice - Gusmini - Presciani</copyright>
+    <productVersion>1.0.0.0</productVersion>
+    <txtProductVersion>1.0.0.0</txtProductVersion>
+    <productName>Riconoscitore Linguaggi LR(1)</productName>
+    <companyName></companyName>
+    <internalName>Riconoscitore Linguaggi LR(1)</internalName>
+    <originalFilename>Yaaaaar.exe</originalFilename>
+    <trademarks></trademarks>
+    <language>ITALIAN</language>
+  </versionInfo>
+</launch4jConfig>
