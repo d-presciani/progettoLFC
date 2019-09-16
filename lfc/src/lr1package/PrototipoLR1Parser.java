@@ -170,6 +170,19 @@ public class PrototipoLR1Parser extends Parser {
 			}
 
 			}
+			
+			
+			/*
+			 * 
+			 */
+			//Qui se ho una regola in corso di creazione significa che ho missato un ;
+			if(ntSX!=null) {
+				retMex += "ATTENZIONE: manca un ; a fine file";
+			}
+			
+			/*
+			 * 
+			 */
 
 
 					// Controllo che la grammatica non presenti terminali senza produzioni associate
@@ -306,7 +319,8 @@ public class PrototipoLR1Parser extends Parser {
 					break loop2;
 				}
 			}
-
+			
+			// TODO teoricamente qui matcha il ;
 			match(input,SC,FOLLOW_SC_in_ar165); 
 				
 					RegolaDiProduzione regola;
@@ -336,6 +350,7 @@ public class PrototipoLR1Parser extends Parser {
 					ntSX.addRegola(regola);
 					// Pulizia della lista temporanea per conservare il lato destro della produzione
 					listaDX.clear();
+					ntSX = null;
 					//System.out.println("LISTA DELLE PRODUZIONI:" + listaReg); // Stampa di debug (commentare in produzione)
 				
 			}

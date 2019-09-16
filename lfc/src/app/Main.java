@@ -114,7 +114,10 @@ public final class Main extends Application{
 							errore = true;
 							testo.setText(testo.getText() + "\nParsing con ANTLR abortito\n\n");
 						}
-					  	if(!errore) {
+					  	if(retMex.contains("ATTENZIONE: manca un ; a fine file")) {
+					  		testo.setText(testo.getText() + retMex);
+					  	}
+					  	else if(!errore) {
 					  		ris = null;
 					  		ris = parser.solve();
 					  		primaryStage.setTitle("LR(1) Solver - " + fileName); // Titolo della schermata
@@ -172,6 +175,7 @@ public final class Main extends Application{
 		    scene.setFill(Color.LAWNGREEN); // Setto colore BG
 		    primaryStage.setScene(scene);
 			primaryStage.setTitle("LR(1) Solver"); // Titolo della schermata
+			primaryStage.getIcons().add(new Image("file:./jack.png"));
 			primaryStage.setResizable(false);
 			primaryStage.show();
 		} catch(Exception e) {
