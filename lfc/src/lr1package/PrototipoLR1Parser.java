@@ -251,7 +251,6 @@ public class PrototipoLR1Parser extends Parser {
 
 	// $ANTLR start "ar"
 	// C:\\Users\\Luka8\\Desktop\\progettoLFC\\PrototipoLR1.g:144:1: ar : nxtChar= NT EQ (charDX= NT |charDXT= CT )* SC ;
-	//TODO RITORNARE ERRORI DA STAMPARE
 	public final String ar() throws RecognitionException {
 		String retMex ="";
 		Token nxtChar=null;
@@ -331,7 +330,6 @@ public class PrototipoLR1Parser extends Parser {
 					if(!presente){
 						listaReg.add(regola);
 					} else {
-						//TODO
 						retMex += "ATTENZIONE! La produzione " + regola + " è stata inserita due volte!\nVerrà considerata una volta sola.\n";
 					}
 					// Associo la regola al non terminale

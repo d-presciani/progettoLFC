@@ -15,10 +15,13 @@ import org.jgrapht.graph.*;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -112,6 +115,16 @@ public class JGraphXDrawer extends JApplet{
 		final String file = dialog.getDirectory() + dialog.getFile();
 		risultato.path = file;
 		if(file.endsWith(".png") || file.endsWith(".jpg") || file.endsWith(".jpeg")) {
+			
+			try {
+				// test viene usato per memorizzare il risultato del calcolo della path solamente per vedere se viene lanciata o meno l'eccezzione
+				@SuppressWarnings("unused")
+				Path test = Paths.get(System.getProperty("user.dir")).relativize(Paths.get(risultato.getPath()));
+			} catch (Exception e) {
+				risultato.esito ="ATTENZIONE: l'immagine deve essere salvata nello stesso disco dal quale si lancia il programma";
+				return risultato;
+			}
+
 			BufferedImage image = mxCellRenderer.createBufferedImage(jgxAdapter, null, 1, Color.WHITE, true, null);
 	        try {
 				ImageIO.write(image, "PNG", new File(file));

@@ -78,6 +78,9 @@ public final class Main extends Application{
 		    btnCarica.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent event) {
+					btnSalvaGrafico.setDisable(true);
+					ris = null;
+					retMex = "";
 					final Scanner inputUtente = new Scanner(System.in);
 					// Richiesta del file di input all'utente
 					final FileDialog dialog = new FileDialog((Frame)null, "Scegliere il file da aprire");
@@ -94,36 +97,35 @@ public final class Main extends Application{
 						
 					  	boolean errore = false;
 					  	try {
-								testo.setText("IDENTIFICAZIONE GRAMMATICHE LR(1)\n"); 
-								PrototipoLR1Lexer lexer = new PrototipoLR1Lexer(new ANTLRReaderStream(new FileReader(file)));
-								tokens = new CommonTokenStream(lexer);
+							testo.setText("IDENTIFICAZIONE GRAMMATICHE LR(1)\n"); 
+							PrototipoLR1Lexer lexer = new PrototipoLR1Lexer(new ANTLRReaderStream(new FileReader(file)));
+							tokens = new CommonTokenStream(lexer);
 						    parser = new PrototipoLR1Parser(tokens);
 						    retMex = parser.lr1();
 						    if(parser.getErrorList().size()>0) {
 						    	errore = true;
 						    }
-						    	String err = "";
-							    for (int i=0;i<parser.getErrorList().size();i++) {
-							    	err += (i+1) + ".\t" + parser.getErrorList().get(i);
-							    }
-							    testo.setText(err);
-							} catch (Exception e) {
-								System.out.println("eccezione catturata");
-								errore = true;
-								testo.setText(testo.getText() + "\nParsing con ANTLR abortito\n\n");
-							}
+					    	String err = "";
+						    for (int i=0;i<parser.getErrorList().size();i++) {
+						    	err += (i+1) + ".\t" + parser.getErrorList().get(i);
+						    }
+						    testo.setText(err);
+						} catch (Exception e) {
+							errore = true;
+							testo.setText(testo.getText() + "\nParsing con ANTLR abortito\n\n");
+						}
 					  	if(!errore) {
 					  		ris = null;
 					  		ris = parser.solve();
 					  		primaryStage.setTitle("LR(1) Solver - " + fileName); // Titolo della schermata
 					  		testo.setText(retMex + "\n" + ris.getMessaggi());
 					  		inputUtente.close();
+							btnSalvaGrafico.setDisable(false);
 					  	}
 					  	/*
 					  	inputUtente.nextLine();
 					  	inputUtente.close();*/
 					  	imW.setImage(null);
-						btnSalvaGrafico.setDisable(false);
 					}
 				}
 			});
@@ -167,7 +169,7 @@ public final class Main extends Application{
 		    // Aggiungo al gruppo la scrollpane (nella griglia da problemi con la posizione)
 		    lista.add(scrollPane);
 		    Scene scene = new Scene(gruppo,960,540); // Dimensione della schermata
-		    scene.setFill(Color.AQUA); // Setto colore BG
+		    scene.setFill(Color.LAWNGREEN); // Setto colore BG
 		    primaryStage.setScene(scene);
 			primaryStage.setTitle("LR(1) Solver"); // Titolo della schermata
 			primaryStage.setResizable(false);
