@@ -7,6 +7,11 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import solver.Carattere;
+import solver.NonTerminale;
+import solver.RegolaDiProduzione;
+import solver.Terminale;
+
 class RegolaDiProduzioneTest {
 
 	@Test

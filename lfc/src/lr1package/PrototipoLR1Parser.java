@@ -2,8 +2,9 @@
 
   package lr1package;
   import myPackage.*;
-  import solver.*;
-  import java.util.LinkedList;
+import solver.*;
+
+import java.util.LinkedList;
   import java.util.Scanner;
 
 

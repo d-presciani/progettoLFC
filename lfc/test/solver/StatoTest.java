@@ -10,7 +10,6 @@ import org.junit.jupiter.api.Test;
 
 
 
-/*
 class StatoTest {
 
 	@Test
@@ -470,7 +469,7 @@ class StatoTest {
 		s.aggiungiCore(reg5);
 		s.regoleCore.get(1).avanzaPuntino();
 		LinkedList<Stato> listaStati = new LinkedList<Stato>();
-		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		LinkedList<Transizione> listaTransizioni = new LinkedList<Transizione>();
 		int nStati = listaStati.size();
 		s.espandiStato(listaStati, listaTransizioni);
 		assertEquals(nStati + 5, listaStati.size());
@@ -540,7 +539,7 @@ class StatoTest {
 			s3.aggiungiCore(reg3);
 			s3.aggiungiCore(reg1);
 			LinkedList<Stato> listaStati = new LinkedList<Stato>();
-			LinkedList<String> listaTransizioni = new LinkedList<String>();
+			LinkedList<Transizione> listaTransizioni = new LinkedList<Transizione>();
 			listaStati.add(s1);
 			listaStati.add(s2);
 			listaStati.add(s3);
@@ -598,7 +597,7 @@ class StatoTest {
 		ntc.calcolaAnnullabile();
 		s.aggiungiCore(reg3);
 		LinkedList<Stato> listaStati = new LinkedList<Stato>();
-		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		LinkedList<Transizione> listaTransizioni = new LinkedList<Transizione>();
 		int nStati = listaStati.size();
 		s.espandiStato(listaStati, listaTransizioni);
 		assertEquals(nStati + 4, listaStati.size());
@@ -669,7 +668,7 @@ class StatoTest {
 		reg2.addSeguito("b");
 		s3.aggiungiCore(reg2);
 		LinkedList<Stato> listaStati = new LinkedList<Stato>();
-		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		LinkedList<Transizione> listaTransizioni = new LinkedList<Transizione>();
 		listaStati.add(s1);
 		listaStati.add(s2);
 		listaStati.add(s3);
@@ -707,7 +706,7 @@ class StatoTest {
 		s.aggiungiCore(reg2);
 		s.regoleCore.get(1).avanzaPuntino();
 		LinkedList<Stato> listaStati = new LinkedList<Stato>();
-		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		LinkedList<Transizione> listaTransizioni = new LinkedList<Transizione>();
 		s.espandiStato(listaStati, listaTransizioni);
 		assertTrue(s.erroreLR1);
 	}
@@ -754,7 +753,7 @@ class StatoTest {
 		s.aggiungiCore(reg3);
 		s.aggiungiCore(reg);
 		LinkedList<Stato> listaStati = new LinkedList<Stato>();
-		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		LinkedList<Transizione> listaTransizioni = new LinkedList<Transizione>();
 		s.espandiStato(listaStati, listaTransizioni);
 		assertTrue(s.erroreLR1);
 	}
@@ -783,7 +782,7 @@ class StatoTest {
 		s.aggiungiCore(reg3);
 		s.aggiungiCore(reg);
 		LinkedList<Stato> listaStati = new LinkedList<Stato>();
-		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		LinkedList<Transizione> listaTransizioni = new LinkedList<Transizione>();
 		s.espandiStato(listaStati, listaTransizioni);
 		assertTrue(s.erroreLR1);
 	}
@@ -811,7 +810,7 @@ class StatoTest {
 		nta.calcolaAnnullabile();
 		s.aggiungiCore(reg);
 		LinkedList<Stato> listaStati = new LinkedList<Stato>();
-		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		LinkedList<Transizione> listaTransizioni = new LinkedList<Transizione>();
 		int counterStato = Stato.counter - 1;
 		s.espandiStato(listaStati, listaTransizioni);
 		String check = "";
@@ -846,7 +845,7 @@ class StatoTest {
 		parteDx.add(tb);
 		s.aggiungiCore(reg1);
 		LinkedList<Stato> listaStati = new LinkedList<Stato>();
-		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		LinkedList<Transizione> listaTransizioni = new LinkedList<Transizione>();
 		int counterStato = Stato.counter - 1;
 		s.espandiStato(listaStati, listaTransizioni);
 		String check = "";
@@ -854,4 +853,4 @@ class StatoTest {
 		check += "S->.b {[b]} \n";
 		assertEquals(check, s.toString());
 	}
-}*/
+}
