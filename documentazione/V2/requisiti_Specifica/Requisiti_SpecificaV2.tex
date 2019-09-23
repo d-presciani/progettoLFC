@@ -70,12 +70,14 @@ Scopo del programma che si andrà a realizzare è il riconoscimento di una gramm
 Il programma deve consentire all'utente le seguenti azioni:
 \begin{itemize}
 \item selezione del file di input da sottoporre al parsing e all'identificazione.
+\item salvataggio del grafo relativo alla grammatica inserita
 \end{itemize}
 Il programma deve fornire le seguenti funzionalità:
 \begin{itemize}
 \item effettuare il parsing del file ricevuto in input, individuando eventuali errori sintattici, lessicali o semantici;
 \item qualora vengano individuati errori di qualsiasi genere nella fase di parsing, il programma deve comunicare i dettagli relativi agli errori individuati all'utente;
 \item qualora non vengano individuati errori nella fase di parsing, il programma deve procedere nell'identificare la grammatica come grammatica $LR \left( 1 \right)$ o non $LR \left( 1 \right)$.
+\item qualora la grammatica risulti $LR \left( 1 \right)$ il programma deve permettere la generazione di un grafo per visualizzare la struttura della grammatica.
 \end{itemize}  
 
 \subsection{Struttura corretta della grammatica}\label{struttura}
@@ -139,16 +141,38 @@ Gli errori semantici si verificano nei seguenti casi:
 \item \textbf{Procedimento standard:}
 \begin{enumerate}[label=\arabic*.]
 \item l'utente avvia il programma;
+\item l'utente clicca il pulsante "carica file";
 \item l'utente seleziona il file di input desiderato;
 \item il programma esegue il parsing e l'analisi del file di input;
-\item il programma mostra a schermo l'esito dell'analisi della grammatica;
-\item l'utente chiude il programma.
+\item il programma mostra a schermo l'esito dell'analisi della grammatica.
 \end{enumerate}
 \textbf{Procedimenti alternativi o eccezioni:}
 \begin{itemize}
 \item allo step $3$, il programma rileva errori nella grammatica
 \begin{itemize}[label=]
-\item viene mostrato un messaggio d'errore contenente informazioni relative all'errore individuato, l'utente chiude il programma e, corretta la grammatica, la procedura riparte dallo step $1$
+\item viene mostrato un messaggio d'errore contenente informazioni relative all'errore individuato, l'utente, corretta la grammatica riprende la procedura dallo step $2$
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\subsection{UC2 - Visualizzazione della grammatica analizzata}
+\begin{itemize}[label=]
+\item \textbf{Descrizione:} visualizzazione della grammatica $LR\left( 1 \right)$ analizzata precedentemente
+\item \textbf{Attori coinvolti:} utente
+\item \textbf{Precondizioni:} analisi di una grammatica avvenuta correttamente
+\item \textbf{Trigger:} necessità di visualizzare la grammatica identificata
+\item \textbf{Post condizioni:} creazione di un file contenente il grafo relativo alla grammatica e visualizzazione dello stesso
+\item \textbf{Procedimento standard:}
+\begin{enumerate}[label=\arabic*.]
+\item l'utente clicca il pulsante "genera e mostra grafo";
+\item l'utente seleziona la posizione dove salvare il grafo e il formato del file creato;
+\item il programma genera e mostra a schermo il grafo relativo alla grammatica.
+\end{enumerate}
+\textbf{Procedimenti alternativi o eccezioni:}
+\begin{itemize}
+\item allo step $3$, il programma rileva un errore in fase di generazione dell'immagine
+\begin{itemize}[label=]
+\item viene mostrato un messaggio d'errore contenente informazioni relative all'errore individuato, l'utente, riprende la procedura dal punto $1$ seguendo le indicazioni fornite dal programma
 \end{itemize}
 \end{itemize}
 \end{itemize}
@@ -157,7 +181,8 @@ Gli errori semantici si verificano nei seguenti casi:
 Il programma, definito in linguaggio Java, sarà composto di due moduli:
 \begin{itemize}
 \item un modulo generato da ANTLR, che si occuperà del parsing e dell'individuazione di errori lessicali e sintattici;
-\item un modulo scritto manualmente che si occuperà dell'analisi della grammatica e della sua classificazione.
+\item un modulo scritto manualmente che si occuperà dell'analisi della grammatica e della sua classificazione;
+\item un secondo modulo scritto manualmente che si occuperà della creazione di un'interfaccia grafica.
 \end{itemize}
 L'interfacciamento con l'utente avverrà attraverso una CLI (Command Line Interface).
 \pagebreak
