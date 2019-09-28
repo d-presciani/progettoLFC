@@ -5,10 +5,10 @@ import java.util.LinkedList;
 public class Solver {
 	
 	
-	public void solve(LinkedList<NonTerminale> listaNT, LinkedList<RegolaDiProduzione> listaReg) {
-		
+	public Risultati solve(LinkedList<NonTerminale> listaNT, LinkedList<RegolaDiProduzione> listaReg) {
+		Stato.counter = 1;
 		LinkedList<Stato> listaStati = new LinkedList<Stato>();
-		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		LinkedList<Transizione> listaTransizioni = new LinkedList<Transizione>();
 		
 		//Calcolo annullabilità regole
 		for(RegolaDiProduzione reg : listaReg) {
@@ -22,38 +22,44 @@ public class Solver {
 		
 		//Creo il primo stato
 		Stato mom = new Stato();
-		try {
-			mom.aggiungiCore(listaReg.get(0));
-		} catch (ErroreSemantico e) {
-			System.err.println("ERRORE SEMANTICO! " + e.getMessage());
-			System.exit(0);
-		}
+		mom.aggiungiCore(listaReg.get(0));
 		listaStati.add(mom);
 		
 		int i=0;
 		
 		// Espando tutti gli stati
 		while(i<listaStati.size()) {
-			try {
-				listaStati.get(i).espandiStato(listaStati, listaTransizioni);
-			} catch (ErroreSemantico e) {
-				System.err.println("ERRORE SEMANTICO!" + e.getMessage());
-				System.exit(0);
-			}
+			listaStati.get(i).espandiStato(listaStati, listaTransizioni);
 			i++;
 		}
 		
-		System.out.println("Numero stati: " + listaStati.size());
+		// OLD Stampo in console
+		/*
+		System.out.println("Numero stati: " + listaStati.size()); //NOPMD
 		
-		System.out.println("\nElenco degli stati:");
+		System.out.println("\nElenco degli stati:"); //NOPMD
 		for(Stato stt : listaStati) {
-			System.out.println(stt.toString());
+			System.out.println(stt.toString()); //NOPMD
 		}
 		
-		System.out.println("\nElenco delle transizioni");
-		for(String transizione : listaTransizioni) {
-			System.out.println(transizione);
+		System.out.println("\nElenco delle transizioni"); //NOPMD
+		for(Transizione transizione : listaTransizioni) {
+			System.out.println(transizione.toString()); //NOPMD
 		}
+		*/
+		
+		
+		//NEW: Stampo il grafo
+		LinkedList<String> nodi = new LinkedList<String>();
+		for(Stato st : listaStati) {
+			nodi.add(st.toGraph());
+		}
+		
+		// OLD test per disegnare grafico
+		/*
+		JGraphXDrawer drawer = new JGraphXDrawer();
+		drawer.draw(nodi, listaTransizioni, fileName);
+		*/
 		
 		// Controllo che la grammatica sia LR(1)
 		boolean isLR1 = true;
@@ -65,14 +71,31 @@ public class Solver {
 		
 		// Stampo risultato controllo
 		if(isLR1) {
-			System.out.println("\nLa grammatica inserita è LR(1)");
+			/*
+			System.out.println("\nLa grammatica inserita è LR(1)"); //NOPMD
+			return true;
+			*/
+			return new Risultati(nodi, listaTransizioni, "La grammatica inserita è LR(1)\n");
+			
 		} else {
-			System.out.println("\nLa grammagita inserita non è LR(1), gli stati che contengono conflitti sono:\n");
+			/*
+			System.out.println("\nLa grammatica inserita non è LR(1), gli stati che contengono conflitti sono:\n"); //NOPMD
 			for(Stato stt : listaStati) {
 				if(stt.erroreLR1) {
-					System.out.println("S"+stt.numeroStato);
+					System.out.println("S"+stt.numeroStato); //NOPMD
 				}
 			}
+			return false;
+			*/
+			String tempRis = "";
+			tempRis += "La grammatica inserita non è LR(1), gli stati che contengono conflitti sono:\n";
+			for(Stato stt : listaStati) {
+				if(stt.erroreLR1) {
+					tempRis += "S"+stt.numeroStato + " ";
+				}
+			}
+			Stato.resetCounter();
+			return new Risultati(nodi, listaTransizioni, tempRis);
 		}
 		
 	}

@@ -1,7 +1,0 @@
-S0->T/cjswa;
-T->oLb;
-T->oLgCe;
-L->;
-L->aL;
-C->TC;
-C->;

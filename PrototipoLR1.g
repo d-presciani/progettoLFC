@@ -10,6 +10,7 @@ options {
   import myPackage.*;
   import solver.*;
   import java.util.LinkedList;
+  import java.util.Scanner;
 }
 
 @lexer::header{
@@ -30,6 +31,8 @@ options {
   List<Carattere> listaDX;
   // Classificatore della grammatica
   Solver classificatore;
+  // Scanner per input utente
+  Scanner capitano = new Scanner(System.in);
   void init () {
     env = new Environment();
     listaNT = new LinkedList<NonTerminale>();
@@ -101,13 +104,16 @@ lr1	:
 	}
 		pr (ar+)
 	{
-		// Controllo che la grammatica non generi loop nel calcolo degli inizi
+		// Controllo che la grammatica non presenti terminali senza produzioni associate
 		try{
 			for(NonTerminale nt : listaNT){
 				nt.controlloProduzioni();
 			}
 		} catch (ErroreSemantico e){
-			System.err.println("\nERRORE! " + e.getMessage());
+			System.err.println("\nERRORE! " + e.getMessage() + "\n\nPremere INVIO per uscire dal programma.");
+			capitano.nextLine();
+			capitano.close();
+			System.exit(0);
 		}
 	}
 	;
