@@ -7,6 +7,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import solver.RegolaDiProduzione;
+import solver.Terminale;
+
 class TerminaleTest {
 
 	@Test

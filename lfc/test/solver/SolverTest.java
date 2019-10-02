@@ -6,6 +6,12 @@ import java.util.LinkedList;
 
 import org.junit.jupiter.api.Test;
 
+import solver.Carattere;
+import solver.NonTerminale;
+import solver.RegolaDiProduzione;
+import solver.Solver;
+import solver.Terminale;
+
 class SolverTest {
 
 	@Test
@@ -33,8 +39,9 @@ class SolverTest {
 		listaRegole.add(reg1);
 				
 		Solver risolutore = new Solver();
-		
-		assertTrue(risolutore.solve(listaNT, listaRegole));		
+
+		Risultati ris  = risolutore.solve(listaNT, listaRegole);
+		assertTrue(ris.messaggi.contains("La grammatica inserita è LR(1)"));		
 	}
 	
 	@Test
@@ -69,7 +76,8 @@ class SolverTest {
 		
 		Solver risolutore = new Solver();
 		
-		assertFalse(risolutore.solve(listaNT, listaRegole));
+		Risultati ris  = risolutore.solve(listaNT, listaRegole);
+		assertFalse(ris.messaggi.contains("La grammatica inserita è LR(1)"));
 	}
 
 }

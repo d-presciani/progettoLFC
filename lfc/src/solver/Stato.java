@@ -19,6 +19,10 @@ public class Stato {
 		erroreLR1 = false;
 	}
 	
+	public static void resetCounter () {
+		Stato.counter = 1;
+	}
+	
 	// Aggiunge una regola
 	public void aggiungiCore(RegolaDiProduzione rdp){
 		// Aggiungo la regola ricevuta alle regole core
@@ -181,8 +185,7 @@ public class Stato {
 	
 	
 	// Funzione per generazione di nuovi stati
-	// TODO: Aggiungere caso che una regola di completamento porta ad aggiungre nuovi seguiti alle altre regole di completamento
-	public void espandiStato(LinkedList<Stato> listaStati, LinkedList<String> listaTransizioni) {
+	public void espandiStato(LinkedList<Stato> listaStati, LinkedList<Transizione> listaTransizioni) {
 		LinkedList<String> caratteriParsati = new LinkedList<String>(); // Variabile utilizata per memorizzare i vari caratteri man mano li parso
 		
 		// Scorro tutte le regole core
@@ -253,12 +256,11 @@ public class Stato {
 							temp.aggiungiCore(reg);
 						}
 						listaStati.add(temp);
-						
-						String transizione = "S" + numeroStato + " -- " + chpasr + " --> S"+temp.numeroStato;
-						listaTransizioni.add(transizione);
+						Transizione trTemp = new Transizione(numeroStato, temp.numeroStato, chpasr);
+						listaTransizioni.add(trTemp);
 					} else {
-						String transizione = "S" + numeroStato + " -- " + chpasr + " --> S" + nroStatoDup;
-						listaTransizioni.add(transizione);
+						Transizione trTemp = new Transizione(numeroStato, nroStatoDup, chpasr);
+						listaTransizioni.add(trTemp);
 					}
 				}			
 			}			
@@ -326,12 +328,11 @@ public class Stato {
 							temp.aggiungiCore(reg);
 						}
 						listaStati.add(temp);
-						
-						String transizione = "S" + numeroStato + " -- " + chpasr + " --> S"+temp.numeroStato;
-						listaTransizioni.add(transizione);
+						Transizione trTemp = new Transizione(numeroStato, temp.numeroStato, chpasr);
+						listaTransizioni.add(trTemp);
 					} else {
-						String transizione = "S" + numeroStato + " -- " + chpasr + " --> S" + nroStatoDup;
-						listaTransizioni.add(transizione);
+						Transizione trTemp = new Transizione(numeroStato, nroStatoDup, chpasr);
+						listaTransizioni.add(trTemp);
 					}
 				}			
 			}			
@@ -370,6 +371,56 @@ public class Stato {
 			}
 		}
 		
+	}
+	
+	// Funzione per la stampa dello stato per rappresentazione grafica
+	public String toGraph() {
+		LinkedList<String> coreString = new LinkedList<String>();
+		LinkedList<String> complString = new LinkedList<String>();
+		String temp = "";
+		temp += "I"+numeroStato;
+		if(erroreLR1) {
+			temp += " (!!ERRORE LR1!!)";
+		}
+		temp += "\n";
+		coreString.add(temp);
+		for(RegolaDiProduzione reg : regoleCore) {
+			coreString.add(reg.toString() + " {" + reg.seguiti + "}\n");
+		}
+		if(regoleCompletamenti.size()!=0) {
+			for(RegolaDiProduzione reg : regoleCompletamenti) {
+				complString.add("\n" + reg.toString() + " {" + reg.seguiti + "}");
+			}
+		}
+		// Generazione separatore di lungezza dinamica
+		int min = 0;
+		for(String reg : coreString) {
+			if(reg.length() > min) {
+				min = reg.length();
+			}
+		}
+		for(String reg : complString) {
+			if(reg.length() > min) {
+				min = reg.length();
+			}
+		}
+		String sep = "";
+		for(int i=0; i<min; i++) {
+			sep += "-";
+		}
+		// Fine generazione separatore e inizio costruzione messaggio
+		String messaggio = "";
+		for(String reg : coreString) {
+			messaggio += reg;
+		}
+		if(complString.size()!=0) {
+			messaggio += sep;
+			for(String reg : complString) {
+				messaggio += reg;
+			}
+		}
+		
+		return messaggio;
 	}
 	
 	@Override

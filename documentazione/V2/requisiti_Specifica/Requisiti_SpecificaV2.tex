@@ -1,0 +1,207 @@
+\documentclass[12pt]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{fancyhdr}
+\usepackage[margin=2cm]{geometry}
+\usepackage{tocloft}
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage{graphicx}
+
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\thesection}{\arabic{section}.}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+
+\setlength{\headheight}{15pt}
+
+\pagestyle{fancy}
+\renewcommand{\footrulewidth}{0.4pt}
+\lhead{\bfseries Requisiti di sistema}
+\chead{}
+\rhead{}
+\lfoot{}
+\cfoot{}
+\rfoot{\thepage}
+
+\begin{document}
+\tableofcontents
+
+\pagebreak
+
+\section{Prefazione}
+
+\subsection{Version History}
+
+Versione 0.0 - 16/04/2019
+
+\subsection{Sommario modifiche}
+Definizione dei requisiti funzionali, dei casi d'uso, della struttura generale del software, della struttura dei test e degli strumenti utilizzati per lo sviluppo.
+
+\pagebreak
+
+\section{Introduzione}
+
+\subsection{Definizioni e glossario}
+\subsubsection*{Grammatica libera da contesto}
+In informatica e in linguistica, una grammatica libera dal contesto è una grammatica formale in cui
+ogni regola sintattica è espressa sotto forma di derivazione di un simbolo a sinistra a partire da uno
+o più simboli a destra. \par
+Ciò può essere espresso con due simbolismi equivalenti:
+\begin{enumerate}[label=\arabic*)]
+\item $S := \alpha$
+\item $S \to \alpha$
+\end{enumerate}
+dove $S$ è un simbolo detto \textit{non terminale}, sostituibile con altri simboli non terminali e/o con simboli terminali, e $\alpha$ è una sequenza di simboli non terminali e/o terminali, ossia simboli che non possono essere sostituiti con null'altro. \par
+L'espressione "libera dal contesto" si riferisce al fatto che il simbolo non terminale $S$ può sempre
+essere sostituito da $\alpha$, indipendentemente dai simboli che lo precedono o lo seguono; un linguaggio
+formale si dice libero dal contesto se esiste una grammatica libera dal contesto che lo genera.
+\subsubsection*{Parser}
+Un parser LR è un parser di tipo bottom-up per grammatiche libere da contesto che legge il proprio input partendo da sinistra verso destra, producendo una derivazione a destra. Laddove indicato come parser $LR \left( k \right)$, il $k$ si riferisce al numero di simboli letti (ma non "consumati") per prendere le decisioni di parsing.
+
+\subsection{Scopo}
+Scopo del programma che si andrà a realizzare è il riconoscimento di una grammatica LR(1) contenuta in un file di input selezionato dall'utente. \par
+
+\pagebreak
+
+\section{Requisiti funzionali}
+
+Il programma deve consentire all'utente le seguenti azioni:
+\begin{itemize}
+\item selezione del file di input da sottoporre al parsing e all'identificazione.
+\item salvataggio del grafo relativo alla grammatica inserita
+\end{itemize}
+Il programma deve fornire le seguenti funzionalità:
+\begin{itemize}
+\item effettuare il parsing del file ricevuto in input, individuando eventuali errori sintattici, lessicali o semantici;
+\item qualora vengano individuati errori di qualsiasi genere nella fase di parsing, il programma deve comunicare i dettagli relativi agli errori individuati all'utente;
+\item qualora non vengano individuati errori nella fase di parsing, il programma deve procedere nell'identificare la grammatica come grammatica $LR \left( 1 \right)$ o non $LR \left( 1 \right)$.
+\item qualora la grammatica risulti $LR \left( 1 \right)$ il programma deve permettere la generazione di un grafo per visualizzare la struttura della grammatica.
+\end{itemize}  
+
+\subsection{Struttura corretta della grammatica}\label{struttura}
+Il programma deve riconoscere come formalmente corrette (quindi prive di errori sintattici, lessicali e/o grammaticali) soltanto grammatiche che presentino la seguente struttura:
+\begin{itemize}
+\item una prima regola $pr$ che abbia come elemento di sinistra il non terminale $S0$, definita come segue
+$$
+SZ \hspace{5pt} EQ \hspace{5pt} NT \hspace{5pt} TER \hspace{5pt} SC
+$$
+\item altre $n \geq 1$ regole di produzione $ar$, che formano il resto della grammatica, definite come segue
+$$
+NT \hspace{5pt} EQ \hspace{5pt} \left( NT \left| CT \right. \right)^* \hspace{5pt} SC
+$$
+\end{itemize}
+I blocchi componenti le regole appena definite sono così traducibili:
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Simbolo} & \textbf{Caratteri} \\
+\hline
+$SZ$ & $S0$ \\
+\hline
+$EQ$ & $-> \left| \hspace{5pt} := \right.$ \\
+\hline
+$NT$ & $A \hspace{5pt} \dots \hspace{5pt} Z$ \\
+\hline
+$CT$ & $a \hspace{3pt} \dots z \left| \hspace{3pt} 0 \hspace{3pt} \dots \hspace{3pt} 9 \hspace{3pt} \right| \hspace{3pt} + \hspace{3pt} \left| \hspace{3pt} - \hspace{3pt} \right| \hspace{3pt} * \hspace{3pt} \left| \hspace{3pt} / \right.$ \\
+\hline
+$TER$ & $\text{/swa} \hspace{5pt} \left| \hspace{5pt} \text{/cjswa} \right.$ \\
+\hline
+$SC$ & $;$ \\
+\hline
+\end{tabular}
+\caption{Corrispondenza tra caratteri della grammatica e blocchi di definizione delle regole}
+\end{table}
+
+\underline{Nota:} Per la definizione della struttura delle regole è stata utilizzata la notazione formale di Backus-Naur estesa (EBNF).
+
+\subsection{Errori lessicali}
+L'utilizzo di qualsiasi carattere non riconducibile alla colonna "Caratteri" della Tabella 1 corrisponde a un errore lessicale.
+
+\subsection{Errori sintattici}
+Gli errori sintattici sono dati dal mancato rispetto della struttura delle regole $pr$ e $ar$ come definite nel paragrafo "Struttura corretta della grammatica" a pagina \pageref{struttura}.
+
+\subsection{Errori semantici}
+Gli errori semantici si verificano nei seguenti casi:
+\begin{itemize}
+\item nella grammatica è presente un carattere non terminale che non presenta regole di produzioni associate;
+\item nella grammatica è presente una regola duplicata (\underline{nota bene} questo \underline{non} è un errore bloccante).
+\end{itemize}
+\pagebreak
+\section{Casi d'uso}
+\subsection{UC1 - Analisi di una grammatica}
+\begin{itemize}[label=]
+\item \textbf{Descrizione:} identificazione di una grammatica $LR\left( 1 \right)$
+\item \textbf{Attori coinvolti:} utente
+\item \textbf{Precondizioni:} esistenza del file d'input contenente la definizione della grammatica
+\item \textbf{Trigger:} necessità di identificare una grammatica
+\item \textbf{Post condizioni:} la classificazione della grammatica viene mostrata a schermo
+\item \textbf{Procedimento standard:}
+\begin{enumerate}[label=\arabic*.]
+\item l'utente avvia il programma;
+\item l'utente clicca il pulsante "carica file";
+\item l'utente seleziona il file di input desiderato;
+\item il programma esegue il parsing e l'analisi del file di input;
+\item il programma mostra a schermo l'esito dell'analisi della grammatica.
+\end{enumerate}
+\textbf{Procedimenti alternativi o eccezioni:}
+\begin{itemize}
+\item allo step $3$, il programma rileva errori nella grammatica
+\begin{itemize}[label=]
+\item viene mostrato un messaggio d'errore contenente informazioni relative all'errore individuato, l'utente, corretta la grammatica riprende la procedura dallo step $2$
+\end{itemize}
+\end{itemize}
+\end{itemize}
+
+\subsection{UC2 - Visualizzazione della grammatica analizzata}
+\begin{itemize}[label=]
+\item \textbf{Descrizione:} visualizzazione della grammatica $LR\left( 1 \right)$ analizzata precedentemente
+\item \textbf{Attori coinvolti:} utente
+\item \textbf{Precondizioni:} analisi di una grammatica avvenuta correttamente
+\item \textbf{Trigger:} necessità di visualizzare la grammatica identificata
+\item \textbf{Post condizioni:} creazione di un file contenente il grafo relativo alla grammatica e visualizzazione dello stesso
+\item \textbf{Procedimento standard:}
+\begin{enumerate}[label=\arabic*.]
+\item l'utente clicca il pulsante "genera e mostra grafo";
+\item l'utente seleziona la posizione dove salvare il grafo e il formato del file creato;
+\item il programma genera e mostra a schermo il grafo relativo alla grammatica.
+\end{enumerate}
+\textbf{Procedimenti alternativi o eccezioni:}
+\begin{itemize}
+\item allo step $3$, il programma rileva un errore in fase di generazione dell'immagine
+\begin{itemize}[label=]
+\item viene mostrato un messaggio d'errore contenente informazioni relative all'errore individuato, l'utente, riprende la procedura dal punto $1$ seguendo le indicazioni fornite dal programma
+\end{itemize}
+\end{itemize}
+\end{itemize}
+\pagebreak
+\section{Struttura del programma}
+Il programma, definito in linguaggio Java, sarà composto di due moduli:
+\begin{itemize}
+\item un modulo generato da ANTLR, che si occuperà del parsing e dell'individuazione di errori lessicali e sintattici;
+\item un modulo scritto manualmente che si occuperà dell'analisi della grammatica e della sua classificazione;
+\item un secondo modulo scritto manualmente che si occuperà della creazione di un'interfaccia grafica.
+\end{itemize}
+L'interfacciamento con l'utente avverrà attraverso una CLI (Command Line Interface).
+\pagebreak
+\section{Programma di testing}
+Il testing del programma sarà incentrato sul modulo \textit{non} generato da ANTLR, assumendo che i controlli su quello generato da ANTLR siano già stati svolti dal produttore del tool, e sarà composto di:
+\begin{itemize}
+\item casi di test per ogni classe generata scritti in JUnit, per i quali sarà richiesta una coverage del codice $\geq 95\%$;
+\item verifiche di coverage del codice scritto tramite l'esecuzione del programma con diversi input, al fine di garantire l'assenza di dead code;
+\item analisi statica del codice tramite strumenti quali SpotBugs e PMD.
+\end{itemize}
+A ogni revisione del codice, nonché in precedenza al rilascio di una nuova versione, saranno svolti test di non regressione per evitare l'introduzione di nuovi difetti nel codice.
+\pagebreak
+\section{Strumenti utilizzati}
+\subsection{Controllo di versione}
+Per il controllo di versione verrà utilizzato Git, così da consentire il lavoro a più mani sul progetto anche qualora non ci si trovi tutti nello stesso ambiente. L'utilizzo di Git prevederà la creazione di branch secondari per gli sviluppi incrementali del programma, così da conservare sempre una versione funzionante del programma stesso all'interno del branch "master" della repository ospitante il progetto.
+\subsection{Strumenti di sviluppo}
+ANTLR sarà utilizzato per definire e generare il modulo che effettuerà il parsing del file in input contenente la grammatica da analizzare. \par
+Le classi Java generate come output da ANTLR saranno poi incluse nel progetto Eclipse, IDE utilizzato per la realizzazione del programma, per essere integrate con il modulo di analisi della grammatica che verrà invece scritto a mano all'interno di Eclipse stesso.
+\subsection{Strumenti di testing}
+Per il testing verrà utilizzato JUnit per la definizione dei casi di test e l'esecuzione dei casi stessi, mentre per quanto riguarda l'analisi statica del codice verranno usati due plugin di Eclipse: SpotBugs e PMD. \par
+Per verificare la copertura del codice durante le esecuzioni del programma verrà utilizzato lo strumento di coverage messo a disposizione da Eclipse.
+\end{document}

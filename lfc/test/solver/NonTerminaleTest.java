@@ -5,6 +5,12 @@ import static org.junit.Assert.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
+import solver.Carattere;
+import solver.ErroreSemantico;
+import solver.NonTerminale;
+import solver.RegolaDiProduzione;
+import solver.Terminale;
+
 import java.util.LinkedList;
 import java.util.List;
 

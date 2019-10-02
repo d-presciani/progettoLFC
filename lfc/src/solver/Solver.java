@@ -5,10 +5,10 @@ import java.util.LinkedList;
 public class Solver {
 	
 	
-	public boolean solve(LinkedList<NonTerminale> listaNT, LinkedList<RegolaDiProduzione> listaReg) {
-		
+	public Risultati solve(LinkedList<NonTerminale> listaNT, LinkedList<RegolaDiProduzione> listaReg) {
+		Stato.counter = 1;
 		LinkedList<Stato> listaStati = new LinkedList<Stato>();
-		LinkedList<String> listaTransizioni = new LinkedList<String>();
+		LinkedList<Transizione> listaTransizioni = new LinkedList<Transizione>();
 		
 		//Calcolo annullabilità regole
 		for(RegolaDiProduzione reg : listaReg) {
@@ -33,6 +33,8 @@ public class Solver {
 			i++;
 		}
 		
+		// OLD Stampo in console
+		/*
 		System.out.println("Numero stati: " + listaStati.size()); //NOPMD
 		
 		System.out.println("\nElenco degli stati:"); //NOPMD
@@ -41,9 +43,23 @@ public class Solver {
 		}
 		
 		System.out.println("\nElenco delle transizioni"); //NOPMD
-		for(String transizione : listaTransizioni) {
-			System.out.println(transizione); //NOPMD
+		for(Transizione transizione : listaTransizioni) {
+			System.out.println(transizione.toString()); //NOPMD
 		}
+		*/
+		
+		
+		//NEW: Stampo il grafo
+		LinkedList<String> nodi = new LinkedList<String>();
+		for(Stato st : listaStati) {
+			nodi.add(st.toGraph());
+		}
+		
+		// OLD test per disegnare grafico
+		/*
+		JGraphXDrawer drawer = new JGraphXDrawer();
+		drawer.draw(nodi, listaTransizioni, fileName);
+		*/
 		
 		// Controllo che la grammatica sia LR(1)
 		boolean isLR1 = true;
@@ -55,9 +71,14 @@ public class Solver {
 		
 		// Stampo risultato controllo
 		if(isLR1) {
+			/*
 			System.out.println("\nLa grammatica inserita è LR(1)"); //NOPMD
 			return true;
+			*/
+			return new Risultati(nodi, listaTransizioni, "La grammatica inserita è LR(1)\n");
+			
 		} else {
+			/*
 			System.out.println("\nLa grammatica inserita non è LR(1), gli stati che contengono conflitti sono:\n"); //NOPMD
 			for(Stato stt : listaStati) {
 				if(stt.erroreLR1) {
@@ -65,6 +86,16 @@ public class Solver {
 				}
 			}
 			return false;
+			*/
+			String tempRis = "";
+			tempRis += "La grammatica inserita non è LR(1), gli stati che contengono conflitti sono:\n";
+			for(Stato stt : listaStati) {
+				if(stt.erroreLR1) {
+					tempRis += "S"+stt.numeroStato + " ";
+				}
+			}
+			Stato.resetCounter();
+			return new Risultati(nodi, listaTransizioni, tempRis);
 		}
 		
 	}
