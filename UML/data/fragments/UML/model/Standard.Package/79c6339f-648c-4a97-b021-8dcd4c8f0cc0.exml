@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="graph" version="4">
+  <OBJECT>
+    <ID name="graph" mc="Standard.Package" uid="79c6339f-648c-4a97-b021-8dcd4c8f0cc0"/>
+    <PID name="uml" mc="Standard.Package" uid="69ccc457-a972-4351-a956-864a6bf874ff"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[graph]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="JGraphXDrawer" mc="Standard.Class" uid="c37b9153-f329-459c-af10-46588c1148fd"/>
+        <COMPID name="RelationshipEdge" mc="Standard.Class" uid="b22c1ec5-dce1-40ec-be03-d3227b103603"/>
+        <COMPID name="RisImmagine" mc="Standard.Class" uid="31150726-9611-4d46-bdcb-37e8eb6302af"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Infrastructure.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

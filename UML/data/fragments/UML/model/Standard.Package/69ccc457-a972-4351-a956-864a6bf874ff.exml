@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="uml" version="4">
+  <OBJECT>
+    <ID name="uml" mc="Standard.Package" uid="69ccc457-a972-4351-a956-864a6bf874ff"/>
+    <PID name="UML" mc="Standard.Project" uid="bd45f15d-5d84-4f60-942f-1ffb40264578"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[uml]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="java" mc="Standard.Package" uid="fe7c5efd-f0cd-4673-9efb-7611fd315c69"/>
+        <COMPID name="javax" mc="Standard.Package" uid="0f05e9ff-076d-4145-aeb7-85e5319ec573"/>
+        <COMPID name="graph" mc="Standard.Package" uid="79c6339f-648c-4a97-b021-8dcd4c8f0cc0"/>
+        <COMPID name="lr1package" mc="Standard.Package" uid="02744aba-06e4-4bc6-9a2e-f3dc7a616b4f"/>
+        <COMPID name="solver" mc="Standard.Package" uid="f85ab7c7-9c58-4638-8936-70649116e1e2"/>
+        <COMPID name="myPackage" mc="Standard.Package" uid="ecb37558-9828-4b69-b442-312fb7671b40"/>
+        <COMPID name="app" mc="Standard.Package" uid="362bfb18-1bcd-43a4-af94-f44c207e42ac"/>
+      </COMP>
+      <COMP relation="Product">
+        <COMPID name="uml Class diagram" mc="Standard.ClassDiagram" uid="269e9f5d-c73d-4c32-abf9-5e5e166dbedd"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

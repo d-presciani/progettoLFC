@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="UML" version="4">
+  <OBJECT>
+    <ID name="UML" mc="Standard.Project" uid="bd45f15d-5d84-4f60-942f-1ffb40264578"/>
+    <ATTRIBUTES>
+      <ATT name="ProjectContext"></ATT>
+      <ATT name="ProjectDescr"></ATT>
+      <ATT name="Name"><![CDATA[UML]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="Model">
+        <COMPID name="uml" mc="Standard.Package" uid="69ccc457-a972-4351-a956-864a6bf874ff"/>
+      </COMP>
+      <COMP relation="DiagramRoot">
+        <COMPID name="UML" mc="Infrastructure.DiagramSet" uid="58f99551-090f-40a5-99ec-748875b075b5"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="UML" version="4">
+  <OBJECT>
+    <ID name="UML" mc="Infrastructure.DiagramSet" uid="58f99551-090f-40a5-99ec-748875b075b5"/>
+    <PID name="UML" mc="Standard.Project" uid="bd45f15d-5d84-4f60-942f-1ffb40264578"/>
+    <ATTRIBUTES>
+      <ATT name="Name"><![CDATA[UML]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="Sub">
+        <COMPID name="Auto Diagrams" mc="Infrastructure.DiagramSet" uid="dc2bf0ef-a1a4-47ee-828c-13d0dd413e84"/>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

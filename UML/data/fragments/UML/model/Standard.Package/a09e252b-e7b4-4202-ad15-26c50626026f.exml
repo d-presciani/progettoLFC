@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="awt" version="4">
+  <OBJECT>
+    <ID name="awt" mc="Standard.Package" uid="a09e252b-e7b4-4202-ad15-26c50626026f"/>
+    <PID name="java" mc="Standard.Package" uid="fe7c5efd-f0cd-4673-9efb-7611fd315c69"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[awt]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Dimension" mc="Standard.Class" uid="21715737-47b2-4233-b632-1d9687ecdbea"/>
+        <COMPID name="FileDialog" mc="Standard.Class" uid="6fad9bbf-9223-4f2e-9497-24b5e3955071"/>
+        <COMPID name="Frame" mc="Standard.Class" uid="5425cea1-02b3-4103-a32e-0768125e4d61"/>
+        <COMPID name="image" mc="Standard.Package" uid="c81620d5-df14-421a-9e64-dc8a6d56c4c2"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Infrastructure.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+      <COMP relation="Tag">
+        <OBJECT>
+          <ID name="" mc="Infrastructure.TaggedValue" uid="348a7dc1-55f4-454f-afcf-86826b51cde4"/>
+          <ATTRIBUTES>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Definition">
+              <FOREIGNID name="JavaExtern" mc="Infrastructure.TagType" uid="003800a8-0000-0197-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

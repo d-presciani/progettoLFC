@@ -1,0 +1,44 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="util" version="4">
+  <OBJECT>
+    <ID name="util" mc="Standard.Package" uid="416e5f44-54a9-4375-85b4-c2cde7962926"/>
+    <PID name="java" mc="Standard.Package" uid="fe7c5efd-f0cd-4673-9efb-7611fd315c69"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[util]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Scanner" mc="Standard.Class" uid="2a46df17-de13-46d4-bfc9-78d84346fbe8"/>
+        <COMPID name="List" mc="Standard.Interface" uid="8d032545-f433-475d-91af-1f56c8fdfc8d"/>
+        <COMPID name="HashMap" mc="Standard.Class" uid="af1ea933-8644-4542-87e1-d6d55f98149b"/>
+        <COMPID name="Stack" mc="Standard.Class" uid="11fec3b8-5220-40c0-a81c-134824543bbe"/>
+        <COMPID name="ArrayList" mc="Standard.Class" uid="6118f336-37bd-4882-9372-a1e543a025c9"/>
+        <COMPID name="Map" mc="Standard.Interface" uid="fafef6e1-6133-4f1e-a255-aef91efd6d33"/>
+        <COMPID name="LinkedList" mc="Standard.Class" uid="b2f592c2-8c3b-4b8a-aabe-d30285a63e4b"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Infrastructure.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+      <COMP relation="Tag">
+        <OBJECT>
+          <ID name="" mc="Infrastructure.TaggedValue" uid="3c181ec7-001d-4838-a0df-645a24532ab4"/>
+          <ATTRIBUTES>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Definition">
+              <FOREIGNID name="JavaExtern" mc="Infrastructure.TagType" uid="003800a8-0000-0197-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
