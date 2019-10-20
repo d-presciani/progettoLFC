@@ -178,13 +178,12 @@ Gli errori semantici si verificano nei seguenti casi:
 \end{itemize}
 \pagebreak
 \section{Struttura del programma}
-Il programma, definito in linguaggio Java, sarà composto di due moduli:
+Il programma, definito in linguaggio Java, sarà composto da tre moduli:
 \begin{itemize}
 \item un modulo generato da ANTLR, che si occuperà del parsing e dell'individuazione di errori lessicali e sintattici;
 \item un modulo scritto manualmente che si occuperà dell'analisi della grammatica e della sua classificazione;
 \item un secondo modulo scritto manualmente che si occuperà della creazione di un'interfaccia grafica.
 \end{itemize}
-L'interfacciamento con l'utente avverrà attraverso una CLI (Command Line Interface).
 \pagebreak
 \section{Programma di testing}
 Il testing del programma sarà incentrato sul modulo \textit{non} generato da ANTLR, assumendo che i controlli su quello generato da ANTLR siano già stati svolti dal produttore del tool, e sarà composto di:
