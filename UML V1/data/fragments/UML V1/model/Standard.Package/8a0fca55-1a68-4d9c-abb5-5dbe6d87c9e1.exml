@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="lr1Package" version="4">
+  <OBJECT>
+    <ID name="lr1Package" mc="Standard.Package" uid="8a0fca55-1a68-4d9c-abb5-5dbe6d87c9e1"/>
+    <PID name="uml v1" mc="Standard.Package" uid="d167e3e7-120c-4643-9466-07d1950e0ae4"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[lr1Package]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="PrototipoLR1Parser" mc="Standard.Class" uid="f3d65371-5c0c-4318-bc4e-7a9c3f103642"/>
+        <COMPID name="PrototipoLR1Lexer" mc="Standard.Class" uid="97f4f7ca-d586-4d5e-bfc8-16e28f232b53"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Infrastructure.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

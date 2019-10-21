@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="solver" version="4">
+  <OBJECT>
+    <ID name="solver" mc="Standard.Package" uid="e85aa874-a235-4dbe-af83-bedbb394cdbc"/>
+    <PID name="uml v1" mc="Standard.Package" uid="d167e3e7-120c-4643-9466-07d1950e0ae4"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[solver]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="ErroreSemantico" mc="Standard.Class" uid="ab39f221-ce14-4cf9-9ed1-be52cd2597c7"/>
+        <COMPID name="Stato" mc="Standard.Class" uid="37fa05b0-1c6a-4fba-9f8a-e6c439366314"/>
+        <COMPID name="Terminale" mc="Standard.Class" uid="16787024-0400-4397-a788-f5de5c160e30"/>
+        <COMPID name="Tester" mc="Standard.Class" uid="ce525b14-b11c-4730-8b06-ef60170c1d7b"/>
+        <COMPID name="Carattere" mc="Standard.Class" uid="b444b6ab-1247-4bed-b164-c582b75782ce"/>
+        <COMPID name="NonTerminale" mc="Standard.Class" uid="a5ce8593-dc14-47f9-8ce8-430988e9401c"/>
+        <COMPID name="RegolaDiProduzione" mc="Standard.Class" uid="94068be9-5854-4b54-93e5-27658f63bef8"/>
+        <COMPID name="Solver" mc="Standard.Class" uid="e5334fa5-a07d-432d-a7f6-1ddb90c96ee7"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Infrastructure.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>

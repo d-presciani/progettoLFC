@@ -1,0 +1,43 @@
+<?xml version="1.0" ?>
+<!--GENERATED FILE, PLEASE DO NOT EDIT!!!--><EXT object="util" version="4">
+  <OBJECT>
+    <ID name="util" mc="Standard.Package" uid="9dddfff4-8134-4196-80f7-2746fdc29ede"/>
+    <PID name="java" mc="Standard.Package" uid="c98f2d83-699e-4000-9d2b-9375a3726c0b"/>
+    <ATTRIBUTES>
+      <ATT name="IsInstantiable">false</ATT>
+      <ATT name="IsAbstract">false</ATT>
+      <ATT name="IsLeaf">false</ATT>
+      <ATT name="IsRoot">false</ATT>
+      <ATT name="Visibility">Public</ATT>
+      <ATT name="Name"><![CDATA[util]]></ATT>
+      <ATT name="status">1970354901745664</ATT>
+    </ATTRIBUTES>
+    <DEPENDENCIES>
+      <COMP relation="OwnedElement">
+        <COMPID name="Stack" mc="Standard.Class" uid="8c1a3a20-e0f3-4244-9872-94c43e3d5a82"/>
+        <COMPID name="LinkedList" mc="Standard.Class" uid="77876810-b36e-4881-84f7-3b3d9cad6b5f"/>
+        <COMPID name="Scanner" mc="Standard.Class" uid="17b4d4a5-00ad-4e02-86ae-9e7336188f27"/>
+        <COMPID name="Hashtable" mc="Standard.Class" uid="aeb85929-a195-427e-b2f7-cb3bbc4474d6"/>
+        <COMPID name="List" mc="Standard.Interface" uid="69be03e4-adbe-461e-a416-5f1c7afb5135"/>
+        <COMPID name="ArrayList" mc="Standard.Class" uid="077ba189-da79-47b3-9b9b-3fe6129486f4"/>
+      </COMP>
+      <LINK relation="Extension">
+        <FOREIGNID name="JavaPackage" mc="Infrastructure.Stereotype" uid="01ec23a8-0000-0126-0000-000000000000"/>
+      </LINK>
+      <COMP relation="Tag">
+        <OBJECT>
+          <ID name="" mc="Infrastructure.TaggedValue" uid="53f0bbe4-c47e-4e46-b541-9742796f4ceb"/>
+          <ATTRIBUTES>
+            <ATT name="Name"></ATT>
+            <ATT name="status">1970354901745664</ATT>
+          </ATTRIBUTES>
+          <DEPENDENCIES>
+            <LINK relation="Definition">
+              <FOREIGNID name="JavaExtern" mc="Infrastructure.TagType" uid="003800a8-0000-0197-0000-000000000000"/>
+            </LINK>
+          </DEPENDENCIES>
+        </OBJECT>
+      </COMP>
+    </DEPENDENCIES>
+  </OBJECT>
+</EXT>
