@@ -127,7 +127,7 @@ Il programma è eseguibile su più SO tra cui Windows, Linux e Mac OS. L'unico r
 All'avvio del programma ci si ritroverà davanti alla seguente pagina iniziale:
 \begin{figure}[h!]
 \centering
-\includegraphics[scale=0.6]{immagini/Main.png}
+\includegraphics[scale=0.5]{immagini/Main.png}
 \caption{Pagina iniziale}
 \end{figure}
 
@@ -139,16 +139,63 @@ Da questa finestra è possibile premere il tasto "Carica file" per selezionare i
 \end{figure}
 
 Una volta selezionato il file desiderato, il programma procederà all'analisi della grammatica, informando l'utente se essa sia o non sia di tipo LR(1) oppure se il file contenga degli errori.
+\pagebreak
 
 \subsection{Esempio grammatica LR(1)}
-Se la grammatica inserita è di tipo LR(1)
+Se la grammatica inserita è di tipo LR(1) verrà visualizzato un messaggio come il seguente:
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{immagini/GrammaticaLR1.png}
+\caption{Finestra con messaggio grammatica LR(1)}
+\end{figure}
 
 \subsection{Esempio grammatica non LR(1)}
-
+Se la grammatica inserita non è di tipo LR(1) verrà visualizzato un messaggio come il seguente, dove verranno inoltre riportati i nomi degli stati in errore:
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{immagini/GrammaticaNoLR1.png}
+\caption{Finestra con messaggio grammatica non LR(1)}
+\end{figure}
+\pagebreak
 
 \subsection{Esempio grammatica con errori}
+Se la grammatica inserita contiene errori verrà visualizzato un messaggio con il tipo di errore presente:
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{immagini/GrammaticaErrata.png}
+\caption{Finestra con messaggio grammatica errata}
+\end{figure}
 
+Se il tipo di errore è risolvibile automaticamente dal programma, verrà mostrato se la grammatica è o non è di tipo LR(1) oltre al tipo di errore presente.
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{immagini/GrammaticaErrataRis.png}
+\caption{Finestra con messaggio grammatica LR(1), ma errata}
+\end{figure}
+\pagebreak
 
 \subsection{Generazione e salvataggio del grafo}
+Una volta analizzata la grammatica, se essa non presenta errori bloccanti, sarà possibile, premendo l'apposito tasto in alto, generare e mostrare il grafo.
+Una volta premuto il tasto si aprirà una finestra, come la seguente, per scegliere dove salvare l'immagine generata (può essere salvata sia in .jpg che .png):
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{immagini/SalvaImmagine.png}
+\caption{Finestra di salvataggio immagine grafo}
+\end{figure}
+
+A questo punto nella parte destra del programma verrà visualizzata l'immagine del grafo:
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{immagini/GrammaticaLR1Immagine.png}
+\caption{Grafo di una grammatica LR(1)}
+\end{figure}
+\pagebreak
+
+Se qualche stato dovesse invece presentare errori, essi sarebbero colorati di rosso:
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.5]{immagini/GrammaticaNoLR1Immagine.png}
+\caption{Grafo di una grammatica non LR(1)}
+\end{figure}
 
 \end{document}
