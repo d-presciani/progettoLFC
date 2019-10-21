@@ -1,0 +1,53 @@
+\BOOKMARK [1][-]{section.1}{Prefazione}{}% 1
+\BOOKMARK [2][-]{subsection.1.1}{Version History}{section.1}% 2
+\BOOKMARK [2][-]{subsection.1.2}{Sommario modifiche}{section.1}% 3
+\BOOKMARK [1][-]{section.2}{Introduction}{}% 4
+\BOOKMARK [2][-]{subsection.2.1}{Definizioni e glossario}{section.2}% 5
+\BOOKMARK [2][-]{subsection.2.2}{Scopo}{section.2}% 6
+\BOOKMARK [2][-]{subsection.2.3}{Toolchain}{section.2}% 7
+\BOOKMARK [1][-]{section.3}{Iterazione 0}{}% 8
+\BOOKMARK [2][-]{subsection.3.1}{Requisiti funzionali}{section.3}% 9
+\BOOKMARK [3][-]{subsubsection.3.1.1}{Struttura corretta della grammatica}{subsection.3.1}% 10
+\BOOKMARK [3][-]{subsubsection.3.1.2}{Errori lessicali}{subsection.3.1}% 11
+\BOOKMARK [3][-]{subsubsection.3.1.3}{Errori sintattici}{subsection.3.1}% 12
+\BOOKMARK [3][-]{subsubsection.3.1.4}{Errori semantici}{subsection.3.1}% 13
+\BOOKMARK [2][-]{subsection.3.2}{Casi d'uso}{section.3}% 14
+\BOOKMARK [3][-]{subsubsection.3.2.1}{UC1 - Analisi di una grammatica}{subsection.3.2}% 15
+\BOOKMARK [2][-]{subsection.3.3}{Struttura del programma}{section.3}% 16
+\BOOKMARK [3][-]{subsubsection.3.3.1}{Scelta architetturale}{subsection.3.3}% 17
+\BOOKMARK [2][-]{subsection.3.4}{Programma di testing}{section.3}% 18
+\BOOKMARK [1][-]{section.4}{Iterazione 1}{}% 19
+\BOOKMARK [2][-]{subsection.4.1}{Design Architetturale}{section.4}% 20
+\BOOKMARK [3][-]{subsubsection.4.1.1}{Class diagram}{subsection.4.1}% 21
+\BOOKMARK [2][-]{subsection.4.2}{Testing}{section.4}% 22
+\BOOKMARK [3][-]{subsubsection.4.2.1}{Descrizione del prodotto software}{subsection.4.2}% 23
+\BOOKMARK [3][-]{subsubsection.4.2.2}{Funzionalit\340 oggetto di test}{subsection.4.2}% 24
+\BOOKMARK [4][-]{subsubsubsection.4.2.2.1}{Elenco delle funzionalit\340 oggetto di test}{subsubsection.4.2.2}% 25
+\BOOKMARK [2][-]{subsection.4.3}{Esiti dei test}{section.4}% 26
+\BOOKMARK [3][-]{subsubsection.4.3.1}{Esiti e copertura dei test di unit\340}{subsection.4.3}% 27
+\BOOKMARK [4][-]{subsubsubsection.4.3.1.1}{Esiti dei test per la classe Stato}{subsubsection.4.3.1}% 28
+\BOOKMARK [4][-]{subsubsubsection.4.3.1.2}{Esiti dei test per la classe RegolaDiProduzione}{subsubsection.4.3.1}% 29
+\BOOKMARK [4][-]{subsubsubsection.4.3.1.3}{Esiti dei test per la classe NonTerminale}{subsubsection.4.3.1}% 30
+\BOOKMARK [4][-]{subsubsubsection.4.3.1.4}{Esiti dei test per la classe Solver}{subsubsection.4.3.1}% 31
+\BOOKMARK [4][-]{subsubsubsection.4.3.1.5}{Esiti dei test per la classe Terminale}{subsubsection.4.3.1}% 32
+\BOOKMARK [3][-]{subsubsection.4.3.2}{Esiti e copertura dei test di sistema}{subsection.4.3}% 33
+\BOOKMARK [1][-]{section.5}{Iterazione 2}{}% 34
+\BOOKMARK [2][-]{subsection.5.1}{Design Architetturale}{section.5}% 35
+\BOOKMARK [3][-]{subsubsection.5.1.1}{Librerie utilizzate}{subsection.5.1}% 36
+\BOOKMARK [3][-]{subsubsection.5.1.2}{Class Diagram}{subsection.5.1}% 37
+\BOOKMARK [2][-]{subsection.5.2}{Casi d'uso}{section.5}% 38
+\BOOKMARK [3][-]{subsubsection.5.2.1}{UC1 - Analisi di una grammatica}{subsection.5.2}% 39
+\BOOKMARK [3][-]{subsubsection.5.2.2}{UC2 - Visualizzazione della grammatica analizzata}{subsection.5.2}% 40
+\BOOKMARK [2][-]{subsection.5.3}{Testing}{section.5}% 41
+\BOOKMARK [3][-]{subsubsection.5.3.1}{Descrizione del prodotto software}{subsection.5.3}% 42
+\BOOKMARK [3][-]{subsubsection.5.3.2}{Funzionalit\340 oggetto di test}{subsection.5.3}% 43
+\BOOKMARK [4][-]{subsubsubsection.5.3.2.1}{Elenco delle funzionalit\340 oggetto di test}{subsubsection.5.3.2}% 44
+\BOOKMARK [2][-]{subsection.5.4}{Esiti dei test}{section.5}% 45
+\BOOKMARK [3][-]{subsubsection.5.4.1}{Esiti e copertura dei test di unit\340}{subsection.5.4}% 46
+\BOOKMARK [4][-]{subsubsubsection.5.4.1.1}{Esiti dei test per la classe Stato}{subsubsection.5.4.1}% 47
+\BOOKMARK [4][-]{subsubsubsection.5.4.1.2}{Esiti dei test per la classe RegolaDiProduzione}{subsubsection.5.4.1}% 48
+\BOOKMARK [4][-]{subsubsubsection.5.4.1.3}{Esiti dei test per la classe NonTerminale}{subsubsection.5.4.1}% 49
+\BOOKMARK [4][-]{subsubsubsection.5.4.1.4}{Esiti dei test per la classe Solver}{subsubsection.5.4.1}% 50
+\BOOKMARK [4][-]{subsubsubsection.5.4.1.5}{Esiti dei test per la classe Terminale}{subsubsection.5.4.1}% 51
+\BOOKMARK [3][-]{subsubsection.5.4.2}{Esiti e copertura dei test di sistema}{subsection.5.4}% 52
+\BOOKMARK [1][-]{section.6}{Sviluppi futuri}{}% 53
