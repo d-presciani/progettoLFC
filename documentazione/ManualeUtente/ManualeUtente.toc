@@ -11,5 +11,5 @@
 \contentsline {subsection}{\numberline {4.1}Selezione grammatica da analizzare}{4}
 \contentsline {subsection}{\numberline {4.2}Esempio grammatica LR(1)}{5}
 \contentsline {subsection}{\numberline {4.3}Esempio grammatica non LR(1)}{5}
-\contentsline {subsection}{\numberline {4.4}Esempio grammatica con errori}{5}
-\contentsline {subsection}{\numberline {4.5}Generazione e salvataggio del grafo}{5}
+\contentsline {subsection}{\numberline {4.4}Esempio grammatica con errori}{6}
+\contentsline {subsection}{\numberline {4.5}Generazione e salvataggio del grafo}{7}
