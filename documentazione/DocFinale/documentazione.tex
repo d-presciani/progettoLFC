@@ -99,7 +99,7 @@ formale si dice libero dal contesto se esiste una grammatica libera dal contesto
 Un parser LR è un parser di tipo bottom-up per grammatiche libere da contesto che legge il proprio input partendo da sinistra verso destra, producendo una derivazione a destra. Laddove indicato come parser $LR \left( k \right)$, il $k$ si riferisce al numero di simboli letti (ma non "consumati") per prendere le decisioni di parsing.
 
 \subsection{Scopo}
-Scopo del programma che si andrà a realizzare è il riconoscimento di una grammatica LR(1) contenuta in un file di input selezionato dall'utente. \par
+Scopo del programma che si andrà a realizzare è il riconoscimento di una grammatica $LR \left( 1 \right)$ contenuta in un file di input selezionato dall'utente. \par
 
 \pagebreak
 
@@ -245,7 +245,7 @@ A ogni revisione del codice, nonché in precedenza al rilascio di una nuova vers
 \pagebreak
 
 \section{Iterazione 1}
-In questa iterazione è stata creata la versione a CLI (Command Line Interface), è stata inserita un'unica interfaccia grafica utilizzata per permettere all'utente la selezione del file che contiene la grammatica da analizzare, l'esito dell'analisi è riportato all'interno della CLI indicando se la grammatica è o meno LR(1), l'elenco di tutti gli stati ed infine un elenco di tutte le transizioni.
+In questa iterazione è stata creata la versione a CLI (Command Line Interface), è stata inserita un'unica interfaccia grafica utilizzata per permettere all'utente la selezione del file che contiene la grammatica da analizzare, l'esito dell'analisi è riportato all'interno della CLI indicando se la grammatica è o meno $LR \left( 1 \right)$, l'elenco di tutti gli stati ed infine un elenco di tutte le transizioni.
 \subsection{Design Architetturale}
 In questa prima versione il design architetturale è rimasto quello previsto nella iterazione 0.
 \subsubsection{Class diagram}
@@ -403,7 +403,7 @@ Per l'implementazione dell'interfaccia grafica e la creazione del grafo sono sta
 \item JavaFX, framework grafico utilizzato per la realizzazione dell'interfaccia utente;
 \item JgraphT, libreria realizzata in swing che permette la creazione di grafi di vario tipo, implementando inoltre iteratori può essere utilizzata per la creazione di algoritmi di vario tipo;
 \item mxGraph, libreria che permette la creazione di diagrammi e utilizza SVG e HTML per il rendering delle immagini, in questo progetto questa libreria è utilizzata per la visualizzazione del grafico creato con JgraphT, in particolare questa libreria è stata scelta perché permette se integrata in un Jframe di modificare l'aspetto del grafico in realtime oltre che offrire molte opzioni per la personalizzazione dei grafici.
-Nella pratica questa libreria è stata utilizzata per modificare l'aspetto delle box cambiando colore agli stati che contengono delle regole che rendono il linguaggio non LR(1) e per modificare lo stile grafico di rappresentazione.
+Nella pratica questa libreria è stata utilizzata per modificare l'aspetto delle box cambiando colore agli stati che contengono delle regole che rendono il linguaggio non $LR \left( 1 \right)$ e per modificare lo stile grafico di rappresentazione.
 \end{itemize}
 
 Durante lo sviluppo di questa iterazione sono però sorte delle problematiche nell'integrazione delle librerie per la generazione del grafo e JavaFx.\par
@@ -597,10 +597,103 @@ Durante il test di sistema è stata rilevata anche la copertura del codice duran
 \caption{Copertura del codice relativa al test di sistema}
 \end{figure}
 \pagebreak
+
+
+\section{Strutture dati e algoritmi}
+In questa sezione si illustrano le strutture dati utilizzate e successivamente gli algoritmi più rilevanti implementati.
+Le strutture fondamentali che costituisco le fondamenta delle strutture più complesse sono le classi Terminale e NonTerminale.
+Queste classi sono rappresentate di seguito.
+\subsection{Terminale}
+Questa classe viene utilizzata per rappresentare i caratteri terminali, questi caratteri sono i più semplici da gestire dato che la maggior parte delle proprietà che condividono con i caratteri NonTerminale sono ben definite.
+\subsubsection{Dati}
+\begin{itemize}
+\item\textit{lettera} una variabile utilizzata per memorizzare il carattere terminale.
+\end{itemize}
+\subsubsection{Operazioni}
+\begin{itemize}
+\item\underline{Costruttore}(\textit{car}): costruisce il Terminale memorizzando la variabile \textit{car} ricevuta;
+\item\underline{CalcolaInizi}: restituisce il carattere Terminale.
+\item\underline{toString}: restituisce la rappresentazione testuale del carattere terminale;
+\item\underline{isAnnullabile}: dato che un carattere terminale non è mai annullabile questa funzione restituisce sempre \textit{false};
+\item\underline{getLettera}: restituisce la rappresentazione testuale del carattere terminale;
+\item\underline{getRegole}: dato che un carattere terminale non ha regole associate questa funzione ritorna sempre null;
+\item\underline{isTerminale}: questa funzione restituisce \textit{true} dato che il carattere è un carattere terminale.
+\end{itemize}
+
+
+\subsection{NonTerminale}
+Questa classe viene utilizzata per rappresentare i caratteri non terminali, questi caratteri hanno proprietà in comune con i caratteri terminali, m,a come si può vedere dai dati memorizzati e dall'implementazione delle funzioni questi ultimi richiedono l'implementazione di particolari algoritmi per restituire alcune informazioni rilevanti.
+\subsubsection{Dati}
+\begin{itemize}
+\item\textit{lettera}: come per la classe Terminale questa variabile viene utilizzata per memorizzare la rappresentazione testuale del carattere;
+\item\textit{rdp}: una LinkedList contenente tutte le regole di produzione che hanno questo non terminale come parte sinistra;
+\item\textit{annullabile}: una flag utilizzata per memorizzare se il carattere è o meno annullabile senza dovere ricalcolare questa proprietà ogni volta.
+\end{itemize}
+\subsubsection{Operazioni}
+\begin{itemize}
+\item\underline{Costruttore}(\textit{lettera}): costruisce il Terminale memorizzando la variabile \textit{lettera} ricevuta, inoltre inizializza la lista \textit{rdp} come LinkedList vuota, viene infine inizializzata la variabile \textit{annullabile} a false;
+\item\underline{CalcolaInizi}: questa funzione calcola gli inizi del non terminale e li restituisce;
+\item\underline{calcolaAnnullabile}: questa funzione deve essere chiamata al termine della creazione del non terminale e calcola se il terminale è o meno annullabile andando ad analizzare tutte le regole di produzione che ha associate;
+\item\underline{toString}: restituisce la rappresentazione testuale del carattere terminale;
+\item\underline{isAnnullabile}: getter del campo annullabile;
+\item\underline{getLettera}: restituisce la rappresentazione testuale del carattere terminale;
+\item\underline{getRegole}: questa funzione restituisce l'elenco delle regole di produzione associate al non terminale;
+\item\underline{isTerminale}: questa funzione restituisce \textit{false} dato che il carattere è un carattere non terminale.
+\end{itemize}
+\subsubsection{Algoritmi}
+L'unico algoritmo di interesse in questa struttura dati è quello che consente di calcolare gli inizi del non terminale visualizzabile di seguito:
+\\ TODO: inserire algoritmo
+
+\subsection{RegolaDiProduzione}
+Questa classe viene utilizzata per rappresentare le varie regole di produzione, questa classe è stata creata come contenitore per semplificare il codice delle altre strutture dati
+\subsubsection{Dati}
+\begin{itemize}
+\item\textit{parteSX}: il non terminale presente a sinistra del simbolo di equivalenza;
+\item\textit{parteDX}: una LinkedList di caratteri terminali e non;
+\item\textit{seguiti}: una LinkedList che rappresentante i seguiti della regola di produzione (NOTA: i seguiti sono da intendersi in relazione alla posizione del puntino (\textit{indice} in questa implementazione));
+\item\textit{indice}: una variabile utilizzata per memorizzare la posizione dell'indice all'interno della parte destra della regola di produzione;
+\item\textit{annullabile}: flag utilizzata per memorizzare se la regola è o meno annullabile senza dover ricalcolare questa proprietà tutte le volte.
+\end{itemize}
+\subsubsection{Operazioni}
+\begin{itemize}
+\item\underline{Costruttore}(\textit{parSX}, \textit{parDX}): costruisce la regola di produzione partendo dai campi ricevuti, viene posto \textit{indice} = 0;
+\item\underline{Costruttore}(\textit{reg}): costruisce la regola partendo da una regola esistente, questo costruttore viene utilizzato quando la regola è già esistente ma bisogna crearne una nuova uguale per poi incrementare il valore di \textit{indice};
+\item\underline{avanzaPuntino}: incrementa di 1 il valore di \textit{indice};
+\item\underline{calcolaAnnullabilita}: questa funzione deve essere chiamata al termine della creazione della regola di produzione e calcola se la regola è o meno annullabile andando ad analizzare i caratteri presenti in \textit{parteDX};
+\item\underline{equals}(\textit{o}): ridefinizione del metodo equals;
+\item\underline{toString}: ritorna una stringa rappresentante la regola di produzione;
+\item\underline{addSeguito}(\textit{s}): aggiunge all'elenco dei seguiti il carattere ricevuto.
+\end{itemize}
+
+\subsection{Stato}
+Questa è la struttura dati principale in questo progetto, qui sono presente la maggior parte degli algoritmi che permettono di calcolare la se una grammatica fornita è o meno di tipo $LR \left( 1 \right)$.
+\subsubsection{Dati}
+\begin{itemize}
+\item\textit{counter}: variabile statica utilizzata per il conteggio progressivo degli stati che vengono creati;
+\item\textit{regoleCore}: LinkedList contenente le regole core dello stato;
+\item\textit{regoleCompletamenti}: LinkedList contenente le regole di completamento dello stato;
+\item\textit{numeroStato}: variabile utilizzata per la memorizzazione del numero dello stato;
+\item\textit{erroreLR1}: flag utilizzata per memorizzare se uno stato contiene o meno delle regole che sono in conflitto e quindi rendono la grammatica non $LR \left( 1 \right)$.
+\end{itemize}
+\subsubsection{Operazioni}
+\begin{itemize}
+\item\underline{Costruttore}: costruisce uno stato vuoto;
+\item\underline{resetCounter}: funzione per resettare la variabile \textit{counter} a 1;
+\item\underline{aggiungiCore}(\textit{rdp}): funzione che inserisce la regola ricevuta all'elenco delle regole core, successivamente analizza la regola inserita per verificare se questa aggiunge delle regole di completamento allo stato oppure modifica i seguiti delle regole già presenti;
+\item\underline{aggiungiCompletamento}(\textit{nuovaRdp}, \textit{regolaPadre}): funzione ausiliaria chiamata in \underline{aggiungiCore}, si occupa di aggiungere \textit{nuovaRdp} alle regole di completamento e aggiunge i seguiti di \textit{regolaPadre} in caso questa sia annullabile;
+\item\underline{espandiStato}(\textit{listaStati},\textit{listaTransizioni}: quando chiamata questa funzione genera nuovi stati esplorando ogni regola che lo compone;
+\item\underline{toGraph}: questa funzione crea ritorna una String che verrà utilizzata per la rappresentazione dello stato all'interno del grafo;
+\item\underline{toString}: restituisce una string rappresentante lo stato.
+\end{itemize}
+\subsubsection{Algoritmi}
+TODO: inserire lo pseudo-codice degli algoritmi
+
+\pagebreak
+
 \section{Sviluppi futuri}
 Il programma, allo stato attuale, potrebbe essere migliorato sia sotto l'aspetto dell'interfaccia grafica che delle funzionalità, ad esempio:
 \begin{itemize}
-\item espandere le capacità di analisi implementando dei moduli in grado di riconoscere altri tipi di grammatiche come LALR(1) e LL(1);
+\item espandere le capacità di analisi implementando dei moduli in grado di riconoscere altri tipi di grammatiche come $LALR \left( 1 \right)$ e $LL \left( 1 \right)$;
 \item aggiungere la possibilità di scrittura della grammatica direttamente nel programma, senza l'utilizzo di un file txt, in modo da evidenziare anche nella grammatica le regole problematiche;
 \item migrazione della generazione del grafo a librerie compatibili con JavaFX al fine di avere un grafo editabile;
 \item porting dell'applicazione anche per dispositivi mobili.
