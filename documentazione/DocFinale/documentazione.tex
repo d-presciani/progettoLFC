@@ -697,8 +697,8 @@ Questa è la struttura dati principale in questo progetto, qui sono presente la 
 \end{itemize}
 \subsubsection{Algoritmi}
 TODO: inserire lo pseudo-codice degli algoritmi
-
-\begin{algorithm}
+\pagebreak
+\begin{algorithm}[H]
 \caption{aggiungiCore($rdp$: regola di produzione passata)}
 \begin{algorithmic}[1]
 \State $regolaCore \leftarrow rdp$
@@ -744,7 +744,7 @@ TODO: inserire lo pseudo-codice degli algoritmi
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}                     
+\begin{algorithm}[H]                     
 \begin{algorithmic}[1]
 \algrestore{alg1}
 \State $regPresente \leftarrow true$
@@ -790,7 +790,7 @@ TODO: inserire lo pseudo-codice degli algoritmi
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}                     
+\begin{algorithm}[H]                     
 \begin{algorithmic}[1]
 \algrestore{alg11}
 \If{indice della $regoleCompletamenti$ di indice destro $+ 1 <$ dimensione della parte destra della $regoleCompletamenti$ di indice destro}
@@ -818,7 +818,9 @@ TODO: inserire lo pseudo-codice degli algoritmi
 \end{algorithmic}
 \end{algorithm}
 
-\begin{algorithm}
+TODO: aggiungere analisi costi
+
+\begin{algorithm}[H]
 \caption{espandiStato($listaStati$: lista degli stati già creati, $listaTransizioni$: lista delle transizioni già create)}
 \label{espandiStato}
 \begin{algorithmic}[1]
@@ -846,14 +848,130 @@ TODO: inserire lo pseudo-codice degli algoritmi
 \EndIf
 \EndFor
 \EndIf
-\State TODO: Continuare da riga 26 del TXT
+\State $CarattereNuovo \gets$ carattere puntato dall'indice di $regCor$
+\State $caratteriParsati.add(carattereNuovo)$
+\For{ciascuna $regola$ di $listaRegoleNuovoStato$}
+\State $regola.avanzaPuntino$ \Comment{Sposto per ogni regola a destra il puntino per puntare un nuovo carattere}
+\EndFor
+\State $trovato \gets false$
+\For{ciascuno $stato$ in $listaStati$}
+\If{esiste uno $stato$ con le stesse $regoleCore$ contenute in $listaRegoleNuovoStato$}
+\State $trovato \gets true$
 \EndIf
 \EndFor
+\algstore{ESPSTATO1}
 \end{algorithmic}
 \end{algorithm}
 
 
-\pagebreak
+\begin{algorithm}[H]
+\begin{algorithmic}
+\algrestore{ESPSTATO1}
+\If{$trovato = false$}
+\State $temp \gets$ nuovo $stato$ vuoto
+\For{ciascuna $regola$ in $listaRegoleNuovoStato$}
+\State $temp.aggungiCore(regola)$ \Comment{Come illustrato in \textbf{Algoritmo 1}, questa funzione si occupa di aggiungere la regola passata al nuovo stato e genera le eventuali regole di completamento}
+\EndFor
+\State $listaStati.add(temp)$ \Comment{Aggiunta dello stato appena creato alla lista degli stati presenti}
+\State $listaTransizioni.add(new transizione(numeroStato, temp.numeroStato, carattereNuovo)$
+\Else
+\State  $listaTransizioni.add(new transizione(numeroStato,$ numero stato già esistente con le stesse regole core di quello che si stava creando $, carattereNuovo)$
+\EndIf
+\EndIf
+\EndFor
+\State \Comment{Una volta esplorate tutte le $regoleCore$ si procede ad esplorare tutte le $regoleCompletamenti$}
+\For{ciascuna $regComp$ in $regleCompletamenti$}
+\If{$regComp$ ha almeno un carattere da esplorare a destra del puntino}
+\State $giaParsato \gets false$
+\For{ciascuna $str$ di $caratteriParsati$}
+\If{$str$ è uguale al carattere a destra del puntino di $regComp$}
+\State $giaPasato \gets true$
+\State $break$
+\EndIf
+\EndFor
+\If{$giaParsato = false$} \Comment{Se non è ancora stato analizzato il carattere puntato dal puntino di $regComp$ allora lo si analizza}
+\State $listaRegoleNuovStato \gets LinkedList$ di $regoleDiProduzione$
+\State $listaRegoleNuovoStato.add(regComp)$
+\For{ciascuna $altraRegComp$ di $regoleCompletamenti$ dopo $regComp$}
+\If{$altraRegComp$ ha almeno un carattere a destra del puntino $\AND$ il carattere puntato da $regComp$ e $altraRegComp$ è uguale}
+\State $listaRegoleNovoStato.add(altraRegComp)$
+\EndIf
+\EndFor
+\State $carattereNuovo \gets$ carattere puntato dall'indice di $regComp$
+\State $caratteriParsati.add(carattereNuovo)$
+\For{ciascuna $regola$ di $listaRegoleNuovoStato$}
+\State $regola.avanzaPuntino()$
+\EndFor
+\algstore{ESPSTATO2}
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\begin{algorithmic}
+\algrestore{ESPSTATO2}
+\State $trovato \gets false$
+\For{ciascuno $stato$ in $listaStati$}
+\If{esiste uno stato con le stesse $regoleCore$ contenute in $listaReoleNuovoStato$}
+\State $trovato \gets true$
+\EndIf
+\EndFor
+\If{$trovato = false$}
+\State $temp \gets$ nuovo $stato$ vuoto
+\For{ciascuna $regola$ in $listaRegoleNuovoStato$}
+\State $temp.aggungiCore(regola)$ \Comment{Come illustrato in \textbf{Algoritmo 1}, questa funzione si occupa di aggiungere la regola passata al nuovo stato e genera le eventuali regole di completamento}
+\EndFor
+\State $listaStati.add(temp)$ \Comment{Aggiunta dello stato appena creato alla lista degli stati presenti}
+\State $listaTransizioni.add(new transizione(numeroStato, temp.numeroStato, carattereNuovo)$
+\Else
+\State  $listaTransizioni.add(new transizione(numeroStato,$ numero stato già esistente con le stesse regole core di quello che si stava creando $, carattereNuovo)$
+\EndIf
+\EndIf
+\EndIf
+\EndFor
+\State \Comment{Dopo aver espanso lo stato attuale, controllo che lo stato appena espanso sia o meno $LR \left( 1 \right)$}
+\State $sovrapposizione \gets LinkedList$ di $String$ vuota
+\For{ciascuna $reg$ di $regoleCore$}
+\If{L'indice di $reg$ non ha caratteri alla sua destra}
+\For{ciascuna $str$ di $reg.seguiti$}
+\If{$sovrapposizioni$ contiene $seg$}
+\State $erroreLR(1) = true$
+\State $break$
+\Else
+\State $sovrapposizioni.add(seg)$
+\EndIf
+\EndFor
+\EndIf
+\EndFor
+\algstore{ESPSTATO3}
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\begin{algorithmic}
+\algrestore{ESPSTATO3}
+\For{ciascuna $reg$ di $regoleCompletamenti$}
+\If{L'indice di $reg$ non ha caratteri alla sua destra}
+\For{ciascuna $str$ di $reg.seguiti$}
+\If{$sovrapposizioni$ contiene $seg$}
+\State $erroreLR(1) = true$
+\State $break$
+\Else
+\State $sovrapposizioni.add(seg)$
+\EndIf
+\EndFor
+\EndIf
+\EndFor
+\For{ciascun $carattereMosso$ di $caratteriParsati$}
+\If{$sovrapposizioni$ contiene $carattereMosso$}
+\State $erroreLR(1) = true$
+\State $break$
+\EndIf
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+TODO: Inserire costo algoritmo :)
+\pagebreak[4]
+
 
 \section{Sviluppi futuri}
 Il programma, allo stato attuale, potrebbe essere migliorato sia sotto l'aspetto dell'interfaccia grafica che delle funzionalità, ad esempio:

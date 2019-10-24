@@ -67,4 +67,4 @@
 \contentsline {subsubsection}{\numberline {6.4.1}Dati}{34}{subsubsection.6.4.1}
 \contentsline {subsubsection}{\numberline {6.4.2}Operazioni}{34}{subsubsection.6.4.2}
 \contentsline {subsubsection}{\numberline {6.4.3}Algoritmi}{34}{subsubsection.6.4.3}
-\contentsline {section}{\numberline {7.}Sviluppi futuri}{39}{section.7}
+\contentsline {section}{\numberline {7.}Sviluppi futuri}{42}{section.7}
