@@ -11,10 +11,20 @@
 \usepackage{rotating}
 \usepackage{graphicx}
 \usepackage{hyperref}
+\usepackage{algorithm,algorithmicx,algpseudocode}
 
 \renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
 \renewcommand{\thesection}{\arabic{section}.}
 \renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+
+\makeatletter
+\renewcommand{\ALG@name}{Algoritmo}
+\makeatother
+
+\algrenewcommand{\algorithmiccomment}[1]{\hfill \(\triangleright\) #1}
+\algdef{SE}[DOWHILE]{Do}{doWhile}{\algorithmicdo}[1]{\algorithmicwhile\ #1}
+
+\algnewcommand\AND{\textbf{and}}
 
 \setlength{\headheight}{15pt}
 
@@ -687,6 +697,161 @@ Questa è la struttura dati principale in questo progetto, qui sono presente la 
 \end{itemize}
 \subsubsection{Algoritmi}
 TODO: inserire lo pseudo-codice degli algoritmi
+
+\begin{algorithm}
+\caption{aggiungiCore($rdp$: regola di produzione passata)}
+\begin{algorithmic}[1]
+\State $regolaCore \leftarrow rdp$
+\If{parte a destra della $rdp > 0$}
+\If{parte a destra della $rdp >$ dell'indice attuale del puntino \textbf{and} la parte a destra del puntino della $rdp != NULL$}
+\For{$RegolaDiProduzione$ $regComp :$ regole alla destra del puntino della $rdp$}
+\State $RegolaDiProduzione$ temporanea $tmp \leftarrow regComp$
+\State elimino i seguiti della $RegolaDiProduzione$ $tmp$
+\If{indice puntino $+ 1 <$ dimensione della parte a destra della $rdp$}
+\State $i = 0$
+\Do
+\State creo una lista di tipo string vuota $emptyList$
+\If{inizi della parte a destra del puntino $+ i + 1$ della $rdp$ non sono uguali alla lista $emptyList$}
+\For{$string$ $seg :$ inizi della parte a destra del puntino $+ i + 1$ della $rdp$}
+\If{seguiti della $RegolaDiProduzione$ $tmp$ non contengono $seg$}
+\State aggiungo $seg$ ai seguiti della $RegolaDiProduzione$ $tmp$
+\EndIf
+\EndFor
+\EndIf
+\State $i++$
+\doWhile{la regola di indice puntino $+ i$ della $rdp$ è annullabile \textbf{and} la regola di indice puntino $+ i + 1$ della $rdp <$ dimensione della parte a destra della $rdp$}
+\If{$rdp$ è annullabile}
+\For{$string$ $seg :$ seguiti della $rdp$}
+\If{seguiti della $RegolaDiProduzione$ $tmp$ non contengono $seg$}
+\State aggiungo $seg$ ai seguiti della $RegolaDiProduzione$ $tmp$
+\EndIf
+\EndFor
+\EndIf
+\Else
+\For{$string$ $seg :$ seguiti della $rdp$}
+\State aggiungo $seg$ ai seguiti della $RegolaDiProduzione$ $tmp$
+\EndFor
+\EndIf
+\State $boolean regPresente \leftarrow false$
+\For{$RegolaDiProduzione$ $reg$ : $regoleCompletamenti$}
+\If{lettera a sinistra di $RegolaDiProduzione$ $reg$ è uguale alla lettera a sinistra della $RegolaDiProduzione$ $tmp$ \textbf{and} la parte a destra della $RegolaDiProduzione$ $reg$ è uguale alla parte a destra della $RegolaDiProduzione$ $tmp$}
+\For{$string$ $seguito :$ seguiti della $RegolaDiProduzione$ $tmp$}
+\If{seguiti della $RegolaDiProduzione$ $reg$ non contengono $seguito$}
+\State aggiungo $seguito$ ai seguiti della $RegolaDiProduzione$ $reg$
+\EndIf
+\EndFor
+\algstore{alg1}
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}                     
+\begin{algorithmic}[1]
+\algrestore{alg1}
+\State $regPresente \leftarrow true$
+\State $break$
+\EndIf
+\EndFor
+\If{$regPresente == false$}
+\State aggiungo la $RegolaDiProduzione$ $tmp$ alle regole di completamento $regoleCompletamenti$
+\EndIf
+\EndFor
+\State $i \leftarrow 0$
+\While{$i <$ numero di $regoleCompletamenti$}
+\State $RegolaDiProduzione$ $reg \leftarrow regoleCompletamenti(i)$
+\If{dimensione della parte destra della $RegolaDiProduzione$ $reg$ $!= 0$ \textbf{and} regole a destra del puntino della $RegolaDiProduzione$ $reg$ $!= NULL$}
+\For{$RegolaDiProduzione$ $nuoveRegole :$ regole dopo il puntino della $RegolaDiProduzione$ $reg$}
+\State $boolean trovato \leftarrow false$
+\For{$RegolaDiProduzione$ $regCk : regoleCompletamenti$}
+\If{parte a sinistra di $nuoveRegole ==$ parte a sinistra di $regCk$ \textbf{and} parte a destra di $nuoveRegole ==$ parte a destra di $regCk$}
+\State $trovato \leftarrow true$
+\For{$string$ $seguito :$ seguiti della $RegolaDiProduzione$ $reg$}
+\If{seguiti della $RegolaDiProduzione$ $regCk$ non contengono $seguito$}
+\State aggiungo $seguito$ ai seguiti della $RegolaDiProduzione$ $regCk$
+\EndIf
+\EndFor
+\State $break$
+\EndIf
+\EndFor
+\If{$trovato == false$}
+\State inserisco $reg$ in $nuoveRegole$ 
+\EndIf
+\EndFor
+\EndIf
+\State $i++$
+\EndWhile
+\State $boolean modificato \leftarrow true$
+\While{$modificato == true$}
+\State $modificato \leftarrow false$
+\For{$indiceSx = 0$ \textbf{to} $indiceSx <$ dimensione di $regoleCompletamenti$}
+\For{$indiceDx = 0$ \textbf{to} $indiceDx <$ dimensione di $regoleCompletamenti$}
+\If{puntino della regola in indiceDx di $regoleCompletamenti <$ dimensione della parte destra della regola in indiceDx di $regoleCompletamenti$}
+\If{carattere della parte sinistra della regola puntata a indice sinistro $==$ carattere a destra del puntino della regola puntata a indice destro}
+\algstore{alg11}
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}                     
+\begin{algorithmic}[1]
+\algrestore{alg11}
+\If{indice della $regoleCompletamenti$ di indice destro $+ 1 <$ dimensione della parte destra della $regoleCompletamenti$ di indice destro}
+\For{$string seg :$ inizi della parte destra di $regoleCompletamenti$ di indice destro $+ 1$}
+\If{$seguiti$ di indice sinistro di $regoleCompletamenti$ non contengono $seg$}
+\State aggiungo $seg$ ai seguiti di indice sinistro di $regoleCompletamenti$
+\State $modificato \leftarrow true$
+\EndIf
+\EndFor
+\Else
+\For{$string$ $seg :$ seguiti di $regoleCompletamenti$ di indice destro}
+\If{seguiti di $regoleCompletamenti$ di indice sinistro non contengono $seg$}
+\State aggiungo $seg$ ai seguiti di indice sinistro di $regoleCompletamenti$
+\State $modificato \leftarrow true$
+\EndIf
+\EndFor
+\EndIf
+\EndIf
+\EndIf
+\EndFor
+\EndFor
+\EndWhile
+\EndIf
+\EndIf
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}
+\caption{espandiStato($listaStati$: lista degli stati già creati, $listaTransizioni$: lista delle transizioni già create)}
+\label{espandiStato}
+\begin{algorithmic}[1]
+\State $caratteriParsati \gets linkedList$ di $String$ vuota
+\For{ciascuna $regCor$ di $regoleCore$}
+\If{$regCor$ ha almeno un carattere da esplorare a destra del puntino}
+\State $giaPArstato \gets false$
+\For{ciascuna $str$ in caratteriParsati}
+\If{$str$ è uguale al carattere a destra del puntino di $regCore$}
+\State $giaParsato \gets true$
+\State $break$
+\EndIf
+\EndFor
+\If{$giaParsato = false$} \Comment{Se non è ancora stato analizzato il carattere puntato dal puntino allora lo si analizza}
+\State $listaRegoleNuovoStato \gets LinkedList$ di $regolaDiProduzione$ 
+\State $listaRegoleNuovoStato.add(regCor)$
+\For{ciascuna $altraRegCor$ di $regoleCore$ dopo $regCor$}
+\If{$altraRegCor$ ha almeno un carattere a destra del puntino $\AND$ il carattere puntato da $regCor$ e $altraRegCor$ è uguale}
+\State $listaRegoleNuovoStato.add(altraRegCor)$ \Comment{Il nuovo stato avrà come regole core tutte quelle regole che vedono spostato lo stesso carattere}
+\EndIf
+\EndFor
+\For{ciascuna $regComp$ di $regoleComplementi$}
+\If{$regComp$ ha almeno un carattere a destra del puntino $\AND$ il carattere puntato da $regCor$ e $regComp$ è uguale}
+\State $listaRegoleNuovoStato.add(regComp)$
+\EndIf
+\EndFor
+\EndIf
+\State TODO: Continuare da riga 26 del TXT
+\EndIf
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
 
 \pagebreak
 
