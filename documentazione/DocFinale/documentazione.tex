@@ -196,6 +196,12 @@ Gli errori semantici si verificano nei seguenti casi:
 \subsection{Casi d'uso}
 In questa fase preliminare si è identificato un solo caso d'uso riportato di seguito
 
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{immagini/UC_v1.png}
+\caption{UML Use Case Diagram dell'iterazione 0}
+\end{figure}
+
 \subsubsection{UC1 - Analisi di una grammatica}
 \begin{itemize}[label=]
 \item \textbf{Descrizione:} identificazione di una grammatica $LR\left( 1 \right)$
@@ -434,6 +440,11 @@ Rispetto al class diagram presente a pagina \pageref{rifUMLV1} in questa nuova i
 \pagebreak
 \subsection{Casi d'uso}
 Vista l'introduzione di un'interfaccia grafica per l'interazione con il programma sono stati ridefiniti i casi d'uso come segue:
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1]{immagini/UC_v2.png}
+\caption{UML Use Case Diagram dell'iterazione 2}
+\end{figure}
 \subsubsection{UC1 - Analisi di una grammatica}
 \begin{itemize}[label=]
 \item \textbf{Descrizione:} identificazione di una grammatica $LR\left( 1 \right)$
@@ -486,7 +497,7 @@ Il software, sviluppato in linguaggio Java in ambiente di sviluppo Eclipse, è s
 \begin{itemize}
 \item \textbf{app} - questo package contiene il file \textit{Main.java}, oltre ad altri file di supporto, utilizzati per la creazione dell'interfaccia grafica;
 \item \textbf{graph} - questo package contiene tutti i file necessari alla generazione del grafo;
-\item \textbf{lr1package} - questo package contiene due degli output di ANTLR, strumento utilizzato per generare il compilatore, ossia \textit{PrototipoLR1Lexer.java} e \textit{PrototipoLR1Parser.java}; il terzo e ultimo file di output (\textit{PrototipoLR1.tokens} è invece situato all'esterno di questo package;
+\item \textbf{lr1package} - questo package contiene due degli output di ANTLR, strumento utilizzato per generare il compilatore, ossia \textit{PrototipoLR1Lexer.java} e \textit{PrototipoLR1Parser.java}; il terzo e ultimo file di output (\textit{PrototipoLR1.tokens} è invece situato all'esterno di questo package;)
 \item \textbf{myPackage} - questo package contiene il file \textit{Environment.java}, all'interno del quale è definita la classe Environment, necessaria per il corretto funzionamento dei file output di ANTLR ed ereditata da un progetto di esempio;
 \item \textbf{solver} - questo package contiene tutti i file che contengono definizioni di classi custom utilizzate per il processo di riconoscimento delle grammatiche e per rappresentare gli elementi costituenti delle grammatiche.
 \end{itemize}
@@ -690,13 +701,13 @@ Questa è la struttura dati principale in questo progetto, qui sono presente la 
 \item\underline{Costruttore}: costruisce uno stato vuoto;
 \item\underline{resetCounter}: funzione per resettare la variabile \textit{counter} a 1;
 \item\underline{aggiungiCore}(\textit{rdp}): funzione che inserisce la regola ricevuta all'elenco delle regole core, successivamente analizza la regola inserita per verificare se questa aggiunge delle regole di completamento allo stato oppure modifica i seguiti delle regole già presenti;
-\item\underline{aggiungiCompletamento}(\textit{nuovaRdp}, \textit{regolaPadre}): funzione ausiliaria chiamata in \underline{aggiungiCore}, si occupa di aggiungere \textit{nuovaRdp} alle regole di completamento e aggiunge i seguiti di \textit{regolaPadre} in caso questa sia annullabile;
+\item\underline{aggiungiCompletamento}(\textit{nuovaRdp}, \textit{regolaPadre}): funzione che si occupa di aggiungere \textit{nuovaRdp} alle regole di completamento e aggiunge i seguiti di \textit{regolaPadre} in caso questa sia annullabile;
 \item\underline{espandiStato}(\textit{listaStati},\textit{listaTransizioni}: quando chiamata questa funzione genera nuovi stati esplorando ogni regola che lo compone;
 \item\underline{toGraph}: questa funzione crea ritorna una String che verrà utilizzata per la rappresentazione dello stato all'interno del grafo;
 \item\underline{toString}: restituisce una string rappresentante lo stato.
 \end{itemize}
 \subsubsection{Algoritmi}
-TODO: inserire lo pseudo-codice degli algoritmi
+In questa classe sono implementati i principali algoritmi utilizzati per verificare che la grammatica fornita in input sia di tipo $LR \left( 1 \right)$, di seguito è presente lo pseudocodice degli algoritmi di maggior rilevanza.
 \pagebreak
 \begin{algorithm}[H]
 \caption{aggiungiCore($rdp$: regola di produzione passata)}
