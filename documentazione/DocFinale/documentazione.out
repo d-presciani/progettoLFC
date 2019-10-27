@@ -58,14 +58,15 @@
 \BOOKMARK [3][-]{subsubsection.6.2.1}{Dati}{subsection.6.2}% 58
 \BOOKMARK [3][-]{subsubsection.6.2.2}{Operazioni}{subsection.6.2}% 59
 \BOOKMARK [3][-]{subsubsection.6.2.3}{Algoritmi}{subsection.6.2}% 60
-\BOOKMARK [2][-]{subsection.6.3}{RegolaDiProduzione}{section.6}% 61
-\BOOKMARK [3][-]{subsubsection.6.3.1}{Dati}{subsection.6.3}% 62
-\BOOKMARK [3][-]{subsubsection.6.3.2}{Operazioni}{subsection.6.3}% 63
-\BOOKMARK [2][-]{subsection.6.4}{Stato}{section.6}% 64
-\BOOKMARK [3][-]{subsubsection.6.4.1}{Dati}{subsection.6.4}% 65
-\BOOKMARK [3][-]{subsubsection.6.4.2}{Operazioni}{subsection.6.4}% 66
-\BOOKMARK [3][-]{subsubsection.6.4.3}{Algoritmi}{subsection.6.4}% 67
-\BOOKMARK [4][-]{subsubsubsection.6.4.3.1}{aggiungiCore}{subsubsection.6.4.3}% 68
-\BOOKMARK [4][-]{subsubsubsection.6.4.3.2}{espandiStato}{subsubsection.6.4.3}% 69
-\BOOKMARK [4][-]{subsubsubsection.6.4.3.3}{aggiungiCompletamento}{subsubsection.6.4.3}% 70
-\BOOKMARK [1][-]{section.7}{Sviluppi futuri}{}% 71
+\BOOKMARK [4][-]{subsubsubsection.6.2.3.1}{calcolaInizi}{subsubsection.6.2.3}% 61
+\BOOKMARK [2][-]{subsection.6.3}{RegolaDiProduzione}{section.6}% 62
+\BOOKMARK [3][-]{subsubsection.6.3.1}{Dati}{subsection.6.3}% 63
+\BOOKMARK [3][-]{subsubsection.6.3.2}{Operazioni}{subsection.6.3}% 64
+\BOOKMARK [2][-]{subsection.6.4}{Stato}{section.6}% 65
+\BOOKMARK [3][-]{subsubsection.6.4.1}{Dati}{subsection.6.4}% 66
+\BOOKMARK [3][-]{subsubsection.6.4.2}{Operazioni}{subsection.6.4}% 67
+\BOOKMARK [3][-]{subsubsection.6.4.3}{Algoritmi}{subsection.6.4}% 68
+\BOOKMARK [4][-]{subsubsubsection.6.4.3.1}{aggiungiCore}{subsubsection.6.4.3}% 69
+\BOOKMARK [4][-]{subsubsubsection.6.4.3.2}{espandiStato}{subsubsection.6.4.3}% 70
+\BOOKMARK [4][-]{subsubsubsection.6.4.3.3}{aggiungiCompletamento}{subsubsection.6.4.3}% 71
+\BOOKMARK [1][-]{section.7}{Sviluppi futuri}{}% 72

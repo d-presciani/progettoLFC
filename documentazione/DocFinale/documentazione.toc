@@ -60,6 +60,7 @@
 \contentsline {subsubsection}{\numberline {6.2.1}Dati}{32}{subsubsection.6.2.1}
 \contentsline {subsubsection}{\numberline {6.2.2}Operazioni}{33}{subsubsection.6.2.2}
 \contentsline {subsubsection}{\numberline {6.2.3}Algoritmi}{33}{subsubsection.6.2.3}
+\contentsline {subsubsubsection}{\numberline {6.2.3.1}calcolaInizi}{33}{subsubsubsection.6.2.3.1}
 \contentsline {subsection}{\numberline {6.3}RegolaDiProduzione}{33}{subsection.6.3}
 \contentsline {subsubsection}{\numberline {6.3.1}Dati}{33}{subsubsection.6.3.1}
 \contentsline {subsubsection}{\numberline {6.3.2}Operazioni}{34}{subsubsection.6.3.2}
