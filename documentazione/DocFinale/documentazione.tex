@@ -702,7 +702,7 @@ L'unico algoritmo di interesse in questa struttura dati è quello che consente d
 
 \label{COSTOINIZI}
 Questo algoritmo contiene al suo interno una ricorsione, analizzando questa ricorsione si può notare che al massimo l'algoritmo richiama se stesso un numero di volte pari al numero di elementi contenuti nell'elenco delle regole generate dal parser.
-Chiamando \textit{r} questo valore, chiamando \textit{s} il numero di caratteri che rappresentano i seguiti che al massimo possono essere il numero di caratteri terminali più il numero di caratteri non terminali (presi una sola volta) ed infine chiamando \textit{k} la lunghezza della parte destra più lunga presente nella grammatica, si ottiene che questo algoritmo ha costo $O(r^2 s k)$.
+Chiamando \textit{r} questo valore, chiamando \textit{s} il numero di caratteri che rappresentano i seguiti, che al massimo possono essere il numero di caratteri terminali più il numero di caratteri non terminali (presi una sola volta), infine chiamando \textit{k} la lunghezza della parte destra più lunga presente nella grammatica, si ottiene che questo algoritmo ha costo $O(r^2 s k)$.
 
 
 \subsection{RegolaDiProduzione}
@@ -870,7 +870,7 @@ In questa classe sono implementati i principali algoritmi utilizzati per verific
 \end{algorithm}
 
 
-L'algoritomo $aggiungiCore$ fa uso dell'algoritmo $calcolaInizi$ analizzato a pagina \pageref{COSTOINIZI}. Chiamando $r$ il numero di regole generate dal parser, chiamando $s$ il numero di caratteri che rappresentano i seguiti, che al massimo possono essere il numero di caratteri terminali più il numero di caratteri non terminali (presi una sola volta), e infine chiamando $k$ la lunghezza della parte destra più lunga presente nella grammatica, si ottiene che questo algoritmo ha costo $O(rk*calcolaInizi)$
+L'algoritomo $aggiungiCore$ fa uso dell'algoritmo $calcolaInizi$ analizzato a pagina \pageref{COSTOINIZI}. Chiamando $r$ il numero di regole generate dal parser, chiamando $s$ il numero di caratteri che rappresentano i seguiti, che al massimo possono essere il numero di caratteri terminali più il numero di caratteri non terminali (presi una sola volta), e infine chiamando $k$ la lunghezza della parte destra più lunga presente nella grammatica, si ottiene che questo algoritmo ha costo $O(rk*calcolaInizi)$.\par
 Considerando il costo analizzato precedentemente nel caso di $calcolaInizi$ possiamo ottenere un costo di $aggiungiCore$ pari a $O(r^3k^2s)$.
 
 \begin{algorithm}[H]
@@ -1033,18 +1033,18 @@ Per analizzare la complessità computazionale di questo algoritmo si introduce l
 \end{itemize}
 Questo algoritmo vede diversi cicli, analizzandoli singolarmente otteniamo che:
 \begin{itemize}
-\item Il primo ha costo $O(rCore(cPars+rCore+rComp+rStat+s+rStat*aggiungiCore()))$;
-\item Il secondo ha costo $O(rComp(cPars + rComp+ rStat+ s + rStat*aggiungiCore()))$
+\item il primo ha costo $O(rCore(cPars+rCore+rComp+rStat+s+rStat*aggiungiCore()))$;
+\item il secondo ha costo $O(rComp(cPars + rComp+ rStat+ s + rStat*aggiungiCore()))$;
 \item gli altri cicli avendo al massimo due cicli for innestati non vengono analizzati dettagliatamente dato che si è verificato che hanno un costo minore ai precedenti.
 \end{itemize}
 Si riscrivono ora i costi utilizzando la notazione precedente, quindi si ha che:
 \begin{itemize}
-\item $rCore = rComp = rStat = O(r)$;
-\item $cPars = seguiti = O(s)$.
+\item $rCore = rComp = rStat = O(r)$
+\item $cPars = seguiti = O(s)$
 \end{itemize}
-Si nota quindi che entrambi gli algoritmi hanno un costo asintotico a: $O(r^2*aggiungiCore())$, sostituendo ora il costo di $aggiungiCore()$, si ottiene un costo totale per questo algoritmo pari a: $O(r^5 k^2 s)$.
+Si nota quindi che entrambi gli algoritmi hanno un costo asintotico di: $O(r^2*aggiungiCore())$, sostituendo ora il costo di $aggiungiCore()$, si ottiene un costo totale per questo algoritmo pari a: $O(r^5 k^2 s)$.
 \par\pagebreak
-TODO: inserire algoritmo aggiungiCompletamento
+TODO: inserire algoritmo aggiungiCompletamento\par
 Utilizzando la notazione precedente, si ottiene che l'algoritmo $aggiungiCompletamento$ ha costo $O(sk)$
 \par\pagebreak[4]
 
