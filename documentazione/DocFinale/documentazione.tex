@@ -114,9 +114,9 @@
 \subsection{Sommario modifiche}
 
 \begin{itemize}
-\item Versione 0.0 - Definizione dei requisiti funzionali, dei casi d'uso, della struttura generale del software, della struttura dei test e degli strumenti utilizzati per lo sviluppo.
-\item Versione 1.0 - Introduzione dell'iterazione 1 con relativo piano di test ed esiti.
-\item Versione 2.0 - Introduzione dell'iterazione 2, modifiche design architetturale, nuovi casi d'uso, piano di test ed esiti.
+\item Versione 0.0 - Definizione dei requisiti funzionali, dei casi d'uso, della struttura generale del software, della struttura dei test e degli strumenti utilizzati per lo sviluppo;
+\item Versione 1.0 - Introduzione dell'iterazione 1 con relativo piano di test ed esiti;
+\item Versione 2.0 - Introduzione dell'iterazione 2, modifiche design architetturale, nuovi casi \\d'uso, piano di test ed esiti;
 \item Versione 2.1 - Revisione documentazione.
 \end{itemize}
 
@@ -151,12 +151,12 @@ Scopo del programma che si andrà a realizzare è il riconoscimento di una gramm
 Per lo sviluppo di questo progetto è stata scelta la seguente toolchain:
 \begin{itemize}
 \item Git, utilizzato per il controllo di versione, così da consentire il lavoro a più mani sul progetto anche qualora non ci si trovi tutti nello stesso ambiente. L'utilizzo di Git prevederà la creazione di branch secondari per gli sviluppi incrementali del programma, così da conservare sempre una versione funzionante del programma stesso all'interno del branch "master" della repository ospitante il progetto;
-\item GitKraken, client che fornisce un'interfaccia grafica intuitiva per l'utilizzo di github, implementa funzioni che velocizzano l'utilizzo di git implementando un grafo rappresentante l'avanzamento della repository.
-\item Modelio, utilizzato per la creazione di diagrammi UML, si è scelto questo tool visto che implementa dei tool che partendo da codice java genera il modello UML del codice fornito. Essendo questo progetto un'espansione di un progetto già in essere realizzato per il corso Linguaggi Formali e Compilatori questo tool agevolerà la creazione del modello UML del codice già esistente;
+\item GitKraken, client che fornisce un'interfaccia grafica intuitiva per l'utilizzo di github, implementa funzioni che velocizzano l'utilizzo di git implementando un grafo rappresentante l'avanzamento della repository;
+\item Modelio, utilizzato per la creazione di diagrammi UML, si è scelto questo tool visto che implementa delle funzioni che partendo da codice java generano il modello UML del codice fornito. Essendo questo progetto un'espansione di un progetto già in essere realizzato per il corso Linguaggi Formali e Compilatori questo tool agevolerà la creazione del modello UML del codice già esistente;
 \item TexMaker, utilizzato per la redazione della documentazione;
 \item Eclipse, utilizzato per lo sviluppo dell'applicazione, inoltre integra dei tool utili al fine di analizzare la copertura del codice;
 \item ANTLR, tool per la generazione di parser, una volta definita una grammatica questo genera un parser e tutto il codice di contorno per l'individuazione di errori lessicali e semantici;
-\item Junit, tool utilizzato per la definizione dei casi di test e l'esecuzione dei casi stessi;
+\item JUnit, tool utilizzato per la definizione dei casi di test e l'esecuzione dei casi stessi;
 \item SpotBugs, PMD, plugin di Eclipse utilizzati per l'analisi statica del codice.
 \end{itemize}
 
@@ -268,11 +268,11 @@ Il programma, definito in linguaggio Java, sarà composto di tre moduli:
 \item un modulo generato da ANTLR, che si occuperà del parsing e dell'individuazione di errori lessicali e sintattici;
 \item un modulo scritto manualmente che si occuperà dell'analisi della grammatica e della sua classificazione.
 \end{itemize}
-L'interfacciamento con l'utente nella priva versione avverrà attraverso una CLI (Command Line Interface).
+L'interfacciamento con l'utente nella prima versione avverrà attraverso una CLI (Command Line Interface).
 
 
 \subsubsection{Scelta architetturale}\label{bozzaArc}
-Vista la struttura del programma si è scelto la struttura ideale è di tipo pipe and filter dove si possono identificare specifici moduli e ogni modulo genera dei risultati intermedi che verranno poi utilizzati dai moduli successivi.\par
+Vista la struttura del programma si ritiene che la struttura ideale sia di tipo pipe and filter, dove si possono identificare specifici moduli e ogni modulo genera dei risultati intermedi che verranno poi utilizzati dai moduli successivi.\par
 In figura è riportata una bozza della struttura implementata nella fase 1.
 \par
 
@@ -287,7 +287,7 @@ In figura è riportata una bozza della struttura implementata nella fase 1.
 \subsection{Programma di testing}
 Il testing del programma sarà incentrato sul modulo \textit{non} generato da ANTLR, assumendo che i controlli su quello generato da ANTLR siano già stati svolti dal produttore del tool, e sarà composto di:
 \begin{itemize}
-\item casi di test per ogni classe generata scritti in JUnit, per i quali sarà richiesta una coverage del codice $\geq 95\%$;
+\item casi di test per ogni classe generata, scritte in JUnit, per i quali sarà richiesta una coverage del codice $\geq 95\%$;
 \item verifiche di coverage del codice scritto tramite l'esecuzione del programma con diversi input, al fine di garantire l'assenza di dead code;
 \item analisi statica del codice tramite strumenti quali SpotBugs e PMD.
 \end{itemize}
@@ -299,7 +299,7 @@ In questa iterazione è stata creata la versione a CLI (Command Line Interface),
 \subsection{Design Architetturale}
 In questa prima versione il design architetturale è rimasto quello previsto nella iterazione 0.
 \subsubsection{Class diagram}
-Per la generazione del class diagram della fase 1 è stato utilizzato il tool "java designer" di Modelio che premette di estrapolare dal codice già presente il diagramma UML delle classi.
+Per la generazione del class diagram della fase 1 è stato utilizzato il tool "Java Designer" di Modelio che permette di estrapolare dal codice già presente il diagramma UML delle classi.
 In particolare si può notare come la struttura sequenziale del programma è molto simile a quella ipotizzata nella fase zero a pagina \pageref{bozzaArc}.
 
 \begin{sidewaysfigure}\label{rifUMLV1}
@@ -318,7 +318,7 @@ Il software, sviluppato in linguaggio Java in ambiente di sviluppo Eclipse, è s
 \item \textbf{myPackage} - questo package contiene il file \textit{Environment.java}, all'interno del quale è definita la classe Environment, necessaria per il corretto funzionamento dei file output di ANTLR ed ereditata da un progetto di esempio;
 \item \textbf{solver} - questo package contiene tutti i file che contengono definizioni di classi custom utilizzate per il processo di riconoscimento delle grammatiche e per rappresentare gli elementi costituenti delle grammatiche.
 \end{itemize}
-La versione oggetto di test è la 1.0, pubblicata sul branch \textit{master} della repository di Github del progetto (\url{https://github.com/d-presciani/progettoLFC}) in data 26/03/2019.
+La versione oggetto di test è la 1.0, pubblicata sul branch \textit{master} della repository di GitHub del progetto (\url{https://github.com/d-presciani/progettoLFC}) in data 26/03/2019.
 \pagebreak
 
 \subsubsection{Funzionalità oggetto di test}
@@ -427,8 +427,8 @@ Per la classe Terminale sono stati scritti, all'interno della classe TerminaleTe
 \pagebreak
 
 \subsubsection{Esiti e copertura dei test di sistema}
-I test di sistema sono stati effettuati eseguendo il metodo \textit{main} della classe \textit{Riconoscitore} più volte, passandogli come input i file contenuti all'interno della cartella "lfc$\backslash$resourses" presente nella repository del progetto (\url{https://github.com/d-presciani/progettoLFC}); come oracoli per valutare la correttezza dei test sono stati utilizzati i temi svolti in classe durante il corso di Linguaggi formali e compilatori. \par
-Durante i test di sistema è stata rilevata anche la copertura del codice nelle varie esecuzioni; nella seguente immagine è possibile vedere la copertura complessiva (ottenuta combinando la copertura delle singole esecuzioni).
+I test di sistema sono stati effettuati eseguendo il metodo \textit{main} della classe \textit{Riconoscitore} più volte, passandogli come input i file contenuti all'interno della cartella "lfc$\backslash$resourses", presente nella repository del progetto (\url{https://github.com/d-presciani/progettoLFC}). Come oracoli per valutare la correttezza dei test sono stati utilizzati i temi svolti in classe durante il corso di Linguaggi formali e compilatori. \par
+Durante i test di sistema è stata rilevata anche la copertura del codice nelle varie esecuzioni, nella seguente immagine è possibile vedere la copertura complessiva (ottenuta combinando la copertura delle singole esecuzioni).
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{immagini/V1codeCoverage.png}
@@ -440,7 +440,7 @@ Durante i test di sistema è stata rilevata anche la copertura del codice nelle 
 In questa iterazione è stata implementata un interfaccia grafica che permette di interagire con il programma in un ambiente completamente grafico.\par
 È stata aggiunta inoltre la possibilità di visualizzare graficamente il risultato dell'analisi generando un grafo della grammatica analizzata.
 \subsection{Design Architetturale}
-In questa seconda versione la struttura è rimasta di tipo pipe and filter ma è stata ampliata per includere la generazione e la visualizzazione del grafo, come si può vedere in figura.
+In questa seconda versione la struttura è rimasta di tipo pipe and filter, ma è stata ampliata per includere la generazione e la visualizzazione del grafo, come si può vedere in figura.
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{immagini/bozzaArchitettura_v2.png}
@@ -451,18 +451,18 @@ In questa seconda versione la struttura è rimasta di tipo pipe and filter ma è
 Per l'implementazione dell'interfaccia grafica e la creazione del grafo sono state utilizzate le seguenti librerie:
 \begin{itemize}
 \item JavaFX, framework grafico utilizzato per la realizzazione dell'interfaccia utente;
-\item JgraphT, libreria realizzata in swing che permette la creazione di grafi di vario tipo, implementando inoltre iteratori può essere utilizzata per la creazione di algoritmi di vario tipo;
-\item mxGraph, libreria che permette la creazione di diagrammi e utilizza SVG e HTML per il rendering delle immagini, in questo progetto questa libreria è utilizzata per la visualizzazione del grafico creato con JgraphT, in particolare questa libreria è stata scelta perché permette se integrata in un Jframe di modificare l'aspetto del grafico in realtime oltre che offrire molte opzioni per la personalizzazione dei grafici.
-Nella pratica questa libreria è stata utilizzata per modificare l'aspetto delle box cambiando colore agli stati che contengono delle regole che rendono il linguaggio non $LR \left( 1 \right)$ e per modificare lo stile grafico di rappresentazione.
+\item JgraphT, libreria realizzata in swing che permette la creazione di grafi di vario tipo, implementando inoltre iteratori, può essere utilizzata per la creazione di algoritmi di vario tipo;
+\item mxGraph, libreria che permette la creazione di diagrammi, utilizzando SVG e HTML per il rendering delle immagini. In questo progetto questa libreria è utilizzata per la visualizzazione del grafico creato con JgraphT, in particolare questa libreria è stata scelta perché permette, se integrata in un Jframe, di modificare l'aspetto del grafico in realtime, oltre che offrire molte opzioni per la personalizzazione dei grafici creati.
+Nella pratica questa libreria è stata utilizzata per modificare l'aspetto delle box, cambiando colore agli stati che contengono delle regole che rendono il linguaggio non $LR \left( 1 \right)$, e per modificare lo stile grafico di rappresentazione.
 \end{itemize}
 
 Durante lo sviluppo di questa iterazione sono però sorte delle problematiche nell'integrazione delle librerie per la generazione del grafo e JavaFx.\par
 Provando ad integrare all'interno dell'interfaccia utente un modulo sviluppato per testare le funzionalità di mxGraph che implementava la modifica realtime del grafo, sono stati riscontrati alcuni problemi di integrabilità essendo questa libreria realizzata in swing.\par
-Per implementare questo modulo si è provato ad utilizzare la classe SwingNode per "incaplsulare" questo modulo che integra componenti realizzate in swing e riuscire quindi a riutilizzare correttamente il modulo all'interno dell'interfaccia utente creata con JavaFX.\par
+Per implementare questo modulo si è provato ad utilizzare la classe SwingNode per "incapsulare" questo modulo che integra componenti realizzate in swing e riuscire quindi a riutilizzare correttamente il modulo all'interno dell'interfaccia utente creata con JavaFX.\par
 Dopo diversi tentativi si è riusciti ad integrare il modulo contenente il grafo con l'interfaccia utente realizzata con JavaFX, perdendo però la possibilità di editare in tempo reale il grafico, si è dunque scelto per motivi di performance di salvare l'immagine generata tramite mxGraph (la scelta del formato è lasciata all'utente) e poi caricare l'immagine salvata all'interno dell'interfaccia grafica per la visualizzazione del grafo.
 
 \subsubsection{Class Diagram}
-Rispetto al class diagram presente a pagina \pageref{rifUMLV1} in questa nuova iterazione si può vedere come è stato necessario modificare la struttura delle classi per permettere il trasferimento di informazioni tra le classi in modo da poter mostrare all'interno dell'interfaccia grafica i vari messaggi da mostrare all'utente.
+Rispetto al class diagram presente a pagina \pageref{rifUMLV1} in questa nuova iterazione si può vedere come è stato necessario modificare la struttura delle classi, per permettere il trasferimento di informazioni tra le stesse, in modo da poter mostrare all'interno dell'interfaccia grafica i vari messaggi da mostrare all'utente.
 
 \begin{sidewaysfigure}
 \centering
@@ -494,11 +494,12 @@ Vista l'introduzione di un'interfaccia grafica per l'interazione con il programm
 \item il programma esegue il parsing e l'analisi del file di input;
 \item il programma mostra a schermo l'esito dell'analisi della grammatica.
 \end{enumerate}
+\pagebreak
 \textbf{Procedimenti alternativi o eccezioni:}
 \begin{itemize}
 \item allo step $3$, il programma rileva errori nella grammatica
 \begin{itemize}[label=]
-\item viene mostrato un messaggio d'errore contenente informazioni relative all'errore individuato, l'utente, corretta la grammatica riprende la procedura dallo step $2$
+\item viene mostrato un messaggio d'errore contenente le informazioni relative all'errore individuato, l'utente, corretta la grammatica riprende la procedura dallo step $2$
 \end{itemize}
 \end{itemize}
 \end{itemize}
@@ -531,11 +532,11 @@ Il software, sviluppato in linguaggio Java in ambiente di sviluppo Eclipse, è s
 \begin{itemize}
 \item \textbf{app} - questo package contiene il file \textit{Main.java}, oltre ad altri file di supporto, utilizzati per la creazione dell'interfaccia grafica;
 \item \textbf{graph} - questo package contiene tutti i file necessari alla generazione del grafo;
-\item \textbf{lr1package} - questo package contiene due degli output di ANTLR, strumento utilizzato per generare il compilatore, ossia \textit{PrototipoLR1Lexer.java} e \textit{PrototipoLR1Parser.java}; il terzo e ultimo file di output (\textit{PrototipoLR1.tokens} è invece situato all'esterno di questo package;)
+\item \textbf{lr1package} - questo package contiene due degli output di ANTLR, strumento utilizzato per generare il compilatore, ossia \textit{PrototipoLR1Lexer.java} e \textit{PrototipoLR1Parser.java}; il terzo e ultimo file di output (\textit{PrototipoLR1.tokens} è invece situato all'esterno di questo package);
 \item \textbf{myPackage} - questo package contiene il file \textit{Environment.java}, all'interno del quale è definita la classe Environment, necessaria per il corretto funzionamento dei file output di ANTLR ed ereditata da un progetto di esempio;
 \item \textbf{solver} - questo package contiene tutti i file che contengono definizioni di classi custom utilizzate per il processo di riconoscimento delle grammatiche e per rappresentare gli elementi costituenti delle grammatiche.
 \end{itemize}
-La versione oggetto di test è la 2.0, pubblicata sul branch \textit{master} della repository di Github del progetto (\url{https://github.com/d-presciani/progettoLFC}) in data 09/10/2019.
+La versione oggetto di test è la 2.0, pubblicata sul branch \textit{master} della repository di GitHub del progetto (\url{https://github.com/d-presciani/progettoLFC}) in data 09/10/2019.
 \pagebreak
 \subsubsection{Funzionalità oggetto di test}
 Le funzionalità sottoposte a test di unità saranno quelle definite nelle classi contenute all'interno del package \textit{solver}, essendo queste le classi scritte manualmente e quelle che consentono l'effettivo funzionamento del programma; si tralascia di effettuare test di unità sui restanti package in quanto generati automaticamente da ANTLR e difficilmente sottoponibili a test di tale granularità. \par
@@ -608,7 +609,7 @@ Di seguito sono riportati gli esiti dei test e la copertura degli stessi per ogn
 \end{figure}
 \subsubsubsection{Esiti dei test per la classe Stato}
 Per la classe Stato sono stati scritti, all'interno della classe StatoTest, 22 test, superati correttamente dal programma, che garantiscono una copertura della classe Stato pari al $96,1\%$.
-\begin{figure}[h]
+\begin{figure}[H]
 \centering
 \includegraphics[scale=0.4]{immagini/esitiStatoTest.png}
 \caption{Esiti dei test della classe Stato}
@@ -644,8 +645,8 @@ Per la classe Terminale sono stati scritti, all'interno della classe TerminaleTe
 \end{figure}
 \pagebreak
 \subsubsection{Esiti e copertura dei test di sistema}
-I test di sistema è stato effettuato eseguendo il metodo \textit{main} della classe \textit{app}, passandogli come input i file contenuti all'interno della cartella "lfc$\backslash$resources" presente nella repository del progetto (\url{https://github.com/d-presciani/progettoLFC}); come oracoli per valutare la correttezza dei test sono stati utilizzati i temi svolti in classe durante il corso di Linguaggi formali e compilatori. \par
-Durante il test di sistema è stata rilevata anche la copertura del codice durante l'esecuzione; nella seguente immagine è possibile vedere la copertura complessiva.
+I test di sistema sono stati effettuati eseguendo il metodo \textit{main} della classe \textit{app}, passandogli come input i file contenuti all'interno della cartella "lfc$\backslash$resources", presente nella repository del progetto (\url{https://github.com/d-presciani/progettoLFC}). Come oracoli per valutare la correttezza dei test sono stati utilizzati i temi svolti in classe durante il corso di Linguaggi formali e compilatori. \par
+Durante il test di sistema è stata rilevata anche la copertura del codice durante l'esecuzione, nella seguente immagine è possibile vedere la copertura complessiva.
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{immagini/coverage.png}
@@ -667,7 +668,7 @@ Questa classe viene utilizzata per rappresentare i caratteri terminali, questi c
 \subsubsection{Operazioni}
 \begin{itemize}
 \item\underline{Costruttore}(\textit{car}): costruisce il Terminale memorizzando la variabile \textit{car} ricevuta;
-\item\underline{CalcolaInizi}: restituisce il carattere Terminale.
+\item\underline{CalcolaInizi}: restituisce il carattere Terminale;
 \item\underline{toString}: restituisce la rappresentazione testuale del carattere terminale;
 \item\underline{isAnnullabile}: dato che un carattere terminale non è mai annullabile questa funzione restituisce sempre \textit{false};
 \item\underline{getLettera}: restituisce la rappresentazione testuale del carattere terminale;
@@ -677,7 +678,7 @@ Questa classe viene utilizzata per rappresentare i caratteri terminali, questi c
 
 
 \subsection{NonTerminale}
-Questa classe viene utilizzata per rappresentare i caratteri non terminali, questi caratteri hanno proprietà in comune con i caratteri terminali, m,a come si può vedere dai dati memorizzati e dall'implementazione delle funzioni questi ultimi richiedono l'implementazione di particolari algoritmi per restituire alcune informazioni rilevanti.
+Questa classe viene utilizzata per rappresentare i caratteri non terminali, questi caratteri hanno proprietà in comune con i caratteri terminali, ma come si può vedere dai dati memorizzati e dall'implementazione delle funzioni questi ultimi richiedono l'implementazione di particolari algoritmi per restituire alcune informazioni rilevanti.
 \subsubsection{Dati}
 \begin{itemize}
 \item\textit{lettera}: come per la classe Terminale questa variabile viene utilizzata per memorizzare la rappresentazione testuale del carattere;
@@ -721,7 +722,7 @@ Questa classe viene utilizzata per rappresentare le varie regole di produzione, 
 \end{itemize}
 
 \subsection{Stato}
-Questa è la struttura dati principale in questo progetto, qui sono presente la maggior parte degli algoritmi che permettono di calcolare la se una grammatica fornita è o meno di tipo $LR \left( 1 \right)$.
+Questa è la struttura dati principale in questo progetto, qui sono presenti la maggior parte degli algoritmi che permettono di calcolare se una grammatica fornita è o meno di tipo $LR \left( 1 \right)$.
 \subsubsection{Dati}
 \begin{itemize}
 \item\textit{counter}: variabile statica utilizzata per il conteggio progressivo degli stati che vengono creati;
@@ -1024,6 +1025,7 @@ Il programma, allo stato attuale, potrebbe essere migliorato sia sotto l'aspetto
 \item espandere le capacità di analisi implementando dei moduli in grado di riconoscere altri tipi di grammatiche come $LALR \left( 1 \right)$ e $LL \left( 1 \right)$;
 \item aggiungere la possibilità di scrittura della grammatica direttamente nel programma, senza l'utilizzo di un file txt, in modo da evidenziare anche nella grammatica le regole problematiche;
 \item migrazione della generazione del grafo a librerie compatibili con JavaFX al fine di avere un grafo editabile;
+\item porting dell'applicazione su piattaforma web;
 \item porting dell'applicazione anche per dispositivi mobili.
 \end{itemize}
 
