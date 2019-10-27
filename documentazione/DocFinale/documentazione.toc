@@ -67,4 +67,7 @@
 \contentsline {subsubsection}{\numberline {6.4.1}Dati}{34}{subsubsection.6.4.1}
 \contentsline {subsubsection}{\numberline {6.4.2}Operazioni}{35}{subsubsection.6.4.2}
 \contentsline {subsubsection}{\numberline {6.4.3}Algoritmi}{35}{subsubsection.6.4.3}
+\contentsline {subsubsubsection}{\numberline {6.4.3.1}aggiungiCore}{36}{subsubsubsection.6.4.3.1}
+\contentsline {subsubsubsection}{\numberline {6.4.3.2}espandiStato}{39}{subsubsubsection.6.4.3.2}
+\contentsline {subsubsubsection}{\numberline {6.4.3.3}aggiungiCompletamento}{43}{subsubsubsection.6.4.3.3}
 \contentsline {section}{\numberline {7.}Sviluppi futuri}{44}{section.7}

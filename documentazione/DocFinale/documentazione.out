@@ -65,4 +65,7 @@
 \BOOKMARK [3][-]{subsubsection.6.4.1}{Dati}{subsection.6.4}% 65
 \BOOKMARK [3][-]{subsubsection.6.4.2}{Operazioni}{subsection.6.4}% 66
 \BOOKMARK [3][-]{subsubsection.6.4.3}{Algoritmi}{subsection.6.4}% 67
-\BOOKMARK [1][-]{section.7}{Sviluppi futuri}{}% 68
+\BOOKMARK [4][-]{subsubsubsection.6.4.3.1}{aggiungiCore}{subsubsection.6.4.3}% 68
+\BOOKMARK [4][-]{subsubsubsection.6.4.3.2}{espandiStato}{subsubsection.6.4.3}% 69
+\BOOKMARK [4][-]{subsubsubsection.6.4.3.3}{aggiungiCompletamento}{subsubsection.6.4.3}% 70
+\BOOKMARK [1][-]{section.7}{Sviluppi futuri}{}% 71

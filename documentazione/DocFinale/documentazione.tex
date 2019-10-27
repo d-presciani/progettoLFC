@@ -748,7 +748,7 @@ Questa è la struttura dati principale in questo progetto, qui sono presenti la 
 \end{itemize}
 \subsubsection{Algoritmi}
 In questa classe sono implementati i principali algoritmi utilizzati per verificare che la grammatica fornita in input sia di tipo $LR \left( 1 \right)$, di seguito è presente lo pseudocodice degli algoritmi di maggior rilevanza.
-\pagebreak
+\subsubsubsection{aggiungiCore}
 \begin{algorithm}[H]
 \caption{aggiungiCore($rdp$: regola di produzione passata)}
 \begin{algorithmic}[1]
@@ -872,7 +872,8 @@ In questa classe sono implementati i principali algoritmi utilizzati per verific
 
 L'algoritomo $aggiungiCore$ fa uso dell'algoritmo $calcolaInizi$ analizzato a pagina \pageref{COSTOINIZI}. Chiamando $r$ il numero di regole generate dal parser, chiamando $s$ il numero di caratteri che rappresentano i seguiti, che al massimo possono essere il numero di caratteri terminali più il numero di caratteri non terminali (presi una sola volta), e infine chiamando $k$ la lunghezza della parte destra più lunga presente nella grammatica, si ottiene che questo algoritmo ha costo $O(rk*calcolaInizi)$.\par
 Considerando il costo analizzato precedentemente nel caso di $calcolaInizi$ possiamo ottenere un costo di $aggiungiCore$ pari a $O(r^3k^2s)$.
-
+\pagebreak
+\subsubsubsection{espandiStato}
 \begin{algorithm}[H]
 \caption{espandiStato($listaStati$: lista degli stati già creati, $listaTransizioni$: lista delle transizioni già create)}
 \label{espandiStato}
@@ -1043,7 +1044,9 @@ Si riscrivono ora i costi utilizzando la notazione precedente, quindi si ha che:
 \item $cPars = seguiti = O(s)$
 \end{itemize}
 Si nota quindi che entrambi gli algoritmi hanno un costo asintotico di: $O(r^2*aggiungiCore())$, sostituendo ora il costo di $aggiungiCore()$, si ottiene un costo totale per questo algoritmo pari a: $O(r^5 k^2 s)$.
-\par\pagebreak
+\par
+\pagebreak
+\subsubsubsection{aggiungiCompletamento}
 TODO: inserire algoritmo aggiungiCompletamento\par
 Utilizzando la notazione precedente, si ottiene che l'algoritmo $aggiungiCompletamento$ ha costo $O(sk)$
 \par\pagebreak[4]
