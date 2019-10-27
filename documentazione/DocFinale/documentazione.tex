@@ -150,14 +150,14 @@ Scopo del programma che si andrà a realizzare è il riconoscimento di una gramm
 \subsection{Toolchain}
 Per lo sviluppo di questo progetto è stata scelta la seguente toolchain:
 \begin{itemize}
-\item Git, utilizzato per il controllo di versione, così da consentire il lavoro a più mani sul progetto anche qualora non ci si trovi tutti nello stesso ambiente. L'utilizzo di Git prevederà la creazione di branch secondari per gli sviluppi incrementali del programma, così da conservare sempre una versione funzionante del programma stesso all'interno del branch "master" della repository ospitante il progetto;
-\item GitKraken, client che fornisce un'interfaccia grafica intuitiva per l'utilizzo di github, implementa funzioni che velocizzano l'utilizzo di git implementando un grafo rappresentante l'avanzamento della repository;
+\item GitHub, utilizzato per il controllo di versione, così da consentire il lavoro a più mani sul progetto anche qualora non ci si trovi tutti nello stesso ambiente. L'utilizzo di GitHub prevederà la creazione di branch secondari per gli sviluppi incrementali del programma, così da conservare sempre una versione funzionante del programma stesso all'interno del branch "master" della repository ospitante il progetto;
+\item GitKraken, client che fornisce un'interfaccia grafica intuitiva per l'utilizzo di GitHub, implementa funzioni che velocizzano l'utilizzo di git implementando un grafo rappresentante l'avanzamento della repository;
 \item Modelio, utilizzato per la creazione di diagrammi UML, si è scelto questo tool visto che implementa delle funzioni che partendo da codice java generano il modello UML del codice fornito. Essendo questo progetto un'espansione di un progetto già in essere realizzato per il corso Linguaggi Formali e Compilatori questo tool agevolerà la creazione del modello UML del codice già esistente;
 \item TexMaker, utilizzato per la redazione della documentazione;
 \item Eclipse, utilizzato per lo sviluppo dell'applicazione, inoltre integra dei tool utili al fine di analizzare la copertura del codice;
 \item ANTLR, tool per la generazione di parser, una volta definita una grammatica questo genera un parser e tutto il codice di contorno per l'individuazione di errori lessicali e semantici;
 \item JUnit, tool utilizzato per la definizione dei casi di test e l'esecuzione dei casi stessi;
-\item SpotBugs, PMD, plugin di Eclipse utilizzati per l'analisi statica del codice.
+\item SpotBugs e PMD, plugin di Eclipse utilizzati per l'analisi statica del codice.
 \end{itemize}
 
 \pagebreak
@@ -272,7 +272,7 @@ L'interfacciamento con l'utente nella prima versione avverrà attraverso una CLI
 
 
 \subsubsection{Scelta architetturale}\label{bozzaArc}
-Vista la struttura del programma si ritiene che la struttura ideale sia di tipo pipe and filter, dove si possono identificare specifici moduli e ogni modulo genera dei risultati intermedi che verranno poi utilizzati dai moduli successivi.\par
+Vista la struttura del programma si ritiene che la struttura ideale sia di tipo PIPES AND FILTERS, dove si possono identificare specifici moduli e ogni modulo genera dei risultati intermedi che verranno poi utilizzati dai moduli successivi.\par
 In figura è riportata una bozza della struttura implementata nella fase 1.
 \par
 
@@ -295,7 +295,7 @@ A ogni revisione del codice, nonché in precedenza al rilascio di una nuova vers
 \pagebreak
 
 \section{Iterazione 1}
-In questa iterazione è stata creata la versione a CLI (Command Line Interface), è stata inserita un'unica interfaccia grafica utilizzata per permettere all'utente la selezione del file che contiene la grammatica da analizzare, l'esito dell'analisi è riportato all'interno della CLI indicando se la grammatica è o meno $LR \left( 1 \right)$, l'elenco di tutti gli stati ed infine un elenco di tutte le transizioni.
+In questa iterazione è stata creata la versione CLI (Command Line Interface), è stata inserita un'unica interfaccia grafica utilizzata per permettere all'utente la selezione del file che contiene la grammatica da analizzare, l'esito dell'analisi è riportato all'interno della CLI indicando se la grammatica è o meno $LR \left( 1 \right)$, l'elenco di tutti gli stati ed infine un elenco di tutte le transizioni.
 \subsection{Design Architetturale}
 In questa prima versione il design architetturale è rimasto quello previsto nella iterazione 0.
 \subsubsection{Class diagram}
@@ -440,7 +440,7 @@ Durante i test di sistema è stata rilevata anche la copertura del codice nelle 
 In questa iterazione è stata implementata un interfaccia grafica che permette di interagire con il programma in un ambiente completamente grafico.\par
 È stata aggiunta inoltre la possibilità di visualizzare graficamente il risultato dell'analisi generando un grafo della grammatica analizzata.
 \subsection{Design Architetturale}
-In questa seconda versione la struttura è rimasta di tipo pipe and filter, ma è stata ampliata per includere la generazione e la visualizzazione del grafo, come si può vedere in figura.
+In questa seconda versione la struttura è rimasta di tipo PIPES AND FILTERS, ma è stata ampliata per includere la generazione e la visualizzazione del grafo, come si può vedere in figura.
 \begin{figure}[h]
 \centering
 \includegraphics[width=\textwidth]{immagini/bozzaArchitettura_v2.png}
@@ -698,7 +698,12 @@ Questa classe viene utilizzata per rappresentare i caratteri non terminali, ques
 \end{itemize}
 \subsubsection{Algoritmi}
 L'unico algoritmo di interesse in questa struttura dati è quello che consente di calcolare gli inizi del non terminale visualizzabile di seguito:
-\\ TODO: inserire algoritmo
+\\ TODO: inserire algoritmo\par
+
+\label{COSTOINIZI}
+Questo algoritmo contiene al suo interno una ricorsione, analizzando questa ricorsione si può notare che al massimo l'algoritmo richiama se stesso un numero di volte pari al numero di elementi contenuti nell'elenco delle regole generate dal parser.
+Chiamando \textit{r} questo valore, chiamando \textit{s} il numero di caratteri che rappresentano i seguiti che al massimo possono essere il numero di caratteri terminali più il numero di caratteri non terminali (presi una sola volta) ed infine chiamando \textit{k} la lunghezza della parte destra più lunga presente nella grammatica, si ottiene che questo algoritmo ha costo $O(r^2 s k)$.
+
 
 \subsection{RegolaDiProduzione}
 Questa classe viene utilizzata per rappresentare le varie regole di produzione, questa classe è stata creata come contenitore per semplificare il codice delle altre strutture dati
@@ -864,7 +869,9 @@ In questa classe sono implementati i principali algoritmi utilizzati per verific
 \end{algorithmic}
 \end{algorithm}
 
-TODO: aggiungere analisi costi
+
+L'algoritomo $aggiungiCore$ fa uso dell'algoritmo $calcolaInizi$ analizzato a pagina \pageref{COSTOINIZI}. Chiamando $r$ il numero di regole generate dal parser, chiamando $s$ il numero di caratteri che rappresentano i seguiti, che al massimo possono essere il numero di caratteri terminali più il numero di caratteri non terminali (presi una sola volta), e infine chiamando $k$ la lunghezza della parte destra più lunga presente nella grammatica, si ottiene che questo algoritmo ha costo $O(rk*calcolaInizi)$
+Considerando il costo analizzato precedentemente nel caso di $calcolaInizi$ possiamo ottenere un costo di $aggiungiCore$ pari a $O(r^3k^2s)$.
 
 \begin{algorithm}[H]
 \caption{espandiStato($listaStati$: lista degli stati già creati, $listaTransizioni$: lista delle transizioni già create)}
@@ -1015,8 +1022,31 @@ TODO: aggiungere analisi costi
 \EndFor
 \end{algorithmic}
 \end{algorithm}
-TODO: Inserire costo algoritmo :)
-\pagebreak[4]
+Per analizzare la complessità computazionale di questo algoritmo si introduce la seguente notazione:
+\begin{itemize}
+\item \textit{rCore}: numero delle \textit{regoleCore} dello stato
+\item \textit{cPars}: numero di caratteri in \textit{caratteriParsati}
+\item \textit{rComp}: numero delle \textit{regoleCompletamenti} dello stato
+\item \textit{rStat}: numero delle nuove regole Core dello stato da creare
+\item \textit{s}: numero degli stati in \textit{listaStati}
+\item \textit{seguiti}: numero di seguiti
+\end{itemize}
+Questo algoritmo vede diversi cicli, analizzandoli singolarmente otteniamo che:
+\begin{itemize}
+\item Il primo ha costo $O(rCore(cPars+rCore+rComp+rStat+s+rStat*aggiungiCore()))$;
+\item Il secondo ha costo $O(rComp(cPars + rComp+ rStat+ s + rStat*aggiungiCore()))$
+\item gli altri cicli avendo al massimo due cicli for innestati non vengono analizzati dettagliatamente dato che si è verificato che hanno un costo minore ai precedenti.
+\end{itemize}
+Si riscrivono ora i costi utilizzando la notazione precedente, quindi si ha che:
+\begin{itemize}
+\item $rCore = rComp = rStat = O(r)$;
+\item $cPars = seguiti = O(s)$.
+\end{itemize}
+Si nota quindi che entrambi gli algoritmi hanno un costo asintotico a: $O(r^2*aggiungiCore())$, sostituendo ora il costo di $aggiungiCore()$, si ottiene un costo totale per questo algoritmo pari a: $O(r^5 k^2 s)$.
+\par\pagebreak
+TODO: inserire algoritmo aggiungiCompletamento
+Utilizzando la notazione precedente, si ottiene che l'algoritmo $aggiungiCompletamento$ ha costo $O(sk)$
+\par\pagebreak[4]
 
 
 \section{Sviluppi futuri}
