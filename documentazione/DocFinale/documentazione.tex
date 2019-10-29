@@ -1048,8 +1048,44 @@ Si nota quindi che entrambi gli algoritmi hanno un costo asintotico di: $O(r^2*a
 \par
 \pagebreak
 \subsubsubsection{aggiungiCompletamento}
-TODO: inserire algoritmo aggiungiCompletamento\par
-Utilizzando la notazione precedente, si ottiene che l'algoritmo $aggiungiCompletamento$ ha costo $O(sk)$
+\begin{algorithm}[H]
+\caption{$nuovaRdp$: nuova regola di produzione, $regolaPadre$: regola di produzione padre)}
+\label{aggiungiCompletamento}
+\begin{algorithmic}[1]
+\State duplico la regola di produzione $nuovaRdp$ in $regolaTemp$
+\If{indice del puntino di $regolaPadre$ $+ 1 <$ dimensione della parte destra di $regolaPadre$}
+\State $i \leftarrow 0$
+\Do
+\For{$String$ $seg :$ inizi dei caratteri di indice puntino $+ i + 1$ della parte destra di $regolaPadre$}
+\If{seguiti di $regolaTemp$ non contengono $seg$}
+\State aggiungo $seg$ ai seguiti di $regolaTemp$
+\EndIf
+\EndFor
+\State $i++$
+\doWhile{carattere di indice puntino $+ i$ della parte destra di $regolaPadre$ è annullabile \textbf{and} indice puntino $+ i + 1 <$ dimensione della parte destra di $regolaPadre$}
+\State $verificaSegAnn \leftarrow true$
+\For{$j =$ indice puntino $+ 1$ \textbf{to} $j <$ dimensione della parte destra di $regolaPadre$}
+\State $verificaSegAnn = verificaSegAnn$ \&\& carattere di indice $j$ della parte destra di $regolaPadre$ è annullabile
+\EndFor
+\If{$regolaPadre$ è annullabile \textbf{||} dimensione della parte destra di $regolaPadre$ uguale a indice puntino $+ 1$ \textbf{||} $verificaSegAnn == true$}
+\For{$String$ $seg$ : seguiti di $regolaPadre$}
+\If{seguiti di $regolaTemp$ non contengono $seg$}
+\State aggiungo $seg$ ai seguiti di $regolaTemp$
+\EndIf
+\EndFor
+\EndIf
+\Else
+\For{$String$ $seg$ : seguiti di $regolaPadre$}
+\If{seguiti di $regolaTemp$ non contengono $seg$}
+\State aggiungo $seg$ ai seguiti di $regolaTemp$
+\EndIf
+\EndFor
+\EndIf
+\State aggiungo $regolaTemp$ a $regoleCompletamenti$ \Comment Una volta aggiunti i seguiti, aggiungo la nuova regola alle regole di completamento
+\end{algorithmic}
+\end{algorithm}
+
+Utilizzando la notazione precedente, si ottiene che l'algoritmo $aggiungiCompletamento$ ha costo $O(sk)$.
 \par\pagebreak[4]
 
 
