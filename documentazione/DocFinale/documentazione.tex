@@ -696,6 +696,7 @@ Questa classe viene utilizzata per rappresentare i caratteri non terminali, ques
 \item\underline{getRegole}: questa funzione restituisce l'elenco delle regole di produzione associate al non terminale;
 \item\underline{isTerminale}: questa funzione restituisce \textit{false} dato che il carattere è un carattere non terminale.
 \end{itemize}
+\pagebreak
 \subsubsection{Algoritmi}
 \subsubsubsection{calcolaInizi}
 L'unico algoritmo di interesse in questa struttura dati è quello che consente di calcolare gli inizi del non terminale visualizzabile di seguito:
@@ -735,7 +736,7 @@ L'unico algoritmo di interesse in questa struttura dati è quello che consente d
 Questo algoritmo contiene al suo interno una ricorsione, analizzando questa ricorsione si può notare che al massimo l'algoritmo richiama se stesso un numero di volte pari al numero di elementi contenuti nell'elenco delle regole generate dal parser.
 Chiamando \textit{r} questo valore, chiamando \textit{s} il numero di caratteri che rappresentano i seguiti, che al massimo possono essere il numero di caratteri terminali più il numero di caratteri non terminali (presi una sola volta), infine chiamando \textit{k} la lunghezza della parte destra più lunga presente nella grammatica, si ottiene che questo algoritmo ha costo $O(r^2 s k)$.
 
-
+\pagebreak
 \subsection{RegolaDiProduzione}
 Questa classe viene utilizzata per rappresentare le varie regole di produzione, questa classe è stata creata come contenitore per semplificare il codice delle altre strutture dati
 \subsubsection{Dati}
