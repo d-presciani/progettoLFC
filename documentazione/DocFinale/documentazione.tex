@@ -699,7 +699,37 @@ Questa classe viene utilizzata per rappresentare i caratteri non terminali, ques
 \subsubsection{Algoritmi}
 \subsubsubsection{calcolaInizi}
 L'unico algoritmo di interesse in questa struttura dati è quello che consente di calcolare gli inizi del non terminale visualizzabile di seguito:
-\\ TODO: inserire algoritmo\par
+\begin{algorithm}[H]
+\caption{calcolaInizi($prevReg$: lista di regole di produzione già analizzate)}
+\begin{algorithmic}[1]
+\State lista $regole$ $\leftarrow$ $prevReg$
+\State creo una lista 	di tipo $String$ vuota $inizi$
+\For{$RegolaDiProduzione$ $reg$ : $rdp$}
+\If{la parte destra di $reg$ non è vuota}
+\If{$reg$ non è contenuta in $regole$}
+\State aggiungo $reg$ a $regole$
+\State $i = 0$
+\State $finito$ $\leftarrow$ $false$
+\Do
+\State lista di $String$ $temp$ $\leftarrow$ $calcolaInizi(regole)$ per l'elemento $i$ della parte destra di $reg$
+\If{$temp$ non è vuota}
+\For{String $ch$ : $temp$}
+\If{$inizi$ non contiene $ch$}
+\State aggiungi $ch$ ad $inizi$
+\EndIf
+\EndFor
+\EndIf
+\If{l'elemento $i$ della parte destra di $reg$ è non è annullabile}
+\State $finito$ $\leftarrow$ $true$
+\EndIf
+\State $i++$
+\doWhile{not $finito$ $\&\&$ $i$ minore della dimensione della parte destra di $reg$}
+\EndIf
+\EndIf
+\EndFor
+\State\Return inizi
+\end{algorithmic}
+\end{algorithm}
 
 \label{COSTOINIZI}
 Questo algoritmo contiene al suo interno una ricorsione, analizzando questa ricorsione si può notare che al massimo l'algoritmo richiama se stesso un numero di volte pari al numero di elementi contenuti nell'elenco delle regole generate dal parser.

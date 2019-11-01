@@ -1,5 +1,5 @@
-\babel@toc {italian}{}
-\babel@toc {italian}{}
+\select@language {italian}
+\select@language {italian}
 \contentsline {section}{\numberline {1.}Prefazione}{3}{section.1}
 \contentsline {subsection}{\numberline {1.1}Version History}{3}{subsection.1.1}
 \contentsline {subsection}{\numberline {1.2}Sommario modifiche}{3}{subsection.1.2}
@@ -61,14 +61,14 @@
 \contentsline {subsubsection}{\numberline {6.2.2}Operazioni}{33}{subsubsection.6.2.2}
 \contentsline {subsubsection}{\numberline {6.2.3}Algoritmi}{33}{subsubsection.6.2.3}
 \contentsline {subsubsubsection}{\numberline {6.2.3.1}calcolaInizi}{33}{subsubsubsection.6.2.3.1}
-\contentsline {subsection}{\numberline {6.3}RegolaDiProduzione}{33}{subsection.6.3}
-\contentsline {subsubsection}{\numberline {6.3.1}Dati}{33}{subsubsection.6.3.1}
-\contentsline {subsubsection}{\numberline {6.3.2}Operazioni}{34}{subsubsection.6.3.2}
-\contentsline {subsection}{\numberline {6.4}Stato}{34}{subsection.6.4}
-\contentsline {subsubsection}{\numberline {6.4.1}Dati}{34}{subsubsection.6.4.1}
-\contentsline {subsubsection}{\numberline {6.4.2}Operazioni}{35}{subsubsection.6.4.2}
-\contentsline {subsubsection}{\numberline {6.4.3}Algoritmi}{35}{subsubsection.6.4.3}
-\contentsline {subsubsubsection}{\numberline {6.4.3.1}aggiungiCore}{36}{subsubsubsection.6.4.3.1}
-\contentsline {subsubsubsection}{\numberline {6.4.3.2}espandiStato}{39}{subsubsubsection.6.4.3.2}
-\contentsline {subsubsubsection}{\numberline {6.4.3.3}aggiungiCompletamento}{43}{subsubsubsection.6.4.3.3}
-\contentsline {section}{\numberline {7.}Sviluppi futuri}{44}{section.7}
+\contentsline {subsection}{\numberline {6.3}RegolaDiProduzione}{34}{subsection.6.3}
+\contentsline {subsubsection}{\numberline {6.3.1}Dati}{34}{subsubsection.6.3.1}
+\contentsline {subsubsection}{\numberline {6.3.2}Operazioni}{35}{subsubsection.6.3.2}
+\contentsline {subsection}{\numberline {6.4}Stato}{35}{subsection.6.4}
+\contentsline {subsubsection}{\numberline {6.4.1}Dati}{35}{subsubsection.6.4.1}
+\contentsline {subsubsection}{\numberline {6.4.2}Operazioni}{36}{subsubsection.6.4.2}
+\contentsline {subsubsection}{\numberline {6.4.3}Algoritmi}{36}{subsubsection.6.4.3}
+\contentsline {subsubsubsection}{\numberline {6.4.3.1}aggiungiCore}{37}{subsubsubsection.6.4.3.1}
+\contentsline {subsubsubsection}{\numberline {6.4.3.2}espandiStato}{40}{subsubsubsection.6.4.3.2}
+\contentsline {subsubsubsection}{\numberline {6.4.3.3}aggiungiCompletamento}{44}{subsubsubsection.6.4.3.3}
+\contentsline {section}{\numberline {7.}Sviluppi futuri}{45}{section.7}
