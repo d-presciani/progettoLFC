@@ -157,7 +157,8 @@ Per lo sviluppo di questo progetto è stata scelta la seguente toolchain:
 \item Eclipse, utilizzato per lo sviluppo dell'applicazione, inoltre integra dei tool utili al fine di analizzare la copertura del codice;
 \item ANTLR, tool per la generazione di parser, una volta definita una grammatica questo genera un parser e tutto il codice di contorno per l'individuazione di errori lessicali e semantici;
 \item JUnit, tool utilizzato per la definizione dei casi di test e l'esecuzione dei casi stessi;
-\item SpotBugs e PMD, plugin di Eclipse utilizzati per l'analisi statica del codice.
+\item SpotBugs e PMD, plugin di Eclipse utilizzati per l'analisi statica del codice;
+\item Launch4j, tool utilizzato per incapsulare l'eseguibile di tipo jar in un eseguibile di tipo exe, permettendo alcune personalizzazioni aggiuntive.
 \end{itemize}
 
 \pagebreak
@@ -347,6 +348,12 @@ Di seguito vengono riportate le classi, con i relativi metodi, per cui saranno e
 \item public boolean equals(Object o)
 \item public String toString()
 \end{itemize}
+\item Solver
+\begin{itemize}
+\item public boolean solve(LinkedList<NonTerminale> listaNT, \\
+\hspace*{104pt} LinkedList<RegolaDiProduzione> listaReg)
+\end{itemize}
+\pagebreak
 \item NonTerminale
 \begin{itemize}
 \item public NonTerminale (String lettera)
@@ -361,11 +368,6 @@ Di seguito vengono riportate le classi, con i relativi metodi, per cui saranno e
 \item public void setAnnullabile()
 \item public void stampaRegole()
 \item public String toString()
-\end{itemize}
-\item Solver
-\begin{itemize}
-\item public boolean solve(LinkedList<NonTerminale> listaNT, \\
-\hspace*{104pt} LinkedList<RegolaDiProduzione> listaReg)
 \end{itemize}
 \item Terminale
 \begin{itemize}
@@ -564,6 +566,12 @@ Di seguito vengono riportate le classi, con i relativi metodi, per cui saranno e
 \item public boolean equals(Object o)
 \item public String toString()
 \end{itemize}
+\item Solver
+\begin{itemize}
+\item public Risultati solve(LinkedList<NonTerminale> listaNT, \\
+\hspace*{104pt} LinkedList<RegolaDiProduzione> listaReg)
+\end{itemize}
+\pagebreak
 \item NonTerminale
 \begin{itemize}
 \item public NonTerminale (String lettera)
@@ -578,11 +586,6 @@ Di seguito vengono riportate le classi, con i relativi metodi, per cui saranno e
 \item public void setAnnullabile()
 \item public void stampaRegole()
 \item public String toString()
-\end{itemize}
-\item Solver
-\begin{itemize}
-\item public Risultati solve(LinkedList<NonTerminale> listaNT, \\
-\hspace*{104pt} LinkedList<RegolaDiProduzione> listaReg)
 \end{itemize}
 \item Terminale
 \begin{itemize}
@@ -676,7 +679,7 @@ Questa classe viene utilizzata per rappresentare i caratteri terminali, questi c
 \item\underline{isTerminale}: questa funzione restituisce \textit{true} dato che il carattere è un carattere terminale.
 \end{itemize}
 
-
+\pagebreak
 \subsection{NonTerminale}
 Questa classe viene utilizzata per rappresentare i caratteri non terminali, questi caratteri hanno proprietà in comune con i caratteri terminali, ma come si può vedere dai dati memorizzati e dall'implementazione delle funzioni questi ultimi richiedono l'implementazione di particolari algoritmi per restituire alcune informazioni rilevanti.
 \subsubsection{Dati}
@@ -757,7 +760,7 @@ Questa classe viene utilizzata per rappresentare le varie regole di produzione, 
 \item\underline{toString}: ritorna una stringa rappresentante la regola di produzione;
 \item\underline{addSeguito}(\textit{s}): aggiunge all'elenco dei seguiti il carattere ricevuto.
 \end{itemize}
-
+\pagebreak
 \subsection{Stato}
 Questa è la struttura dati principale in questo progetto, qui sono presenti la maggior parte degli algoritmi che permettono di calcolare se una grammatica fornita è o meno di tipo $LR \left( 1 \right)$.
 \subsubsection{Dati}
@@ -904,7 +907,6 @@ In questa classe sono implementati i principali algoritmi utilizzati per verific
 
 L'algoritomo $aggiungiCore$ fa uso dell'algoritmo $calcolaInizi$ analizzato a pagina \pageref{COSTOINIZI}. Chiamando $r$ il numero di regole generate dal parser, chiamando $s$ il numero di caratteri che rappresentano i seguiti, che al massimo possono essere il numero di caratteri terminali più il numero di caratteri non terminali (presi una sola volta), e infine chiamando $k$ la lunghezza della parte destra più lunga presente nella grammatica, si ottiene che questo algoritmo ha costo $O(rk*calcolaInizi)$.\par
 Considerando il costo analizzato precedentemente nel caso di $calcolaInizi$ possiamo ottenere un costo di $aggiungiCore$ pari a $O(r^3k^2s)$.
-\pagebreak
 \subsubsubsection{espandiStato}
 \begin{algorithm}[H]
 \caption{espandiStato($listaStati$: lista degli stati già creati, $listaTransizioni$: lista delle transizioni già create)}
@@ -945,16 +947,15 @@ Considerando il costo analizzato precedentemente nel caso di $calcolaInizi$ poss
 \State $trovato \gets true$
 \EndIf
 \EndFor
+\If{$trovato = false$}
+\State $temp \gets$ nuovo $stato$ vuoto
 \algstore{ESPSTATO1}
 \end{algorithmic}
 \end{algorithm}
 
-
 \begin{algorithm}[H]
 \begin{algorithmic}
 \algrestore{ESPSTATO1}
-\If{$trovato = false$}
-\State $temp \gets$ nuovo $stato$ vuoto
 \For{ciascuna $regola$ in $listaRegoleNuovoStato$}
 \State $temp.aggungiCore(regola)$ \Comment{Come illustrato in \textbf{Algoritmo 1}, questa funzione si occupa di aggiungere la regola passata al nuovo stato e genera le eventuali regole di completamento}
 \EndFor
@@ -965,7 +966,7 @@ Considerando il costo analizzato precedentemente nel caso di $calcolaInizi$ poss
 \EndIf
 \EndIf
 \EndFor
-\State \Comment{Una volta esplorate tutte le $regoleCore$ si procede ad esplorare tutte le $regoleCompletamenti$}
+\State\Comment{Una volta esplorate tutte le $regoleCore$ si procede ad esplorare tutte le $regoleCompletamenti$}
 \For{ciascuna $regComp$ in $regleCompletamenti$}
 \If{$regComp$ ha almeno un carattere da esplorare a destra del puntino}
 \State $giaParsato \gets false$
@@ -988,6 +989,12 @@ Considerando il costo analizzato precedentemente nel caso di $calcolaInizi$ poss
 \For{ciascuna $regola$ di $listaRegoleNuovoStato$}
 \State $regola.avanzaPuntino()$
 \EndFor
+\State $trovato \gets false$
+\For{ciascuno $stato$ in $listaStati$}
+\If{esiste uno stato con le stesse $regoleCore$ contenute in $listaReoleNuovoStato$}
+\State $trovato \gets true$
+\EndIf
+\EndFor
 \algstore{ESPSTATO2}
 \end{algorithmic}
 \end{algorithm}
@@ -995,12 +1002,6 @@ Considerando il costo analizzato precedentemente nel caso di $calcolaInizi$ poss
 \begin{algorithm}[H]
 \begin{algorithmic}
 \algrestore{ESPSTATO2}
-\State $trovato \gets false$
-\For{ciascuno $stato$ in $listaStati$}
-\If{esiste uno stato con le stesse $regoleCore$ contenute in $listaReoleNuovoStato$}
-\State $trovato \gets true$
-\EndIf
-\EndFor
 \If{$trovato = false$}
 \State $temp \gets$ nuovo $stato$ vuoto
 \For{ciascuna $regola$ in $listaRegoleNuovoStato$}
@@ -1028,13 +1029,6 @@ Considerando il costo analizzato precedentemente nel caso di $calcolaInizi$ poss
 \EndFor
 \EndIf
 \EndFor
-\algstore{ESPSTATO3}
-\end{algorithmic}
-\end{algorithm}
-
-\begin{algorithm}[H]
-\begin{algorithmic}
-\algrestore{ESPSTATO3}
 \For{ciascuna $reg$ di $regoleCompletamenti$}
 \If{L'indice di $reg$ non ha caratteri alla sua destra}
 \For{ciascuna $str$ di $reg.seguiti$}
@@ -1047,6 +1041,13 @@ Considerando il costo analizzato precedentemente nel caso di $calcolaInizi$ poss
 \EndFor
 \EndIf
 \EndFor
+\algstore{ESPSTATO3}
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\begin{algorithmic}
+\algrestore{ESPSTATO3}
 \For{ciascun $carattereMosso$ di $caratteriParsati$}
 \If{$sovrapposizioni$ contiene $carattereMosso$}
 \State $erroreLR(1) = true$
