@@ -1,15 +1,15 @@
 \babel@toc {italian}{}
 \babel@toc {italian}{}
-\contentsline {section}{\numberline {1.}Introduzione}{2}
-\contentsline {section}{\numberline {2.}Struttura corretta della grammatica}{2}
-\contentsline {subsection}{\numberline {2.1}Errori lessicali}{2}
-\contentsline {subsection}{\numberline {2.2}Errori sintattici}{2}
-\contentsline {subsection}{\numberline {2.3}Errori semantici}{2}
-\contentsline {subsection}{\numberline {2.4}Esempio di struttura corretta della grammatica}{3}
-\contentsline {section}{\numberline {3.}Requisiti di sistema}{3}
-\contentsline {section}{\numberline {4.}Manuale di utilizzo}{4}
-\contentsline {subsection}{\numberline {4.1}Selezione grammatica da analizzare}{4}
-\contentsline {subsection}{\numberline {4.2}Esempio grammatica LR(1)}{5}
-\contentsline {subsection}{\numberline {4.3}Esempio grammatica non LR(1)}{5}
-\contentsline {subsection}{\numberline {4.4}Esempio grammatica con errori}{6}
-\contentsline {subsection}{\numberline {4.5}Generazione e salvataggio del grafo}{7}
+\contentsline {section}{\numberline {1.}Introduzione}{2}{section.1}
+\contentsline {section}{\numberline {2.}Struttura corretta della grammatica}{2}{section.2}
+\contentsline {subsection}{\numberline {2.1}Errori lessicali}{2}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Errori sintattici}{2}{subsection.2.2}
+\contentsline {subsection}{\numberline {2.3}Errori semantici}{2}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Esempio di struttura corretta della grammatica}{3}{subsection.2.4}
+\contentsline {section}{\numberline {3.}Requisiti di sistema}{3}{section.3}
+\contentsline {section}{\numberline {4.}Manuale di utilizzo}{4}{section.4}
+\contentsline {subsection}{\numberline {4.1}Selezione grammatica da analizzare}{4}{subsection.4.1}
+\contentsline {subsection}{\numberline {4.2}Esempio grammatica LR(1)}{5}{subsection.4.2}
+\contentsline {subsection}{\numberline {4.3}Esempio grammatica non LR(1)}{5}{subsection.4.3}
+\contentsline {subsection}{\numberline {4.4}Esempio grammatica con errori}{6}{subsection.4.4}
+\contentsline {subsection}{\numberline {4.5}Generazione e salvataggio del grafo}{7}{subsection.4.5}
