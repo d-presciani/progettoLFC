@@ -1,6 +1,0 @@
-S0->S/cjswa;
-S->a;
-S->X;
-X->bXa;
-X->bX;
-X->cS;
